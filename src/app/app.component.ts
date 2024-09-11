@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'CoffeeAndTea';
+  passwordVisible = false;
+  user_password?: string;
 }
