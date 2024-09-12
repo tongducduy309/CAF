@@ -12,14 +12,11 @@ import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from './environment';
-import { NzAlertModule } from 'ng-zorro-antd/alert';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { ProductComponent } from './components/product/product.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NgZorroAntModule } from './ng-zorro-ant.module';
 registerLocaleData(en);
 
 export let components:any = [
@@ -33,20 +30,16 @@ export let pages = [
 ]
 
 @NgModule({
-  declarations: [...components,...pages],
+  declarations: [...components,...pages, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NzInputModule,
     ReactiveFormsModule,
-    NzButtonModule,
-    NzIconModule,
     AngularFireModule.initializeApp(environment.firebase),
-    NzAlertModule,
-    NzNotificationModule
+    NgZorroAntModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }
