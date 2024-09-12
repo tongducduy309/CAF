@@ -15,8 +15,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from './environment';
 import { ProductComponent } from './components/product/product.component';
+<<<<<<< Updated upstream
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
+=======
+import { RegisterComponent } from './pages/register/register.component';
+>>>>>>> Stashed changes
 registerLocaleData(en);
 
 export let components:any = [
@@ -30,7 +34,11 @@ export let pages = [
 ]
 
 @NgModule({
+<<<<<<< Updated upstream
   declarations: [...components,...pages, HeaderComponent],
+=======
+  declarations: [...components,...pages, RegisterComponent],
+>>>>>>> Stashed changes
   imports: [
     BrowserModule,
     AppRoutingModule,
