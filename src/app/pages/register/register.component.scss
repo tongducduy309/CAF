@@ -1,6 +1,9 @@
 .btnSendMess{
     background-color: #262626 !important;
     border: none;
+    width: 150px;
+    height: 50px;
+    font-size: 14px;
 }
 
 .btnSendMess:hover{
@@ -22,7 +25,17 @@
     padding: 10px 15px;
 }
 
-
+.group{
+    padding: 20px 15px;
+    
+    span{
+        font-weight: 500;
+      }
+    
+    input{
+        margin-top: 15px;
+      }
+}
 
 .border-top{
     border-top: 1px solid #000;

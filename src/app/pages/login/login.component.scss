@@ -3,6 +3,8 @@
   color: #ffffff !important;
   background-color: #262626 !important;
   border: none;
+  width: 150px;
+  height: 50px;
 }
 
 .btnRegister:hover,.btnLogin:hover, .btnSubmit_ResetPW:hover
@@ -44,9 +46,12 @@
   }
 
   span{
-    font-weight: 600;
+    font-weight: 500;
   }
 
+  input{
+    margin-top: 15px;
+  }
 }
 
 .group-container-btnRegister{
