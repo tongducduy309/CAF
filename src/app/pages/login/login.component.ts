@@ -1,27 +1,50 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
-
+import emailjs from '@emailjs/browser';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   user_email = ''
   user_password = ''
   passwordVisible = false;
   message = ''
   isFormLogin = true;
 
-  isValidEmail_RPW = true
-
   resetYP_email = ''
 
-  constructor (private crud:CrudService,private notification: NzNotificationService, private route:Router){
-
+  constructor (private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute){
+    console.log(window.location.origin);
   }
+
+  ngOnInit(): void {
+    this.routed.paramMap.subscribe(params=>{
+      this.isFormLogin=(params.get('param')==null);
+    })
+  }
+
+  formatEncode(n:any,a:any){
+    let code=['A','B','C','D','E','F','G','H','I','J'];
+    let s=n+"";
+    while (s.length<a) s='0'+s;
+    let x='';
+    for (let i=0;i<a;i++) x+=code[parseInt(s[i])];
+
+
+    return x;
+}
+createID(){
+    let date = new Date();
+    let d=[date.getDate(),date.getMonth(),(date.getFullYear()+"").slice(2,4),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
+    let n=[2,2,2,2,2,2,4];
+    let id='#';
+    for (let i=0;i<d.length;i++) id+=this.formatEncode(d[i],n[i]);
+    return id;
+}
 
   submit(){
     this.crud.getUsers().subscribe((data)=>{
@@ -41,20 +64,25 @@ export class LoginComponent {
   createNotification(type: string, message: string): void {
     this.notification.create(
       type,
-      'Thông Báo',
+      'Notification',
       message
     );
   }
 
   register(){
-    this.sendEmail('recipient@example.com', 'Test Email', 'This is a test email sent from TypeScript.');
-    //this.route.navigate(['register'])
+    //this.sendEmail('recipient@example.com', 'Test Email', 'This is a test email sent from TypeScript.');
+    this.route.navigate(['accounts/register'])
   }
 
   submit_resetPW(){
-    this.isValidEmail_RPW=this.isValidEmail(this.resetYP_email)
-    if (this.isValidEmail_RPW){
-
+    let valid=this.isValidEmail(this.resetYP_email)
+    if (valid){
+      const token = this.createID();
+      const url = `${window.location.origin}/accounts/newpassword?token=${token}` ;
+      this.sendEmail(this.resetYP_email,url);
+    }else
+    {
+      this.createNotification("error","Please Enter '@' In The Email Address")
     }
   }
 
@@ -64,36 +92,28 @@ export class LoginComponent {
     return true
   }
 
-  focusEmail_RPW(){
-    this.isValidEmail_RPW=true
+  // focusEmail_RPW(){
+  //   this.isMessage=true
+  // }
+
+
+  async sendEmail(to_email:string,url:string) {
+    emailjs.init("CtwqRDLtwyzaFMbck")
+    let res = await emailjs.send("service_1t6ee1w","template_qf0hube",{
+      to_email:to_email,
+      url:url
+
+
+    });
+    console.log(res);
+    if (res.status==200){
+      this.isFormLogin=true;
+      this.createNotification('success',"We've sent you an email with a link to update your password.")
+    }else{
+      this.createNotification('error',"Error: Status="+res.status)
+    }
+
   }
-
-
-async sendEmail(recipient: string, subject: string, body: string) {
-  // Create a Nodemailer transporter using SMTP
-  // const nodemailer = require("nodemailer");
-  // const transporter = nodemailer.createTransport({
-  //   host: 'smtp.gmail.com',
-  //   port: 465,
-  //   secure: true, // Use SSL/TLS for security
-  //   auth: {
-  //     user: 'tongducduyy@gmail.com',
-  //     pass: 'qxuo gfpd gbhr zatu',
-  //   },
-  // });
-
-  // // Compose the email message
-  // const mailOptions = {
-  //   from: 'gipas309@gmail.com',
-  //   to: recipient,
-  //   subject,
-  //   text: '<h1>Hello</h1>',
-  // };
-
-  // // Send the email
-  // await transporter.sendMail(mailOptions);
-  // console.log('Email sent successfully!');
-}
 
 // Example usage
 

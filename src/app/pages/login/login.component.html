@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
-      <span class="span_forgotPassword" (click)="isFormLogin=false">Forgot Password?</span>
+      <span class="span_forgotPassword" (click)="this.route.navigate(['accounts/login/reset-your-password'])">Forgot Password?</span>
       <button nz-button nzType="primary" (click)="submit()" class="btnLogin" >
         Login
         <span nz-icon nzType="arrow-right"></span>
@@ -44,8 +44,8 @@
 </div>
 <div *ngIf="isFormLogin===false">
   <h2>Reset your password</h2>
-  <span style="color: #ff0000;" *ngIf="!isValidEmail_RPW"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span>
-  <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text" (focus)="focusEmail_RPW()">
+  <!-- <span style="color: #ff0000;" *ngIf="!isMessage"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span> -->
+  <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text">
   <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
     Submit
   </button>

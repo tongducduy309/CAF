@@ -18,20 +18,26 @@ import { ProductComponent } from './components/product/product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
 import { RegisterComponent } from './pages/register/register.component';
+import { NewpasswordComponent } from './pages/newpassword/newpassword.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { FooterComponent } from './components/footer/footer.component';
 registerLocaleData(en);
 
 
 
 export let components:any = [
   ProductComponent,
-  HeaderComponent
+  HeaderComponent,
+  FooterComponent
 ]
 
 export let pages = [
   AppComponent,
   LoginComponent,
   HomeComponent,
-  RegisterComponent
+  RegisterComponent,
+  NewpasswordComponent,
+  PageNotFoundComponent
 ]
 
 @NgModule({
