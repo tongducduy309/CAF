@@ -1,13 +1,53 @@
-<h2>Log In</h2>
-<span>E-mail :</span>
-<input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
-<span>Password :</span>
-<input
-        [type]="passwordVisible ? 'text' : 'password'"
-        nz-input
-        placeholder="Password"
-        [(ngModel)]="user_password"/>
-<button nz-button nzType="primary" (click)="submit()" class="submit" >
-  Login
-  <span nz-icon nzType="arrow-right"></span>
-</button>
+<app-header></app-header>
+<div *ngIf="isFormLogin===true">
+  <h2>Log In</h2>
+
+
+  <div nz-col style="padding: 10px;">
+    <div class="group border-top border-right border-left">
+      <h5 style="font-weight: 700;font-size: 16px;">Log In</h5>
+    </div>
+    <div class="group border-top border-right border-left">
+      <span>I am a returning customer</span>
+      <div nz-row [nzGutter]="[15]">
+        <div nz-col nzSpan="12">
+          <span>E-mail :</span>
+          <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
+        </div>
+        <div nz-col nzSpan="12">
+          <span>Password :</span>
+          <input
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  nz-input
+                  placeholder="Password"
+                  [(ngModel)]="user_password"/>
+        </div>
+      </div>
+    </div>
+    <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
+      <span class="span_forgotPassword" (click)="isFormLogin=false">Forgot Password?</span>
+      <button nz-button nzType="primary" (click)="submit()" class="btnLogin" >
+        Login
+        <span nz-icon nzType="arrow-right"></span>
+      </button>
+    </div>
+    <div class="group border-top border-right border-left border-bottom group-container-btnRegister">
+      <span style="margin-right: 15px;">
+        If you dont have account
+      </span>
+      <button nz-button nzType="primary" (click)="register()" class="btnRegister" >
+        Register
+        <span nz-icon nzType="arrow-right"></span>
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="isFormLogin===false">
+  <h2>Reset your password</h2>
+  <span style="color: #ff0000;" *ngIf="!isValidEmail_RPW"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span>
+  <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text" (focus)="focusEmail_RPW()">
+  <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
+    Submit
+  </button>
+</div>
+

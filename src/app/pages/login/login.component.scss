@@ -1,7 +1,54 @@
-.submit
+.btnRegister,.btnLogin, .btnSubmit_ResetPW
 {
   color: #ffffff !important;
   background-color: #000000 !important;
+  border: none;
 }
+
+.group{
+  padding: 20px 15px;
+
+  .span_forgotPassword{
+    color: #ff0000;
+    text-decoration: underline;
+    font-size: 14px;
+    margin-right: 15px;
+    cursor: pointer;
+  }
+  .span_forgotPassword:hover{
+    text-decoration: none;
+  }
+
+  span{
+    font-weight: 600;
+  }
+
+
+
+
+}
+
+.group-container-btnRegister{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.border-top{
+  border-top: 1px solid #000;
+}
+.border-right{
+  border-right: 1px solid #000;
+}
+.border-left{
+  border-left: 1px solid #000;
+}
+.border-bottom{
+  border-bottom: 3px solid #000;
+}
+
+
+
+
 
 
