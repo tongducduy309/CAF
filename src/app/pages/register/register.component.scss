@@ -1,0 +1,38 @@
+.btnSendMess{
+    background-color: #262626 !important;
+    border: none;
+}
+
+.btnSendMess:hover{
+    background-color: #000 !important;
+    transition: 0,5s;
+}
+
+.form_group{
+    font: 14px; 
+    font-weight: 500;
+}
+
+.form_group sup{
+    color: red;
+}
+
+.form_group input{
+    border: 1px solid #000;
+    padding: 10px 15px;
+}
+
+
+
+.border-top{
+    border-top: 1px solid #000;
+  }
+  .border-right{
+    border-right: 1px solid #000;
+  }
+  .border-left{
+    border-left: 1px solid #000;
+  }
+  .border-bottom{
+    border-bottom: 1px solid #000;
+  }

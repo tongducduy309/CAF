@@ -9,13 +9,13 @@
     </div>
     <div class="group border-top border-right border-left">
       <span>I am a returning customer</span>
-      <div nz-row [nzGutter]="[15]">
-        <div nz-col nzSpan="12">
-          <span>E-mail :</span>
-          <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
+      <div  nz-row [nzGutter]="[15]">
+        <div class="field form_grow" nz-col nzSpan="12">
+          <span>E-mail <sup aria-hidden="true">*</sup> :</span>
+            <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
         </div>
-        <div nz-col nzSpan="12">
-          <span>Password :</span>
+        <div class="form_group field" nz-col nzSpan="12">
+          <span>Password <sup aria-hidden="true">*</sup> :</span>
           <input
                   [type]="passwordVisible ? 'text' : 'password'"
                   nz-input
@@ -27,7 +27,7 @@
     <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
       <span class="span_forgotPassword" (click)="isFormLogin=false">Forgot Password?</span>
       <button nz-button nzType="primary" (click)="submit()" class="btnLogin" >
-        Login
+        Login 
         <span nz-icon nzType="arrow-right"></span>
       </button>
     </div>

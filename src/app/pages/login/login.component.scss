@@ -1,8 +1,32 @@
 .btnRegister,.btnLogin, .btnSubmit_ResetPW
 {
   color: #ffffff !important;
-  background-color: #000000 !important;
+  background-color: #262626 !important;
   border: none;
+}
+
+.btnRegister:hover,.btnLogin:hover, .btnSubmit_ResetPW:hover
+{
+  background-color: #000 !important;
+  transition: 0,5s;
+}
+
+.form_grow sup{
+  color: #ff0000;
+}
+
+.form_grow input{
+  border: 1px solid black;
+  padding: 10px 15px;
+}
+
+.form_group sup{
+  color: red;
+}
+
+.form_group input{
+  border: 1px solid black;
+  padding: 10px 15px;
 }
 
 .group{
@@ -22,9 +46,6 @@
   span{
     font-weight: 600;
   }
-
-
-
 
 }
 
