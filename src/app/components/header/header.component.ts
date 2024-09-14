@@ -13,7 +13,7 @@ export class HeaderComponent {
   }
   account(){
     if (this.user.isVerify==false){
-      this.route.navigate(["accounts/login"])
+      this.route.navigate(["account/login"])
     }
   }
 }
