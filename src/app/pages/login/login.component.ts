@@ -37,14 +37,14 @@ export class LoginComponent implements OnInit {
 
     return x;
 }
-createID(){
+  createID(){
     let date = new Date();
     let d=[date.getDate(),date.getMonth(),(date.getFullYear()+"").slice(2,4),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
     let n=[2,2,2,2,2,2,4];
     let id='#';
     for (let i=0;i<d.length;i++) id+=this.formatEncode(d[i],n[i]);
     return id;
-}
+  }
 
   submit(){
     this.crud.getUsers().subscribe((data)=>{
