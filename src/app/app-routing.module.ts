@@ -7,33 +7,10 @@ import { NewpasswordComponent } from './pages/newpassword/newpassword.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
+
   {
     path:'home',
     component:HomeComponent
-  },
-  {
-    path:'accounts/login',
-    component:LoginComponent
-  },
-  {
-    path:'accounts/login/:param',
-    component:LoginComponent
-  },
-  {
-    path:'accounts/register',
-    component:RegisterComponent
-  },
-  {
-    path:'accounts/newpassword',
-    component:NewpasswordComponent
-  },
-  {
-    path:'page-not-found',
-    component:PageNotFoundComponent
-  },
-  {
-    path:'**',
-    redirectTo:'/page-not-found'
   },
   {
     path:'',
@@ -41,6 +18,36 @@ const routes: Routes = [
     pathMatch: 'full' ,
 
   },
+  {
+    path:'account/login',
+    component:LoginComponent
+  },
+  {
+    path:'account/login/:param',
+    component:LoginComponent
+  },
+  {
+    path:'account/register',
+    component:RegisterComponent
+  },
+  {
+    path:'account/newpassword/:token',
+    component:NewpasswordComponent
+  },
+  // {
+  //   path:'allproducts'
+  // },
+  // {
+  //   path:'products/:param'
+  // },
+  {
+    path:'page-not-found',
+    component:PageNotFoundComponent
+  },
+  {
+    path:'**',
+    redirectTo:'/page-not-found'
+  }
 ];
 
 @NgModule({

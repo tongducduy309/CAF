@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   resetYP_email = ''
 
   constructor (private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute){
-    console.log(window.location.origin);
+
   }
 
   ngOnInit(): void {
@@ -71,14 +71,14 @@ export class LoginComponent implements OnInit {
 
   register(){
     //this.sendEmail('recipient@example.com', 'Test Email', 'This is a test email sent from TypeScript.');
-    this.route.navigate(['accounts/register'])
+    this.route.navigate(['account/register'])
   }
 
   submit_resetPW(){
     let valid=this.isValidEmail(this.resetYP_email)
     if (valid){
       const token = this.createID();
-      const url = `${window.location.origin}/accounts/newpassword?token=${token}` ;
+      const url = `${window.location.origin}/account/newpassword/${token}` ;
       this.sendEmail(this.resetYP_email,url);
     }else
     {

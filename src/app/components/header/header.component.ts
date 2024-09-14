@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/items/user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  constructor (private user:UserService, private route:Router){
 
+  }
+  account(){
+    if (this.user.isVerify==false){
+      this.route.navigate(["accounts/login"])
+    }
+  }
 }
