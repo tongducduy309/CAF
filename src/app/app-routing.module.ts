@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NewpasswordComponent } from './pages/newpassword/newpassword.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 
 const routes: Routes = [
 
@@ -37,9 +38,10 @@ const routes: Routes = [
   // {
   //   path:'allproducts'
   // },
-  // {
-  //   path:'products/:param'
-  // },
+  {
+    path:'products/:id',
+    component:DetailProductComponent
+  },
   {
     path:'page-not-found',
     component:PageNotFoundComponent

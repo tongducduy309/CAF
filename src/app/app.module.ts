@@ -14,21 +14,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from './environment';
-import { ProductComponent } from './components/product/product.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
 import { RegisterComponent } from './pages/register/register.component';
 import { NewpasswordComponent } from './pages/newpassword/newpassword.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { Product1Component } from './components/product1/product1.component';
+import { DetailProductComponent } from './pages/detail-product/detail-product.component';
+import { Product2Component } from './components/product2/product2.component';
+import { CollectionComponent } from './components/collection/collection.component';
 registerLocaleData(en);
 
 
 
 export let components:any = [
-  ProductComponent,
   HeaderComponent,
-  FooterComponent
+  FooterComponent,
+  Product1Component,
+  Product2Component,
+  CollectionComponent
 ]
 
 export let pages = [
@@ -37,7 +42,8 @@ export let pages = [
   HomeComponent,
   RegisterComponent,
   NewpasswordComponent,
-  PageNotFoundComponent
+  PageNotFoundComponent,
+  DetailProductComponent
 ]
 
 @NgModule({

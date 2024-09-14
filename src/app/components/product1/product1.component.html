@@ -1,0 +1,10 @@
+<div class="product-item">
+  <img src="{{product.img}}" alt="" (click)="this.route.navigate(['products/{{product.id}}'])">
+  <div style="width: 100%;">
+    <span class="name" (click)="this.route.navigate(['products/{{product.id}}'])">{{product.name}}</span>
+    <div>
+      <span class="price">{{product.price}}</span>
+      <span *ngIf="product.cost!='0'" class="cost" >{{product.cost}}</span>
+    </div>
+  </div>
+</div>
