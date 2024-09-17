@@ -6,6 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./detail-product.component.scss']
 })
 export class DetailProductComponent {
+  imgs = [
+    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+    "https://coffee-workdo.myshopify.com/cdn/shop/products/3_23b7a8b2-85c6-4826-bbb5-0274ec262ef1_600x600.png?v=1672659207",
+    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+
+  ]
   products=[
     {
       id:'1',
@@ -36,4 +43,8 @@ export class DetailProductComponent {
       cost:'0',
     }
   ]
+  selectedProvince = 'Zhejiang';
+  provinceData = ['Zhejiang', 'Jiangsu'];
+  isFavorite = false;
+  selected_img_product = 0;
 }
