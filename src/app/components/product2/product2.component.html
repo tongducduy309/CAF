@@ -1,1 +1,52 @@
-<p>product2 works!</p>
+<p style="color: #fff;">product2 works!</p>
+<div class="product-note">
+    <div nz-row >
+        <div nz-col [nzXs]="{ span: 5, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }">Col
+            <span style="color: #fff;">The best coffee
+                As the coffee shop market becomes more popular, the number of cafe websites is growing. The internet and social media play an important role in finding new customers</span>
+        </div>
+        <div nz-col [nzXs]="{ span: 11, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }">
+            <div class="product-item">
+                <img  src="https://coffee-workdo.myshopify.com/cdn/shop/products/1_6ea37d25-5b98-4ae3-90c2-fae660407b3d_600x600.png?v=1672651340" alt="">
+            </div>
+        </div>
+        <div nz-col [nzXs]="{ span: 5, offset: 1 }" [nzLg]="{ span: 6, offset: 2 }">
+            <div  class="product2-item">
+                    <div class="group">
+                        <div class="tag-sale"><span>-14%</span></div>
+                        <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/1_6ea37d25-5b98-4ae3-90c2-fae660407b3d_600x600.png?v=1672651340" alt=""></div>
+                    </div>
+                    <div class="group">
+                        <div class="group" style="display: flex;justify-content: space-between;">
+                            <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
+                            <span>Bean</span>
+                        </div>
+                        <div class="group" style="display: flex;justify-content: space-between;">
+                            <span nz-icon nzType="swap" nzTheme="outline"></span>
+                            <span class="name">Coffee</span>
+                        </div> 
+                        <div class="group" style="display: flex;justify-content: space-between;">
+                            <span nz-icon nzType="eye" nzTheme="outline"></span>
+                            <span class="type">Accessories</span>
+                        </div> 
+                        <div class="group">
+                            <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedProvince">
+                                <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+                            </nz-select>
+                        </div>
+                        <div nz-row class="group" >
+                                <div nz-col nzSpan="12" >
+                                    <div class="price"><span >10.000</span></div>
+                                    <div class="cost"><span >20.000</span></div>
+                                </div>
+                                <div nz-col nzSpan="12" style="display: flex; align-items: center;">
+                                    <div class="btnAddToCart">
+                                        <span>+Add To Cart</span>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product2',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./product2.component.scss']
 })
 export class Product2Component {
-
+  selectedProvince = 'Black';
+  provinceData = ['Black', 'White'];
+  isFavorite = false;
 }
