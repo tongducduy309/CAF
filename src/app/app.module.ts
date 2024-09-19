@@ -25,6 +25,7 @@ import { DetailProductComponent } from './pages/detail-product/detail-product.co
 import { Product2Component } from './components/product2/product2.component';
 import { CollectionComponent } from './components/collection/collection.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
+import { Product3Component } from './components/product3/product3.component';
 registerLocaleData(en);
 
 
@@ -34,6 +35,7 @@ export let components:any = [
   FooterComponent,
   Product1Component,
   Product2Component,
+  Product3Component,
   CollectionComponent
 ]
 
