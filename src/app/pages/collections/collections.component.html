@@ -1,35 +1,5 @@
-<div  style="background-color: #fff; display: flex; flex-wrap: wrap; justify-content: space-evenly;" >
-    <div  class = "Items" style="width: 25%;">
-        <div class="card-wrapper" >
-            <img src="https://coffee-workdo.myshopify.com/cdn/shop/collections/1.png?v=1672641441" alt="All Products">
-        </div>
-        <div class="card-content">
-            <h2>All Products</h2>
-            <button nz-button nzType="primary">
-                42 - Items 
-              </button>
-        </div>
-    </div>
-    <div  class = "Items" style="width: 25%;">
-        <div class="card-wrapper" >
-            <img src="https://coffee-workdo.myshopify.com/cdn/shop/collections/tools.png?v=1672641367" alt="Brewing Tools">
-        </div>
-        <div class="card-content">
-            <h2>Brewing Tools</h2>
-            <button nz-button nzType="primary">
-                5 - Items 
-              </button>
-        </div>
-    </div>
-    <div  class = "Items" style="width: 25%;">
-        <div class="card-wrapper" >
-            <img src="https://coffee-workdo.myshopify.com/cdn/shop/collections/Capsulated_Coffee.png?v=1672641571" alt="Capsulated Coffee">
-        </div>
-        <div class="card-content">
-            <h2>Capsulated Coffee</h2>
-            <button nz-button nzType="primary">
-                8 - Items 
-              </button>
-        </div>
-    </div>
-  </div>
+<div class="collection-list">
+    <app-collection *ngfor="let collection of collections" [collection] = "collection"></app-collection>
+</div>
+
+

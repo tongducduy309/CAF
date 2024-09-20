@@ -1,3 +1,11 @@
-
+<div class="collection-items">
+    <img src="{{collection.img}}" alt="All Products" (click) = "this.route.navigate(['collections/{{collection.id}}'])">
+    <div class="card-content">
+        <span class="name" (click) = "this.route.navigate(['collections/{{collection.id}}'])"> 
+            <h4>{{collection.name}}</h4>
+        </span>
+        <button nz-button nzType="primary" class="btnAllProducts" >42 - Items</button>
+    </div>
+</div>  
 
 
