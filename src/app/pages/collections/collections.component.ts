@@ -22,5 +22,30 @@ export class CollectionsComponent {
       img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/Capsulated_Coffee.png?v=1672641571',
       name: 'Capsulated Coffee',
     },
+    {
+      id: '4',
+      img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/Coffee_Accessories.png?v=1672641517',
+      name: 'Coffee Accessories', 
+    },
+    {
+      id: '5',
+      img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/coffee_machines.png?v=1672641519',
+      name: 'Coffee Machines',
+    },
+    {
+      id: '6',
+      img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/Cups_Mugs.png?v=1672641521',
+      name: 'Cups & Mugs',
+    },
+    {
+      id: '7',
+      img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/roast_Grinders.png?v=1672641551',
+      name: 'Roast & Grinders', 
+    },
+    {
+      id: '8',
+      img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/Decaffeinated_Coffe.png?v=1672661990',
+      name: 'Shop Product',
+    },
   ]
 }

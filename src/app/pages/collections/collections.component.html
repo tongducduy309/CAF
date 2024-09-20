@@ -1,5 +1,10 @@
 <div class="collection-list">
-    <app-collection *ngfor="let collection of collections" [collection] = "collection"></app-collection>
+    <div class="detail-collection">
+        <h4>Collections</h4>
+        <div class="view-collection-list" nz-row [nzGutter] = "[8]">
+            <app-collection nz-col nzSpan="8" *ngFor="let collection of collections" [collection] = "collection"></app-collection>
+        </div>
+    </div>
 </div>
 
 

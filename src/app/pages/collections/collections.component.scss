@@ -1,3 +1,14 @@
 .collection-list{
     background-color: #fff;
+
+    .detail-collection{
+        display: flex;
+        flex-direction: column;
+
+        h4{
+            color: #A7897B;
+            font-size: 40px;
+            text-align: center;
+        }
+    }
 }

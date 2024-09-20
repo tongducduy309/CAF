@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss']
 })
-export class CollectionComponent {
+export class CollectionComponent implements OnInit {
   @Input() collection = {
     id: '1',
     img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/1.png?v=1672641441',
@@ -14,5 +14,8 @@ export class CollectionComponent {
   }
   constructor(public route:Router){
     
+  }
+  ngOnInit(): void {
+    console.log(this.collection)
   }
 }
