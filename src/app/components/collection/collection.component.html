@@ -4,7 +4,9 @@
         <span class="name" (click) = "this.route.navigate(['collections/{{collection.id}}'])"> 
             <h4>{{collection.name}}</h4>
         </span>
-        <button nz-button nzType="primary" class="btnAllProducts" >42 - Items</button>
+        <button nz-button nzType="primary" class="btnAllProducts" (click)="navigateToCollection()">
+            {{ collection.itemsCount || 0 }} - Items
+          </button>
     </div>
 </div>  
 
