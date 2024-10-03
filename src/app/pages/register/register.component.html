@@ -1,17 +1,17 @@
-<app-header></app-header>
+
 
 <div nz-col style="padding: 10px;">
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <h2>Your Personal Details </h2>
     </div>
-    
+
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <div nz-row [nzGutter]="15">
             <div class ="form_group field" nz-col nzSpan="12">
                 <span>First Name<sup aria-hidden="true"> *</sup> :</span>
                 <input nz-input placeholder="First Name" [(ngModel)]="FirstName_Fill" type="text" />
             </div>
-            
+
             <div class ="form_group field" nz-col nzSpan="12">
                 <span >Last Name<sup aria-hidden="true"> *</sup> :</span>
                 <input nz-input placeholder="Last Name" [(ngModel)]="LastName_Fill" type="text" />
@@ -20,9 +20,9 @@
         <div class="form_group field">
             <span>E-mail<sup aria-hidden="true"> *</sup> :</span>
             <input nz-input placeholder="Email" [(ngModel)]="Email_Fill" type="text" />
-        </div> 
+        </div>
     </div>
-    
+
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <h2>Your Password</h2>
         <div class ="form_group field">
@@ -30,14 +30,14 @@
             <input nz-input placeholder="Password" [(ngModel)]="Password_Fill" type="text" />
         </div>
     </div>
-    
-    <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;"> 
+
+    <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;">
         <button nz-button nzType="primary" class="btnSendMess" (click)="SendMess_Register()">
             Send Message
             <span nz-icon nzType="arrow-right"></span>
         </button>
-    </div>    
+    </div>
 </div>
 
-    
+
 
