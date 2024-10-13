@@ -11,5 +11,7 @@ export class Product3Component implements OnInit {
 
   ngOnInit(): void {
   }
-
+  selectedProvince = 'Red';
+  provinceData = ['Red', 'Black'];
+  isFavorite = false;
 }

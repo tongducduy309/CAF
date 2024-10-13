@@ -7,6 +7,7 @@ import { NewpasswordComponent } from './pages/newpassword/newpassword.component'
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
+import { AllProductsComponent } from './pages/all-products/all-products.component';
 
 const routes: Routes = [
 
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path:'collections',
     component:CollectionsComponent
+  },
+  {
+    path:'all-products',
+    component:AllProductsComponent
   },
   {
     path:'page-not-found',
