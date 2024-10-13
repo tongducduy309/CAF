@@ -26,6 +26,7 @@ import { Product2Component } from './components/product2/product2.component';
 import { CollectionComponent } from './components/collection/collection.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { Product3Component } from './components/product3/product3.component';
+import { AllProductsComponent } from './pages/all-products/all-products.component';
 registerLocaleData(en);
 
 
@@ -47,7 +48,8 @@ export let pages = [
   NewpasswordComponent,
   PageNotFoundComponent,
   DetailProductComponent,
-  CollectionsComponent
+  CollectionsComponent,
+  AllProductsComponent
 ]
 
 @NgModule({

@@ -1,0 +1,12 @@
+.all-products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .filters{
+        color: #000;
+        border: 5px solid pink;
+    }
+    .all-product-list{
+        width: 90%;
+    }
+}
