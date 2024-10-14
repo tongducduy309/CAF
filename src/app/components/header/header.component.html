@@ -22,10 +22,57 @@
       nzTitle="Your Cart"
       (nzOnClose)="close()"
     >
-      <ng-container *nzDrawerContent>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+
+      <ng-container *nzDrawerContent >
+        <div class="shopping-cart">
+          <div class="mini-cart-body">
+            <div class="text">
+              You’re <b>416.000</b> VND away from <b>FREE shipping</b>.
+            </div>
+            <div class="process">
+              <div class="process-bar"></div>
+              <div style="width: 50px;position: relative;">
+                <div class="process-icon">
+                  <img src="../../../assets/shipping-logo.svg" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="list-item">
+              <!-- Để sản phẩm xuất hiện ở đây -->
+            </div>
+          </div>
+          <div class="mini-cart-footer">
+            <div class="top">
+              <div style="display: flex;width: 100%;">
+                <div class="btn">
+                  <img src="../../../assets/svgexport-34.svg" alt="">
+                </div>
+                <div class="btn">
+                  <img src="../../../assets/svgexport-35.svg" alt="">
+                </div>
+              </div>
+              <div style="display: flex;width: 100%;margin-top: 20px;">
+                <div class="text_group">
+                  <span>Total</span>
+                  <p>1</p>
+                </div>
+                <div class="text_group" style="text-align: right;">
+                  <span>Subtotal</span>
+                  <p>20.000 VND</p>
+                </div>
+              </div>
+            </div>
+            <div class="bottom">
+              <div class="btn" style="background-color: #262626;">
+                View Cart
+              </div>
+              <div class="btn" style="background-color: #000;">
+                Checkout
+              </div>
+            </div>
+          </div>
+        </div>
+
       </ng-container>
     </nz-drawer>
 </div>
