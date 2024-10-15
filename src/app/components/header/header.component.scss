@@ -62,10 +62,12 @@
 }
 
 .shopping-cart{
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   font-family: 'Outfit';
+  z-index: 0;
   .mini-cart-body{
     padding: 30px;
     flex: 1;
@@ -135,6 +137,7 @@
   }
   .mini-cart-footer{
     box-shadow: 0 0 8px #0000004d;
+    z-index: 0;
     .top{
       padding: 15px;
       .btn{
@@ -179,6 +182,36 @@
         line-height: 19px;
       }
     }
+  }
+
+  .drawer{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    box-shadow: 0 0 8px #0000004d;
+    z-index: 1;
+    background-color: #fff;
+    padding: 30px;
+    width: 100%;
+    .close{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 20px;
+    }
+
+    .hidden_Drawer{
+
+    }
+  }
+}
+
+@keyframes hidden {
+  to{
+    transform: translateY(0);
+  }
+  from{
+    transform: translateY(100%);
   }
 }
 

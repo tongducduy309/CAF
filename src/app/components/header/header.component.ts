@@ -18,6 +18,7 @@ export class HeaderComponent {
   }
 
   visible = false;
+  isPromoCode = true;
   open(): void {
     this.visible = true;
   }

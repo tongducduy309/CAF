@@ -71,6 +71,19 @@
               </div>
             </div>
           </div>
+          <div class="drawer" *ngIf="isPromoCode">
+            <span nz-icon nzType="close" nzTheme="outline" class="close" [ngClass]="{'hidden_Drawer':1==1}"></span>
+            <div style="display: flex;align-items: center;margin-bottom: 20px;">
+              <img src="../../../assets/svgexport-37.svg" alt="" style="margin-right: 10px;">
+              <span>Add discount code</span>
+            </div>
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+              <input type="text" nz-input placeholder="Promo Code"/>
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch style="background-color: #262626;border: none;">Apply</button>
+            </ng-template>
+          </div>
         </div>
 
       </ng-container>

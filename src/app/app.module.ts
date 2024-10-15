@@ -27,6 +27,7 @@ import { CollectionComponent } from './components/collection/collection.componen
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { Product3Component } from './components/product3/product3.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
+import { ItemShoppingCartComponent } from './components/item-shopping-cart/item-shopping-cart.component';
 registerLocaleData(en);
 
 
@@ -37,7 +38,8 @@ export let components:any = [
   Product1Component,
   Product2Component,
   Product3Component,
-  CollectionComponent
+  CollectionComponent,
+  ItemShoppingCartComponent
 ]
 
 export let pages = [
