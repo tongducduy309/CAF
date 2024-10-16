@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 const routes: Routes = [
 
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path:'all-products',
     component:AllProductsComponent
+  },
+  {
+    path:'cart',
+    component:CartComponent
   },
   {
     path:'page-not-found',

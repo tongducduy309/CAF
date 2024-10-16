@@ -1,1 +1,42 @@
-<app-item-shopping-cart></app-item-shopping-cart>
+<section class="first-section">
+  <video src="../../../assets/video/video_home_firstSection.mp4" muted="muted" loop autoplay playsinline controlslist="nodownload"></video>
+  <div class="banner-center-content">
+    <div class="subtitle">CoffeeStore</div>
+    <h2 class="content">Chocolate Coffee</h2>
+    <p>Coffee that fuels your dreams. Life is short, stay awake for it. Coffee, Art, and Vintage. Fuel for your creativity.</p>
+    <a href="" class="link-btn">Show products</a>
+  </div>
+</section>
+<section class="second-section">
+  <div class="container">
+    <nz-carousel nzEffect="scrollx" nzAutoPlay [nzDots]="false">
+    <div nz-carousel-content *ngFor="let i of [1,2,3]">
+      <nz-divider nzOrientation="left" nzText="Vertical"></nz-divider>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <app-product2 nz-col nzSpan="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2>
+      </div>
+    </div>
+  </nz-carousel>
+  </div>
+</section>
+<section class="fourth-section">
+  <div class="container">
+    <div class="bean">
+      <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload"></video>
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-col nzSpan="8">
+          <div class="subtitle">CoffeeStore</div>
+          <h3 class="content">The best coffee</h3>
+          <p>As the coffee shop market becomes more popular, the number of cafe websites is growing. The internet and social media play an important role in finding new customers.</p>
+          <a href="" class="link-btn">Show products</a>
+        </div>
+        <div nz-col nzSpan="8">
+          <app-product2></app-product2>
+        </div>
+        <div nz-col nzSpan="8">
+          <app-product2></app-product2>
+        </div>
+      </div>
+      </div>
+  </div>
+</section>

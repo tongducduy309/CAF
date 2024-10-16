@@ -24,6 +24,12 @@ body{
   font-family: 'Josefin';
 }
 
+h2{
+  font-family: 'Josefin';
+}
+
+
+
 /*======================== Fonts =============================*/
 @font-face {
   font-family: "Josefin";
@@ -37,5 +43,11 @@ body{
   src: url("./assets/fonts/OutfitRegular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+
+.container{
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 

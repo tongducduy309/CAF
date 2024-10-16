@@ -2,8 +2,59 @@
   background-color: #000;
   min-height: 100px;
   color: #fff;
+  padding: 40px;
+  z-index: 1000;
   h4{
     color: #fff;
+  }
+  .title{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+
+  nz-row{
+    nz-col{
+      ul{
+        font-family: 'Outfit';
+        li{
+          margin-bottom: 10px;
+          text-decoration: none;
+          a{
+            text-decoration: none;
+            color:#fff;
+            font-size: 16px;
+            line-height: 22px;
+            font-weight: 500;
+            &:hover{
+              color: #a7897b;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .icon-social-media{
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    background-color: #fff;
+    width: 32px;
+    margin: 0 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .7s;
+    &:hover{
+      background-color: #a7897b;
+
+    }
+    &:hover svg path{
+      fill: #fff;
+    }
   }
 
 }

@@ -28,6 +28,7 @@ import { CollectionsComponent } from './pages/collections/collections.component'
 import { Product3Component } from './components/product3/product3.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { ItemShoppingCartComponent } from './components/item-shopping-cart/item-shopping-cart.component';
+import { CartComponent } from './pages/cart/cart.component';
 registerLocaleData(en);
 
 
@@ -51,7 +52,8 @@ export let pages = [
   PageNotFoundComponent,
   DetailProductComponent,
   CollectionsComponent,
-  AllProductsComponent
+  AllProductsComponent,
+  CartComponent
 ]
 
 @NgModule({

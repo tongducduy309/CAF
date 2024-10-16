@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Route, Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   title_button= "Login"
   list_product = [
     {
@@ -18,12 +18,29 @@ export class HomeComponent {
   namepush = ''
 
 
-  constructor ( private route:Router){
+  constructor ( private route:Router, private elRef: ElementRef){
 
+  }
+  ngOnInit(): void {
+    this.animationFirstSectionContent();
   }
 
   change(){
     this.route.navigate(['login'])
+  }
+
+  animationFirstSectionContent(){
+    const contents = [
+      'Chocolate Coffee',
+    'Choose the origin of the coffee',
+    'Freshly roasted coffee <b>and barista accessories.</b>'
+    ]
+    const content = this.elRef.nativeElement.querySelector('.banner-center-content .content')
+    let i=0
+    setInterval(()=>{
+      content.innerHTML = contents[i++]
+      if (i==3) i=0
+    },2000)
   }
 
 

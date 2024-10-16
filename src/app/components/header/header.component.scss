@@ -1,18 +1,26 @@
 .header{
-  background-color: #000;
+  position: absolute;
   color: #fff;
-  display: flex;
-  padding: 20px 15px;
-  justify-content: center;
-  align-items: center;
-  &>div{
-    border: 1px solid #fff;
+  z-index: 1000;
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px 0;
+
+
+  font-family: 'Outfit';
+  .container{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 5px;
-    cursor: pointer;
+    &>div{
+      border: 1px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 5px;
+      cursor: pointer;
 
+    }
   }
   .border-circle{
     border-radius: 100%;
@@ -21,7 +29,11 @@
   }
   .border-rounded{
     border-radius: 100px;
-    padding: 10px 15px;
+    padding: 10px;
+  }
+  svg{
+    max-width: 100%;
+    display: block;
   }
 
 
@@ -68,6 +80,7 @@
   height: 100%;
   font-family: 'Outfit';
   z-index: 0;
+  overflow: hidden;
   .mini-cart-body{
     padding: 30px;
     flex: 1;
@@ -150,6 +163,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        user-select: none;
       }
 
       .text_group{
@@ -193,6 +207,8 @@
     background-color: #fff;
     padding: 30px;
     width: 100%;
+    transition: all .3s;
+    transform: translateY(100%);
     .close{
       position: absolute;
       right: 20px;
@@ -200,18 +216,59 @@
       font-size: 20px;
     }
 
-    .hidden_Drawer{
 
+  }
+  .hidden_Drawer{
+    animation: hidden 0.5s normal forwards;
+  }
+  .appear_Drawer{
+    animation: appear 0.5s normal forwards;
+  }
+}
+
+.cart-empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  .btn{
+    font-family: 'Outfit';
+    background-color: #262626;
+    padding: 11px 25px;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    span{
+      font-size: 14px;
+      line-height: 14px;
+      font-weight: 600;
     }
+  }
+  h5{
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 700;
   }
 }
 
 @keyframes hidden {
   to{
-    transform: translateY(0);
+    transform: translateY(100%);
   }
   from{
+    transform: translateY(0);
+  }
+}
+
+@keyframes appear {
+  from{
     transform: translateY(100%);
+  }
+  to{
+    transform: translateY(0);
   }
 }
 

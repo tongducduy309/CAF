@@ -1,0 +1,148 @@
+.subtitle{
+  color: #fff;
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+}
+p{
+  color: #fff;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.link-btn{
+  color: #fff;
+  text-decoration: underline;
+}
+.first-section{
+  padding: 200px 0 300px;
+  z-index: -1;
+  position: relative;
+  &::before{
+    content: "";
+    background: linear-gradient(358.82deg, #040404 .95%, #6a593d00 83.76%), linear-gradient(71.98deg, #262626 -1.41%, #6a593d00 30.34%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+  }
+  .banner-center-content{
+    z-index: 2;
+    color: #fff;
+    font-family: 'Outfit';
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2{
+      color: #fff;
+      font-size: 51px;
+      line-height: 61px;
+      font-weight: 700;
+    }
+
+    .content{
+      animation: show_ 2s 2s infinite ease-in-out alternate;
+    }
+  }
+  video{
+    z-index: -1;
+    object-fit: cover;
+    object-position: center;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    line-height: 1;
+    border: none;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+
+  }
+}
+
+.second-section{
+  background-color: #000;
+  [nz-carousel-content] {
+    width: 100%;
+    background-color: transparent;
+    padding: 10px;
+  }
+}
+
+.fourth-section{
+  position: relative;
+  padding: 80px 0;
+  margin-top: 80px;
+  background-color: #000;
+
+  .bean{
+    padding: 55px 20px;
+    position: relative;
+    z-index: 1;
+
+    h3{
+      color: #a7897b;
+      font-size: 32px;
+      line-height: 38px;
+      font-weight: 700;
+    }
+    .link-btn{
+      font-size: 16px;
+      line-height: 16px;
+      font-weight: 700;
+    }
+    video{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: -1;
+    }
+
+    &::before{
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #000000e6 .08%, #0000 99.92%);
+    }
+  }
+
+}
+
+@keyframes show_ {
+
+  from{
+      opacity: 0;
+  }
+  to{
+      opacity: 1;
+  }
+}
+
+@keyframes hidden_ {
+
+  from{
+      opacity: 1;
+  }
+  to{
+      opacity: 0;
+  }
+}
+
+
