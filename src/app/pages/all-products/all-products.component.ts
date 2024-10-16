@@ -14,18 +14,20 @@ export class AllProductsComponent extends Page implements OnInit  {
 
   ngOnInit(): void {
   }
-  openMap: { [name: string]: boolean } = {
-    sub1: true,
-    sub2: false,
-    sub3: false
-  };
-
-  openHandler(value: string): void {
-    for (const key in this.openMap) {
-      if (key !== value) {
-        this.openMap[key] = false;
-      }
+  expandIconPosition: 'start' | 'end' = 'start';
+  panels = [
+    {
+      active: true,
+      name: 'Availability',
+    },
+    {
+      active: true,
+      name: 'Price'
+    },
+    {
+      active: true,
+      name: 'Product type'
     }
-  }
+  ];
 
 }

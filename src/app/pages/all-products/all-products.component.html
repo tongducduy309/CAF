@@ -3,54 +3,41 @@
     <div nz-col class="filters" nzSpan="12">
       <div style="padding: 20px;"><span>Filters</span></div>
       <div class="group">
-        <ul nz-menu nzMode="inline" style="width: 240px;">
-          <li
-            nz-submenu
-            [(nzOpen)]="openMap['sub1']"
-            (nzOpenChange)="openHandler('sub1')"
-            nzTitle="Availability"
-            nzIcon=""
-          >
-            <div class="Selected"><span> Selected</span></div>
-            <div class="Reset"><span>Reset</span></div>
-            <ul>
-              <li nz-menu-item>In stock</li>
-              <li nz-menu-item>Out of stock</li>
-            </ul>
-          </li>
-          <li
-            nz-submenu
-            [(nzOpen)]="openMap['sub2']"
-            (nzOpenChange)="openHandler('sub2')"
-            nzTitle="Price"
-            nzIcon=""
-          >
-            <ul>
-              <span>The highest price is 782.00 USD</span>
-              <span>Reset</span>
-              <li nz-menu-item>Min price:</li>
-              <li nz-menu-item>Max price:</li>
-            </ul>
-          </li>
-          <li
-            nz-submenu
-            [(nzOpen)]="openMap['sub3']"
-            (nzOpenChange)="openHandler('sub3')"
-            nzTitle="Product type"
-            nzIcon=""
-          >
-            <ul>
-              <span> Selected</span>
-              <span>Reset</span>
-              <li nz-menu-item>Accessories</li>
-              <li nz-menu-item>Coffee</li>
-              <li nz-menu-item>Grinder</li>
-              <li nz-menu-item>Machine</li>
-              <li nz-menu-item>Mugs</li>
-              <li nz-menu-item>Tools</li>
-            </ul>
-          </li>
-        </ul>
+        <nz-collapse nzExpandIconPosition="right">
+            <nz-collapse-panel 
+              [nzHeader]="panels[0].name"
+              nzActive="true"
+              [nzExtra]="extraTpl0"
+              (nzActiveChange) = "panels[0].active = !panels[0].active"
+              [nzShowArrow] = "false"          
+
+            >
+              <div class="group">
+                <div class="quantity">
+                  <span class="qty">0</span>
+                  <span>selected</span>
+                </div>
+                <span class="Reset">reset</span>
+              </div>
+              <ng-template #extraTpl0>
+                
+                <span nz-icon [nzType]="panels[0].active?'minus':'plus'"></span>
+              </ng-template>
+            </nz-collapse-panel>
+            
+            <nz-collapse-panel 
+              [nzHeader]="panels[1].name"
+              nzActive="true"
+              [nzExtra]="extraTpl1"
+              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzShowArrow] = "false"            
+            >
+              <ng-template #extraTpl1>
+                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              </ng-template>
+            </nz-collapse-panel>
+        </nz-collapse>
+        
       </div>
     </div>
     <div nz-col class="list-product" nzSpan="12">
