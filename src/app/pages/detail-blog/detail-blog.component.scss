@@ -1,0 +1,40 @@
+.detail-blog{
+    &>div>div{
+        p{
+            font-family: 'Outfit';
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+        }
+        h5{
+            font-family: 'Josefin';
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 27px;
+        }
+        blockquote{
+            font-family: 'Outfit';
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 24px;
+        }
+        
+    }
+    .social-media{
+        display: flex;
+        align-items: center;
+        li{
+            margin: 0 3px;
+        }
+        .icon{
+            width: 28px;
+            height: 28px;
+            border-radius: 100%;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    }
+}

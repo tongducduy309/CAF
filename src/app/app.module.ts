@@ -29,6 +29,9 @@ import { Product3Component } from './components/product3/product3.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { ItemShoppingCartComponent } from './components/item-shopping-cart/item-shopping-cart.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
+import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
+import { BlogComponent } from './components/blog/blog.component';
 registerLocaleData(en);
 
 
@@ -40,7 +43,8 @@ export let components:any = [
   Product2Component,
   Product3Component,
   CollectionComponent,
-  ItemShoppingCartComponent
+  ItemShoppingCartComponent,
+  BlogComponent
 ]
 
 export let pages = [
@@ -53,7 +57,9 @@ export let pages = [
   DetailProductComponent,
   CollectionsComponent,
   AllProductsComponent,
-  CartComponent
+  CartComponent,
+  BlogsComponent,
+  DetailBlogComponent
 ]
 
 @NgModule({

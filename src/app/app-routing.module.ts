@@ -9,6 +9,8 @@ import { DetailProductComponent } from './pages/detail-product/detail-product.co
 import { CollectionsComponent } from './pages/collections/collections.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
+import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
 
 const routes: Routes = [
 
@@ -56,6 +58,14 @@ const routes: Routes = [
   {
     path:'cart',
     component:CartComponent
+  },
+  {
+    path:'blogs',
+    component:BlogsComponent
+  },
+  {
+    path:'blogs/:name',
+    component:DetailBlogComponent
   },
   {
     path:'page-not-found',
