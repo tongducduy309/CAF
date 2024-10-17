@@ -62,12 +62,12 @@ export class RegisterComponent implements OnInit {
     }
 
 
-    this.crud.addNewData('users',this.Email_Fill,{
-      firstName: this.FirstName_Fill,
-      lastName: this.LastName_Fill,
-      password:this.Password_Fill,
-      email: this.Email_Fill
-    })
+    // this.crud.addNewData('users',this.Email_Fill,{
+    //   firstName: this.FirstName_Fill,
+    //   lastName: this.LastName_Fill,
+    //   password:this.Password_Fill,
+    //   email: this.Email_Fill
+    // })
 
     this.createNotification('success', 'Thanks for registering!');
 

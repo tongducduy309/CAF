@@ -1,5 +1,7 @@
 <section class="first-section">
-  <video src="../../../assets/video/video_home_firstSection.mp4" muted="muted" loop autoplay playsinline controlslist="nodownload"></video>
+  <div class="bean">
+    <video src="../../../assets/video/video_home_firstSection.mp4" muted="muted" loop autoplay playsinline controlslist="nodownload"></video>
+  </div>
   <div class="banner-center-content">
     <div class="subtitle">CoffeeStore</div>
     <h2 class="content">Chocolate Coffee</h2>
@@ -9,14 +11,36 @@
 </section>
 <section class="second-section">
   <div class="container">
-    <nz-carousel nzEffect="scrollx" nzAutoPlay [nzDots]="false">
-    <div nz-carousel-content *ngFor="let i of [1,2,3]">
-      <nz-divider nzOrientation="left" nzText="Vertical"></nz-divider>
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-        <app-product2 nz-col nzSpan="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2>
-      </div>
+    <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
+      <ul class="tabs">
+        <li class="selected"><p>Bán Chạy</p></li>
+        <li><p>Trà Trái Cây</p></li>
+        <li><p>Trà Sữa</p></li>
+        <li><p>Cà Phê</p></li>
+        <li><p>Bánh Ăn Kèm</p></li>
+      </ul>
+      <a href="" class="link-btn">XEM THÊM</a>
     </div>
-  </nz-carousel>
+
+  <div class="view-products">
+    <div class="previous btn">
+      <span nz-icon nzType="left" nzTheme="outline" style="color: #fff;"></span>
+    </div>
+    <div class="next btn">
+      <span nz-icon nzType="right" nzTheme="outline" style="color: #fff;"></span>
+    </div>
+    <nz-carousel nzEffect="scrollx" nzAutoPlay [nzDots]="false">
+      <div nz-carousel-content *ngFor="let i of [1,2,3]">
+        <div>
+          <div nz-row [nzGutter]="[40,20]">
+            <app-product2 nz-col [nzSpan]="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2>
+
+          </div>
+        </div>
+        <!-- <h3>{{i}}</h3> -->
+      </div>
+    </nz-carousel>
+  </div>
   </div>
 </section>
 <section class="fourth-section">
@@ -35,6 +59,76 @@
         </div>
         <div nz-col nzSpan="8">
           <app-product2></app-product2>
+        </div>
+      </div>
+      </div>
+  </div>
+</section>
+<section class="sixth-section">
+  <div class="container">
+    <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
+      <div>
+        <div class="subtitle">CoffeeStore</div>
+        <h3 class="content">Coffee Shop Best Discount ‘s Product</h3>
+      </div>
+      <div>
+        <a href="" class="link-btn">XEM THÊM</a>
+      </div>
+    </div>
+    <div nz-row [nzGutter]="[24,12]">
+      <div nz-col [nzSpan]="6" *ngFor="let i of [1,2,3,4]">
+        <app-product3></app-product3>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="seventh-section">
+  <div class="container">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <div nz-col nzSpan="8">
+        <div class="subtitle">CoffeeStore</div>
+        <h3 class="content">Shop Best Seller <br> Product</h3>
+        <p>Coffee is a drink prepared from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content.</p>
+        <a href="" class="link-btn">Show Products</a>
+      </div>
+      <div nz-col nzSpan="8" style="display: flex;justify-content: center;align-items: center;">
+        <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
+      </div>
+      <div nz-col nzSpan="8">
+        <app-product2></app-product2>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="subcribe-section">
+  <div class="container">
+    <div class="banner">
+      <img src="../../../assets/images/Subscribe-banner.webp" alt="">
+      <div class="subcribe-column">
+        <div class="subtitle">CoffeeStore</div>
+        <h3 class="content">Subscribe newsletter and get <br> -20% off</h3>
+        <p>It is the most popular hot drink in the world. Seeds of the Coffea plant's fruits are separated to produce unroasted green coffee beans.</p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="nineth-section">
+  <div class="container">
+    <div class="bean">
+      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+        <div nz-col nzSpan="8">
+          <div class="subtitle">CoffeeStore</div>
+          <h3 class="content">Fresh roasted coffee <br> Blogs</h3>
+          <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant.</p>
+          <a href="" class="link-btn">Show Blogs</a>
+        </div>
+        <div nz-col nzSpan="8">
+          <app-blog></app-blog>
+        </div>
+        <div nz-col nzSpan="8">
+          <app-blog></app-blog>
         </div>
       </div>
       </div>

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { CrudService } from 'src/services/crud.service';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,25 @@ export class HomeComponent implements OnInit{
   ]
   namepush = ''
 
+  products: any = []
 
-  constructor ( private route:Router, private elRef: ElementRef){
+  constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
 
   }
   ngOnInit(): void {
     this.animationFirstSectionContent();
+    this.getAllProducts();
   }
 
+
+  // ============================GET DATA=============================
+  getAllProducts(){
+    this.crud.getProducts('all').subscribe((data)=>{
+      this.products=data
+      console.log(this.products);
+    });
+
+  }
   change(){
     this.route.navigate(['login'])
   }

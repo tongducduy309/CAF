@@ -47,18 +47,18 @@ export class LoginComponent implements OnInit {
   }
 
   submit(){
-    this.crud.getUsers().subscribe((data)=>{
-      let isLogin = false;
-      data.forEach(user => {
-        if (user.id==this.user_email && user.password==this.user_password){
-          this.createNotification('success','Đăng Nhập Thành Công');
-          isLogin = true
-        }
-      });
-      if (!isLogin){
-        this.createNotification('error','Đăng Nhập Thất Bại');
-      }
-    })
+    // this.crud.getUsers().subscribe((data)=>{
+    //   let isLogin = false;
+    //   data.forEach(user => {
+    //     if (user.id==this.user_email && user.password==this.user_password){
+    //       this.createNotification('success','Đăng Nhập Thành Công');
+    //       isLogin = true
+    //     }
+    //   });
+    //   if (!isLogin){
+    //     this.createNotification('error','Đăng Nhập Thất Bại');
+    //   }
+    // })
   }
 
   createNotification(type: string, message: string): void {
