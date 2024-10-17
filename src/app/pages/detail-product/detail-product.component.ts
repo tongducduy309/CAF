@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CrudService } from 'src/services/crud.service';
 
 @Component({
   selector: 'app-detail-product',
   templateUrl: './detail-product.component.html',
   styleUrls: ['./detail-product.component.scss']
 })
-export class DetailProductComponent {
+export class DetailProductComponent implements OnInit {
+
   imgs = [
     "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
     "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
@@ -47,4 +50,24 @@ export class DetailProductComponent {
   provinceData = ['Zhejiang', 'Jiangsu'];
   isFavorite = false;
   selected_img_product = 0;
+  product:any;
+
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router){
+    this.route.paramMap.subscribe(async (params) => {
+      await this.getIdProduct(params.get('id'))
+    });
+  }
+
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
+  getIdProduct(id:any){
+
+    this.crud.getProducts(id).subscribe((product)=>{
+      this.product = product
+      if (!this.product) this.router.navigate(['page-not-found'])
+    })
+
+  }
 }
