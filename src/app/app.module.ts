@@ -32,6 +32,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
 import { BlogComponent } from './components/blog/blog.component';
+import { RatingProductComponent } from './components/rating-product/rating-product.component';
 registerLocaleData(en);
 
 
@@ -44,7 +45,8 @@ export let components:any = [
   Product3Component,
   CollectionComponent,
   ItemShoppingCartComponent,
-  BlogComponent
+  BlogComponent,
+  RatingProductComponent
 ]
 
 export let pages = [

@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./product2.component.scss']
 })
 export class Product2Component {
+
+  @Input() bg = '#a7897b61';
   selectedProvince = 'Black';
   provinceData = ['Black', 'White'];
   isFavorite = false;

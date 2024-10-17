@@ -50,6 +50,10 @@ p{
   font-weight: 700;
 }
 
+.fw-500{
+  font-weight: 500 !important;
+}
+
 .first-section{
   padding: 200px 0 300px;
   z-index: -1;
@@ -199,7 +203,7 @@ p{
 
 
 
-.fourth-section{
+.third-section{
   position: relative;
   padding: 80px 0;
   background-color: #000;
@@ -235,14 +239,18 @@ p{
 
 }
 
-.sixth-section{
+.fourth-section{
+  background-color: #000;
+}
+
+.fiveth-section{
   background-color: #000;
   [app-product3]{
     background-color: #a7897b;
   }
 }
 
-.seventh-section{
+.sixth-section{
   background-color: #000;
 }
 .subcribe-section{
@@ -284,7 +292,7 @@ p{
   }
 }
 
-.nineth-section{
+.eightth-section{
   background-color: #000;
 }
 

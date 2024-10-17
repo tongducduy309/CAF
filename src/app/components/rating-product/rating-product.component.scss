@@ -1,0 +1,40 @@
+.rating-product{
+  font-family: 'Outfit';
+  color: #fff;
+  margin-bottom: 10px;
+  img{
+    width: 100%;
+  }
+  .name{
+    color: #fff;
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 700;
+  }
+
+  .auther{
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  .comment{
+    color: #a7897b;
+    font-size: 16px;
+    line-height: 22px;
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2;
+   -webkit-box-orient: vertical;
+
+  }
+}
+
+::ng-deep .ant-rate-star{
+  margin: 0 !important;
+}
+
+::ng-deep .ant-rate-star-full{
+  color: #6a593d !important;
+}

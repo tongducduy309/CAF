@@ -43,7 +43,7 @@
   </div>
   </div>
 </section>
-<section class="fourth-section">
+<section class="third-section">
   <div class="container">
     <div class="bean">
       <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload"></video>
@@ -64,7 +64,28 @@
       </div>
   </div>
 </section>
-<section class="sixth-section">
+<section class="fourth-section">
+  <div class="container">
+    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+      <div nz-col nzSpan="8">
+        <div class="subtitle">CoffeeStore</div>
+        <h3 class="content">Fresh roasted coffee <br> with 24h delivery blogs</h3>
+        <p>Denver Biscuit cafe knows how to entice future customers. A video takes viewers all the way from the preparation of one of their desserts to the service.</p>
+        <a href="" class="link-btn">Show products</a>
+      </div>
+      <div nz-col nzSpan="8">
+        <div class="subtitle fw-500">Choose the origin of the coffee:</div>
+        <h3 class="content">Spain</h3>
+        <img style="opacity: .4;" src="../../../assets/images/flying-coffee.webp" alt="">
+      </div>
+      <div nz-col nzSpan="8">
+        <app-rating-product></app-rating-product>
+        <app-rating-product></app-rating-product>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="fiveth-section">
   <div class="container">
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <div>
@@ -77,12 +98,12 @@
     </div>
     <div nz-row [nzGutter]="[24,12]">
       <div nz-col [nzSpan]="6" *ngFor="let i of [1,2,3,4]">
-        <app-product3></app-product3>
+        <app-product3 bg="#a7897b" color_text="#fff"></app-product3>
       </div>
     </div>
   </div>
 </section>
-<section class="seventh-section">
+<section class="sixth-section">
   <div class="container">
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
@@ -114,7 +135,7 @@
 
   </div>
 </section>
-<section class="nineth-section">
+<section class="eightth-section">
   <div class="container">
     <div class="bean">
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">

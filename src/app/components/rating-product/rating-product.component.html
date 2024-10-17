@@ -1,0 +1,20 @@
+<div nz-row class="rating-product" [nzGutter]="[20]">
+  <div nz-col [nzSpan]="8" style="display: flex;align-items: center;justify-content: center;">
+    <img src="https://coffee-workdo.myshopify.com/cdn/shop/products/3.png?v=1672642716" alt="">
+  </div>
+  <div nz-col [nzSpan]="16">
+    <h3 class="name">Chocolate Brew</h3>
+    <p class="comment">I love the atmosphere at Taste & See Coffee Shop and Gallery. It's the perfect place to relax and enjoy a cup of coffee.</p>
+    <div style="display: flex;justify-content: space-between;align-items: center;">
+      <span class="auther">
+        Robert
+      </span>
+      <span>
+        <nz-rate [ngModel]="4" [nzCharacter]="rateIcon" nzDisabled></nz-rate>
+        <ng-template #rateIcon><span nz-icon nzType="star" nzTheme="fill" style="font-size: 10px;"></span></ng-template>
+        4.5/
+        <b>5.0</b>
+      </span>
+    </div>
+  </div>
+</div>
