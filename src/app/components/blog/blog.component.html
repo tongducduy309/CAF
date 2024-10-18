@@ -1,1 +1,19 @@
-<p>blog works!</p>
+<div class = "blog-item">
+    <div class="blog-img">
+        <span (click) = "this.route.navigate(['blogs/{{blog.id}}'])">
+            <img src="{{blog.img}}" alt="From our passion to your single cup of coffee" >
+            <span class="blg-lbl">
+                ARTICLES
+            </span>
+        </span>            
+    </div>
+
+    <div class = "blog-content">
+        <span>coffee</span><br>
+        <span class="title" (click) = "this.route.navigate(['blogs/{{blog.id}}'])" style="cursor: pointer;">{{blog.title}}</span>
+        <p>{{blog.content}}</p>
+    </div>
+    <span class="link-btn">READ MORE</span>
+</div>
+
+
