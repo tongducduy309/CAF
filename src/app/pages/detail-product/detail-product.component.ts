@@ -102,7 +102,7 @@ export class DetailProductComponent implements OnInit {
   }
 
   submitReview(){
-    this.crud.addData("customer-reviews",this.form_review).subscribe(response => {
+    this.crud.addData("customer-reviews",{...this.form_review,pid:this.product.id}).subscribe(response => {
       console.log("Successful");
   }, error => {
       console.error('Error:', error);
