@@ -1,1 +1,12 @@
-<p>blogs works!</p>
+<div class = "container">
+    <div class = "section-title">
+        <div class="sub-title">ALLBLOGS</div>
+        <h2>COFFEE</h2>
+        
+        <div nz-row [nzGutter]="[24,24]">
+            <app-blog nz-col [nzSpan]="6" *ngFor="let blog of blogs" [blog]="blog"></app-blog>
+        </div>
+    </div>
+
+    
+</div>

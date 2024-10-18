@@ -1,0 +1,85 @@
+
+
+.blog-item{
+    display: flex;
+    flex-direction: column;
+    max-width: 282px;
+    background-color: #eaeaea;
+    padding: 15px 15px;
+    border-radius: 10px;
+    border: 1px solid #000;
+    
+    .blog-img{
+        cursor: pointer;
+        position: relative;
+        img{
+            max-width: 250px;
+        }
+
+        .blg-lbl{
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            background: #fff;
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 13px;
+            z-index: 1;
+        }
+    }
+
+    .blog-content{
+        padding-top: 20px;
+        span{
+            font-family: 'Outfit';
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 16px;
+        }
+        
+        p{
+            font-family: 'Outfit';
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 20px;
+            
+        }
+    }
+
+    .link-btn {
+        font-style: normal;
+        font-family: 'Outfit';
+        font-size: 12px;
+        line-height: 12px;
+        font-weight: 700;
+        text-align: center;
+        position: relative;
+        padding-bottom: 5px;
+        margin-right: 180px;
+        color: #000;
+        transition: all ease-in-out .25s;
+    }
+
+    .link-btn::before{
+        content: "";
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: #000;
+        transition: all .25s ease-in-out;
+    }
+    
+    .link-btn:hover{
+        color: #A7897B;
+    }
+}
+
+
