@@ -24,12 +24,12 @@
           </div>
         </div>
         <div nz-row class="group" style="display: flex;align-items: center;">
-          <nz-rate [ngModel]="0" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
+          <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
           <div style="cursor: pointer;font-size: 20px;">
             <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span>
             <span style="font-weight: 700;">Write a Review</span>
           </div>
-          <ng-template #rateIcon><span nz-icon nzType="star" nzTheme="outline" style="color: #a7897b;"></span></ng-template>
+          <ng-template #rateIcon><span nz-icon nzType="star" [nzTheme]="product?.point==0?'outline':'fill'"></span></ng-template>
         </div>
         <div class="group">
           <div class="name">
@@ -38,7 +38,7 @@
         </div>
         <div class="group">
           <div style="cursor: pointer;font-size: 20px;">
-            <span nz-icon nzType="question-circle" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span>
+            <!-- <span nz-icon nzType="question-circle" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span> -->
             <span style="font-weight: 700;">Xem Kích Cỡ</span>
           </div>
         </div>
@@ -90,24 +90,68 @@
   </div>
 </section>
 <section class="customer-review-section">
-  <div class="container">
-    <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Customer Reviews</div>
+  <div class="container" style="margin-bottom: 20px;">
+    <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Bài Đánh Giá</div>
 
-    <div style="display: flex;align-items: center;justify-content: center;">
+    <div style="display: flex;align-items: center;justify-content: center;" class="sub">
       <div class="block">
         <div>
           <div style="display: flex;align-items: center;">
-            <nz-rate [ngModel]="0" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
+            <nz-rate [ngModel]="rating_of_product.point" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
             <span class="text">4.0 / <b>5.0</b></span>
           </div>
-          <span class="text">Based on 2 reviews</span>
+          <span class="text">Có {{rating_of_product.customer}} bài đánh giá</span>
         </div>
       </div>
       <div class="block">
         <div>
-          <div class="btn">
-            Write a review
+          <div class="btn" (click)="writeReview()">
+            {{(writing_review)?'Hủy đánh giá':'Viết đánh giá'}}
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container w-600">
+
+
+    <div class="form" [ngClass]="{'max-height':writing_review,'min-height':writing_review==false}">
+      <div class="content" style="color: #000;text-align: center;width: 100%;margin-bottom: 20px;">Viết Đánh Giá</div>
+
+      <div class="group">
+        <span class="label">Đánh Giá</span>
+        <nz-rate [(ngModel)]="form_review.point" [nzCharacter]="rateIconReview" style="margin-right: 20px;" (ngModelChange)="changeRating_Review($event)" (nzOnHoverChange)="hoverRating_Review($event)"></nz-rate>
+        <ng-template #rateIconReview><span nz-icon nzType="star" [nzTheme]="form_review?.point==0?'outline':'fill'"></span></ng-template>
+      </div>
+
+      <div class="group">
+        <span class="label">Viết nhận xét</span>
+        <textarea
+        nz-input
+        placeholder="Viết nhận xét..."
+        [(ngModel)] = "form_review.comment"
+        [nzAutosize]="{ minRows: 6, maxRows: 6 }"
+      ></textarea>
+      </div>
+
+      <div class="group">
+        <span class="label">Họ và tên</span>
+        <input nz-input placeholder="Nhập họ và tên của bạn (Hiển thị công khai)" [(ngModel)]="form_review.name" type="text" />
+      </div>
+
+      <div class="group">
+        <span class="label">Email</span>
+        <input nz-input placeholder="Nhập email của bạn (Không hiển thị công khai)" [(ngModel)]="form_review.email" type="email" />
+      </div>
+
+      <p>Về dữ liệu của, chúng tôi sẽ chỉ liên hệ với bạn về đánh giá bạn để lại và chỉ khi cần thiết. Bằng cách gửi đánh giá của mình, bạn đồng ý với các điều khoản và điều kiện về <a href="">chính sách quyền riêng tư</a> của chúng tôi.</p>
+
+      <div class="group" style="display: flex;width: 100%;justify-content: space-between;">
+        <div class="btn" style="background-color: transparent;border: 2px solid #262626;">
+          Hủy đánh giá
+        </div>
+        <div class="btn">
+          Gửi
         </div>
       </div>
     </div>

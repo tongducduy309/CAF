@@ -50,24 +50,62 @@ export class DetailProductComponent implements OnInit {
   provinceData = ['Zhejiang', 'Jiangsu'];
   isFavorite = false;
   selected_img_product = 0;
-  product:any;
+  product:any = {
+  };
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router){
+  form_review:any = {
+    point:0
+  }
+
+  rating_of_product:any = {
+
+  }
+
+  writing_review:any
+
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, ){
     this.route.paramMap.subscribe(async (params) => {
       await this.getIdProduct(params.get('id'))
     });
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   getIdProduct(id:any){
 
     this.crud.getProducts(id).subscribe((product)=>{
       this.product = product
+      this.rating_of_product.point = 3
+      this.rating_of_product.customer = 2
       if (!this.product) this.router.navigate(['page-not-found'])
     })
 
+  }
+
+  writeReview(){
+    if (this.writing_review){
+      this.form_review = {}
+    }
+    this.writing_review = !this.writing_review
+  }
+
+  changeRating_Review(event:any){
+    this.form_review.point = event
+    console.log(event);
+  }
+
+  hoverRating_Review(event:any){
+    if (this.form_review.point==0){
+      this.form_review.point = event
+    }
+  }
+
+  submitReview(){
+    this.crud.addData("customer-reviews",this.form_review).subscribe(response => {
+      console.log("Successful");
+  }, error => {
+      console.error('Error:', error);
+  });
   }
 }
