@@ -84,9 +84,7 @@ export class DetailProductComponent implements OnInit {
   }
 
   writeReview(){
-    if (this.writing_review){
-      this.form_review = {}
-    }
+    this.form_review = {}
     this.writing_review = !this.writing_review
   }
 
@@ -101,12 +99,16 @@ export class DetailProductComponent implements OnInit {
     }
   }
 
-  submitReview(){
-    this.crud.addData("customer-reviews",{...this.form_review,pid:this.product.id}).subscribe(response => {
-      console.log("Successful");
-  }, error => {
-      console.error('Error:', error);
-  });
+  async submitReview(){
+    this.crud.addData("customer-reviews",{...this.form_review,pid:this.product.id})
+    .then(response => response)
+    .then(data => {
+        if (data.status) console.log("Successful Submit Review");
+    })
+    .catch(error => {
+        console.error('Error:', error);  
+
+    });
   this.writing_review=false;
   }
 }
