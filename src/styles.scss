@@ -28,6 +28,40 @@ h2{
   font-family: 'Josefin';
 }
 
+.btn{
+  user-select: none;
+  cursor: pointer;
+}
+
+.link-btn{
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 16px;
+  text-align: center;
+  position: relative;
+  color: #fff;
+  cursor: pointer;
+
+  &::before{
+    content: "";
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    transition: all ease-in-out .5s;
+
+
+  }
+
+  &:hover::before{
+    background: #a7897b !important;
+  }
+
+}
 
 
 /*======================== Fonts =============================*/

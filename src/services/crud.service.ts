@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentSnapshot} from '@angular/fire/compat/firestore';
-import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
