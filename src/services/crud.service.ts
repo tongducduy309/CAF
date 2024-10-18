@@ -10,7 +10,7 @@ export class CrudService {
   }
 
   addData(id:any,data:any){
-    return this.http.post(`https://api-caf.vercel.app/api/post/${id}`,data)
+    return this.http.post(`https://api-caf.vercel.app/api/post/${id}`,data, { headers: { 'Content-Type': 'application/json' } })
   }
 
   // ============================PRODUCT=============================
