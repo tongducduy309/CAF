@@ -107,5 +107,6 @@ export class DetailProductComponent implements OnInit {
   }, error => {
       console.error('Error:', error);
   });
+  this.writing_review=false;
   }
 }

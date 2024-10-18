@@ -147,10 +147,10 @@
       <p>Về dữ liệu của, chúng tôi sẽ chỉ liên hệ với bạn về đánh giá bạn để lại và chỉ khi cần thiết. Bằng cách gửi đánh giá của mình, bạn đồng ý với các điều khoản và điều kiện về <a href="">chính sách quyền riêng tư</a> của chúng tôi.</p>
 
       <div class="group" style="display: flex;width: 100%;justify-content: space-between;">
-        <div class="btn" style="background-color: transparent;border: 2px solid #262626;">
+        <div class="btn" style="background-color: transparent;border: 2px solid #262626;" (click)="writing_review=false;">
           Hủy đánh giá
         </div>
-        <div class="btn">
+        <div class="btn" (click)="submitReview()">
           Gửi
         </div>
       </div>
