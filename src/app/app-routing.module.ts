@@ -11,6 +11,13 @@ import { AllProductsComponent } from './pages/all-products/all-products.componen
 import { CartComponent } from './pages/cart/cart.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { WishlistComponent } from './pages/wishlist/wishlist.component';
+import { SearchComponent } from './pages/search/search.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 const routes: Routes = [
 
@@ -40,9 +47,6 @@ const routes: Routes = [
     path:'account/newpassword/:token',
     component:NewpasswordComponent
   },
-  // {
-  //   path:'allproducts'
-  // },
   {
     path:'products/:id',
     component:DetailProductComponent
@@ -58,6 +62,38 @@ const routes: Routes = [
   {
     path:'cart',
     component:CartComponent
+  },
+  {
+    path:'about-us',
+    component:AboutUsComponent
+  },
+  {
+    path:'contact-with-us',
+    component:ContactWithUsComponent
+  },
+  {
+    path:'faq',
+    component:FaqComponent
+  },
+  {
+    path:'privacy-policy',
+    component:PrivacyPolicyComponent
+  },
+  {
+    path:'search',
+    component:SearchComponent
+  },
+  {
+    path:'terms-and-conditions',
+    component:TermsAndConditionsComponent
+  },
+  {
+    path:'wishlist',
+    component:WishlistComponent
+  },
+  {
+    path:'shipping-and-delivery',
+    component:TermsAndConditionsComponent
   },
   {
     path:'blogs',

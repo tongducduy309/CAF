@@ -8,6 +8,7 @@ export class Page {
 
   }
 
+
   changeItemsCart(event:any){
     this.ItemsCartEmitter.emit(event);
   }

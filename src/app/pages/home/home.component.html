@@ -19,7 +19,7 @@
         <li><p>Cà Phê</p></li>
         <li><p>Bánh Ăn Kèm</p></li>
       </ul>
-      <a href="" class="link-btn">XEM THÊM</a>
+      <a href="/all-products" class="link-btn">XEM THÊM</a>
     </div>
 
   <div class="view-products">
@@ -52,7 +52,7 @@
           <div class="subtitle">CoffeeStore</div>
           <h3 class="content">The best coffee</h3>
           <p>As the coffee shop market becomes more popular, the number of cafe websites is growing. The internet and social media play an important role in finding new customers.</p>
-          <a href="" class="link-btn">Show products</a>
+          <a href="/all-products" class="link-btn">Show products</a>
         </div>
         <div nz-col nzSpan="8">
           <app-product2></app-product2>
@@ -71,7 +71,7 @@
         <div class="subtitle">CoffeeStore</div>
         <h3 class="content">Fresh roasted coffee <br> with 24h delivery blogs</h3>
         <p>Denver Biscuit cafe knows how to entice future customers. A video takes viewers all the way from the preparation of one of their desserts to the service.</p>
-        <a href="" class="link-btn">Show products</a>
+        <a href="/all-products" class="link-btn">Show products</a>
       </div>
       <div nz-col nzSpan="8">
         <div class="subtitle fw-500">Choose the origin of the coffee:</div>
@@ -93,7 +93,7 @@
         <h3 class="content">Coffee Shop Best Discount ‘s Product</h3>
       </div>
       <div>
-        <a href="" class="link-btn">XEM THÊM</a>
+        <a href="/all-products" class="link-btn">XEM THÊM</a>
       </div>
     </div>
     <div nz-row [nzGutter]="[24,12]">
@@ -110,7 +110,7 @@
         <div class="subtitle">CoffeeStore</div>
         <h3 class="content">Shop Best Seller <br> Product</h3>
         <p>Coffee is a drink prepared from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content.</p>
-        <a href="" class="link-btn">Show Products</a>
+        <a href="/all-products" class="link-btn">Show Products</a>
       </div>
       <div nz-col nzSpan="8" style="display: flex;justify-content: center;align-items: center;">
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
@@ -138,17 +138,17 @@
 <section class="eightth-section">
   <div class="container">
     <div class="bean">
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-        <div nz-col nzSpan="8">
+      <div nz-row [nzGutter]="[16,16]">
+        <div nz-col [nzSpan]="10">
           <div class="subtitle">CoffeeStore</div>
           <h3 class="content">Fresh roasted coffee <br> Blogs</h3>
           <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant.</p>
-          <a href="" class="link-btn">Show Blogs</a>
+          <a href="/blogs" class="link-btn">Show Blogs</a>
         </div>
-        <div nz-col nzSpan="8">
+        <div nz-col [nzSpan]="7">
           <app-blog></app-blog>
         </div>
-        <div nz-col nzSpan="8">
+        <div nz-col [nzSpan]="7">
           <app-blog></app-blog>
         </div>
       </div>

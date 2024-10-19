@@ -1,17 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/items/user.service';
+import { CrudService } from 'src/services/crud.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   @Input() itemsCart = []
   subtotal = 0
   bg_header = 'transparent'
-  constructor (private user:UserService, private router:Router){
+
+  categories: any = {}
+  constructor (private user:UserService, private router:Router, private crud:CrudService){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)  
    {
@@ -25,6 +28,18 @@ export class HeaderComponent {
         }
       }
     });
+  }
+  ngOnInit(): void {
+    this.getCategories();
+  }
+
+  
+
+  getCategories(){
+    this.crud.get("categories","all").subscribe((categories:any)=>{
+      this.categories.drinks = categories.filter((category:any)=>category.type==0)
+      this.categories.food = categories.filter((category:any)=>category.type==1)
+    })
   }
   account(){
     if (this.user.isVerify==false){
@@ -46,13 +61,9 @@ export class HeaderComponent {
     this.visible = false;
   }
 
-  remoteCart(){
-    this.router.navigate(['cart'])
+  remote(page:any){
+    this.router.navigate([page])
     this.visible = false;
   }
 
-  remoteAllProduct(){
-    this.router.navigate(['all-products'])
-    this.visible = false;
-  }
 }

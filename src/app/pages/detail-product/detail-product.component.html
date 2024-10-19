@@ -97,10 +97,11 @@
       <div class="block">
         <div>
           <div style="display: flex;align-items: center;">
-            <nz-rate [ngModel]="rating_of_product.point" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
-            <span class="text">4.0 / <b>5.0</b></span>
+            <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
+            <span class="text">{{rating_of_product.point==0?'':rating_of_product.point}} / <b>5.0</b></span>
           </div>
-          <span class="text">Có {{rating_of_product.customer}} bài đánh giá</span>
+          <span class="text" *ngIf="rating_of_product.customer>0">Có {{rating_of_product.customer}} bài đánh giá</span>
+          <span class="text" *ngIf="rating_of_product.customer==0">Bạn là người đầu tiên đánh giá</span>
         </div>
       </div>
       <div class="block">
@@ -144,7 +145,7 @@
         <input nz-input placeholder="Nhập email của bạn (Không hiển thị công khai)" [(ngModel)]="form_review.email" type="email" />
       </div>
 
-      <p>Về dữ liệu của, chúng tôi sẽ chỉ liên hệ với bạn về đánh giá bạn để lại và chỉ khi cần thiết. Bằng cách gửi đánh giá của mình, bạn đồng ý với các điều khoản và điều kiện về <a href="">chính sách quyền riêng tư</a> của chúng tôi.</p>
+      <p>Về dữ liệu của, chúng tôi sẽ chỉ liên hệ với bạn về đánh giá bạn để lại và chỉ khi cần thiết. Bằng cách gửi đánh giá của mình, bạn đồng ý với các điều khoản và điều kiện về <a href="/privacy-policy">chính sách quyền riêng tư</a> của chúng tôi.</p>
 
       <div class="group" style="display: flex;width: 100%;justify-content: space-between;">
         <div class="btn" style="background-color: transparent;border: 2px solid #262626;" (click)="writing_review=false;">
