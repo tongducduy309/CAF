@@ -1,4 +1,40 @@
 .detail-blog{
+    padding: 80px 0px;
+
+    .about-user{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        h6{
+            margin: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        span{
+            margin-right: 5px;
+        }
+
+        em{
+            font-style: italic;
+            font-weight: 400;
+        }
+    }
+
+    .post-lbl{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        b{
+            font-weight: 700;
+        }
+    }
+    
+    
+
     &>div>div{
         p{
             font-family: 'Outfit';
@@ -17,9 +53,16 @@
             font-weight: 500;
             font-size: 15px;
             line-height: 24px;
+            padding: 40px 0 40px 20px;
         }
         
     }
+
+    img{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
     .social-media{
         display: flex;
         align-items: center;
@@ -36,5 +79,20 @@
             justify-content: center;
             cursor: pointer;
         }
+    }
+
+    .another-blogs{
+        h3{
+            font-family: Josefin Sans;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 32px;
+            color: #A7897B;
+        }
+    }
+
+    .art-auther{
+        margin-bottom: 50px;
     }
 }

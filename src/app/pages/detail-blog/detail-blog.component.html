@@ -1,6 +1,23 @@
 <div class="detail-blog">
     <div nz-row>
-        <div nz-col nzSpan = "16">
+        <div nz-col nzSpan = "12" style="padding: 0px 15px;">
+            <div class="about-user">
+                <h6>
+                    <span>Alpesh,</span>
+                    <em>company.com</em>
+                </h6>
+                <div class="post-lbl">
+                    <b>Category:</b>
+                    coffee
+                </div>
+                <div class="post-lbl">
+                    <b>Date:</b> 
+                    <time datetime="2022-12-30"> December 30, 2022</time>
+                </div>
+            </div>
+        </div>
+        
+        <div nz-col nzSpan = "16" style="padding: 0px 15px;">
             <img src="https://coffee-workdo.myshopify.com/cdn/shop/articles/image_25.png?v=1672400766" alt="Anh blog">
             <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant. Coffee is one of the three most popular beverages in the world (alongside water and tea), and it is one of the most profitable international commodities.</p>
             <h5>Our journey begins with a commitment to sourcing the finest coffee beans from around the world. We partner with farmers who share our dedication to quality, sustainability, and fair trade practices. Through direct relationships, we ensure that the farmers receive fair compensation for their hard work, which allows us to deliver exceptional coffee while supporting the communities that cultivate it.</h5>
@@ -47,15 +64,9 @@
 
         </div>
 
-        <div nz-col nzSpan = "8">
+        <div class="another-blogs" nz-col nzSpan = "8" style="padding: 0px 15px;">
             <h3>Related articles</h3>
-            <app-blog>
-
-            </app-blog>
-            <app-blog>
-
-            </app-blog>
-
+            <app-blog *ngFor="let blog of blogs" [blog]="blog"> </app-blog>
         </div>
     </div>
 </div>
