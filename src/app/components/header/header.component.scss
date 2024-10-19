@@ -18,7 +18,6 @@
   }
 
 
-  font-family: 'Outfit';
   .container{
     display: flex;
     justify-content: center;
@@ -33,7 +32,7 @@
         align-items: center;
         margin: 0 5px;
         cursor: pointer;
-  
+
       }
     }
   }
@@ -74,7 +73,7 @@
 
   }
 
-  
+
 
 
 
@@ -103,7 +102,7 @@
 
 ::ng-deep .ant-drawer-close{
   position: absolute;
-  right: 20px; 
+  right: 20px;
   font-size: 27px;
 }
 
@@ -114,12 +113,11 @@
 
 .shopping-cart{
 
-  
+
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: 'Outfit';
   z-index: 0;
   overflow: hidden;
   .mini-cart-body{
@@ -274,7 +272,6 @@
   flex-direction: column;
   height: 100%;
   .btn{
-    font-family: 'Outfit';
     background-color: #262626;
     padding: 11px 25px;
     color: #fff;

@@ -1,92 +1,59 @@
-.common-banner-section{
-    background-color: #000;
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+}
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+p{
+  color: #000;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.header-section{
+  background-color: #000;
+  color: #fff;
+
+  p{
     color: #fff;
-    background-position: 50% 50%;
-    position: relative;
-    z-index: 1;
-    background-repeat: no-repeat;
-    background-size: cover;
+  }
 
-    .common-banner-content{
-        margin: 0;
-        padding: 0;
-        font-size: 100%;
-        list-style: none;
-        vertical-align: baseline;
-        box-sizing: border-box;
-        display: block;
-        color: #fff;
 
-        .back-btn{
-            display: inline-flex;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 15px;
-            color:  #fff;
-            font-weight: 500;
-            font-size: 13px;
-            font-family: 'Outfit';
-            font-style: normal;
-            line-height: 18px;
-        }
-
-        .back-btn span{
-            width: 34px;
-            height: 34px;
-            border-radius: 100%;
-            border: 1px solid #fff;
-            background-color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            vertical-align: middle;
-            padding: 4px 0px;
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        h2{
-            color: #fff;
-            font-family: 'Josefin Sans';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 32px;
-            line-height: 32px;
-        }
-        
-        p{
-            color: #fff;
-            font-family: 'Outfit';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 20px;
-        }
+  .btn{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    span{
+      margin-right: 10px;
+      font-size: 15px;
     }
 
+  }
+
+  .title{
+    color: #fff;
+  }
 }
+
+.content-section{
+  margin-bottom: 80px;
+
+  .title{
+    color: #000;
+    margin: 50px 0 30px 0;
+  }
+}
+
 
 .container{
     padding-top: 40px;
     padding-bottom: 40px;
 
-    .section-title{
-        .sub-title{
-            font-family: 'Outfit';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 14px;
-            line-height: 14px;
-            margin-bottom: 28px;
-        }
-
-        h2{
-            font-family: 'Josefin Sans';
-            font-style: normal;
-            font-weight: 700;
-            font-size: 28px;
-            line-height: 28px;
-        }
-    }
 }

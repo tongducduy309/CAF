@@ -1,36 +1,26 @@
-<div class="common-banner-section">
-    <div class="container">
-        <div nz-row>
-            <div nz-col nzSpan = "20">
-                <div class="common-banner-content">
-                    <a class="back-btn">
-                        <span class="svg-ic">
-                            <svg xmlns:xlink="http://www.w3.org/2000/svg" width="11" height="5" viewBox="0 0 11 5" fill="none">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5791 2.28954C10.5791 2.53299 10.3818 2.73035 10.1383 2.73035L1.52698 2.73048L2.5628 3.73673C2.73742 3.90636 2.74146 4.18544 2.57183 4.36005C2.40219 4.53467 2.12312 4.53871 1.9485 4.36908L0.133482 2.60587C0.0480403 2.52287 -0.000171489 2.40882 -0.000171488 2.2897C-0.000171486 2.17058 0.0480403 2.05653 0.133482 1.97353L1.9485 0.210321C2.12312 0.0406877 2.40219 0.044729 2.57183 0.219347C2.74146 0.393966 2.73742 0.673036 2.5628 0.842669L1.52702 1.84888L10.1383 1.84875C10.3817 1.84874 10.5791 2.04609 10.5791 2.28954Z" fill="#FFFFFF"></path>
-                            </svg>
-                        </span>
-                        Back to home
-                    </a>
-                    <div class="section-title">
-                        <h2></h2>
-                        <h2>coffee</h2>
-                    </div>
-                    <p>
-                        Our coffee blog is a delightful haven for all coffee enthusiasts, from casual sippers to devoted connoisseurs. Dive into a realm where we celebrate the art, science, and culture of coffee. 
-                    </p>
-                </div>
-            </div>
+<section class="header-section">
+  <div class="container">
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <div class="btn" (click)="back()">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          Trở Về
         </div>
+
+        <h2 class="title">Blog</h2>
+        <p>Blog cà phê của chúng tôi là thiên đường thú vị cho tất cả những người đam mê cà phê, từ những người uống cà phê bình thường đến những người sành sỏi. Đi sâu vào thế giới nơi chúng tôi tôn vinh nghệ thuật, khoa học và văn hóa cà phê.</p>
+      </div>
     </div>
-</div>
+  </div>
+</section>
 
 <div class = "container">
     <div class = "section-title">
-        <div class="sub-title">ALLBLOGS</div>
-        <h2>COFFEE</h2>
-        
+        <div class="subtitle">ALLBLOGS</div>
+        <h2 class="title">COFFEE</h2>
+
         <div nz-row [nzGutter]="[24,24]">
             <app-blog nz-col [nzSpan]="8" *ngFor="let blog of blogs" [blog]="blog"></app-blog>
         </div>
-    </div> 
+    </div>
 </div>

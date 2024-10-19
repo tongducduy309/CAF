@@ -38,6 +38,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { FaqComponent } from './pages/faq/faq.component';
 import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { SearchToolComponent } from './components/search-tool/search-tool.component';
 registerLocaleData(en);
 
 
@@ -51,7 +52,8 @@ export let components:any = [
   CollectionComponent,
   ItemShoppingCartComponent,
   BlogComponent,
-  RatingProductComponent
+  RatingProductComponent,
+  SearchToolComponent
 ]
 
 export let pages = [

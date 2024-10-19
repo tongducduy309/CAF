@@ -1,1 +1,22 @@
-<p>search works!</p>
+<section class="header-section">
+  <div class="container">
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <div class="btn" (click)="back()">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          Trở Về
+        </div>
+
+        <h2 class="title">Tìm Kiếm</h2>
+        <p>Bạn hãy cho chúng tôi biết một số thông tin cơ bản về sản phẩm bạn đang muốn tìm. Chúng tôi sẽ tìm kiếm thay bạn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content-section" style="margin-bottom: 100px;">
+  <div class="container">
+    <div class="container">
+      <app-search-tool></app-search-tool>
+    </div>
+  </div>
+</section>
