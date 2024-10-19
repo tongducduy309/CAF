@@ -1,4 +1,157 @@
+.common-banner-section{
+    padding: 40px 0;
+    background-color: #000;
+    background-position: 50% 50%;
+    position: relative;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .common-banner-content{
+        margin: 0;
+        padding: 0;
+        font-size: 100%;
+        list-style: none;
+        vertical-align: baseline;
+        box-sizing: border-box;
+        display: block;
+        color: #fff;
+
+        .back-btn{
+            display: inline-flex;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color:  #fff;
+            font-weight: 500;
+            font-size: 13px;
+            font-family: 'Outfit';
+            font-style: normal;
+            line-height: 18px;
+        }
+
+        .back-btn span{
+            width: 34px;
+            height: 34px;
+            border-radius: 100%;
+            border: 1px solid #fff;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            padding: 4px 0px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+    }
+
+    .blog-cat{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: 0;
+        }
+
+        li.active{
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 13px;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #000;
+            -webkit-border-radius: 50px
+        }
+
+        li{
+            padding: 10px 20px;
+            font-size: 13px;
+            line-height: 1;
+            color: #fff;
+        }
+
+        li.b{
+            font-family: 'Outfit';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 13px;
+            line-height: 13px;
+        }
+    }
+
+    h2{
+        color: #fff;
+        font-family: 'Josefin Sans';
+        font-style: normal;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 32px;
+    }
+
+    p{
+        color: #fff;
+        font-family: 'Outfit';
+        font-style: normal;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+    }
+}
+
 .detail-blog{
+    padding: 80px 0px;
+    
+    .about-user{
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        
+        h6 span{
+            display: block;
+            font-weight: 700;
+        }
+
+        h6{
+            
+            font-family: 'Josefin Snas';
+            font-style: italic;
+            font-weight: 400;
+            line-height: 16px;
+            font-size: 16px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .post-lbl{
+            margin-left: 10px;
+            font-size: 12px;
+
+            b{
+                font-family: 'Outfit';
+                font-style: normal;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 17px;
+            }
+        }
+        
+
+    }
+    
+    
+
     &>div>div{
         p{
             font-family: 'Outfit';
@@ -17,9 +170,16 @@
             font-weight: 500;
             font-size: 15px;
             line-height: 24px;
+            padding: 40px 0 40px 20px;
         }
         
     }
+
+    img{
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
     .social-media{
         display: flex;
         align-items: center;
@@ -36,5 +196,20 @@
             justify-content: center;
             cursor: pointer;
         }
+    }
+
+    .another-blogs{
+        h3{
+            font-family: Josefin Sans;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 32px;
+            color: #A7897B;
+        }
+    }
+
+    .art-auther{
+        margin-bottom: 50px;
     }
 }

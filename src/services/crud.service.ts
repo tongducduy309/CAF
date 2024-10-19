@@ -9,6 +9,8 @@ export class CrudService {
 
   }
 
+  // ============================ALL=============================
+
   addData(id:any,data:any){
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     // this.http.post(`https://api-caf.vercel.app/api/post/${id}`,{...data}, { headers })
@@ -20,6 +22,11 @@ export class CrudService {
     },
     body: JSON.stringify(data)
 })
+  }
+
+  get(table:string,id:string){
+    return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`);
+
   }
 
   // ============================PRODUCT=============================

@@ -58,14 +58,18 @@ export class DetailProductComponent implements OnInit {
   }
 
   rating_of_product:any = {
-
+    point:0
   }
+
+  customer_reviews: any = []
 
   writing_review:any
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, ){
     this.route.paramMap.subscribe(async (params) => {
-      await this.getIdProduct(params.get('id'))
+      const id = params.get('id')
+      this.getIdProduct(id)
+      this.getCustomerReviews(id)
     });
   }
 
@@ -76,11 +80,27 @@ export class DetailProductComponent implements OnInit {
 
     this.crud.getProducts(id).subscribe((product)=>{
       this.product = product
-      this.rating_of_product.point = 3
-      this.rating_of_product.customer = 2
+
       if (!this.product) this.router.navigate(['page-not-found'])
     })
 
+  }
+
+  getCustomerReviews(id:any){
+    this.crud.get('customer-reviews',id).subscribe((cs:any)=>{
+      let sum = 0
+      console.log(cs.length);
+      for (let c of cs){
+        sum+=c.point
+        console.log(sum);
+      }
+
+      this.customer_reviews = cs
+      this.rating_of_product.customer = cs.length
+      if (cs.length>0){
+        this.rating_of_product.point = Math.floor(sum/cs.length)
+      }
+    })
   }
 
   writeReview(){
@@ -106,7 +126,7 @@ export class DetailProductComponent implements OnInit {
         if (data.status) console.log("Successful Submit Review");
     })
     .catch(error => {
-        console.error('Error:', error);  
+        console.error('Error:', error);
 
     });
   this.writing_review=false;

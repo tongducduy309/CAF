@@ -5,6 +5,17 @@
   margin: 0 auto;
   width: 100%;
   padding: 20px 0;
+  &>div>a>img{
+    width: 100px;
+    height: 32px;
+  }
+
+  .subtitle{
+    color: #000;
+    font-size: 22px;
+    line-height: 26px;
+    font-weight: 700;
+  }
 
 
   font-family: 'Outfit';
@@ -13,13 +24,17 @@
     justify-content: center;
     align-items: center;
     &>div{
-      border: 1px solid #fff;
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: 0 5px;
-      cursor: pointer;
-
+      &>div{
+        border: 1px solid #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 5px;
+        cursor: pointer;
+  
+      }
     }
   }
   .border-circle{
@@ -36,19 +51,39 @@
     display: block;
   }
 
+  [nz-menu]{
+    background-color: transparent;
+    border: none;
+    li{
+      ::ng-deep .ant-menu-submenu-title{
+        color: #fff;
+      }
+    }
+    [nz-submenu]{
+      margin: 0 10px;
+      border-bottom: 1px solid #f0f0f0;
+
+      &:hover{
+        border-bottom: 1px solid #a7897b;
+      }
+    }
+    [nz-submenu]::after{
+      border: none;
+    }
+
+
+  }
+
+  
 
 
 
 
-}
-
-::ng-deep .ant-drawer-header{
-  background: #262626 !important;
 
 }
 
 ::ng-deep .ant-drawer-body{
-  padding: 0;
+    padding: 0;
 }
 
 ::ng-deep .ant-drawer-title,::ng-deep .ant-drawer-close{
@@ -67,13 +102,19 @@
 }
 
 ::ng-deep .ant-drawer-close{
-  // Adjust the positioning properties as needed
   position: absolute;
-  right: 20px; /* Adjust right position */
+  right: 20px; 
   font-size: 27px;
 }
 
+::ng-deep .ant-drawer-header{
+  background-color: #262626;
+}
+
+
 .shopping-cart{
+
+  
   position: relative;
   display: flex;
   flex-direction: column;

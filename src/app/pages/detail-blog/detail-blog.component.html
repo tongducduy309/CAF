@@ -1,6 +1,59 @@
+<div class="blog-page-banner common-banner-section">
+    <div class="container">
+        <div nz-row>
+            <div nz-col nzSpan = "20">
+                <div class="common-banner-content">
+                    <a class="back-btn">
+                        <span class="svg-ic">
+                            <svg xmlns:xlink="http://www.w3.org/2000/svg" width="11" height="5" viewBox="0 0 11 5" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5791 2.28954C10.5791 2.53299 10.3818 2.73035 10.1383 2.73035L1.52698 2.73048L2.5628 3.73673C2.73742 3.90636 2.74146 4.18544 2.57183 4.36005C2.40219 4.53467 2.12312 4.53871 1.9485 4.36908L0.133482 2.60587C0.0480403 2.52287 -0.000171489 2.40882 -0.000171488 2.2897C-0.000171486 2.17058 0.0480403 2.05653 0.133482 1.97353L1.9485 0.210321C2.12312 0.0406877 2.40219 0.044729 2.57183 0.219347C2.74146 0.393966 2.73742 0.673036 2.5628 0.842669L1.52702 1.84888L10.1383 1.84875C10.3817 1.84874 10.5791 2.04609 10.5791 2.28954Z" fill="#FFFFFF"></path>
+                            </svg>
+                        </span>
+                        Back to home
+                    </a>
+                    <ul class="blog-cat">
+                        <li class="active">Featured</li>
+                        <li> 
+                            <b>Category:</b>
+                            coffee
+                        </li>
+                        <li>
+                            <b>Date:</b>
+                            <time datetime="2022-12-30"> December 30, 2022</time>
+                        </li>
+                    </ul>
+                    <div class="section-title">
+                        <h2>From our passion to your single cup of coffee</h2>
+                    </div>
+                    <p></p>
+                    <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant. Coffee is one of the three most popular beverages in the world (alongside water and tea), and it...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="detail-blog">
     <div nz-row>
-        <div nz-col nzSpan = "16">
+        <div nz-col nzSpan = "14" style="padding: 0px 15px;">
+            <div class="about-user">
+                <h6>
+                    <span>WorkDo,</span>
+                    company.com
+                </h6>
+                <div class="post-lbl">
+                    <b>Category:</b>
+                    coffee
+                </div>
+                <div class="post-lbl">
+                    <b>Date:</b> 
+                    <time datetime="2022-12-30"> December 30, 2022</time>
+                </div>
+            </div>
+        </div>
+        
+        <div nz-col nzSpan = "16" style="padding: 0px 15px;">
             <img src="https://coffee-workdo.myshopify.com/cdn/shop/articles/image_25.png?v=1672400766" alt="Anh blog">
             <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant. Coffee is one of the three most popular beverages in the world (alongside water and tea), and it is one of the most profitable international commodities.</p>
             <h5>Our journey begins with a commitment to sourcing the finest coffee beans from around the world. We partner with farmers who share our dedication to quality, sustainability, and fair trade practices. Through direct relationships, we ensure that the farmers receive fair compensation for their hard work, which allows us to deliver exceptional coffee while supporting the communities that cultivate it.</h5>
@@ -47,15 +100,9 @@
 
         </div>
 
-        <div nz-col nzSpan = "8">
+        <div class="another-blogs" nz-col nzSpan = "8" style="padding: 0px 15px;">
             <h3>Related articles</h3>
-            <app-blog>
-
-            </app-blog>
-            <app-blog>
-
-            </app-blog>
-
+            <app-blog *ngFor="let blog of blogs" [blog]="blog"> </app-blog>
         </div>
     </div>
 </div>
