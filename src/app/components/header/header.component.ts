@@ -14,6 +14,8 @@ export class HeaderComponent implements OnInit{
   bg_header = 'transparent'
 
   categories: any = {}
+
+  isSearing:any;
   constructor (private user:UserService, private router:Router, private crud:CrudService){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)  
@@ -31,9 +33,11 @@ export class HeaderComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getCategories();
+
+
   }
 
-  
+
 
   getCategories(){
     this.crud.get("categories","all").subscribe((categories:any)=>{
@@ -64,6 +68,16 @@ export class HeaderComponent implements OnInit{
   remote(page:any){
     this.router.navigate([page])
     this.visible = false;
+  }
+
+  openSearch(){
+    document.body.style.overflow = 'hidden'
+    this.isSearing=true
+  }
+
+  closeSearch(){
+    document.body.style.overflow = 'auto'
+    this.isSearing=false
   }
 
 }

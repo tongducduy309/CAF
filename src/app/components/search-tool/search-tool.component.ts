@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { fromEvent, map, throttleTime } from 'rxjs';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { debounceTime, fromEvent, map, throttleTime } from 'rxjs';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -8,11 +8,13 @@ import { CrudService } from 'src/services/crud.service';
   styleUrls: ['./search-tool.component.scss']
 })
 export class SearchToolComponent implements OnInit{
+  @Input() theme = 'light'
   private inputElement!: HTMLInputElement;
   results:any = []
   key: any
+  isFinding = false
 
-  constructor(private crud:CrudService){
+  constructor(private crud:CrudService, private el: ElementRef){
 
   }
   ngOnInit(): void {
@@ -21,22 +23,32 @@ export class SearchToolComponent implements OnInit{
 
 
   changeKey(){
-    this.inputElement = document.getElementById('input') as HTMLInputElement;
+
+    this.inputElement = this.el.nativeElement.querySelector('.input_search') as HTMLInputElement;
+
     fromEvent(this.inputElement, 'input')
   .pipe(
-    throttleTime(500), // Tối đa 1 lần gọi trong 500ms
+    debounceTime(300),
     map((event: any) => event.target.value)
   )
   .subscribe(value => {
+    this.isFinding = true
     this.findProducts()
   });
   }
 
   findProducts(){
     if(this.key.trim().length>0){
+      console.log(this.key.trim().toLowerCase());
       this.crud.get("products",this.key.trim().toLowerCase()).subscribe((products)=>{
         this.results = products
+        this.isFinding=false
       })
     }
+    else {
+      this.results = []
+    }
+
+
   }
 }

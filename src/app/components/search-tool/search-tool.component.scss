@@ -8,6 +8,11 @@
     border: none;
     outline: 0;
     flex: 1;
+    background-color: transparent;
+
+    &::placeholder{
+      color: inherit;
+    }
   }
   .btn{
     background-color: #000;
@@ -19,6 +24,7 @@
 }
 
 .results{
+  background-color: #fff;
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
