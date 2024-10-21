@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Page } from 'src/app/classes/page';
+import { CrudService } from 'src/services/crud.service';
 
 @Component({
   selector: 'app-all-products',
@@ -72,13 +73,24 @@ export class AllProductsComponent extends Page implements OnInit  {
   Cup1_style=0;
   Cups2_style=0;
   color_text = '#262626';
-  constructor() {
+
+  products:any = []
+  constructor(private crud:CrudService) {
     super();
   }
 
   ngOnInit(): void {
     // Giả lập việc lấy dữ liệu từ hệ thống
     this.getStockData();
+
+    this.getAllProducts();
+  }
+
+  getAllProducts(){
+    this.crud.get("products","all").subscribe((products)=>{
+      this.products=products
+      console.log(this.products);
+    })
   }
   
   selectedProvince = 'Alphabetically,A-Z';

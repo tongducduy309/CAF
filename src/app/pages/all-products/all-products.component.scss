@@ -56,6 +56,13 @@
                     padding: 10px;  
                 }
 
+                ::ng-deep .ant-collapse-header{
+                    background-color: transparent;
+                }
+
+
+
+
                 .group-name{
                     margin-left: -5px;
                     margin-bottom: 20px;
@@ -80,4 +87,22 @@
         }
     }
 }
+::ng-deep .ant-collapse{
+    border: none;
+    background-color: transparent;
+}
+
+::ng-deep .ant-collapse-content{
+    border: none;
+    
+}
+
+::ng-deep .ant-collapse-header{
+    padding-bottom: 0 !important;
+}
+
+::ng-deep .ant-collapse-item{
+    border: none !important;
+}
+
 

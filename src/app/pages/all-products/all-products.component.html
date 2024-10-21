@@ -340,7 +340,11 @@
       </div>
       </div>
 
-          <app-product3 (addToCartEmitter)="addToCart($event)"></app-product3>
+          <div nz-row [nzGutter]="[24,24]">
+            <div nz-col [nzSpan]="8">
+              <app-product3 *ngFor="let product of products" [product]="product"  (addToCartEmitter)="addToCart($event)"></app-product3>
+            </div>
+          </div>
     </div>
   </div>
 </div>
