@@ -42,6 +42,7 @@ export class SearchToolComponent implements OnInit{
       console.log(this.key.trim().toLowerCase());
       this.crud.get("products",this.key.trim().toLowerCase()).subscribe((products)=>{
         this.results = products
+        // console.log(products);
         this.isFinding=false
       })
     }

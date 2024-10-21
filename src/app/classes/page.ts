@@ -9,7 +9,13 @@ export class Page {
   }
 
 
-  changeItemsCart(event:any){
-    this.ItemsCartEmitter.emit(event);
+  addToCart(product:any){
+    this.ItemsCartEmitter.emit(product);
+  }
+
+  getPrice(item:any){
+    if (!item.sale) item.sale=0
+    console.log(item.cost,item.cost*(item.sale/100));
+    return (item.cost-item.cost*(item.sale/100))
   }
 }

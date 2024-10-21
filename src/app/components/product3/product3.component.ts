@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class Product3Component implements OnInit {
   @Input() product:any = {
-    id:1
   }
 
   @Input() bg = '#6a593d21';
@@ -16,12 +15,12 @@ export class Product3Component implements OnInit {
 
   @Output() addToCartEmitter = new EventEmitter();
 
+  selectedSize = 0;
+
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
-  selectedProvince = 'Red';
-  provinceData = ['Red', 'Black'];
   isFavorite = false;
 
   AddToCart(){
@@ -30,6 +29,6 @@ export class Product3Component implements OnInit {
   }
 
   detailProduct(){
-    this.router.navigate(["products/"+this.product.id])
+    this.router.navigate([+"#head"])
   }
 }

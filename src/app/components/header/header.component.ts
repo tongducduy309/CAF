@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/items/user.service';
 import { CrudService } from 'src/services/crud.service';
@@ -9,8 +9,10 @@ import { CrudService } from 'src/services/crud.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  @Input() itemsCart = []
-  subtotal = 0
+  @Input() itemsCart:any = []
+  @Input() total = 0
+  @Input() subtotal = 0
+  @Output() QuantityEmitter = new EventEmitter()
   bg_header = 'transparent'
 
   categories: any = {}
@@ -78,6 +80,11 @@ export class HeaderComponent implements OnInit{
   closeSearch(){
     document.body.style.overflow = 'auto'
     this.isSearing=false
+  }
+
+  changeQuantityItem(item:any){
+    // this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
+    this.QuantityEmitter.emit(item)
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CrudService } from 'src/services/crud.service';
   templateUrl: './detail-product.component.html',
   styleUrls: ['./detail-product.component.scss']
 })
-export class DetailProductComponent implements OnInit {
+export class DetailProductComponent extends Page implements OnInit {
 
   imgs = [
     "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
@@ -46,11 +47,13 @@ export class DetailProductComponent implements OnInit {
       cost:'0',
     }
   ]
-  selectedProvince = 'Zhejiang';
+  selectedSize = 0;
   provinceData = ['Zhejiang', 'Jiangsu'];
   isFavorite = false;
   selected_img_product = 0;
   product:any = {
+    sale:[],
+    cost:[]
   };
 
   form_review:any = {
@@ -66,6 +69,7 @@ export class DetailProductComponent implements OnInit {
   writing_review:any
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, ){
+    super();
     this.route.paramMap.subscribe(async (params) => {
       const id = params.get('id')
       this.getIdProduct(id)
@@ -78,8 +82,13 @@ export class DetailProductComponent implements OnInit {
 
   getIdProduct(id:any){
 
-    this.crud.getProducts(id).subscribe((product)=>{
-      this.product = product
+    this.crud.get("products",id).subscribe((product:any)=>{
+      if (product[0])
+        this.product = product[0]
+      if (Object.keys(this.product).length==0) this.router.navigate(["home"])
+      this.product.quantity = 1
+    this.selectedSize = 0
+    console.log(this.product);
 
       if (!this.product) this.router.navigate(['page-not-found'])
     })
@@ -102,6 +111,7 @@ export class DetailProductComponent implements OnInit {
       }
     })
   }
+  quantity = 1
 
   writeReview(){
     this.form_review = {}
@@ -131,4 +141,35 @@ export class DetailProductComponent implements OnInit {
     });
   this.writing_review=false;
   }
+
+  changeQuantity(){
+    this.product.quantity = this.product.quantity.replace(/\D/g, '');
+    if(this.product.quantity<1) this.product.quantity=1
+  }
+
+  removeQuantity(){
+    if (this.product.quantity>1)
+      this.product.quantity--;
+
+  }
+
+  addQuantity(){
+    this.product.quantity++;
+
+  }
+
+  addToCart_(){
+    const product_c = {
+      pid:this.product.id,
+      name:this.product.name,
+      uid:'1',
+      quantity:this.product.quantity,
+      sale:this.product.sale[this.selectedSize],
+      cost:this.product.cost[this.selectedSize],
+      size:this.product.size[this.selectedSize]
+    }
+    this.addToCart(product_c)
+  }
+
+
 }

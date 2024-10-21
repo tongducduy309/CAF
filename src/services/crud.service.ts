@@ -31,9 +31,8 @@ export class CrudService {
 
   // ============================PRODUCT=============================
 
-  getProducts(id:string){
-    return this.http.get(`https://api-caf.vercel.app/api/get/products/${id}`);
-
+  getInfoItemsCart(ids:any){
+    return this.http.get(`https://api-caf.vercel.app/api/get/products/items-cart/${ids}`);
   }
 
   // ============================USER=============================

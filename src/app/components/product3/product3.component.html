@@ -1,7 +1,7 @@
 
 <div class="product-item" [ngStyle]="{'background-color':bg, 'color':color_text}">
 
-    <div class="tag-sale"><span>-11%</span></div>
+    <div class="tag-sale" *ngIf="product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
     <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/1_f9e82651-1554-4bdc-a3bd-a8f8d1c454eb_306x203.png?v=1672658975" alt=""></div>
     <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
         <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
@@ -10,21 +10,21 @@
     </div>
     <div class="product-content">
         <div class="subtitle" [ngStyle]="{'color':color_text}">
-            1Zpresso
+            {{product.c_name}}
         </div>
-        <h5 class="name" [ngStyle]="{'color':color_text}" (click)="detailProduct()">Burr Coffee Grinder</h5>
+        <a class="name" [href]="'products/'+this.product.name_id" [ngStyle]="{'color':color_text}">{{product.name}}</a>
     </div>
     <div class="select">
         <div>
-            <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedProvince" [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
-                  <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
-              </nz-select>
+            <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize" [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
+              <nz-option *ngFor="let size of product.size;index as i" [nzValue]="i" [nzLabel]="size"></nz-option>
+            </nz-select>
         </div>
     </div>
     <div nz-row class="group" >
         <div nz-col nzSpan="12" style="font-weight: 800;" [ngStyle]="{'color':color_text}">
-                <div class="price" style="font-size: 14px;"><span >10.000</span></div>
-                <div class="cost"><span >20.000</span></div>
+          <span class="price">{{(product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize]}}</span>
+          <span class="cost" *ngIf="product.sale[selectedSize]">{{product.cost[selectedSize]}}</span>
         </div>
         <div nz-col nzSpan="12" style="display: flex; align-items: center;" >
             <div class="btnAddToCart" style="font-weight: 700;" (click)="AddToCart()">

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit{
   ]
   namepush = ''
 
-  products: any = []
+  products_best_discount: any = []
 
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
 
@@ -31,9 +31,9 @@ export class HomeComponent implements OnInit{
 
   // ============================GET DATA=============================
   getAllProducts(){
-    this.crud.getProducts('all').subscribe((data)=>{
-      this.products=data
-      console.log(this.products);
+    this.crud.get('products','all').subscribe((data)=>{
+      this.products_best_discount=data
+      // console.log(this.products);
     });
 
   }

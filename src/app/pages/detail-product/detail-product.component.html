@@ -1,34 +1,32 @@
 
-<section class="first-section">
+<section class="first-section" id="head">
   <div class="container">
     <div nz-row class="show-product" [nzGutter]="[40]">
       <div nz-col nzSpan="13">
         <div nz-row [nzGutter]="[20]">
-          <div nz-col nzSpan="5">
+          <!-- <div nz-col nzSpan="5">
             <div class="list-img">
               <div *ngFor="let img of imgs; index as i" [ngClass]="{'selected':selected_img_product==i}" (click)="selected_img_product=i"><img [src]="img" alt=""></div>
 
             </div>
-          </div>
-          <div nz-col nzSpan="19" class="main-img">
+          </div> -->
+          <div nz-col nzSpan="24" class="main-img">
             <img [src]="imgs[selected_img_product]" alt="">
           </div>
         </div>
       </div>
 
       <div nz-col nzSpan="11">
-        <div class="group" style="display: flex;justify-content: space-between;">
-          <div class="tag-sale"><span>- 23%</span></div>
-          <div>
-            <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
-          </div>
+        <div class="tag-sale" *ngIf="product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
+        <div class="favorite">
+          <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
         </div>
         <div nz-row class="group" style="display: flex;align-items: center;">
           <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
-          <div style="cursor: pointer;font-size: 20px;">
-            <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span>
-            <span style="font-weight: 700;">Write a Review</span>
-          </div>
+          <a href="/products/{{product.id}}/#customer_review_section" style="font-size: 20px;" class="btn">
+            <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 5px;font-size: 20px;color: #fff;"></span>
+            <span style="font-weight: 700;color: #fff;">Viết đánh giá</span>
+          </a>
           <ng-template #rateIcon><span nz-icon nzType="star" [nzTheme]="product?.point==0?'outline':'fill'"></span></ng-template>
         </div>
         <div class="group">
@@ -36,42 +34,42 @@
             {{product.name}}
           </div>
         </div>
-        <div class="group">
+        <!-- <div class="group">
           <div style="cursor: pointer;font-size: 20px;">
-            <!-- <span nz-icon nzType="question-circle" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span> -->
+            <span nz-icon nzType="question-circle" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span>
             <span style="font-weight: 700;">Xem Kích Cỡ</span>
           </div>
-        </div>
+        </div> -->
         <div class="group">
-          <span style="font-size: 16px;font-weight: 700;">Material:</span>
-          <nz-select [nzBorderless]="true" class="material" [(ngModel)]="selectedProvince">
-            <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+          <span style="font-size: 16px;font-weight: 700;">Chọn kích cỡ:</span>
+          <nz-select [nzBorderless]="true" class="material" [(ngModel)]="selectedSize">
+            <nz-option *ngFor="let size of product.size;index as i" [nzValue]="i" [nzLabel]="size"></nz-option>
           </nz-select>
         </div>
-        <div class="group" style="font-size: 16px;font-weight: 700;">
-          <span>This is soluble instant coffee. 1 spoon makes 1 cup of 125ml coffee. Drink hot or cold in milk or water. Add sugar as per...</span>
+        <div class="group description" style="font-size: 16px;font-weight: 700;" *ngIf="product.description">
+          <span>{{product.description}}</span>
         </div>
         <div nz-row class="group" >
           <div nz-col nzSpan="12" class="group-qty">
-            <span style="font-size: 16px;font-weight: 700;">Quantity:</span>
+            <span style="font-size: 16px;font-weight: 700;">Số lượng:</span>
             <div class="quantity">
-              <span nz-icon nzType="minus" nzTheme="outline"></span>
-              <input type="text">
-              <span nz-icon nzType="plus" nzTheme="outline"></span>
+              <span nz-icon nzType="minus" nzTheme="outline" (click)="removeQuantity()"></span>
+              <input type="text" [(ngModel)]="product.quantity" (blur)="changeQuantity()">
+              <span nz-icon nzType="plus" nzTheme="outline" (click)="addQuantity()"></span>
             </div>
           </div>
           <div nz-col nzSpan="12" style="display: flex; align-items: center;">
-            <span class="price">{{(product.sale)?product.cost*(product.sale/100):product.cost}}</span>
-            <span class="cost" *ngIf="product.sale">{{product.cost}}</span>
+            <span class="price">{{(product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize]}}</span>
+            <span class="cost" *ngIf="product.sale[selectedSize]">{{product.cost[selectedSize]}}</span>
             <span style="font-size: 22px;
             color: #a7897b;
             font-weight: 900;
-            margin-right: 10px;">VND</span>
+            margin-right: 10px;user-select: none;">VND</span>
           </div>
         </div>
         <div nz-row class="group" [nzGutter]="[20]">
           <div nz-col nzSpan="12">
-            <div class="btnAddToCart">
+            <div class="btnAddToCart" (click)="addToCart_()">
               <span>Add To Cart</span>
             </div>
           </div>
@@ -89,7 +87,7 @@
     </div>
   </div>
 </section>
-<section class="customer-review-section">
+<section class="customer-review-section" id="customer_review_section">
   <div class="container" style="margin-bottom: 20px;">
     <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Bài Đánh Giá</div>
 

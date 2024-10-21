@@ -97,8 +97,8 @@
       </div>
     </div>
     <div nz-row [nzGutter]="[24,12]">
-      <div nz-col [nzSpan]="6" *ngFor="let i of [1,2,3,4]">
-        <app-product3 bg="#a7897b" color_text="#fff"></app-product3>
+      <div nz-col [nzSpan]="6" *ngFor="let product of products_best_discount">
+        <app-product3 bg="#a7897b" color_text="#fff" [product]="product"></app-product3>
       </div>
     </div>
   </div>
