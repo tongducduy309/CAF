@@ -1,3 +1,6 @@
+section{
+  padding: 80px 0;
+}
 .btnSendMess{
     background-color: #262626 !important;
     border: none;
@@ -12,7 +15,7 @@
 }
 
 .form_group{
-    font: 14px; 
+    font: 14px;
     font-weight: 500;
 }
 
@@ -27,11 +30,11 @@
 
 .group{
     padding: 20px 15px;
-    
+
     span{
         font-weight: 500;
       }
-    
+
     input{
         margin-top: 15px;
       }

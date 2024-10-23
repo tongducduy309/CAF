@@ -1,5 +1,5 @@
 
-<section class="first-section" id="head">
+<section class="first-section" id="head" *ngIf="must_load==0">
   <div class="container">
     <div nz-row class="show-product" [nzGutter]="[40]">
       <div nz-col nzSpan="13">
@@ -18,9 +18,9 @@
 
       <div nz-col nzSpan="11">
         <div class="tag-sale" *ngIf="product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
-        <div class="favorite">
+        <!-- <div class="favorite">
           <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
-        </div>
+        </div> -->
         <div nz-row class="group" style="display: flex;align-items: center;">
           <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
           <a href="/products/{{product.id}}/#customer_review_section" style="font-size: 20px;" class="btn">
@@ -70,12 +70,12 @@
         <div nz-row class="group" [nzGutter]="[20]">
           <div nz-col nzSpan="12">
             <div class="btnAddToCart" (click)="addToCart_()">
-              <span>Add To Cart</span>
+              <span>Thêm Vào Giỏ Hàng</span>
             </div>
           </div>
           <div nz-col nzSpan="12">
             <div class="btnBuyItNow">
-              <span>Buy It Now</span>
+              <span>Mua Ngay</span>
             </div>
           </div>
 
@@ -87,7 +87,7 @@
     </div>
   </div>
 </section>
-<section class="customer-review-section" id="customer_review_section">
+<section class="customer-review-section" id="customer_review_section" *ngIf="must_load==0">
   <div class="container" style="margin-bottom: 20px;">
     <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Bài Đánh Giá</div>
 
@@ -95,8 +95,9 @@
       <div class="block">
         <div>
           <div style="display: flex;align-items: center;">
-            <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" nzDisabled style="margin-right: 20px;"></nz-rate>
-            <span class="text">{{rating_of_product.point==0?'':rating_of_product.point}} / <b>5.0</b></span>
+            <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon2" nzDisabled style="margin-right: 20px;"></nz-rate>
+            <ng-template #rateIcon2><span nz-icon nzType="star" [nzTheme]="product?.point==0?'outline':'fill'"></span></ng-template>
+            <span class="text">{{rating_of_product.point==0?'':rating_of_product.point}}.0 / <b>5.0</b></span>
           </div>
           <span class="text" *ngIf="rating_of_product.customer>0">Có {{rating_of_product.customer}} bài đánh giá</span>
           <span class="text" *ngIf="rating_of_product.customer==0">Bạn là người đầu tiên đánh giá</span>
@@ -157,7 +158,7 @@
 
   </div>
 </section>
-<section class="best-products-section">
+<section class="best-products-section" *ngIf="must_load==0">
   <div class="container">
     <div class="bean">
       <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload"></video>
@@ -169,10 +170,10 @@
           <a href="" class="link-btn">Show products</a>
         </div>
         <div nz-col nzSpan="8">
-          <app-product2></app-product2>
+          <!-- <app-product2></app-product2> -->
         </div>
         <div nz-col nzSpan="8">
-          <app-product2></app-product2>
+          <!-- <app-product2></app-product2> -->
         </div>
       </div>
       </div>

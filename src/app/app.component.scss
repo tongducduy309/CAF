@@ -1,5 +1,16 @@
 
 ::ng-deep .ant-spin-spinning{
-  position: fixed;
-  height: 100% !important;
+  max-height: 100vh !important;
+  .ant-spin-dot{
+    i{
+      background-color:#a7897b
+    }
+  }
+  .ant-spin-text{
+    color: #000 !important;
+  }
+}
+
+::ng-deep .ant-spin-blur{
+  opacity: 0;
 }

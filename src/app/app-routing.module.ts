@@ -18,6 +18,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { FaqComponent } from './pages/faq/faq.component';
 import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 const routes: Routes = [
 
@@ -87,13 +88,17 @@ const routes: Routes = [
     path:'terms-and-conditions',
     component:TermsAndConditionsComponent
   },
-  {
-    path:'wishlist',
-    component:WishlistComponent
-  },
+  // {
+  //   path:'wishlist',
+  //   component:WishlistComponent
+  // },
   {
     path:'shipping-and-delivery',
     component:TermsAndConditionsComponent
+  },
+  {
+    path:'checkout',
+    component:CheckoutComponent
   },
   {
     path:'blogs',

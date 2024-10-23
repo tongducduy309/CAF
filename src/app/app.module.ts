@@ -39,6 +39,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { SearchToolComponent } from './components/search-tool/search-tool.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 registerLocaleData(en);
 
 
@@ -75,7 +76,8 @@ export let pages = [
   PrivacyPolicyComponent,
   FaqComponent,
   ContactWithUsComponent,
-  AboutUsComponent
+  AboutUsComponent,
+  CheckoutComponent
 ]
 
 @NgModule({

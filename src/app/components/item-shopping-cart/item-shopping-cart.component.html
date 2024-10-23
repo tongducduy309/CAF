@@ -1,8 +1,8 @@
 <div class="item-shopping">
     <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/51_lWSE15NL._SL1000_-removebg-preview_x125.png?v=1672644074" alt=""></div>
     <div class="information">
-        <div class="name">
-            <span>{{item.name}}</span>
+        <div class="top">
+            <span class="name" (click)="remote('products/'+item.name_id)">{{item.name}}</span>
             <div (click)="remove()" style="cursor: pointer;">
               <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 20 20" fill="none" >
                 <path d="M12.7589 7.24609C12.5002 7.24609 12.2905 7.45577 12.2905 7.71448V16.5669C12.2905 16.8255 12.5002 17.0353 12.7589 17.0353C13.0176 17.0353 13.2273 16.8255 13.2273 16.5669V7.71448C13.2273 7.45577 13.0176 7.24609 12.7589 7.24609Z" fill="#FF0000"></path>

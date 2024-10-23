@@ -1,4 +1,4 @@
-<section class="first-section">
+<section *ngIf="must_load<=0" class="first-section">
   <div class="bean">
     <video src="../../../assets/video/video_home_firstSection.mp4" muted="muted" loop autoplay playsinline controlslist="nodownload"></video>
   </div>
@@ -9,7 +9,7 @@
     <a href="" class="link-btn">Show products</a>
   </div>
 </section>
-<section class="second-section">
+<section *ngIf="must_load<=0" class="second-section">
   <div class="container">
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <ul class="tabs">
@@ -33,7 +33,7 @@
       <div nz-carousel-content *ngFor="let i of [1,2,3]">
         <div>
           <div nz-row [nzGutter]="[40,20]">
-            <app-product2 nz-col [nzSpan]="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2>
+            <!-- <app-product2 nz-col [nzSpan]="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2> -->
 
           </div>
         </div>
@@ -43,7 +43,7 @@
   </div>
   </div>
 </section>
-<section class="third-section">
+<section *ngIf="must_load<=0" class="third-section">
   <div class="container">
     <div class="bean">
       <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload"></video>
@@ -55,16 +55,16 @@
           <a href="/all-products" class="link-btn">Show products</a>
         </div>
         <div nz-col nzSpan="8">
-          <app-product2></app-product2>
+          <!-- <app-product2></app-product2> -->
         </div>
         <div nz-col nzSpan="8">
-          <app-product2></app-product2>
+          <!-- <app-product2></app-product2> -->
         </div>
       </div>
       </div>
   </div>
 </section>
-<section class="fourth-section">
+<section *ngIf="must_load<=0" class="fourth-section">
   <div class="container">
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
@@ -85,7 +85,7 @@
     </div>
   </div>
 </section>
-<section class="fiveth-section">
+<section *ngIf="must_load<=0" class="fiveth-section">
   <div class="container">
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <div>
@@ -103,7 +103,7 @@
     </div>
   </div>
 </section>
-<section class="sixth-section">
+<section *ngIf="must_load<=0" class="sixth-section">
   <div class="container">
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
@@ -116,12 +116,12 @@
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
       </div>
       <div nz-col nzSpan="8">
-        <app-product2></app-product2>
+        <app-product2 [product]="this.products_best_discount[0]"></app-product2>
       </div>
     </div>
   </div>
 </section>
-<section class="subcribe-section">
+<section *ngIf="must_load<=0" class="subcribe-section">
   <div class="container">
     <div class="banner">
       <img src="../../../assets/images/Subscribe-banner.webp" alt="">
@@ -135,7 +135,7 @@
 
   </div>
 </section>
-<section class="eightth-section">
+<section *ngIf="must_load<=0" class="eightth-section">
   <div class="container">
     <div class="bean">
       <div nz-row [nzGutter]="[16,16]">

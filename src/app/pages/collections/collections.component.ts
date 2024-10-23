@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Page } from 'src/app/classes/page';
 
 @Component({
   selector: 'app-collections',
   templateUrl: './collections.component.html',
   styleUrls: ['./collections.component.scss']
 })
-export class CollectionsComponent {
+export class CollectionsComponent extends Page implements OnInit {
+
   collections = [
     {
       id: '1',
       img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/1.png?v=1672641441',
-      name: 'All Products', 
+      name: 'All Products',
       itemsCount: 42,
     },
     {
@@ -28,7 +30,7 @@ export class CollectionsComponent {
     {
       id: '4',
       img: 'https://coffee-workdo.myshopify.com/cdn/shop/collections/Coffee_Accessories.png?v=1672641517',
-      name: 'Coffee Accessories', 
+      name: 'Coffee Accessories',
       itemsCount: 8,
     },
     {
@@ -56,4 +58,8 @@ export class CollectionsComponent {
       itemsCount: 6,
     },
   ]
+
+  ngOnInit(): void {
+    this.loaded()
+  }
 }

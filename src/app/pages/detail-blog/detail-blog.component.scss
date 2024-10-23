@@ -12,7 +12,7 @@
         padding: 0;
         font-size: 100%;
         list-style: none;
-        vertical-align: baseline;
+        // vertical-align: baseline;
         box-sizing: border-box;
         display: block;
         color: #fff;
@@ -110,20 +110,20 @@
 
 .detail-blog{
     padding: 80px 0px;
-    
+
     .about-user{
         align-items: center;
         display: flex;
         flex-wrap: wrap;
         box-sizing: border-box;
-        
+
         h6 span{
             display: block;
             font-weight: 700;
         }
 
         h6{
-            
+
             font-family: 'Josefin Snas';
             font-style: italic;
             font-weight: 400;
@@ -146,11 +146,11 @@
                 line-height: 17px;
             }
         }
-        
+
 
     }
-    
-    
+
+
 
     &>div>div{
         p{
@@ -172,7 +172,7 @@
             line-height: 24px;
             padding: 40px 0 40px 20px;
         }
-        
+
     }
 
     img{

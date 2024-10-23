@@ -3,12 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
 import emailjs from '@emailjs/browser';
+import { Page } from 'src/app/classes/page';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends Page implements OnInit {
   user_email = ''
   user_password = ''
   passwordVisible = false;
@@ -18,12 +19,13 @@ export class LoginComponent implements OnInit {
   resetYP_email = ''
 
   constructor (private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute){
-
+    super()
   }
 
   ngOnInit(): void {
     this.routed.paramMap.subscribe(params=>{
       this.isFormLogin=(params.get('param')==null);
+      this.loaded()
     })
   }
 

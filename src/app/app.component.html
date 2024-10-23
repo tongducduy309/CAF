@@ -1,5 +1,5 @@
 
-<nz-spin [nzSpinning]="false" [nzDelay]="500" nzSize="large">
+<nz-spin [nzSpinning]="loading" nzSize="large" nzTip="Đợi Giây Lát...">
   <app-header (QuantityEmitter)="changeQuantityItem($event)" [itemsCart]="itemsCart" [total]="total" [subtotal]="subtotal"></app-header>
   <router-outlet (activate)="change($event)"></router-outlet>
   <app-footer></app-footer>

@@ -1,0 +1,50 @@
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+}
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+.block{
+  border: 1px solid #262626;
+  padding: 30px;
+  .btnContinueShopping, .btnCheckout{
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 100px;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+    width: 100%;
+  }
+
+  .btnContinueShopping{
+    color: #fff;
+    background-color: #262626;
+    // &:hover{
+    //   background-color: #bbb1ad;
+    // }
+  }
+
+  .btnCheckout{
+    color: #262626;
+    background-color: transparent;
+    border: 1px solid #262626;
+    margin-bottom: 10px;
+    &:hover{
+      background-color: #262626;
+      color: #fff;
+    }
+  }
+}
+
+.second-section{
+  padding-bottom: 80px;
+}

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { CrudService } from 'src/services/crud.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent extends Page implements OnInit{
   title_button= "Login"
   list_product = [
     {
@@ -21,9 +22,10 @@ export class HomeComponent implements OnInit{
   products_best_discount: any = []
 
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
-
+    super()
   }
   ngOnInit(): void {
+
     this.animationFirstSectionContent();
     this.getAllProducts();
   }
@@ -33,7 +35,8 @@ export class HomeComponent implements OnInit{
   getAllProducts(){
     this.crud.get('products','all').subscribe((data)=>{
       this.products_best_discount=data
-      // console.log(this.products);
+      console.log(this.products_best_discount);
+      this.loaded()
     });
 
   }

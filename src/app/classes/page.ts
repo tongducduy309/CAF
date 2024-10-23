@@ -2,20 +2,31 @@ import { EventEmitter, Injectable, Output } from "@angular/core";
 
 @Injectable()
 export class Page {
-  @Output() ItemsCartEmitter= new EventEmitter()
-
+  @Output() ItemsCartAddEmitter= new EventEmitter()
+  @Output() LoadingEmitter= new EventEmitter()
+  @Output() changeQuantityEmitter= new EventEmitter()
+  must_load = 0
   constructor (){
-
+    this.LoadingEmitter.emit(true)
+    document.body.style.overflow = 'hidden'
   }
 
 
   addToCart(product:any){
-    this.ItemsCartEmitter.emit(product);
+    this.ItemsCartAddEmitter.emit(product);
   }
 
-  getPrice(item:any){
-    if (!item.sale) item.sale=0
-    console.log(item.cost,item.cost*(item.sale/100));
-    return (item.cost-item.cost*(item.sale/100))
+
+
+
+  loaded(){
+    this.must_load--;
+    if (this.must_load<=0){
+      this.LoadingEmitter.emit(false)
+      console.log(this.must_load);
+      document.body.style.overflow = 'auto'
+    }
+
+
   }
 }

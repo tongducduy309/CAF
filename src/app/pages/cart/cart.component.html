@@ -1,1 +1,37 @@
-<p>cart works!</p>
+<section>
+  <div class="container">
+    <div class="btn" (click)="back()">
+      <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+      Trở Về
+    </div>
+
+    <h2 class="title">Giỏ Hàng</h2>
+
+
+  </div>
+</section>
+
+<section class="second-section">
+  <div class="container">
+    <div nz-row [nzGutter]="[24,24]">
+      <div nz-col [nzSpan]="18">
+        <div class="items-cart">
+          <app-item-shopping-cart [item]="item" (QuantityEmitter)="changeQuantityItem($event)" *ngFor="let item of itemsCart"></app-item-shopping-cart>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="6">
+        <div class="block" style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+          <h4 class="subtitle">Tạm Tính</h4>
+          <h4 class="subtitle"><b style="margin-right: 5px;">{{subtotal}}</b>  VND</h4>
+          <p style="text-align: center;">Thuế và phí vận chuyển sẽ được tính khi thanh toán</p>
+          <div class="btnCheckout">
+            <span>Thanh toán</span>
+          </div>
+          <div class="btnContinueShopping">
+            <span>Tiếp tục mua hàng</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

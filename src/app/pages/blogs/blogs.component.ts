@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Page } from 'src/app/classes/page';
 @Component({
   selector: 'app-blogs',
   templateUrl: './blogs.component.html',
   styleUrls: ['./blogs.component.scss']
 })
-export class BlogsComponent implements OnInit {
+export class BlogsComponent extends Page implements OnInit {
 
   constructor(private location:Location){
-
+    super()
   }
   back(){
     this.location.back();
   }
 
   ngOnInit(): void {
+    this.loaded()
   }
 
   blogs = [

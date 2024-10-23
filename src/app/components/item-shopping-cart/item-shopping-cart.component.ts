@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -11,11 +12,17 @@ export class ItemShoppingCartComponent implements OnInit{
   @Input() item:any = {}
   @Output() QuantityEmitter = new EventEmitter()
 
-  constructor(){
+  constructor(private router:Router){
 
   }
 
   ngOnInit(): void {
+    console.log(this.item);
+  }
+
+  remote(s:any){
+    console.log(s);
+    this.router.navigate([s])
   }
 
   remove(){

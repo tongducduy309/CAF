@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Page } from 'src/app/classes/page';
 
 @Component({
   selector: 'app-detail-blog',
   templateUrl: './detail-blog.component.html',
   styleUrls: ['./detail-blog.component.scss']
 })
-export class DetailBlogComponent implements OnInit {
+export class DetailBlogComponent extends Page implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super()
+  }
 
   ngOnInit(): void {
+    this.loaded()
   }
 
   blogs = [

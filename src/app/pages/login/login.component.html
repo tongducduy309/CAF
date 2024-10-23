@@ -1,6 +1,7 @@
 
-<div *ngIf="isFormLogin===true">
-  <h2>Log In</h2>
+<section *ngIf="isFormLogin===true">
+  <div class="container">
+    <h4 class="subtitle" style="text-align: center;">Đăng Nhập</h4>
 
 
   <div nz-col style="padding: 10px;">
@@ -41,13 +42,16 @@
       </button>
     </div>
   </div>
-</div>
-<div *ngIf="isFormLogin===false">
-  <h2>Reset your password</h2>
-  <!-- <span style="color: #ff0000;" *ngIf="!isMessage"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span> -->
-  <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text">
-  <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
-    Submit
-  </button>
-</div>
+  </div>
+</section>
+<section *ngIf="isFormLogin===false">
+  <div class="container">
+    <h2>Reset your password</h2>
+    <!-- <span style="color: #ff0000;" *ngIf="!isMessage"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span> -->
+    <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text" style="margin-bottom: 10px;">
+    <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
+      Submit
+    </button>
+  </div>
+</section>
 

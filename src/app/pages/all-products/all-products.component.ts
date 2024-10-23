@@ -89,10 +89,11 @@ export class AllProductsComponent extends Page implements OnInit  {
   getAllProducts(){
     this.crud.get("products","all").subscribe((products)=>{
       this.products=products
+      this.loaded()
       console.log(this.products);
     })
   }
-  
+
   selectedProvince = 'Alphabetically,A-Z';
   provinceData = [ 'Best seller','Alphabetically,A-Z','Alphabetically,Z-A',
     'Feartured','Price,low to high','Price,high to low','Date,old to new','Date,new to old'];
@@ -292,93 +293,93 @@ export class AllProductsComponent extends Page implements OnInit  {
       case 'Tools':
         return this.ToolsQty;
       case 'Zpresso':
-        return this.ZpressoQty 
+        return this.ZpressoQty
       case 'Bean':
-        return this.BeanQty 
+        return this.BeanQty
       case 'Beanly':
         return this.BeanlyQty
       case 'Benki':
-        return this.BenkiQty  
+        return this.BenkiQty
       case 'Budan':
         return this.BudanQty
       case 'Coffee WorkDo':
-        return this.CoffeeWorkDoQty 
+        return this.CoffeeWorkDoQty
       case 'Generic':
-        return this.GenericQty 
+        return this.GenericQty
       case 'KC':
-        return this.KCQty 
+        return this.KCQty
       case 'Nescafe':
-        return this.NescafeQty 
+        return this.NescafeQty
       case 'RAGE':
-        return this.RAGEQty 
+        return this.RAGEQty
       case 'Sunbean':
-        return this.SunbeanQty 
+        return this.SunbeanQty
       case 'TATA':
-        return this.TATAQty 
+        return this.TATAQty
       case 'Tokai':
-        return this.TokaiQty 
+        return this.TokaiQty
       case 'Black':
-        return this.BlackQty 
+        return this.BlackQty
       case 'Blue':
         return this.BlueQty
       case 'Brown':
-        return this.BrownQty 
+        return this.BrownQty
       case 'Green':
-        return this.GreenQty 
+        return this.GreenQty
       case 'Grey':
         return this.GreyQty
       case 'Pink':
-        return this.PinkQty 
+        return this.PinkQty
       case 'Purple':
         return this.PurpleQty
       case 'Red':
-        return this.RedQty 
+        return this.RedQty
       case 'White':
-        return this.WhiteQty 
+        return this.WhiteQty
       case 'Yellow':
-        return this.YellowQty 
+        return this.YellowQty
       case 'Ceramic':
-        return this.CeramiQty 
+        return this.CeramiQty
       case 'Classic':
-        return this.ClassicQty 
+        return this.ClassicQty
       case 'Creamy':
-        return this.CreamyQty 
+        return this.CreamyQty
       case 'Cappuccino':
-        return this.CuppuccinoQty 
+        return this.CuppuccinoQty
       case 'Dhak Blend':
-        return this.DhakBlendQty 
+        return this.DhakBlendQty
       case 'Dark Roast':
-        return this.DrakRoastQty 
+        return this.DrakRoastQty
       case 'Ethiopian':
-        return this.EthiopianQty 
+        return this.EthiopianQty
       case 'Hazelnut':
-        return this.HazelnutQty 
+        return this.HazelnutQty
       case 'Hazinut':
-        return this.HazinutQty 
+        return this.HazinutQty
       case 'Italian':
-        return this.ItalianQty 
+        return this.ItalianQty
       case 'Kerehaklu':
-        return this.KerehakluQty 
+        return this.KerehakluQty
       case 'Medium':
-        return this.MediumQty 
+        return this.MediumQty
       case 'OG Blend':
         return this.OGBlendQty
       case 'Rise Blend':
         return this.RiseBlendQty
       case 'Soul Blend':
-        return this.SoulBlendQty 
+        return this.SoulBlendQty
       case 'Steel':
-        return this.SteelQty 
+        return this.SteelQty
       case 'Strong':
-        return this.StrongQty 
+        return this.StrongQty
       case 'Thogarihunkal':
-        return this.ThogarihunkalQty 
+        return this.ThogarihunkalQty
       case 'Vanilla':
-        return this.VenillaQty 
+        return this.VenillaQty
       case 'Vienna Roast':
-        return this.ViennaRoastQty 
+        return this.ViennaRoastQty
       case 'Vita Blend':
-        return this.VitaBlendQty 
+        return this.VitaBlendQty
         case 'Cups 1 size':
           return this.Cups1_size;
         case 'Gram 230':

@@ -131,8 +131,10 @@
       line-height: 22px;
       font-weight: normal;
       margin-bottom: 10px;
+      text-align: center;
     }
     .process{
+      --value: 20% ;
       display: flex;
       align-items: center;
       flex: 1;
@@ -151,7 +153,7 @@
           left: 0;
           content: '';
           background-color: #a7897b;
-          width: 72%;
+          width: var(--value);
           height: 100%;
           border-radius: 100px;
         }
@@ -192,7 +194,7 @@
     box-shadow: 0 0 8px #0000004d;
     z-index: 0;
     .top{
-      padding: 15px;
+      padding: 5px 15px;
       .btn{
         background-color: #a7897b;
         border-radius: 10px;

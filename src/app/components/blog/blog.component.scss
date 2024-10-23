@@ -34,26 +34,23 @@
     .blog-content{
         padding-top: 20px;
         span{
-            font-family: 'Outfit';
             font-size: 16px;
             font-style: normal;
             font-weight: 600;
             line-height: 16px;
         }
-        
+
         p{
-            font-family: 'Outfit';
             font-size: 14px;
             font-style: normal;
             font-weight: 400;
             line-height: 20px;
-            
+
         }
     }
 
     .link-btn {
         font-style: normal;
-        font-family: 'Outfit';
         font-size: 12px;
         line-height: 12px;
         font-weight: 700;
@@ -77,7 +74,7 @@
         background-color: #000;
         transition: all .25s ease-in-out;
     }
-    
+
     .link-btn:hover{
         color: #A7897B;
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -8,15 +9,19 @@ import { CrudService } from 'src/services/crud.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends Page implements OnInit {
   FirstName_Fill = ''
   LastName_Fill = ''
   Email_Fill = ''
   Password_Fill = ''
 
-  constructor(private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute) {}
+  constructor(private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute) {
+    super()
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loaded()
+  }
 
   isValidEmail(email:string){
     if (email.length==0) return false
