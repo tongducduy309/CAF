@@ -19,6 +19,7 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { AccountComponent } from './pages/account/account.component';
 
 const routes: Routes = [
 
@@ -33,6 +34,10 @@ const routes: Routes = [
 
   },
   {
+    path:'account',
+    component:AccountComponent
+  },
+  {
     path:'account/login',
     component:LoginComponent
   },
@@ -45,7 +50,7 @@ const routes: Routes = [
     component:RegisterComponent
   },
   {
-    path:'account/newpassword/:token',
+    path:'account/new-password',
     component:NewpasswordComponent
   },
   {
@@ -97,7 +102,11 @@ const routes: Routes = [
     component:TermsAndConditionsComponent
   },
   {
-    path:'checkout',
+    path:'checkout/b',
+    component:CheckoutComponent
+  },
+  {
+    path:'checkout/c',
     component:CheckoutComponent
   },
   {
@@ -108,6 +117,7 @@ const routes: Routes = [
     path:'blogs/:name',
     component:DetailBlogComponent
   },
+
   {
     path:'page-not-found',
     component:PageNotFoundComponent

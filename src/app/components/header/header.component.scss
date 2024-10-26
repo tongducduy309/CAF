@@ -67,6 +67,8 @@
         border-bottom: 1px solid #a7897b;
       }
     }
+
+
     [nz-submenu]::after{
       border: none;
     }
@@ -80,6 +82,29 @@
 
 
 
+
+
+
+}
+
+[nz-menu-item]{
+  &:hover{
+    color: #a7897b ;
+  }
+  a{
+    &:hover{
+      color: #a7897b ;
+    }
+  }
+}
+
+.panel{
+  li{
+    &:hover{
+      color: #a7897b ;
+    }
+    cursor: pointer;
+  }
 }
 
 ::ng-deep .ant-drawer-body{

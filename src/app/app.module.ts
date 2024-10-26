@@ -40,6 +40,9 @@ import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { SearchToolComponent } from './components/search-tool/search-tool.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { AccountComponent } from './pages/account/account.component';
+import { BoxAddressComponent } from './components/box-address/box-address.component';
+import { ManageAddressComponent } from './components/manage-address/manage-address.component';
 registerLocaleData(en);
 
 
@@ -54,7 +57,9 @@ export let components:any = [
   ItemShoppingCartComponent,
   BlogComponent,
   RatingProductComponent,
-  SearchToolComponent
+  SearchToolComponent,
+  BoxAddressComponent,
+  ManageAddressComponent
 ]
 
 export let pages = [
@@ -77,7 +82,8 @@ export let pages = [
   FaqComponent,
   ContactWithUsComponent,
   AboutUsComponent,
-  CheckoutComponent
+  CheckoutComponent,
+  AccountComponent
 ]
 
 @NgModule({

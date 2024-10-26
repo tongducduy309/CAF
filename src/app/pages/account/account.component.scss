@@ -1,0 +1,60 @@
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+}
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.header-section{
+  .btn{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    span{
+      margin-right: 10px;
+      font-size: 15px;
+    }
+
+  }
+}
+
+.btnAddress{
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .3s;
+  user-select: none;
+  color: #a7897b;
+  background-color: transparent;
+  border: 1px solid #a7897b;
+  &:hover{
+    background-color: #a7897b;
+    color: #000;
+  }
+}
+
+.first-section{
+  .password{
+
+    p{
+      display: inline-block;
+      margin-right: 10px;
+    }
+    span{
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+}
+
+

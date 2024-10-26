@@ -1,0 +1,26 @@
+
+<nz-ribbon nzText="Mặc định" nzColor="black" *ngIf="info.default">
+  <div class="box">
+    <div style="display: flex;">
+      <p style="margin-right: 20px;"><b>{{info.name}}</b></p>
+      <p>Số điện thoại: {{info.contactNumber}}</p>
+    </div>
+    <p class="address" style="margin: 0;">Địa chỉ: {{info.address}}</p>
+    <div class="group-btn" *ngIf="isShowGroupBtn">
+      <button style="margin-right: 10px;" nz-button nzType="primary" nzGhost (click)="modify()">Chỉnh sửa</button>
+      <button nz-button nzType="default" nzDanger (click)="remove()">Xóa</button>
+    </div>
+  </div>
+</nz-ribbon>
+
+<div class="box" *ngIf="!info.default">
+  <div style="display: flex;">
+    <p style="margin-right: 20px;"><b>{{info.name}}</b></p>
+    <p>Số điện thoại: {{info.contactNumber}}</p>
+  </div>
+  <p class="address" style="margin: 0;">Địa chỉ: {{info.address}}</p>
+  <div class="group-btn" *ngIf="isShowGroupBtn">
+    <button style="margin-right: 10px;" nz-button nzType="primary" nzGhost (click)="modify()">Chỉnh sửa</button>
+    <button nz-button nzType="default" nzDanger (click)="remove()">Xóa</button>
+  </div>
+</div>

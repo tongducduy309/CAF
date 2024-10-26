@@ -1,0 +1,39 @@
+.body{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .top{
+    flex: 1;
+    padding: 30px;
+  }
+  .bottom{
+    .btn{
+      background-color: #000;
+      color: #fff;
+      text-align: center;
+      padding: 11px 25px;
+    }
+  }
+}
+
+::ng-deep .ant-modal-footer{
+  .ant-btn-primary{
+    background-color: #000;
+    border: none;
+  }
+}
+
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.label{
+  margin-bottom: 3px;
+}
+
+.group{
+  margin-bottom: 15px;
+}

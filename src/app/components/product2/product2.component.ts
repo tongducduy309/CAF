@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 })
 export class Product2Component implements OnInit{
   ngOnInit(): void {
-    console.log(this.product);
   }
   @Input() product:any = {}
   @Input() bg = '#a7897b61';

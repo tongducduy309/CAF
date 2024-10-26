@@ -53,8 +53,10 @@ export class HomeComponent extends Page implements OnInit{
     const content = this.elRef.nativeElement.querySelector('.banner-center-content .content')
     let i=0
     setInterval(()=>{
-      content.innerHTML = contents[i++]
-      if (i==3) i=0
+      if(content){
+        content.innerHTML = contents[i++]
+        if (i==3) i=0
+      }
     },2000)
   }
 

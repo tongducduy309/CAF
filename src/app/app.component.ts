@@ -80,8 +80,7 @@ export class AppComponent{
   }
 
   getItemsCart(){
-    const j = this.getItemsCartFromLocalStorage() || '[]'
-    this.itemsCart = JSON.parse(j)
+    this.itemsCart = this.getItemsCartFromLocalStorage()
 
     this.total = 0
     this.subtotal=0
@@ -93,7 +92,7 @@ export class AppComponent{
   }
 
   getItemsCartFromLocalStorage(){
-    return window.localStorage.getItem("caf-itemsCart")
+    return JSON.parse(window.localStorage.getItem("caf-itemsCart") || '[]')
   }
 
 

@@ -101,23 +101,23 @@
           <div class="group">
             <div class="inline">
               <b>Tạm tính:</b>
-              <div>100000 <span>VND</span></div>
+              <div>{{bill.subtotal}} <span>VND</span></div>
             </div>
             <div class="inline">
               <b>Phí vận chuyển:</b>
-              <div>100000 <span>VND</span></div>
+              <div>{{bill.ship}} <span>VND</span></div>
             </div>
             <div class="inline">
               <b>Giảm giá:</b>
-              <div>100000 <span>VND</span></div>
+              <div>{{bill.discount}} <span>VND</span></div>
             </div>
-            <div class="inline">
+            <div class="inline" *ngIf="bill.discount>0">
               <b></b>
               <div class="cost">100000 <span>VND</span></div>
             </div>
             <div class="inline">
               <b>Tổng:</b>
-              <div style="font-weight: 600;">100000 <span>VND</span></div>
+              <div style="font-weight: 600;">{{bill.cost}} <span>VND</span></div>
             </div>
           </div>
         </div>

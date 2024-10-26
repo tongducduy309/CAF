@@ -1,0 +1,43 @@
+<section class="header-section">
+  <div class="container">
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <div class="btn" (click)="back()">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          Trở Về
+        </div>
+
+        <h2 class="title">Tài Khoản</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="first-section">
+  <div class="container">
+    <div nz-row [nzGutter]="[24,24]">
+      <div nz-col [nzSpan]="12">
+        <p><b>Email:</b></p>
+        <p><b>Số điện thoại:</b></p>
+        <div class="password">
+          <p><b>Mật khẩu:</b> </p>
+          <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"></span>
+        </div>
+      </div>
+      <div nz-col [nzSpan]="12">
+        <p><b>Xếp hạng:</b></p>
+        <p><b>Điểm:</b></p>
+      </div>
+    </div>
+
+    <app-box-address></app-box-address>
+
+
+    <div class="btnAddress"  (click)="isMannageAddress=true">
+      <span>Thêm mới hoặc đặt lại địa chỉ mặc định</span>
+    </div>
+  </div>
+
+  <app-manage-address [(visible)]="isMannageAddress"></app-manage-address>
+</section>

@@ -136,18 +136,16 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   addToCart_(){
-    const product_c = {
-      pid:this.product.id,
-      name:this.product.name,
-      uid:'1',
-      quantity:this.product.quantity,
-      sale:this.product.sale[this.selectedSize],
-      cost:this.product.cost[this.selectedSize],
-      size:this.product.size[this.selectedSize],
-      name_id: this.product.name_id
-    }
-    this.addToCart(product_c)
+    // const product_c = {
+    //   pid:this.product.id,
+    //   name:this.product.name,
+    //   quantity:this.product.quantity,
+    //   sale:this.product.sale[this.selectedSize],
+    //   cost:this.product.cost[this.selectedSize],
+    //   size:this.product.size[this.selectedSize],
+    //   name_id: this.product.name_id
+    // }
+    this.addToCart(this.product.id)
   }
-
 
 }
