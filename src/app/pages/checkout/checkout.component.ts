@@ -17,6 +17,10 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   products: any = []
 
+  address_user_choosing:any = {}
+
+  isMannageAddress = false
+
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, private main:MainService){
     super()
 
@@ -48,6 +52,11 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
         }
       })
     });
+  }
+
+  chooseAddress(a:any){
+    this.address_user_choosing = a
+    this.isMannageAddress=false
   }
 
 }

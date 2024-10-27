@@ -10,21 +10,14 @@
           <div class="block">
             <h4 class="subtitle">Thông tin</h4>
             <div class="group">
-              <p class="label">Họ và tên:</p>
-              <input nz-input placeholder="Họ và tên" [(ngModel)]="user.name" />
+              <app-box-address [info]="address_user_choosing"></app-box-address>
+              <div class="btnChangeAddress" (click)="isMannageAddress=true">
+                <span>Thay đổi địa chỉ giao hàng</span>
+              </div>
             </div>
             <div class="group">
-              <p class="label">Email: <b>(*Khuyến khích* Điền email để nhận thông báo cho đơn hàng này)</b></p>
-              <input nz-input placeholder="Email" [(ngModel)]="user.email" />
-            </div>
-            <div class="group">
-              <p class="label">Số điện thoại:</p>
-              <input nz-input placeholder="Số điện thoại" [(ngModel)]="user.contactNumber" />
-            </div>
-
-            <div class="group">
-              <p class="label">Địa chỉ:</p>
-              <input nz-input placeholder="Địa chỉ" [(ngModel)]="user.address" />
+              <p class="label">Email: <b>(Trạng thái đơn hàng sẽ được gửi về email này)</b></p>
+              <input nz-input placeholder="Email" [(ngModel)]="user.email" disabled/>
             </div>
           </div>
 
@@ -124,4 +117,6 @@
       </div>
     </div>
   </div>
+
+  <app-manage-address (chooseEmitter)="chooseAddress($event)" [(visible)]="isMannageAddress"></app-manage-address>
 </section>

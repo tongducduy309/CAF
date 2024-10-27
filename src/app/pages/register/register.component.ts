@@ -10,13 +10,21 @@ import { CrudService } from 'src/services/crud.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends Page implements OnInit {
-  FirstName_Fill = ''
-  LastName_Fill = ''
+  fullname = ''
   Email_Fill = ''
   Password_Fill = ''
 
+  submited = false
+
   constructor(private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute) {
     super()
+    this.routed.paramMap.subscribe(params=>{
+      const token = params.get("token")
+      if (token!=null){
+        
+      }
+      this.loaded()
+    })
   }
 
   ngOnInit(): void {
@@ -46,12 +54,8 @@ export class RegisterComponent extends Page implements OnInit {
 
   SendMess_Register(){
 
-    if (!this.FirstName_Fill.trim()) {
-      this.createNotification('error', 'First Name is required.');
-      return;
-    }
 
-    if (!this.LastName_Fill.trim()) {
+    if (!this.fullname.trim()) {
       this.createNotification('error', 'Last Name is required.');
       return;
     }
@@ -74,12 +78,13 @@ export class RegisterComponent extends Page implements OnInit {
     //   email: this.Email_Fill
     // })
 
+    this.submited = true
+
     this.createNotification('success', 'Thanks for registering!');
 
 
-    this.FirstName_Fill = '';
-    this.LastName_Fill = '';
-    this.Email_Fill = '';
-    this.Password_Fill = '';
+    // this.fullname = '';
+    // this.Email_Fill = '';
+    // this.Password_Fill = '';
   }
 }

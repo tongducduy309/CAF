@@ -24,6 +24,19 @@ export class CrudService {
 })
   }
 
+  verifyUser(token:any){
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    // this.http.post(`https://api-caf.vercel.app/api/post/${id}`,{...data}, { headers })
+
+    return fetch(`https://api-caf.vercel.app/api/put/users/verify`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({token:token})
+})
+  }
+
   get(table:string,id:string){
     return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`);
 

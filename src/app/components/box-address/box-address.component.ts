@@ -9,7 +9,7 @@ export class BoxAddressComponent {
   @Input() info:any = {}
   @Output()  removeEmitter = new EventEmitter()
   @Output()  modifyEmitter = new EventEmitter()
-
+  @Output()  chooseEmitter = new EventEmitter()
   @Input() isShowGroupBtn=false
   remove(){
     this.removeEmitter.emit(this.info.id)
@@ -17,5 +17,9 @@ export class BoxAddressComponent {
 
   modify(){
     this.modifyEmitter.emit(this.info)
+  }
+
+  choose(){
+    this.chooseEmitter.emit(this.info)
   }
 }

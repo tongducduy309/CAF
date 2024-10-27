@@ -50,6 +50,10 @@ const routes: Routes = [
     component:RegisterComponent
   },
   {
+    path:'account/verify/:token',
+    component:RegisterComponent
+  },
+  {
     path:'account/new-password',
     component:NewpasswordComponent
   },

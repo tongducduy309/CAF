@@ -61,7 +61,7 @@
   margin-bottom: 40px;
 }
 
-.btnCheckout{
+.btnCheckout, .btnChangeAddress{
   font-weight: 700;
   font-size: 14px;
   border-radius: 5px;
@@ -71,11 +71,21 @@
   transition: all .3s;
   user-select: none;
   width: 100%;
-  color: #fff;
-  background-color: #262626;
+
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.btnCheckout{
+  color: #fff;
+  background-color: #262626;
+}
+
+.btnChangeAddress{
+  border: 2px solid #000;
+  color: #000;
+  border-radius: 8px;
 }
 
 .product{

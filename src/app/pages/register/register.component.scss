@@ -17,6 +17,7 @@ section{
 .form_group{
     font: 14px;
     font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .form_group sup{
@@ -28,15 +29,15 @@ section{
     padding: 10px 15px;
 }
 
+
 .group{
     padding: 20px 15px;
 
     span{
         font-weight: 500;
       }
-
-    input{
-        margin-top: 15px;
+      p{
+        margin: 0;
       }
 }
 
