@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { UserService } from 'src/app/items/user.service';
+import { UserService } from 'src/services/user.service';
 import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,10 @@ export class HeaderComponent implements OnInit{
   @Input() itemsCart:any = []
   @Input() total = 0
   @Input() subtotal = 0
+  @Input() user:any=null;
+  @Output() userChange = new EventEmitter();
   @Output() QuantityEmitter = new EventEmitter()
+
   @ViewChild('process') process: any;
   bg_header = '#000'
   btnShowCart = true
@@ -22,7 +26,9 @@ export class HeaderComponent implements OnInit{
   freeShip = 200000
 
   isSearing:any;
-  constructor (private user:UserService, private router:Router, private crud:CrudService){
+
+
+  constructor (private userS:UserService, private router:Router, private crud:CrudService, private main:MainService){
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
    {
@@ -45,8 +51,17 @@ export class HeaderComponent implements OnInit{
   }
   ngOnInit(): void {
     this.getCategories();
+    this.getUser();
 
+  }
 
+  async getUser(){
+    let token = this.main.getCookie("u-caf")
+    if(token){
+
+      this.user=await this.userS.login_method_1(token)
+      // console.log(this.user);
+    }
   }
 
 
@@ -58,7 +73,7 @@ export class HeaderComponent implements OnInit{
     })
   }
   account(){
-    if (this.user.isVerify==false){
+    if (this.userS.isVerify==false){
       this.router.navigate(["account/login"])
     }
   }
@@ -98,6 +113,11 @@ export class HeaderComponent implements OnInit{
     this.QuantityEmitter.emit(item)
 
 
+  }
+
+  logout(){
+    this.userS.logout()
+    this.user = null
   }
 
 }

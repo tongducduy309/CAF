@@ -3,46 +3,7 @@
     <div nz-col class="filters" nzSpan="8">
       <div style="padding: 20px;"><span>Bộ Lọc</span></div>
       <div class="filter-form">
-        <div class="filter-1">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[0].name"
-            nzActive="true"
-            [nzExtra]="extraTpl0"
-            (nzActiveChange) = "panels[0].active = !panels[0].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxOption_Availability" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl0>
 
-              <span nz-icon [nzType]="panels[0].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
         <div class="filter-2">
           <nz-collapse nzExpandIconPosition="right">
             <nz-collapse-panel
@@ -57,16 +18,18 @@
                   <span style="font-size: 12px;">The highest price is</span>
                   <span class="qty">{{ maxPrice }} USD</span>
                 </div>
-                  <span class="reset">Reset</span>
+                  <span class="reset">Đặt lại</span>
               </div>
+              <nz-slider nzRange [nzMin]="rangePrice[0]" [nzStep]="1000" [nzMax]="rangePrice[1]" [(ngModel)]="valuePrice" (nzOnAfterChange)="changePrice($event)"></nz-slider>
               <div class="distance-price" style="display: flex;">
+
                   <div style="padding-right: 10px;">
-                    <span>Min price:</span>
-                    <input nz-input placeholder={{minPrice}} nzSize="large" />
+                    <span>Giá lớn hơn:</span>
+                    <input nz-input placeholder={{rangePrice[0]}} nzSize="large" />
                   </div>
                   <div style="padding-right: 10px;">
-                    <span>Max price:</span>
-                    <input nz-input placeholder={{maxPrice}} nzSize="large"/>
+                    <span>Giá nhỏ hơn:</span>
+                    <input nz-input placeholder={{rangePrice[1]}} nzSize="large"/>
                   </div>
               </div>
               <ng-template #extraTpl1>

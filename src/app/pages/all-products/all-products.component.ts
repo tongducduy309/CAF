@@ -8,6 +8,8 @@ import { CrudService } from 'src/services/crud.service';
   styleUrls: ['./all-products.component.scss']
 })
 export class AllProductsComponent extends Page implements OnInit  {
+  rangePrice = [0,100000]
+  valuePrice = [0,100000]
   inStockQuantity = 0;
   outOfStockQuantity = 0;
   maxPrice=0;
@@ -404,6 +406,10 @@ export class AllProductsComponent extends Page implements OnInit  {
   }
   log(values: string[]): void {
     console.log(values);
+  }
+
+  changePrice(price:any){
+
   }
 
 }

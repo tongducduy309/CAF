@@ -5,6 +5,7 @@ export class Page {
   @Output() ItemsCartAddEmitter= new EventEmitter()
   @Output() LoadingEmitter= new EventEmitter()
   @Output() changeQuantityEmitter= new EventEmitter()
+  @Output() UserEmitter= new EventEmitter()
   must_load = 0
   constructor (){
     this.LoadingEmitter.emit(true)
@@ -28,5 +29,9 @@ export class Page {
     }
 
 
+  }
+
+  reload(){
+    window.location.reload()
   }
 }

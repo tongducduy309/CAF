@@ -1,4 +1,4 @@
-<section>
+<section [ngStyle]="{'padding':(submited)?'100px 0':'80px 0'}">
   <div class="container" *ngIf="!submited">
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
       <h2>Đăng Ký Tài Khoản</h2>
@@ -41,10 +41,14 @@
     <nz-result
 
       nzStatus="success"
-      nzTitle="Hoàn thành bước đăng ký"
-      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong email '+Email_Fill"
+      [nzTitle]="'Chờ xác thực tài khoản'"
+      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong hộp thư '+Email_Fill"
     >
+    <div nz-result-extra>
+      <button nz-button (click)="reload()">Tải lại trang</button>
+    </div>
     </nz-result>
+
   </div>
 </section>
 

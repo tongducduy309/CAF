@@ -6,38 +6,44 @@
 
   <div nz-col style="padding: 10px;">
     <div class="group border-top border-right border-left">
-      <h5 style="font-weight: 700;font-size: 16px;">Log In</h5>
-    </div>
-    <div class="group border-top border-right border-left">
-      <span>I am a returning customer</span>
       <div  nz-row [nzGutter]="[15]">
         <div class="field form_grow" nz-col nzSpan="12">
           <span>E-mail <sup aria-hidden="true">*</sup> :</span>
             <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
         </div>
-        <div class="form_group field" nz-col nzSpan="12">
-          <span>Password <sup aria-hidden="true">*</sup> :</span>
-          <input
-                  [type]="passwordVisible ? 'text' : 'password'"
-                  nz-input
-                  placeholder="Password"
-                  [(ngModel)]="user_password"/>
+        <div nz-col nzSpan="12">
+          <span>Mật khẩu <sup aria-hidden="true">*</sup> :</span>
+          <nz-input-group [nzSuffix]="suffixTemplate">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              placeholder="Mật khẩu"
+              [(ngModel)]="user_password"
+            />
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <span style="cursor: pointer;"
+              nz-icon
+              [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"
+            ></span>
+          </ng-template>
         </div>
       </div>
     </div>
     <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
-      <span class="span_forgotPassword" (click)="this.route.navigate(['account/login/reset-your-password'])">Forgot Password?</span>
+      <span class="span_forgotPassword" (click)="this.route.navigate(['account/login/reset-your-password'])">Quên mật khẩu?</span>
       <button nz-button nzType="primary" (click)="submit()" class="btnLogin" >
-        Login
+        Đăng Nhập
         <span nz-icon nzType="arrow-right"></span>
       </button>
     </div>
     <div class="group border-top border-right border-left border-bottom group-container-btnRegister">
       <span style="margin-right: 15px;">
-        If you dont have account
+        Chưa có tài khoản ?
       </span>
       <button nz-button nzType="primary" (click)="register()" class="btnRegister" >
-        Register
+        Đăng Ký
         <span nz-icon nzType="arrow-right"></span>
       </button>
     </div>

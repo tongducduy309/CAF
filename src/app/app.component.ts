@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
-import { Page } from './classes/page';
-import { NzTransButtonDirective } from 'ng-zorro-antd/core/trans-button';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -17,8 +15,11 @@ export class AppComponent{
   total = 0
   subtotal = 0
   loading:any = true
+  header_footer_visible = true
+  user:any=null;
 
   constructor (private crud:CrudService, private main:MainService){
+
     this.getItemsCart()
   }
 
@@ -51,6 +52,11 @@ export class AppComponent{
     componentRef.LoadingEmitter?.subscribe((res:any)=>{
       console.log(this.loading);
       this.loading=res
+
+    })
+    componentRef.UserEmitter?.subscribe((res:any)=>{
+      // console.log(res);
+      this.user = res
 
     })
 

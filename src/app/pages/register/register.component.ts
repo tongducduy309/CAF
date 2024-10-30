@@ -1,34 +1,72 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent extends Page implements OnInit {
+export class RegisterComponent extends Page implements OnInit,AfterViewInit {
   fullname = ''
   Email_Fill = ''
   Password_Fill = ''
 
   submited = false
 
-  constructor(private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute) {
+  user:any = null
+
+  constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService) {
+
     super()
-    this.routed.paramMap.subscribe(params=>{
-      const token = params.get("token")
+    this.must_load = 1
+    this.routed.queryParamMap.subscribe(params => {
+      const token = params.get('token')
       if (token!=null){
-        
+        this.crud.verifyUser(token).then(response => response.json())
+        .then(async data=> {
+          if(data.result=='Success'){
+            console.log("Xác thực thành công");
+            this.user =  await this.userS.login_method_1(token)
+            this.UserEmitter.emit(this.user)
+            this.router.navigate([''])
+            this.loaded()
+          }
+          else{
+            if(data.result=='Verified'){
+              let token_cookie = this.main.getCookie("u-caf")
+              if(!token_cookie){
+
+                this.user=await this.userS.login_method_1(token)
+
+              }
+
+              this.UserEmitter.emit(this.user)
+              this.router.navigate([''])
+            }
+          }
+          // console.log(data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       }
-      this.loaded()
-    })
+      else{
+        this.loaded()
+      }
+
+    });
+
+  }
+  ngAfterViewInit(): void {
+
   }
 
   ngOnInit(): void {
-    this.loaded()
   }
 
   isValidEmail(email:string){
@@ -80,7 +118,7 @@ export class RegisterComponent extends Page implements OnInit {
 
     this.submited = true
 
-    this.createNotification('success', 'Thanks for registering!');
+    // this.createNotification('success', 'Thanks for registering!');
 
 
     // this.fullname = '';

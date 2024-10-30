@@ -4,6 +4,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
 import emailjs from '@emailjs/browser';
 import { Page } from 'src/app/classes/page';
+import { UserService } from 'src/services/user.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,7 +19,7 @@ export class LoginComponent extends Page implements OnInit {
 
   resetYP_email = ''
 
-  constructor (private crud:CrudService,private notification: NzNotificationService, public route:Router, private routed: ActivatedRoute){
+  constructor (private crud:CrudService, public route:Router, private routed: ActivatedRoute, private userS:UserService){
     super()
   }
 
@@ -61,15 +62,10 @@ export class LoginComponent extends Page implements OnInit {
     //     this.createNotification('error','Đăng Nhập Thất Bại');
     //   }
     // })
+    this.userS.login_method_2(this.user_email,this.user_password)
   }
 
-  createNotification(type: string, message: string): void {
-    this.notification.create(
-      type,
-      'Notification',
-      message
-    );
-  }
+
 
   register(){
     //this.sendEmail('recipient@example.com', 'Test Email', 'This is a test email sent from TypeScript.');
@@ -84,7 +80,7 @@ export class LoginComponent extends Page implements OnInit {
       this.sendEmail(this.resetYP_email,url);
     }else
     {
-      this.createNotification("error","Please Enter '@' In The Email Address")
+      // this.createNotification("error","Please Enter '@' In The Email Address")
     }
   }
 
@@ -110,9 +106,9 @@ export class LoginComponent extends Page implements OnInit {
     console.log(res);
     if (res.status==200){
       this.isFormLogin=true;
-      this.createNotification('success',"We've sent you an email with a link to update your password.")
+      // this.createNotification('success',"We've sent you an email with a link to update your password.")
     }else{
-      this.createNotification('error',"Error: Status="+res.status)
+      // this.createNotification('error',"Error: Status="+res.status)
     }
 
   }

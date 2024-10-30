@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
 
-  constructor() { }
+  constructor(private notification: NzNotificationService) { }
 
   getPrice(item:any){
     if (!item.sale) item.sale=0
@@ -48,5 +49,13 @@ export class MainService {
 
   deleteCookie(name: string, path: string = '/', domain: string | null = null) {
     this.setCookie(name, '', -1, path, domain);
+  }
+
+  createNotification(type: string, message: string): void {
+    this.notification.create(
+      type,
+      'Thông Báo',
+      message
+    );
   }
 }
