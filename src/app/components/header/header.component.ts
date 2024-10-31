@@ -36,18 +36,7 @@ export class HeaderComponent implements OnInit{
       if (event instanceof NavigationEnd)
    {
         // Route change detected
-        if (this.user==null){
-          if (event.urlAfterRedirects!='/account/login'&&event.urlAfterRedirects!='/account/reset-your-password'&&event.urlAfterRedirects!='/account/register'){
-            console.log("Header",this.user);
-            this.getUser();
-          }
-          else{
-            this.user = this.getUser();
-              if (this.user){
-                this.remote('')
-              }
-          }
-        }
+        this.checkUser(event.urlAfterRedirects)
         switch (event.urlAfterRedirects){
           case '/home':
             this.bg_header = 'transparent'
@@ -71,14 +60,33 @@ export class HeaderComponent implements OnInit{
 
   }
 
-  async getUser(){
-    let token = this.main.getCookie("u-caf")
-    if(token){
-
-      this.user=await this.userS.login_method_1(token)
-      return this.user
-      // console.log(this.user);
+  async checkUser(path:string){
+    if (this.user==null){
+      if (path!='/account/login'&&path!='/account/reset-your-password'&&path!='/account/register'){
+        this.user = await this.getUser();
+      }
+      else{
+        this.user = await this.getUser();
+          if (this.user!=null){
+            this.remote('')
+          }
+      }
     }
+  }
+
+  async getUser():Promise<any>{
+    
+    return new Promise(async (resolve, reject) =>{
+      let token = this.main.getCookie("u-caf")||null
+      console.log(token);
+      if(token){
+        
+        const user=await this.userS.login_method_1(token)
+        return resolve(user)
+        // console.log(this.user);
+      }
+      return resolve(null)
+    })
   }
 
 

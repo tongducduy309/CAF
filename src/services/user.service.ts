@@ -45,18 +45,17 @@ export class UserService {
 
   login_method_2(email:any,password:any):Promise<any>{
     return new Promise((resolve, reject) => {
-      this.crud.get('users',`${email}/${password}`).subscribe((user:any)=>{
-        if (user){
-          if (user.result!='Success')
-            this.main.createNotification("info","Tài khoản chưa được xác thực")
-          else{
-            this.setUser(user.id,user.fullname,user.token,user.verify)
-            resolve(this.user);
-          }
-
-        }else{
+      this.crud.get('users',`${email}/${password}`).subscribe((result:any)=>{
+        if (result.result=='Not Verified')
+          this.main.createNotification("info","Tài khoản chưa được xác thực")
+        if (result.result=='Success'){
+          this.setUser(result.id,result.fullname,result.token,result.verify)
+          resolve(this.user);
+        }
+        if (result.result=='Not Exist'){
           this.main.createNotification("info","Tài khoản không tồn tại")
           resolve (null)
+
         }
 
       })
