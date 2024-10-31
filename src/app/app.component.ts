@@ -20,28 +20,32 @@ export class AppComponent{
 
   constructor (private crud:CrudService, private main:MainService){
 
-    this.getItemsCart()
+    // this.getItemsCart()
   }
 
   change(componentRef:any){
     componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
-      this.total+=res.quantity*1
-      this.subtotal+=res.quantity*this.main.getPrice(res)
-      let n = -1
-      for (let i = 0; i<this.itemsCart.length;i++){
-        if (this.itemsCart[i].id==res.id){
-          n=i;
-          break;
+      if (this.user){
+        this.total+=res.quantity*1
+        this.subtotal+=res.quantity*this.main.getPrice(res)
+        let n = -1
+        for (let i = 0; i<this.itemsCart.length;i++){
+          if (this.itemsCart[i].id==res.id){
+            n=i;
+            break;
+          }
         }
-      }
-      if (n==-1){
-        this.itemsCart = [...this.itemsCart,res]
-      }
-      else{
-        this.itemsCart[n].quantity+=res.quantity
+        if (n==-1){
+          this.itemsCart = [...this.itemsCart,res]
+        }
+        else{
+          this.itemsCart[n].quantity+=res.quantity
+        }
+      }else{
+        this.main.createNotification("info","Đăng nhập để mở giỏ hàng")
       }
 
-      this.putItemCartToSession(this.itemsCart)
+      // this.putItemCartToSession(this.itemsCart)
       console.log(res);
     })
 
@@ -81,30 +85,30 @@ export class AppComponent{
 
     console.log(this.subtotal,this.total);
 
-    this.putItemCartToSession(this.itemsCart)
+    // this.putItemCartToSession(this.itemsCart)
 
   }
 
-  getItemsCart(){
-    this.itemsCart = this.getItemsCartFromLocalStorage()
+  // getItemsCart(){
+  //   // this.itemsCart = this.getItemsCartFromLocalStorage()
 
-    this.total = 0
-    this.subtotal=0
+  //   this.total = 0
+  //   this.subtotal=0
 
-    for (let ite of this.itemsCart){
-      this.total+=ite.quantity*1
-      this.subtotal+=ite.quantity*this.main.getPrice(ite)
-    }
-  }
+  //   for (let ite of this.itemsCart){
+  //     this.total+=ite.quantity*1
+  //     this.subtotal+=ite.quantity*this.main.getPrice(ite)
+  //   }
+  // }
 
-  getItemsCartFromLocalStorage(){
-    return JSON.parse(window.localStorage.getItem("caf-itemsCart") || '[]')
-  }
+  // getItemsCartFromLocalStorage(){
+  //   return JSON.parse(window.localStorage.getItem("caf-itemsCart") || '[]')
+  // }
 
 
-  putItemCartToSession(items:any){
-    // console.log(items);
-    window.localStorage.setItem(`caf-itemsCart`,JSON.stringify(items))
-  }
+  // putItemCartToSession(items:any){
+  //   // console.log(items);
+  //   window.localStorage.setItem(`caf-itemsCart`,JSON.stringify(items))
+  // }
 
 }

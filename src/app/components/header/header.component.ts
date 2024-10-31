@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit{
   @Input() itemsCart:any = []
   @Input() total = 0
   @Input() subtotal = 0
+  @Output() itemsCartChange = new EventEmitter();
+  @Output() totalChange = new EventEmitter();
+  @Output() subtotalChange = new EventEmitter();
   @Input() user:any=null;
   @Output() userChange = new EventEmitter();
   @Output() QuantityEmitter = new EventEmitter()
@@ -33,6 +36,18 @@ export class HeaderComponent implements OnInit{
       if (event instanceof NavigationEnd)
    {
         // Route change detected
+        if (this.user==null){
+          if (event.urlAfterRedirects!='/account/login'&&event.urlAfterRedirects!='/account/reset-your-password'&&event.urlAfterRedirects!='/account/register'){
+            console.log("Header",this.user);
+            this.getUser();
+          }
+          else{
+            this.user = this.getUser();
+              if (this.user){
+                this.remote('')
+              }
+          }
+        }
         switch (event.urlAfterRedirects){
           case '/home':
             this.bg_header = 'transparent'
@@ -43,15 +58,16 @@ export class HeaderComponent implements OnInit{
           case '/checkout':
             this.btnShowCart = false
             break
+          
           default:
-            this.bg_header = '#000';
+            this.bg_header = '#000'
         }
       }
     });
   }
   ngOnInit(): void {
     this.getCategories();
-    this.getUser();
+
 
   }
 
@@ -60,6 +76,7 @@ export class HeaderComponent implements OnInit{
     if(token){
 
       this.user=await this.userS.login_method_1(token)
+      return this.user
       // console.log(this.user);
     }
   }
@@ -67,9 +84,10 @@ export class HeaderComponent implements OnInit{
 
 
   getCategories(){
-    this.crud.get("categories","all").subscribe((categories:any)=>{
-      this.categories.drinks = categories.filter((category:any)=>category.type==0)
-      this.categories.food = categories.filter((category:any)=>category.type==1)
+    this.crud.get("categories","group-by-type").subscribe((categories:any)=>{
+      this.categories=categories
+      console.log(categories);
+
     })
   }
   account(){
@@ -85,7 +103,13 @@ export class HeaderComponent implements OnInit{
 
 
   open(): void {
-    this.visible = true;
+
+    if (this.user){
+      this.visible = true;
+    }
+    else{
+      this.main.createNotification("info","Đăng nhập để mở giỏ hàng")
+    }
 
   }
 

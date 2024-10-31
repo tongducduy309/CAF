@@ -145,7 +145,10 @@ export class DetailProductComponent extends Page implements OnInit {
     //   size:this.product.size[this.selectedSize],
     //   name_id: this.product.name_id
     // }
-    this.addToCart(this.product.id)
+    this.addToCart({
+      id:this.product.id[this.selectedSize],
+      quantity:this.product.quantity
+    })
   }
 
 }

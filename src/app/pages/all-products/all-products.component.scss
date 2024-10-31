@@ -1,60 +1,51 @@
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+  text-align: center;
+}
 .all-products{
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 80vh;
     .all-product-list{
         width: 90%;
         .filters{
             padding: 10px;
             color: #000;
             .filter-form{
-                .filter-1{
+                .filter{
                     border: #ffff;
                     border-bottom: 1px solid #E2E2E2;
                     margin-bottom: 10px;
-                    padding: 10px;  
+                    padding: 10px;
+                    ul li::marker {
+                      unicode-bidi: isolate;
+                      font-variant-numeric: tabular-nums;
+                      text-transform: none;
+                      text-indent: 0px !important;
+                      text-align: start !important;
+                      text-align-last: start !important;
+                    }
+
+                    ul{
+                      padding-inline-start: 40px;
+                    }
+
+                    ul li {
+                      list-style: disc;
+                      font-size: 16px;
+                      line-height: 22px;
+                      font-weight: 500;
+                      cursor: pointer;
+                      &:hover{
+                        color: #a7897b;
+                      }
+                    }
                 }
-                .filter-2{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-3{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-4{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-5{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-6{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-7{
-                    border: #ffff;
-                    border-bottom: 1px solid #E2E2E2;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
-                .filter-8{
-                    border: #ffff;
-                    margin-bottom: 10px;
-                    padding: 10px;  
-                }
+
 
                 ::ng-deep .ant-collapse-header{
                     background-color: transparent;
@@ -82,9 +73,17 @@
 
                     }
                 }
-                
+
             }
         }
+    }
+
+    .heading{
+      display: flex;
+      justify-content:
+      space-between;
+      font-size: 14px;
+      margin-bottom: 30px;
     }
 }
 ::ng-deep .ant-collapse{
@@ -94,7 +93,7 @@
 
 ::ng-deep .ant-collapse-content{
     border: none;
-    
+
 }
 
 ::ng-deep .ant-collapse-header{

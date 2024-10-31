@@ -21,11 +21,15 @@ export class Product3Component implements OnInit {
 
   ngOnInit(): void {
   }
-  isFavorite = false;
 
   AddToCart(){
     console.log("Add To Cart");
-    this.addToCartEmitter.emit(this.product);
+    console.log(this.product);
+    this.addToCartEmitter.emit({
+      id:this.product.id[this.selectedSize],
+      quantity:1,
+      sale:this.product.sale[this.selectedSize],
+    });
   }
 
   detailProduct(){

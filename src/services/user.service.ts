@@ -20,8 +20,12 @@ export class UserService {
       this.crud.get('users',token).subscribe((user:any)=>{
         if (user){
           this.setUser(user.id,user.fullname,token,user.verify)
-          // console.log(this.user);
+          console.log(this.user);
           resolve(this.user);
+        }
+        else{
+          this.main.createNotification("info","Tài khoản không tồn tại")
+          resolve(null)
         }
       })
 
@@ -43,9 +47,18 @@ export class UserService {
     return new Promise((resolve, reject) => {
       this.crud.get('users',`${email}/${password}`).subscribe((user:any)=>{
         if (user){
-          this.setUser(user.id,user.fullname,user.token,user.verify)
-          resolve(this.user);
+          if (user.result!='Success')
+            this.main.createNotification("info","Tài khoản chưa được xác thực")
+          else{
+            this.setUser(user.id,user.fullname,user.token,user.verify)
+            resolve(this.user);
+          }
+
+        }else{
+          this.main.createNotification("info","Tài khoản không tồn tại")
+          resolve (null)
         }
+
       })
 
     });

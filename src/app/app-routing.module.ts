@@ -70,6 +70,10 @@ const routes: Routes = [
     component:AllProductsComponent
   },
   {
+    path:'all-products/:key',
+    component:AllProductsComponent
+  },
+  {
     path:'cart',
     component:CartComponent
   },

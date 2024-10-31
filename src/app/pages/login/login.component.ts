@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
 import emailjs from '@emailjs/browser';
 import { Page } from 'src/app/classes/page';
 import { UserService } from 'src/services/user.service';
+import { MainService } from 'src/services/main.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends Page implements OnInit {
+export class LoginComponent extends Page implements OnInit,AfterViewInit {
   user_email = ''
   user_password = ''
   passwordVisible = false;
@@ -19,16 +20,45 @@ export class LoginComponent extends Page implements OnInit {
 
   resetYP_email = ''
 
-  constructor (private crud:CrudService, public route:Router, private routed: ActivatedRoute, private userS:UserService){
+  constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService){
     super()
+    // this.must_load=1
+  }
+  ngAfterViewInit(): void {
+    Promise.resolve().then(()=> {
+      // this.getUser()
+      this.loaded()
+    })
+
   }
 
   ngOnInit(): void {
+
+
+
     this.routed.paramMap.subscribe(params=>{
       this.isFormLogin=(params.get('param')==null);
-      this.loaded()
+      // this.loaded()
     })
   }
+
+  // async getUser(){
+  //   let token_cookie = this.main.getCookie("u-caf")
+  //   console.log(token_cookie);
+  //   if(token_cookie!=null){
+
+  //     const user=await this.userS.login_method_1(token_cookie)
+  //     if (user){
+  //       this.UserEmitter.emit(user)
+  //       // console.log("Login",user);
+  //       this.router.navigate(['/'])
+  //       // this.loaded()
+  //     }
+  //   }
+  //   else{
+  //     this.loaded()
+  //   }
+  // }
 
   formatEncode(n:any,a:any){
     let code=['A','B','C','D','E','F','G','H','I','J'];
@@ -49,7 +79,7 @@ export class LoginComponent extends Page implements OnInit {
     return id;
   }
 
-  submit(){
+  async submit(){
     // this.crud.getUsers().subscribe((data)=>{
     //   let isLogin = false;
     //   data.forEach(user => {
@@ -62,14 +92,19 @@ export class LoginComponent extends Page implements OnInit {
     //     this.createNotification('error','Đăng Nhập Thất Bại');
     //   }
     // })
-    this.userS.login_method_2(this.user_email,this.user_password)
+    const user = await this.userS.login_method_2(this.user_email,this.user_password)
+    if (user){
+      this.UserEmitter.emit(user)
+      this.router.navigate([''])
+    }
+
   }
 
 
 
   register(){
     //this.sendEmail('recipient@example.com', 'Test Email', 'This is a test email sent from TypeScript.');
-    this.route.navigate(['account/register'])
+    this.router.navigate(['account/register'])
   }
 
   submit_resetPW(){

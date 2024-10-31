@@ -1,290 +1,34 @@
-<div class="all-products" >
+<section class="all-products" >
   <div nz-row class="all-product-list" nzGutter="16px">
     <div nz-col class="filters" nzSpan="8">
-      <div style="padding: 20px;"><span>Bộ Lọc</span></div>
+      <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Menu</span><span style="cursor: pointer;" (click)="remote('all-products')">Xem toàn bộ</span></div>
       <div class="filter-form">
 
-        <div class="filter-2">
+        <div class="filter" *ngFor="let cate of categories">
           <nz-collapse nzExpandIconPosition="right">
             <nz-collapse-panel
-              [nzHeader]="panels[1].name"
+              [nzHeader]="cate.name"
               nzActive="true"
               [nzExtra]="extraTpl1"
               (nzActiveChange) = "panels[1].active = !panels[1].active"
               [nzShowArrow] = "false"
             >
-            <div class="group-name">
-                <div class="quantity">
-                  <span style="font-size: 12px;">The highest price is</span>
-                  <span class="qty">{{ maxPrice }} USD</span>
-                </div>
-                  <span class="reset">Đặt lại</span>
-              </div>
-              <nz-slider nzRange [nzMin]="rangePrice[0]" [nzStep]="1000" [nzMax]="rangePrice[1]" [(ngModel)]="valuePrice" (nzOnAfterChange)="changePrice($event)"></nz-slider>
-              <div class="distance-price" style="display: flex;">
-
-                  <div style="padding-right: 10px;">
-                    <span>Giá lớn hơn:</span>
-                    <input nz-input placeholder={{rangePrice[0]}} nzSize="large" />
-                  </div>
-                  <div style="padding-right: 10px;">
-                    <span>Giá nhỏ hơn:</span>
-                    <input nz-input placeholder={{rangePrice[1]}} nzSize="large"/>
-                  </div>
-              </div>
+              <ul>
+                <li *ngFor="let value of cate.values" (click)="remote('all-products/'+value.name_id)">
+                  {{value.name}}
+                </li>
+              </ul>
               <ng-template #extraTpl1>
                 <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
               </ng-template>
             </nz-collapse-panel>
         </nz-collapse>
         </div>
-        <div class="filter-3">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[2].name"
-            nzActive="true"
-            [nzExtra]="extraTpl2"
-            (nzActiveChange) = "panels[2].active = !panels[2].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <!--chua sua lai qty khi chon va reset-->
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxOption_ProType" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
 
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl2>
-
-              <span nz-icon [nzType]="panels[2].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-        <div class="filter-4">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[3].name"
-            nzActive="true"
-            [nzExtra]="extraTpl3"
-            (nzActiveChange) = "panels[3].active = !panels[3].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxBrand" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl3>
-
-              <span nz-icon [nzType]="panels[3].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-        <div class="filter-5">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[4].name"
-            nzActive="true"
-            [nzExtra]="extraTpl4"
-            (nzActiveChange) = "panels[4].active = !panels[4].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxColor" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl4>
-
-              <span nz-icon [nzType]="panels[4].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-        <div class="filter-6">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[5].name"
-            nzActive="true"
-            [nzExtra]="extraTpl5"
-            (nzActiveChange) = "panels[5].active = !panels[5].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxMaterial" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl5>
-
-              <span nz-icon [nzType]="panels[5].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-        <div class="filter-7">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[6].name"
-            nzActive="true"
-            [nzExtra]="extraTpl6"
-            (nzActiveChange) = "panels[6].active = !panels[6].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxSize" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl6>
-
-              <span nz-icon [nzType]="panels[6].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
-        <div class="filter-8">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-            [nzHeader]="panels[7].name"
-            nzActive="true"
-            [nzExtra]="extraTpl7"
-            (nzActiveChange) = "panels[7].active = !panels[7].active"
-            [nzShowArrow] = "false"
-          >
-            <div class="group-name">
-              <div class="quantity">
-                <span class="qty">0</span>
-                <span>selected</span>
-              </div>
-                <span class="reset">Reset</span>
-            </div>
-            <div class="checkbox">
-              <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="log($event)">
-                <div nz-col>
-                  <div *ngFor="let option of checkboxStyle" class="group" style="display: flex; justify-content: space-between; padding-right: 20px;">
-                    <div nz-col nzSpan="10">
-                      <label nz-checkbox
-                             [nzValue]="option.value"
-                             [ngModel]="option.checked"
-                      >
-                          {{ option.label }}
-                      </label>
-                    </div>
-                    <span>({{ getQuantity(option.value) }})</span> <!-- Lấy số lượng tương ứng nếu cần -->
-                  </div>
-                </div>
-              </nz-checkbox-wrapper>
-            </div>
-            <ng-template #extraTpl7>
-
-              <span nz-icon [nzType]="panels[7].active?'minus':'plus'"></span>
-            </ng-template>
-          </nz-collapse-panel>
-          </nz-collapse>
-        </div>
       </div>
     </div>
     <div nz-col class="list-product" nzSpan="16">
-      <div class="heading" style="display: flex;justify-content: space-between;font-size: 14px;">
+      <div class="heading">
         <div>
           <nz-breadcrumb style="font-weight: 500;">
               <nz-breadcrumb-item>
@@ -303,11 +47,13 @@
       </div>
       </div>
 
-          <div nz-row [nzGutter]="[24,24]">
+          <div nz-row [nzGutter]="[24,24]" *ngIf="products.length>0">
             <div nz-col [nzSpan]="8">
               <app-product3 *ngFor="let product of products" [product]="product"  (addToCartEmitter)="addToCart($event)"></app-product3>
             </div>
           </div>
+
+          <h3 class="title" *ngIf="products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
     </div>
   </div>
-</div>
+</section>

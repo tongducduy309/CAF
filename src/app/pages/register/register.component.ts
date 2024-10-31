@@ -38,12 +38,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
           }
           else{
             if(data.result=='Verified'){
-              let token_cookie = this.main.getCookie("u-caf")
-              if(!token_cookie){
-
-                this.user=await this.userS.login_method_1(token)
-
-              }
+              this.user=await this.userS.login_method_1(token)
 
               this.UserEmitter.emit(this.user)
               this.router.navigate([''])
