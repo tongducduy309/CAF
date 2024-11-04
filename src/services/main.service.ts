@@ -51,11 +51,13 @@ export class MainService {
     this.setCookie(name, '', -1, path, domain);
   }
 
-  createNotification(type: string, message: string): void {
-    this.notification.create(
-      type,
-      'Thông Báo',
-      message
-    );
+  createNotification(type: string, message: string, show=true): void {
+    if (show){
+      this.notification.create(
+        type,
+        'Thông Báo',
+        message
+      );
+    }
   }
 }

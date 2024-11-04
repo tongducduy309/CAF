@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit{
           case '/checkout':
             this.btnShowCart = false
             break
-          
+
           default:
             this.bg_header = '#000'
         }
@@ -64,6 +64,7 @@ export class HeaderComponent implements OnInit{
     if (this.user==null){
       if (path!='/account/login'&&path!='/account/reset-your-password'&&path!='/account/register'){
         this.user = await this.getUser();
+
       }
       else{
         this.user = await this.getUser();
@@ -75,18 +76,26 @@ export class HeaderComponent implements OnInit{
   }
 
   async getUser():Promise<any>{
-    
-    return new Promise(async (resolve, reject) =>{
-      let token = this.main.getCookie("u-caf")||null
-      console.log(token);
+
+    return new Promise(async (resolve, reject) => {
+      const token = this.main.getCookie("u-caf")
+
       if(token){
-        
-        const user=await this.userS.login_method_1(token)
-        return resolve(user)
-        // console.log(this.user);
+        const result = await this.userS.getUser(null,null,token)
+        if (result){
+          if (result.result=='Success'){
+            resolve({id:result.id})
+          }
+        }
+        resolve(null)
+
+
       }
-      return resolve(null)
-    })
+
+
+    });
+
+
   }
 
 

@@ -14,24 +14,25 @@
 </section>
 
 
-<section class="first-section">
+<section class="first-section" *ngIf="this.user">
   <div class="container">
     <div nz-row [nzGutter]="[24,24]">
       <div nz-col [nzSpan]="12">
-        <p><b>Email:</b></p>
-        <p><b>Số điện thoại:</b></p>
+        <!-- <p><b>Họ và tên:</b> {{user.fullname}}</p> -->
+        <p><b>Email:</b> {{user.email}}</p>
+        <!-- <p><b>Số điện thoại:</b> {{user.contactNumber}}</p> -->
         <div class="password">
-          <p><b>Mật khẩu:</b> </p>
-          <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"></span>
+          <p><b>Mật khẩu:</b> <span class="btnChangePassword"><span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"></span>Thay đổi mật khẩu</span></p>
+
         </div>
       </div>
       <div nz-col [nzSpan]="12">
-        <p><b>Xếp hạng:</b></p>
-        <p><b>Điểm:</b></p>
+        <p><b>Xếp hạng:</b> {{user.ranking}}</p>
+        <p><b>Điểm:</b> {{user.point}}</p>
       </div>
     </div>
 
-    <app-box-address></app-box-address>
+    <app-box-address [info]="user.addressDefault"></app-box-address>
 
 
     <div class="btnAddress"  (click)="isMannageAddress=true">
@@ -39,5 +40,5 @@
     </div>
   </div>
 
-  <app-manage-address [(visible)]="isMannageAddress"></app-manage-address>
+  <app-manage-address [(visible)]="isMannageAddress" [list_address]="address"></app-manage-address>
 </section>

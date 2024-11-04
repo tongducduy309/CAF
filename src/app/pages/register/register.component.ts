@@ -23,9 +23,11 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
   constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService) {
 
     super()
-    this.must_load = 1
+    // this.must_load = 1
     this.routed.queryParamMap.subscribe(params => {
       const token = params.get('token')
+      this.must_load++
+      console.log(token);
       if (token!=null){
         this.crud.verifyUser(token).then(response => response.json())
         .then(async data=> {
@@ -58,7 +60,9 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-
+    Promise.resolve().then(()=> {
+      this.loaded()
+    })
   }
 
   ngOnInit(): void {
@@ -102,6 +106,12 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       this.createNotification('error', 'Invalid Password. Ensure it contains a special character and is at least 8 characters long.');
       return;
     }
+
+    this.crud.addData("register",{
+      email:this.Email_Fill,
+      fullname:this.fullname,
+      password:this.Password_Fill
+    })
 
 
     // this.crud.addNewData('users',this.Email_Fill,{

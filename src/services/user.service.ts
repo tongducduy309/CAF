@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/classes/user';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from './main.service';
 
@@ -14,54 +13,78 @@ export class UserService {
 
 
 
-  login_method_1(token:any):Promise<any>{
+  async login_method_1(token:any):Promise<any>{
 
-    return new Promise((resolve, reject) => {
-      this.crud.get('users',token).subscribe((user:any)=>{
-        if (user){
-          this.setUser(user.id,user.fullname,token,user.verify)
-          console.log(this.user);
-          resolve(this.user);
+
+    return new Promise(async (resolve, reject) => {
+
+      const result = await this.getUser(null,null,token)
+      // console.log(result);
+      if (result){
+        if (result.result=='Success'){
+          this.main.setCookie("u-caf",token)
+          this.main.createNotification("success","Đăng nhập thành công")
+          resolve({id:result.id,fullname:result.fullname,token:token})
         }
-        else{
-          this.main.createNotification("info","Tài khoản không tồn tại")
-          resolve(null)
-        }
-      })
-
-    });
-  }
-
-  setUser(id:any,name:any,token:any,verify:any){
-    if(verify){
-      this.user = new User(id,name,token)
-      this.main.setCookie("u-caf",token)
-      this.main.createNotification("success","Đăng nhập thành công")
-    }
-    else{
-      this.main.createNotification("warning","Tài khoản chưa được xác thực")
-    }
-  }
-
-  login_method_2(email:any,password:any):Promise<any>{
-    return new Promise((resolve, reject) => {
-      this.crud.get('users',`${email}/${password}`).subscribe((result:any)=>{
         if (result.result=='Not Verified')
           this.main.createNotification("info","Tài khoản chưa được xác thực")
-        if (result.result=='Success'){
-          this.setUser(result.id,result.fullname,result.token,result.verify)
-          resolve(this.user);
-        }
         if (result.result=='Not Exist'){
           this.main.createNotification("info","Tài khoản không tồn tại")
-          resolve (null)
+
+
 
         }
+      }
 
-      })
+
+    });
+  }
+
+  async login_method_2(email:any,password:any):Promise<any>{
+    return new Promise(async (resolve, reject) => {
+      const result = await this.getUser(email,password)
+      if (result){
+        if (result.result=='Success'){
+          this.main.setCookie("u-caf",result.token)
+          this.main.createNotification("success","Đăng nhập thành công")
+          resolve({id:result.id,fullname:result.fullname,token:result.token})
+        }
+        if (result.result=='Not Verified')
+          this.main.createNotification("info","Tài khoản chưa được xác thực")
+        if (result.result=='Not Exist'){
+          this.main.createNotification("info","Tài khoản không tồn tại")
+
+
+
+        }
+      }
+      resolve(null)
 
     });
 
+
+  }
+
+  getUser(email:any=null,password:any=null,token:any=null):Promise<any>{
+    // console.log(email,password,token);
+      return new Promise((resolve, reject) => {
+        if (email&&password){
+          this.crud.get('users',`${email}/${password}`).subscribe((result:any)=>{
+            resolve(result)
+
+          })
+        }
+        else{
+          if (token){
+            this.crud.get('users',token).subscribe((user:any)=>{
+              // console.log(user);
+              resolve(user)
+            })
+          }
+          // else resolve(null)
+        }
+
+      });
   }
 
   logout(){

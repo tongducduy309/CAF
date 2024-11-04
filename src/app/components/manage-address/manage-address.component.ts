@@ -11,7 +11,7 @@ export class ManageAddressComponent {
  @Output() visibleChange = new EventEmitter<boolean>();
  @Output() chooseEmitter = new EventEmitter();
  isFormAddress = false
- list_address = [
+ @Input() list_address = [
   {id:1,name:'Tống Đức Duy', contactNumber:'0586152003', address:'123', default:true, index:0},
   {id:1,name:'Tống Đức Duy', contactNumber:'0586152003', address:'123', index:1, choosing:true}
  ]
@@ -42,6 +42,6 @@ export class ManageAddressComponent {
 
  chooseAddress(a:any){
   this.chooseEmitter.emit(a)
-  
+
  }
 }
