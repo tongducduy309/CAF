@@ -1,10 +1,10 @@
 <section class="all-products" >
   <div nz-row class="all-product-list" nzGutter="16px">
     <div nz-col class="filters" nzSpan="8">
-      <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Menu</span><span style="cursor: pointer;" (click)="remote('all-products')">Xem toàn bộ</span></div>
+      <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Bộ lọc</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">Bỏ lọc</span></div>
       <div class="filter-form">
 
-        <div class="filter" *ngFor="let cate of categories">
+        <!-- <div class="filter" *ngFor="let cate of categories">
           <nz-collapse nzExpandIconPosition="right">
             <nz-collapse-panel
               [nzHeader]="cate.name"
@@ -23,37 +23,97 @@
               </ng-template>
             </nz-collapse-panel>
         </nz-collapse>
+        </div> -->
+
+
+        <div class="filter">
+          <nz-collapse nzExpandIconPosition="right">
+            <nz-collapse-panel
+              nzHeader="Xu hướng"
+              nzActive="true"
+              [nzExtra]="extraTpl1"
+              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzShowArrow] = "false"
+            >
+              <label nz-checkbox [(ngModel)]="filters_value.trend[0]" (ngModelChange)="changeItemFilters('trend_0',$event)">Mới nhất</label>
+              <label nz-checkbox [(ngModel)]="filters_value.trend[1]" (ngModelChange)="changeItemFilters('trend_1',$event)">Best seller</label>
+              <ng-template #extraTpl1>
+                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              </ng-template>
+            </nz-collapse-panel>
+        </nz-collapse>
+        </div>
+
+        <div class="filter">
+          <nz-collapse nzExpandIconPosition="right">
+            <nz-collapse-panel
+              nzHeader="Giá"
+              nzActive="true"
+              [nzExtra]="extraTpl1"
+              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzShowArrow] = "false"
+            >
+              <ul>
+                <li><label nz-checkbox [(ngModel)]="filters_value.price[0]" (ngModelChange)="changeItemFilters('price_0_10000_25000',$event)">Từ 10.000 đến 25.000</label></li>
+                <li><label nz-checkbox [(ngModel)]="filters_value.price[1]" (ngModelChange)="changeItemFilters('price_1_25000_40000',$event)">Từ 25.000 đến 40.000</label></li>
+                <li><label nz-checkbox [(ngModel)]="filters_value.price[2]" (ngModelChange)="changeItemFilters('price_2_40000_60000',$event)">Từ 40.000 đến 60.000</label></li>
+                <li><label nz-checkbox [(ngModel)]="filters_value.price[3]" (ngModelChange)="changeItemFilters('price_3_60000_9999999999',$event)">Từ 60.000 trở lên</label></li>
+              </ul>
+              <ng-template #extraTpl1>
+                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              </ng-template>
+            </nz-collapse-panel>
+        </nz-collapse>
+        </div>
+
+        <div class="filter">
+          <nz-collapse nzExpandIconPosition="right">
+            <nz-collapse-panel
+              nzHeader="Danh mục"
+              nzActive="true"
+              [nzExtra]="extraTpl1"
+              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzShowArrow] = "false"
+            >
+            <!-- <label nz-checkbox *ngFor="let cate of categories" >{{cate.name}}</label> -->
+            <div *ngFor="let cate of categories;index as i">
+              <p class="subtitle">{{cate.name}}</p>
+              <ul>
+                <li *ngFor="let value of cate.values;index as j">
+                  <label nz-checkbox [(ngModel)]="filters_value.categories[i*((i>0)?categories[i-1].length:0)+j]" (ngModelChange)="changeItemFilters('category_'+(i*((i>0)?categories[i-1].length:0)+j)+'_'+value.id,$event)">{{value.name}}</label>
+
+                </li>
+              </ul>
+            </div>
+              <ng-template #extraTpl1>
+                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              </ng-template>
+            </nz-collapse-panel>
+        </nz-collapse>
         </div>
 
       </div>
     </div>
     <div nz-col class="list-product" nzSpan="16">
       <div class="heading">
-        <div>
-          <nz-breadcrumb style="font-weight: 500;">
-              <nz-breadcrumb-item>
-                <a [routerLink]="['/']">Home</a>
-              </nz-breadcrumb-item>
-              <nz-breadcrumb-item>All Products</nz-breadcrumb-item>
-            </nz-breadcrumb>
-        </div>
         <div class="select">
           <div>
-              <span style="padding: 20px;font-weight: 800;">Sort by:</span>
-              <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedProvince" [ngStyle]="{'color':color_text+color_text}">
-                    <nz-option *ngFor="let p of provinceData" [nzValue]="p" [nzLabel]="p"></nz-option>
+              <span style="padding: 20px;font-weight: 800;">Sắp xếp:</span>
+              <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSort" (ngModelChange)="sortBy()" nzSize="large">
+                <nz-option nzValue="0" nzLabel="Phổ biến"></nz-option>
+                <!-- <nz-option nzValue="1" nzLabel="Giá từ thấp đến cao"></nz-option>
+                <nz-option nzValue="2" nzLabel="Giá từ cao đến thấp"></nz-option> -->
+                <nz-option nzValue="1" nzLabel="Theo đánh giá"></nz-option>
               </nz-select>
           </div>
       </div>
       </div>
 
-          <div nz-row [nzGutter]="[24,24]" *ngIf="products.length>0">
-            <div nz-col [nzSpan]="8">
-              <app-product3 *ngFor="let product of products" [product]="product"  (addToCartEmitter)="addToCart($event)"></app-product3>
-            </div>
+          <div nz-row [nzGutter]="[12,24]" *ngIf="products_v.length>0">
+            <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v" [product]="product"  (addToCartEmitter)="addToCart($event)"></app-product3>
           </div>
 
-          <h3 class="title" *ngIf="products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
+          <h3 class="title" *ngIf="products_v.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
     </div>
   </div>
 </section>
