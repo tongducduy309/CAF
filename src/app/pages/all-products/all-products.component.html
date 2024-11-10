@@ -35,8 +35,8 @@
               (nzActiveChange) = "panels[1].active = !panels[1].active"
               [nzShowArrow] = "false"
             >
-              <label nz-checkbox [(ngModel)]="filters_value.trend[0]" (ngModelChange)="changeItemFilters('trend_0',$event)">Mới nhất</label>
-              <label nz-checkbox [(ngModel)]="filters_value.trend[1]" (ngModelChange)="changeItemFilters('trend_1',$event)">Best seller</label>
+              <label nz-checkbox [(ngModel)]="filters_value.trend[0]">Mới nhất</label>
+              <label nz-checkbox [(ngModel)]="filters_value.trend[1]">Best seller</label>
               <ng-template #extraTpl1>
                 <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
               </ng-template>
