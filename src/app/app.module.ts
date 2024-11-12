@@ -43,6 +43,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { AccountComponent } from './pages/account/account.component';
 import { BoxAddressComponent } from './components/box-address/box-address.component';
 import { ManageAddressComponent } from './components/manage-address/manage-address.component';
+import { NoteProductComponent } from './components/note-product/note-product.component';
 registerLocaleData(en);
 
 
@@ -59,7 +60,8 @@ export let components:any = [
   RatingProductComponent,
   SearchToolComponent,
   BoxAddressComponent,
-  ManageAddressComponent
+  ManageAddressComponent,
+  NoteProductComponent
 ]
 
 export let pages = [

@@ -16,11 +16,12 @@ export class AllProductsComponent extends Page implements OnInit  {
   filters_value:any = {
     price:[false,false,false,false],
     trend:[false,false],
-    categories:[]
+    category:[]
   }
   filters:any={
     category:[],
-    price:[]
+    price:[],
+    trend:[]
   }
   n_filters = 0
 
@@ -72,10 +73,10 @@ export class AllProductsComponent extends Page implements OnInit  {
           name:key,
           values:categories[key]
         })
-        this.filters_value.categories.push(false)
+        this.filters_value.category.push(false)
       })
       // this.categories=categories
-      console.log(categories);
+      // console.log(categories);
       this.loaded()
     })
   }
@@ -179,9 +180,24 @@ export class AllProductsComponent extends Page implements OnInit  {
   removeFilters(){
     for (let f of this.filters.category){
       let s= f.split("_")
-      this.filters_value.category[s[0]][parseInt(s[1])]=false
+      this.filters_value.category[parseInt(s[1])]=false
     }
-    this.filters = []
+
+    for (let f of this.filters.price){
+      let s= f.split("_")
+      this.filters_value.price[parseInt(s[1])]=false
+    }
+
+    for (let f of this.filters.trend){
+      let s= f.split("_")
+      this.filters_value.trend[parseInt(s[1])]=false
+    }
+    this.filters = {
+      price:[],
+      category:[],
+      trend:[]
+    }
+    this.products_v=[...this.products]
     this.n_filters = 0
   }
 

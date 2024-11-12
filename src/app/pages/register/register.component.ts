@@ -12,13 +12,17 @@ import { UserService } from 'src/services/user.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent extends Page implements OnInit,AfterViewInit {
-  fullname = ''
-  Email_Fill = ''
-  Password_Fill = ''
 
   submited = false
 
-  user:any = null
+  user:any = {
+    fullname: '',
+    email:'',
+    password:'',
+    confirm_password:''
+  }
+
+  passwordVisible=false
 
   constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService) {
 
@@ -74,8 +78,13 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
     return true
   }
 
-  isValidPassword(password:string){
-    if (password.length==0) return false
+  isValid(s:string){
+    if (s.trim().length==0) return false
+    return true
+  }
+
+  isValidPassword(s:string){
+    if (s.trim().length<=8) return false
     return true
   }
 
@@ -92,25 +101,30 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
   SendMess_Register(){
 
 
-    if (!this.fullname.trim()) {
-      this.createNotification('error', 'Last Name is required.');
+    if (!this.isValid(this.user.fullname)) {
+      this.createNotification('error', 'Bắt buộc ghi đầy đủ họ và tên');
       return;
     }
 
-    if (!this.isValidEmail(this.Email_Fill)) {
-      this.createNotification('error', 'Invalid Email. Ensure it contains a "@" symbol.');
+    if (!this.isValidEmail(this.user.email)) {
+      this.createNotification('error', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
       return;
     }
 
-    if (!this.isValidPassword(this.Password_Fill)) {
-      this.createNotification('error', 'Invalid Password. Ensure it contains a special character and is at least 8 characters long.');
+    if (!this.isValidPassword(this.user.password)) {
+      this.createNotification('error', 'Mật khẩu phải dài hơn 8 kí tự');
+      return;
+    }
+
+    if (this.user.password!=this.user.confirm_password) {
+      this.createNotification('error', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
       return;
     }
 
     this.crud.addData("register",{
-      email:this.Email_Fill,
-      fullname:this.fullname,
-      password:this.Password_Fill
+      email:this.user.email,
+      fullname:this.user.fullname,
+      password:this.user.password
     })
 
 

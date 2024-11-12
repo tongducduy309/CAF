@@ -20,7 +20,12 @@ section{
     margin-bottom: 20px;
 }
 
-.form_group sup{
+::ng-deep .ant-input-affix-wrapper,.form_group input{
+  border: 1px solid black;
+  padding: 10px 15px;
+}
+
+sup{
     color: red;
 }
 
@@ -29,6 +34,9 @@ section{
     padding: 10px 15px;
 }
 
+.field{
+  margin-bottom: 10px;
+}
 
 .group{
     padding: 20px 15px;

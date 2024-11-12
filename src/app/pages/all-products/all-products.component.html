@@ -36,7 +36,7 @@
               [nzShowArrow] = "false"
             >
               <label nz-checkbox [(ngModel)]="filters_value.trend[0]">Mới nhất</label>
-              <label nz-checkbox [(ngModel)]="filters_value.trend[1]">Best seller</label>
+              <!-- <label nz-checkbox [(ngModel)]="filters_value.trend[1]">Best seller</label> -->
               <ng-template #extraTpl1>
                 <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
               </ng-template>
@@ -80,7 +80,7 @@
               <p class="subtitle">{{cate.name}}</p>
               <ul>
                 <li *ngFor="let value of cate.values;index as j">
-                  <label nz-checkbox [(ngModel)]="filters_value.categories[i*((i>0)?categories[i-1].length:0)+j]" (ngModelChange)="changeItemFilters('category_'+(i*((i>0)?categories[i-1].length:0)+j)+'_'+value.id,$event)">{{value.name}}</label>
+                  <label nz-checkbox [(ngModel)]="filters_value.category[i*((i>0)?categories[i-1].length:0)+j]" (ngModelChange)="changeItemFilters('category_'+(i*((i>0)?categories[i-1].length:0)+j)+'_'+value.id,$event)">{{value.name}}</label>
 
                 </li>
               </ul>

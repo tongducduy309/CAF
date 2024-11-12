@@ -7,24 +7,46 @@
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <div class ="form_group field">
           <p>Họ và tên<sup aria-hidden="true"> *</sup> :</p>
-          <input nz-input placeholder="Họ và tên" [(ngModel)]="fullname" type="text" />
+          <input nz-input placeholder="Họ và tên" [(ngModel)]="user.fullname" type="text" />
         </div>
         <div class="form_group field">
             <p>E-mail<sup aria-hidden="true"> *</sup> :</p>
-            <input nz-input placeholder="Email" [(ngModel)]="Email_Fill" type="text" />
+            <input nz-input placeholder="Email" [(ngModel)]="user.mail" type="text" />
         </div>
     </div>
 
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
-        <div class ="form_group field">
+        <div class ="field">
             <p>Mật khẩu<sup aria-hidden="true"> *</sup> :</p>
-            <input nz-input placeholder="Mật khẩu" [(ngModel)]="Password_Fill" type="password" />
+            <nz-input-group [nzSuffix]="suffixTemplate">
+              <input
+                [type]="passwordVisible ? 'text' : 'password'"
+                nz-input
+                placeholder="Mật khẩu"
+                [(ngModel)]="user.password"
+              />
+            </nz-input-group>
         </div>
 
-        <div class ="form_group field">
+        <div class ="field">
           <p>Xác nhận mật khẩu<sup aria-hidden="true"> *</sup> :</p>
-          <input nz-input placeholder="Xác nhận mật khẩu" [(ngModel)]="Password_Fill" type="password" />
-      </div>
+          <nz-input-group [nzSuffix]="suffixTemplate">
+            <input
+              [type]="passwordVisible ? 'text' : 'password'"
+              nz-input
+              placeholder="Xác nhận mật khẩu"
+              [(ngModel)]="user.confirm_password"
+            />
+          </nz-input-group>
+        </div>
+
+        <ng-template #suffixTemplate>
+          <span style="cursor: pointer;"
+            nz-icon
+            [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordVisible = !passwordVisible"
+          ></span>
+        </ng-template>
     </div>
 
     <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;">
@@ -42,7 +64,7 @@
 
       nzStatus="success"
       [nzTitle]="'Chờ xác thực tài khoản'"
-      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong hộp thư '+Email_Fill"
+      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong hộp thư '+this.user.email"
     >
     <div nz-result-extra>
       <button nz-button (click)="reload()">Tải lại trang</button>
