@@ -91,7 +91,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
   createNotification(type: string, message: string): void {
     this.notification.create(
       type,
-      'Notification',
+      'Thông báo',
       message
     );
   }
