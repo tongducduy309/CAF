@@ -42,16 +42,11 @@ export class AppComponent{
           this.itemsCart[n].quantity+=res.quantity
         }
       }else{
-        this.main.createNotification("info","Đăng nhập để mở giỏ hàng")
+        this.main.createNotification("info","Đăng nhập để thêm sản phẩm vào giỏ hàng")
       }
 
       // this.putItemCartToSession(this.itemsCart)
       console.log(res);
-    })
-
-    componentRef.changeQuantityEmitter?.subscribe((res:any)=>{
-      this.changeQuantityItem(res);
-      // console.log("App",res);
     })
     componentRef.LoadingEmitter?.subscribe((res:any)=>{
       console.log(this.loading);
@@ -68,26 +63,7 @@ export class AppComponent{
 
 
 
-  changeQuantityItem(item:any){
-    this.total = 0
-    this.subtotal=0
 
-    for (let ite of this.itemsCart){
-      if (item.id==ite.id){
-        ite.quantity = item.quantity
-      }
-      this.total+=ite.quantity*1
-      this.subtotal+=ite.quantity*this.main.getPrice(ite)
-    }
-    if (item.quantity==0){
-      this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
-    }
-
-    console.log(this.subtotal,this.total);
-
-    // this.putItemCartToSession(this.itemsCart)
-
-  }
 
   // getItemsCart(){
   //   // this.itemsCart = this.getItemsCartFromLocalStorage()

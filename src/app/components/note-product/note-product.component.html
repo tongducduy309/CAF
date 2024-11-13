@@ -1,1 +1,27 @@
-<p>note-product works!</p>
+<nz-modal
+      [nzVisible]="visible"
+      [nzTitle]="title"
+      nzCentered
+      (nzOnCancel)="cancel()"
+      (nzOnOk)="submit()"
+      nzOkText="Xác Nhận"
+      nzCancelText="Hủy"
+    >
+      <ng-container *nzModalContent>
+        <p class="subtitle">{{product.name}} ({{product.sizeSelected}})</p>
+        <textarea
+        nz-input
+        placeholder="Thêm ghi chú..."
+        [(ngModel)] = "product.note"
+        [nzAutosize]="{ minRows: 6, maxRows: 6 }"
+      ></textarea>
+      <div class="group-qty" style="margin-top: 20px;">
+        <span style="font-size: 16px;font-weight: 700;">Số lượng:</span>
+        <div class="quantity">
+          <span nz-icon nzType="minus" nzTheme="outline" (click)="removeQuantity()"></span>
+          <input type="text" [(ngModel)]="product.quantity" (blur)="changeQuantity()">
+          <span nz-icon nzType="plus" nzTheme="outline" (click)="addQuantity()"></span>
+        </div>
+      </div>
+      </ng-container>
+    </nz-modal>

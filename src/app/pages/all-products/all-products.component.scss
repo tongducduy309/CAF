@@ -8,6 +8,22 @@
 .subtitle{
   font-style: italic;
 }
+
+.name-category{
+  width: 100%;
+  padding: 5px 0 5px 10px;
+  background-color: #262626;
+  margin-bottom: 20px;
+  p{
+    margin: 0;
+    color: #fff;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 500;
+  }
+
+}
 .all-products{
     display: flex;
     flex-direction: column;

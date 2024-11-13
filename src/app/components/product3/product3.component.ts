@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-product3',
@@ -17,19 +18,35 @@ export class Product3Component implements OnInit {
 
   selectedSize = 0;
 
-  constructor(private router:Router) { }
+  isFormAddToCart = false
+
+  constructor(private router:Router, public main:MainService) { }
 
   ngOnInit(): void {
   }
 
-  AddToCart(){
+  AddToCart(product:any){
     console.log("Add To Cart");
     console.log(this.product);
-    this.addToCartEmitter.emit({
+    const product_c = {
       id:this.product.id[this.selectedSize],
-      quantity:1,
+      pid:this.product.id,
+      name:this.product.name,
+      quantity:product.quantity,
       sale:this.product.sale[this.selectedSize],
-    });
+      cost:this.product.cost[this.selectedSize],
+      size:this.product.size[this.selectedSize],
+      name_id: this.product.name_id,
+      note:product.note
+    }
+    this.addToCartEmitter.emit(product_c);
+  }
+
+  openFormAddToCart(){
+    this.product["quantity"] = 1
+    this.product["note"]=''
+    this.product["sizeSelected"] = this.product.size[this.selectedSize]
+    this.isFormAddToCart = true
   }
 
   detailProduct(){

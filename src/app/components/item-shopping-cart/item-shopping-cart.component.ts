@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-item-shopping-cart',
@@ -12,7 +13,7 @@ export class ItemShoppingCartComponent implements OnInit{
   @Input() item:any = {}
   @Output() QuantityEmitter = new EventEmitter()
 
-  constructor(private router:Router){
+  constructor(private router:Router, public main:MainService){
 
   }
 

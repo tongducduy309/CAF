@@ -1,4 +1,4 @@
-<section class="all-products" >
+<section class="all-products" style="padding-bottom: 80px;">
   <div nz-row class="all-product-list" nzGutter="16px">
     <div nz-col class="filters" nzSpan="8">
       <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Bộ lọc</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">Bỏ lọc</span></div>
@@ -109,11 +109,19 @@
         </div> -->
       </div>
 
-          <div nz-row [nzGutter]="[12,24]" *ngIf="products_v.length>0">
-            <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v" [product]="product"  (addToCartEmitter)="addToCart($event)"></app-product3>
+
+          <div *ngIf="name_cate_products.length>0">
+            <div *ngFor="let n of name_cate_products" style="margin-top: 20px;">
+              <div class="name-category"><p>{{n.name}}</p></div>
+              <div nz-row [nzGutter]="[12,24]" >
+
+                <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v[n.id]" [product]="product"  (addToCartEmitter)="AddToCart($event)"></app-product3>
+              </div>
+            </div>
+
           </div>
 
-          <h3 class="title" *ngIf="products_v.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
+          <h3 class="title" *ngIf="name_cate_products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
     </div>
   </div>
 </section>

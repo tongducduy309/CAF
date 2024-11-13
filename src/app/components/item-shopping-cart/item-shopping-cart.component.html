@@ -19,13 +19,14 @@
             </div>
 
         </div>
-        <span class="cost" *ngIf="item.sale">{{item.cost}}</span>
-        <span class="price">{{(item.sale)?item.cost*(item.sale/100):item.cost}} VND</span>
+        <span class="cost" *ngIf="item.sale">{{main.formatPrice(item.cost)}}</span>
+        <span class="price">{{main.formatPrice((item.sale)?item.cost*(item.sale/100):item.cost)}} VND</span>
         <div class="type">
             <span style="font-weight: 800;padding-right: 5px;">Kích cỡ:</span>
             <span>{{item.size}}</span>
 
         </div>
+        <p class="note">Ghi chú: {{item.note}}</p>
         <div>
           <div class="quantity">
             <span nz-icon nzType="minus" nzTheme="outline" (click)="removeQuantity()"></span>

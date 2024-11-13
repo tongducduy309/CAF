@@ -23,11 +23,13 @@
     </div>
     <div nz-row class="group" style="display: flex; justify-content: space-between;margin-top: 10px;">
         <div style="font-weight: 800;" [ngStyle]="{'color':color_text}">
-          <span class="price">{{(product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize]}}</span>
-          <span class="cost" *ngIf="product.sale[selectedSize]">{{product.cost[selectedSize]}}</span>
+          <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
+          <span class="cost" *ngIf="product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
         </div>
-        <div class="btnAddToCart" style="font-weight: 700;" (click)="AddToCart()">
+        <div class="btnAddToCart" style="font-weight: 700;" (click)="openFormAddToCart()">
           <span [ngStyle]="{'color':color_text}">+Thêm vào giỏ</span>
         </div>
     </div>
+
+    <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (productEmitter)="AddToCart($event)"></app-note-product>
 </div>

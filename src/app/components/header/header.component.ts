@@ -31,7 +31,10 @@ export class HeaderComponent implements OnInit{
   isSearing:any;
 
 
-  constructor (private userS:UserService, private router:Router, private crud:CrudService, private main:MainService){
+  constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService){
+
+  }
+  ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
    {
@@ -40,21 +43,23 @@ export class HeaderComponent implements OnInit{
         switch (event.urlAfterRedirects){
           case '/home':
             this.bg_header = 'transparent'
+            this.btnShowCart = true
             break
           case '/cart':
+            this.bg_header = '#000'
             this.btnShowCart = false
             break
           case '/checkout':
+            this.bg_header = '#000'
             this.btnShowCart = false
             break
 
           default:
             this.bg_header = '#000'
+            this.btnShowCart = true
         }
       }
     });
-  }
-  ngOnInit(): void {
     this.getCategories();
 
 
@@ -64,6 +69,7 @@ export class HeaderComponent implements OnInit{
     if (this.user==null){
       if (path!='/account/login'&&path!='/account/reset-your-password'&&path!='/account/register'){
         this.user = await this.getUser();
+        this.userChange.emit(this.user)
 
       }
       else{
@@ -149,10 +155,33 @@ export class HeaderComponent implements OnInit{
     this.isSearing=false
   }
 
-  changeQuantityItem(item:any){
-    //this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
-    this.QuantityEmitter.emit(item)
+  // changeQuantityItem(item:any){
+  //   this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
 
+
+
+  // }
+
+  changeQuantityItem(item:any){
+    this.total = 0
+    this.subtotal=0
+
+    for (let ite of this.itemsCart){
+      if (item.id==ite.id){
+        ite.quantity = item.quantity
+      }
+      this.total+=ite.quantity*1
+      this.subtotal+=ite.quantity*this.main.getPrice(ite)
+    }
+    if (item.quantity==0){
+      this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
+    }
+    this.itemsCartChange.emit(this.itemsCart)
+    this.subtotalChange.emit(this.subtotal)
+    this.totalChange.emit(this.total)
+    console.log(this.subtotal,this.total);
+
+    // this.putItemCartToSession(this.itemsCart)
 
   }
 
