@@ -18,7 +18,7 @@ export class ItemShoppingCartComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.item);
+    // console.log(this.item);
   }
 
   remote(s:any){

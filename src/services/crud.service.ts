@@ -38,7 +38,8 @@ export class CrudService {
   }
 
   get(table:string,id:string){
-    return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`);
+
+    return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`,{headers:new HttpHeaders('Content-type')});
 
   }
 

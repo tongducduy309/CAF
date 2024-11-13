@@ -44,13 +44,14 @@
 }
 
 .first-section{
-  .password{
+  padding-bottom: 80px;
+  .password,.name{
 
     p{
       display: inline-block;
       margin-right: 10px;
       cursor: pointer;
-      &>.btnChangePassword{
+      &>.btn{
         &:hover{
           color: #a7897b;
         }

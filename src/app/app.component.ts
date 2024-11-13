@@ -49,7 +49,7 @@ export class AppComponent{
       console.log(res);
     })
     componentRef.LoadingEmitter?.subscribe((res:any)=>{
-      console.log(this.loading);
+      // console.log(this.loading);
       this.loading=res
 
     })

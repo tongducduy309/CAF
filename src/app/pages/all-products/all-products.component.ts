@@ -69,7 +69,7 @@ export class AllProductsComponent extends Page implements OnInit  {
       // this.products=products
       this.products_v={...this.products}
       this.loaded()
-      console.log(this.products);
+      // console.log(this.products);
     })
   }
 

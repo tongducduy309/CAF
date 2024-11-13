@@ -24,7 +24,7 @@ export class Page {
     this.must_load--;
     if (this.must_load<=0){
       this.LoadingEmitter.emit(false)
-      console.log(this.must_load);
+      // console.log(this.must_load);
       document.body.style.overflow = 'auto'
     }
 

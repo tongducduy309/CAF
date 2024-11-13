@@ -18,11 +18,20 @@
   <div class="container">
     <div nz-row [nzGutter]="[24,24]">
       <div nz-col [nzSpan]="12">
-        <!-- <p><b>Họ và tên:</b> {{user.fullname}}</p> -->
+        <div class="name">
+          <p><b>Họ và tên:</b> {{user.fullname}}<span class="btn">
+            <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"
+            ></span>Thay đổi họ và tên
+          </span></p>
+        </div>
         <p><b>Email:</b> {{user.email}}</p>
         <!-- <p><b>Số điện thoại:</b> {{user.contactNumber}}</p> -->
         <div class="password">
-          <p><b>Mật khẩu:</b> <span class="btnChangePassword"><span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"></span>Thay đổi mật khẩu</span></p>
+          <p><b>Mật khẩu:</b>
+            <span class="btn">
+              <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"
+              ></span>Thay đổi mật khẩu
+            </span></p>
 
         </div>
       </div>

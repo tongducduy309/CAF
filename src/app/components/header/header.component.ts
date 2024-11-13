@@ -109,7 +109,7 @@ export class HeaderComponent implements OnInit{
   getCategories(){
     this.crud.get("categories","group-by-type").subscribe((categories:any)=>{
       this.categories=categories
-      console.log(categories);
+      // console.log(categories);
 
     })
   }
@@ -179,7 +179,7 @@ export class HeaderComponent implements OnInit{
     this.itemsCartChange.emit(this.itemsCart)
     this.subtotalChange.emit(this.subtotal)
     this.totalChange.emit(this.total)
-    console.log(this.subtotal,this.total);
+    // console.log(this.subtotal,this.total);
 
     // this.putItemCartToSession(this.itemsCart)
 
