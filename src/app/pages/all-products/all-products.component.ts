@@ -69,7 +69,7 @@ export class AllProductsComponent extends Page implements OnInit  {
       // this.products=products
       this.products_v={...this.products}
       this.loaded()
-      // console.log(this.products);
+      console.log(this.products);
     })
   }
 
@@ -141,6 +141,16 @@ export class AllProductsComponent extends Page implements OnInit  {
     this.router.navigate([path])
   }
 
+  isOver30DaysOld(time:any): boolean {
+    const millisecondsInDay = 24 * 60 * 60 * 1000;
+    const thirtyDaysInMilliseconds = 30 * millisecondsInDay;
+
+    const currentTime = Date.now();
+    const timeDifference = currentTime - time;
+
+    return timeDifference > thirtyDaysInMilliseconds;
+  }
+
   changeItemFilters(value:any,state:any){
     // console.log(this.name_cate_products);
     const s =  value.split("_")
@@ -207,6 +217,31 @@ export class AllProductsComponent extends Page implements OnInit  {
           else i++
         }
 
+      }
+
+      if (this.filters.trend.length>0){
+        let i = 0
+        while (i<this.name_cate_products.length){
+          let n = this.name_cate_products[i]
+          let u=0,a=[...pts[n.id]]
+          while (u<a.length){
+            const date = new Date(pts[n.id][u].created);
+            const timestamp = date.getTime();
+            if (this.isOver30DaysOld(timestamp)) {
+              a.splice(u,1)
+            }
+            else
+              u++
+          }
+          pts[n.id] = [...a]
+          if (pts[n.id].length==0){
+            this.filter_name_cate_products.push(n)
+            delete pts[n.id]
+            this.name_cate_products.splice(i,1)
+
+          }
+          else i++
+        }
       }
 
       this.products_v = {...pts}

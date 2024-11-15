@@ -12,7 +12,6 @@ import { CartComponent } from './pages/cart/cart.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
-import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
@@ -20,6 +19,8 @@ import { ContactWithUsComponent } from './pages/contact-with-us/contact-with-us.
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { AccountComponent } from './pages/account/account.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 const routes: Routes = [
 
@@ -125,7 +126,14 @@ const routes: Routes = [
     path:'blogs/:name',
     component:DetailBlogComponent
   },
-
+  {
+    path:'dashboard',
+    component:DashboardComponent
+  },
+  {
+    path:'orders',
+    component:OrdersComponent
+  },
   {
     path:'page-not-found',
     component:PageNotFoundComponent

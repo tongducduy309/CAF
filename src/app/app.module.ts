@@ -32,7 +32,6 @@ import { DetailBlogComponent } from './pages/detail-blog/detail-blog.component';
 import { BlogComponent } from './components/blog/blog.component';
 import { RatingProductComponent } from './components/rating-product/rating-product.component';
 import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
-import { WishlistComponent } from './pages/wishlist/wishlist.component';
 import { SearchComponent } from './pages/search/search.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { FaqComponent } from './pages/faq/faq.component';
@@ -44,6 +43,8 @@ import { AccountComponent } from './pages/account/account.component';
 import { BoxAddressComponent } from './components/box-address/box-address.component';
 import { ManageAddressComponent } from './components/manage-address/manage-address.component';
 import { NoteProductComponent } from './components/note-product/note-product.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 registerLocaleData(en);
 
 
@@ -78,14 +79,15 @@ export let pages = [
   BlogsComponent,
   DetailBlogComponent,
   TermsAndConditionsComponent,
-  WishlistComponent,
   SearchComponent,
   PrivacyPolicyComponent,
   FaqComponent,
   ContactWithUsComponent,
   AboutUsComponent,
   CheckoutComponent,
-  AccountComponent
+  AccountComponent,
+  DashboardComponent,
+  OrdersComponent
 ]
 
 @NgModule({
