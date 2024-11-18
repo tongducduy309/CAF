@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
+import { UserService } from 'src/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +19,12 @@ export class AppComponent{
   header_footer_visible = true
   user:any=null;
 
-  constructor (private crud:CrudService, private main:MainService){
+  constructor (private crud:CrudService, private main:MainService, private userS:UserService){
 
     // this.getItemsCart()
   }
+
+
 
   change(componentRef:any){
     componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
@@ -58,6 +61,29 @@ export class AppComponent{
       this.user = res
 
     })
+
+  }
+
+  async getUser():Promise<any>{
+
+    return new Promise(async (resolve, reject) => {
+      const token = this.main.getCookie("u-caf")
+
+      if(token){
+        const result = await this.userS.getUser(null,null,token)
+        if (result){
+          if (result.result=='Success'){
+            resolve({id:result.id})
+          }
+        }
+        resolve(null)
+
+
+      }
+
+
+    });
+
 
   }
 

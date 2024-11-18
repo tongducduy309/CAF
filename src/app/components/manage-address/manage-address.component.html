@@ -11,7 +11,7 @@
           <app-box-address (chooseEmitter)="chooseAddress($event)" [isShowGroupBtn]="true" (removeEmitter)="removeAddress($event)" (modifyEmitter)="modifyAddress($event)" *ngFor="let a of list_address;index as i" [info]="a"></app-box-address>
         </div>
         <div class="bottom">
-          <div class="btn" (click)="isFormAddress=true">
+          <div class="btn" (click)="isFormAddress=true;isModify=false">
             <span nz-icon nzType="plus" nzTheme="outline"></span>
             THÊM ĐỊA CHỈ MỚI
           </div>
@@ -31,11 +31,11 @@
       <ng-container *nzModalContent>
         <div class="group">
           <p class="label">Tên người nhận:</p>
-          <input nz-input placeholder="Họ và tên" [(ngModel)]="addressForm.name" />
+          <input nz-input placeholder="Họ và tên" [(ngModel)]="addressForm.receiver" />
         </div>
         <div class="group">
           <p class="label">Số điện thoại:</p>
-          <input nz-input placeholder="Số điện thoại" [(ngModel)]="addressForm.contactNumber" />
+          <input nz-input placeholder="Số điện thoại" [(ngModel)]="addressForm.contactnumber" />
         </div>
         <div class="group">
           <p class="label">Địa chỉ nhận:</p>
@@ -43,7 +43,7 @@
         </div>
 
         <div class="group">
-          <label nz-checkbox [(ngModel)]="addressForm.default">Đặt địa chỉ làm mặc định</label>
+          <label nz-checkbox [(ngModel)]="addressForm.default" [nzDisabled]="isaddressForm_default">Đặt địa chỉ làm mặc định</label>
         </div>
       </ng-container>
     </nz-modal>

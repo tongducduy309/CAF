@@ -49,5 +49,5 @@
     </div>
   </div>
 
-  <app-manage-address [(visible)]="isMannageAddress" [list_address]="address"></app-manage-address>
+  <app-manage-address *ngIf="user.id" [user]="{id:user.id,id_address_default:user.id_address_default}" (chooseEmitter)="chooseAddress($event)" [(visible)]="isMannageAddress"></app-manage-address>
 </section>

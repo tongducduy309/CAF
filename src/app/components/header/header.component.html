@@ -73,7 +73,7 @@
     <ng-template #contentTemplate>
       <ul class="panel" style="margin: 0;">
         <li style="margin-bottom: 10px;" (click)="remote('account')">Tài khoản</li>
-        <li style="margin-bottom: 10px;">Đơn hàng</li>
+        <li style="margin-bottom: 10px;" (click)="remote('orders')">Đơn hàng</li>
         <li style="margin-bottom: 10px;" (click)="remote('cart')">Giỏ hàng</li>
         <li (click)="logout()">Đăng xuất</li>
       </ul>

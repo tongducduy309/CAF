@@ -1,0 +1,55 @@
+section{
+  padding-bottom: 80px;
+}
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+}
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+p{
+  color: #000;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+.header-section{
+  background-color: #000;
+  color: #fff;
+
+  p{
+    color: #fff;
+  }
+
+
+  .btn{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    span{
+      margin-right: 10px;
+      font-size: 15px;
+    }
+
+  }
+
+  .title{
+    color: #fff;
+  }
+}
+
+.content-section{
+  background-color: #fff;
+
+  ::ng-deep .ant-tabs-nav-wrap{
+    justify-content: center;
+  }
+
+}

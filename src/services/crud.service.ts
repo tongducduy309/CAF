@@ -43,6 +43,23 @@ export class CrudService {
 
   }
 
+  delete(table:string,id:string){
+
+    return this.http.delete(`https://api-caf.vercel.app/api/delete/${table}/${id}`,{headers:new HttpHeaders('Content-type')});
+
+  }
+
+  put(table:any,data:any){
+
+    return fetch(`https://api-caf.vercel.app/api/put/${table}`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+})
+  }
+
   // ============================PRODUCT=============================
 
   getInfoItemsCart(ids:any){

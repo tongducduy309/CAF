@@ -17,6 +17,7 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
   passwordVisible = false;
   message = ''
   isFormLogin = true;
+  isSendEmailSuccess = false;
 
   resetYP_email = ''
 
@@ -80,24 +81,20 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
   }
 
   async submit(){
-    // this.crud.getUsers().subscribe((data)=>{
-    //   let isLogin = false;
-    //   data.forEach(user => {
-    //     if (user.id==this.user_email && user.password==this.user_password){
-    //       this.createNotification('success','Đăng Nhập Thành Công');
-    //       isLogin = true
-    //     }
-    //   });
-    //   if (!isLogin){
-    //     this.createNotification('error','Đăng Nhập Thất Bại');
-    //   }
-    // })
+    if (this.user_email.trim().length==0||this.user_password.trim().length==0){
+      this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")
+      return;
+    }
     const user = await this.userS.login_method_2(this.user_email,this.user_password)
     if (user){
       this.UserEmitter.emit(user)
       this.router.navigate([''])
     }
 
+  }
+
+  onEnter() {
+    this.submit()
   }
 
 
@@ -110,12 +107,21 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
   submit_resetPW(){
     let valid=this.isValidEmail(this.resetYP_email)
     if (valid){
-      const token = this.createID();
-      const url = `${window.location.origin}/account/newpassword/${token}` ;
-      this.sendEmail(this.resetYP_email,url);
+      this.crud.get("reset-your-password",this.resetYP_email).subscribe((r:any)=>{
+        if (r.result=='success'){
+          this.isSendEmailSuccess=true
+        }
+        if (r.result=='Not Exist'){
+          this.main.createNotification("info","Tài khoản không tồn tại")
+        }
+        if (r.result=='failed'){
+          this.main.createNotification("info","Quá trình xác thực bị lỗi [403]")
+        }
+      })
+
     }else
     {
-      // this.createNotification("error","Please Enter '@' In The Email Address")
+      this.main.createNotification('error', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
     }
   }
 
@@ -128,25 +134,6 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
   // focusEmail_RPW(){
   //   this.isMessage=true
   // }
-
-
-  async sendEmail(to_email:string,url:string) {
-    emailjs.init("CtwqRDLtwyzaFMbck")
-    let res = await emailjs.send("service_1t6ee1w","template_qf0hube",{
-      to_email:to_email,
-      url:url
-
-
-    });
-    console.log(res);
-    if (res.status==200){
-      this.isFormLogin=true;
-      // this.createNotification('success',"We've sent you an email with a link to update your password.")
-    }else{
-      // this.createNotification('error',"Error: Status="+res.status)
-    }
-
-  }
 
 // Example usage
 

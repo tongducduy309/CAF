@@ -1,1 +1,27 @@
-<p>orders works!</p>
+<section class="header-section">
+  <div class="container">
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <div class="btn" (click)="back()">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          Trở Về
+        </div>
+
+        <h2 class="title">Đơn hàng</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <nz-tabset>
+      <nz-tab [nzTitle]="titleTemplate" *ngFor="let tab of tabs">
+        <ng-template #titleTemplate>
+          <span *ngIf="tab.icon.length>0" nz-icon [nzType]="tab.icon" nzTheme="outline"></span>
+          {{ tab.name }}
+        </ng-template>
+      </nz-tab>
+  </nz-tabset>
+  </div>
+</section>

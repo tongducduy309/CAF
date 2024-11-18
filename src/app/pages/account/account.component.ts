@@ -17,6 +17,8 @@ export class AccountComponent extends Page implements OnInit {
   user: any = null
   address: any = []
 
+  address_user_choosing:any = null
+
   constructor(private location:Location, private main:MainService, private userS:UserService, private router:Router, private crud:CrudService){
     super()
   }
@@ -62,16 +64,6 @@ export class AccountComponent extends Page implements OnInit {
 
   }
 
-  getAddressOfUser(){
-    this.crud.get("users/address",this.user.id).subscribe((address:any)=>{
-      this.address = address
-      for (let a of address){
-        if (a.addressDefault==1){
-          this.user.addressDefault = {...a}
-        }
-      }
-    })
-  }
 
   getRanking(point:any){
     if (point>0&&point<500){
@@ -87,6 +79,11 @@ export class AccountComponent extends Page implements OnInit {
       return 'VIP'
     }
     return 'Thành viên mới'
+  }
+
+  chooseAddress(a:any){
+    this.address_user_choosing = a
+    this.isMannageAddress=false
   }
 
 }

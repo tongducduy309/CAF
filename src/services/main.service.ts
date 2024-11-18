@@ -62,6 +62,12 @@ export class MainService {
   }
 
   formatPrice(num:any) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    try {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+    catch (e){
+      console.log('Format Error');
+    }
+    return num
   }
 }

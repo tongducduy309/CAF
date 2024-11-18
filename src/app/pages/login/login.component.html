@@ -9,7 +9,7 @@
       <div  nz-row [nzGutter]="[15]">
         <div class="field form_group" nz-col nzSpan="12">
           <span>E-mail <sup aria-hidden="true">*</sup> :</span>
-            <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" />
+            <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" (keyup.enter)="onEnter()"/>
         </div>
         <div nz-col nzSpan="12">
           <span>Mật khẩu <sup aria-hidden="true">*</sup> :</span>
@@ -18,6 +18,7 @@
               [type]="passwordVisible ? 'text' : 'password'"
               nz-input
               placeholder="Mật khẩu"
+              (keyup.enter)="onEnter()"
               [(ngModel)]="user_password"
             />
           </nz-input-group>
@@ -52,12 +53,25 @@
 </section>
 <section *ngIf="isFormLogin===false">
   <div class="container">
-    <h2>Reset your password</h2>
+    <div *ngIf="!this.isSendEmailSuccess">
+      <h2>Reset your password</h2>
     <!-- <span style="color: #ff0000;" *ngIf="!isMessage"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span> -->
-    <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text" style="margin-bottom: 10px;">
-    <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
-      Submit
-    </button>
+      <input nz-input placeholder="Email" [(ngModel)]="resetYP_email" type="text" style="margin-bottom: 10px;">
+      <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
+        Submit
+      </button>
+    </div>
+
+    <nz-result *ngIf="this.isSendEmailSuccess"
+
+      nzStatus="success"
+      [nzTitle]="'Thiết lập lại mật khẩu'"
+      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong hộp thư để thiết lập lại mật khẩu'+resetYP_email"
+    >
+    <div nz-result-extra>
+      <button nz-button (click)="reload()">Tải lại trang</button>
+    </div>
+    </nz-result>
   </div>
 </section>
 

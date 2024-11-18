@@ -99,7 +99,10 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
 
   SendMess_Register(){
-
+    if (this.user.fullname.trim().length==0||this.user.email.trim().length==0||this.user.password.trim().length==0){
+      this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")
+      return;
+    }
 
     if (!this.isValid(this.user.fullname)) {
       this.createNotification('error', 'Bắt buộc ghi đầy đủ họ và tên');

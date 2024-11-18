@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from './main.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { MainService } from './main.service';
 export class UserService {
   isVerify=false;
   user: any = null
-  constructor(private crud:CrudService, private main:MainService,) { }
+  constructor(private crud:CrudService, private main:MainService, private router:Router) { }
 
 
 
@@ -22,7 +23,7 @@ export class UserService {
       // console.log(result);
       if (result){
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",token)
+          this.main.setCookie("u-caf",token,30)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:token})
         }
@@ -45,12 +46,14 @@ export class UserService {
       const result = await this.getUser(email,password)
       if (result){
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",result.token)
+          this.main.setCookie("u-caf",result.token,30)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
         }
         if (result.result=='Not Verified')
           this.main.createNotification("info","Tài khoản chưa được xác thực")
+        if (result.result=='Wrong Password')
+          this.main.createNotification("info","Mật khẩu chưa chính xác")
         if (result.result=='Not Exist'){
           this.main.createNotification("info","Tài khoản không tồn tại")
 
@@ -91,5 +94,6 @@ export class UserService {
     this.main.deleteCookie("u-caf")
     this.user = null
     this.main.createNotification("info","Đã đăng xuất tài khoản")
+    this.router.navigate([''])
   }
 }
