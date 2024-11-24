@@ -1,0 +1,34 @@
+
+
+.header-menu {
+  line-height: 64px;
+}
+
+
+.inner-layout {
+  padding: 24px 0;
+  background: #fff;
+}
+
+.sider-menu {
+  height: 100%;
+}
+
+.inner-content {
+  padding: 0 24px;
+  min-height: 280px;
+  width: 240px;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+::ng-deep .ant-layout{
+  height: 100vh;
+}
+
+
+// [nz-menu] {
+//   width: 240px;
+// }

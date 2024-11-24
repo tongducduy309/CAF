@@ -1,3 +1,4 @@
+import { TmplAstRecursiveVisitor } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
@@ -12,12 +13,10 @@ export class AppComponent{
   title = 'Coffee Store';
   passwordVisible = false;
   user_password?: string;
-  itemsCart:any = []
-  total = 0
-  subtotal = 0
   loading:any = true
   header_footer_visible = true
   user:any=null;
+  total = 0
 
   constructor (private crud:CrudService, private main:MainService, private userS:UserService){
 
@@ -29,21 +28,21 @@ export class AppComponent{
   change(componentRef:any){
     componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
       if (this.user){
-        this.total+=res.quantity*1
-        this.subtotal+=res.quantity*this.main.getPrice(res)
-        let n = -1
-        for (let i = 0; i<this.itemsCart.length;i++){
-          if (this.itemsCart[i].id==res.id){
-            n=i;
-            break;
+        this.crud.addData("cart",{pid:res.id,uid:this.user.id,quantity:res.quantity*1,note:res.note}).then(response=>response.json()).then(data=>{
+          if (data.result='success'){
+
+            this.total+=res.quantity*1
+
+
+
+
+            this.main.createNotification("success","Thêm vào giỏ hàng thành công")
           }
-        }
-        if (n==-1){
-          this.itemsCart = [...this.itemsCart,res]
-        }
-        else{
-          this.itemsCart[n].quantity+=res.quantity
-        }
+          else{
+            this.main.createNotification("error","Thêm vào giỏ hàng thất bại")
+          }
+        })
+
       }else{
         this.main.createNotification("info","Đăng nhập để thêm sản phẩm vào giỏ hàng")
       }

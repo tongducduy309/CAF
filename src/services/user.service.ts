@@ -23,7 +23,7 @@ export class UserService {
       // console.log(result);
       if (result){
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",token,30)
+          this.main.setCookie("u-caf",token,43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:token})
         }
@@ -46,7 +46,7 @@ export class UserService {
       const result = await this.getUser(email,password)
       if (result){
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",result.token,30)
+          this.main.setCookie("u-caf",result.token,43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
         }

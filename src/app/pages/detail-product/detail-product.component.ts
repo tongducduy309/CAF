@@ -110,7 +110,7 @@ export class DetailProductComponent extends Page implements OnInit {
     this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id,pid:this.product.id})
     .then(response => response)
     .then(data => {
-        if (data.status) console.log("Successful Submit Review");
+        if (data.status==200) console.log("Successful Submit Review");
     })
     .catch(error => {
         console.error('Error:', error);

@@ -12,6 +12,7 @@ export class ItemShoppingCartComponent implements OnInit{
 
   @Input() item:any = {}
   @Output() QuantityEmitter = new EventEmitter()
+  @Output() RemoveEmitter = new EventEmitter()
 
   constructor(private router:Router, public main:MainService){
 
@@ -27,8 +28,7 @@ export class ItemShoppingCartComponent implements OnInit{
   }
 
   remove(){
-    this.item.quantity = 0
-    this.QuantityEmitter.emit(this.item)
+    this.RemoveEmitter.emit({id:this.item.id,quantity:this.item.quantity})
   }
 
   changeQuantity(){

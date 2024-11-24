@@ -11,6 +11,10 @@
   }
 }
 
+::ng-deep .ant-spin-container{
+  height: 100%;
+}
+
 ::ng-deep .ant-spin-blur{
   opacity: 0;
 }

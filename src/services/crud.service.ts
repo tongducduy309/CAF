@@ -45,7 +45,7 @@ export class CrudService {
 
   delete(table:string,id:string){
 
-    return this.http.delete(`https://api-caf.vercel.app/api/delete/${table}/${id}`,{headers:new HttpHeaders('Content-type')});
+    return this.http.delete(`https://api-caf.vercel.app/api/delete/${table}/${id}`);
 
   }
 

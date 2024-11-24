@@ -1,11 +1,38 @@
-<nz-layout class="layout">
-  <nz-sider class="sider" [nzWidth] = "300">
-    <div class="container j-Center">
-    </div>
-  </nz-sider>
-  <nz-layout class="inner-layout">
-    <div nz-row [nzGutter]="[24,24]">
-    </div>
+<nz-layout>
 
+  <nz-layout class="inner-layout">
+    <nz-sider nzWidth="300px" nzTheme="light" nzCollapsible [(nzCollapsed)]="isCollapsed">
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <!-- <li nzIcon="home">
+        <span>Chuyển tới trang chủ</span>
+      </li> -->
+
+        <li nz-submenu nzOpen nzTitle="Quản lí đơn hàng" nzIcon="container">
+          <ul>
+            <li nz-menu-item nzSelected>Tất cả</li>
+            <li nz-menu-item>option6</li>
+            <li nz-menu-item>option7</li>
+            <li nz-menu-item>option8</li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm" nzIcon="appstore-add">
+          <ul>
+            <li nz-menu-item>Tất cả</li>
+            <li nz-menu-item>Chương trình khuyến mãi</li>
+            <li nz-menu-item>Bán chạy</li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzTitle="Thống kê" nzIcon="line-chart">
+          <ul>
+            <li nz-menu-item>option9</li>
+            <li nz-menu-item>option10</li>
+            <li nz-menu-item>option11</li>
+            <li nz-menu-item>option12</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-content class="inner-content">Content</nz-content>
   </nz-layout>
 </nz-layout>

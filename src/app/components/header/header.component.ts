@@ -10,15 +10,12 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  @Input() itemsCart:any = []
+  itemsCart:any = []
   @Input() total = 0
-  @Input() subtotal = 0
-  @Output() itemsCartChange = new EventEmitter();
-  @Output() totalChange = new EventEmitter();
-  @Output() subtotalChange = new EventEmitter();
+  @Output() totalChange = new EventEmitter()
+  subtotal = 0
   @Input() user:any=null;
   @Output() userChange = new EventEmitter();
-  @Output() QuantityEmitter = new EventEmitter()
 
   @ViewChild('process') process: any;
   bg_header = '#000'
@@ -30,6 +27,12 @@ export class HeaderComponent implements OnInit{
 
   isSearing:any;
 
+  loading = true
+
+  visibleCart = false
+
+  @Input() visible = true
+
 
   constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService){
 
@@ -37,26 +40,29 @@ export class HeaderComponent implements OnInit{
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
-   {
+    {
         // Route change detected
         this.checkUser(event.urlAfterRedirects)
         switch (event.urlAfterRedirects){
           case '/home':
             this.bg_header = 'transparent'
             this.btnShowCart = true
+            this.visible=true
             break
           case '/cart':
-            this.bg_header = '#000'
-            this.btnShowCart = false
-            break
           case '/checkout':
             this.bg_header = '#000'
             this.btnShowCart = false
+            this.visible=true
+            break
+          case '/dashboard':
+            this.visible = false
             break
 
           default:
             this.bg_header = '#000'
             this.btnShowCart = true
+            this.visible=true
         }
       }
     });
@@ -69,14 +75,21 @@ export class HeaderComponent implements OnInit{
     if (this.user==null){
       if (path!='/account/login'&&path!='/account/reset-your-password'&&path!='/account/register'){
         this.user = await this.getUser();
-        this.userChange.emit(this.user)
+
+        if (this.user!=null){
+          this.getItemsCart()
+          this.userChange.emit(this.user)
+        }
 
       }
       else{
         this.user = await this.getUser();
           if (this.user!=null){
             this.remote('')
+            this.getItemsCart()
+            this.userChange.emit(this.user)
           }
+
       }
     }
   }
@@ -119,7 +132,7 @@ export class HeaderComponent implements OnInit{
     }
   }
 
-  visible = false;
+  // visible = false;
   isPromoCode:any = -1;
   isGift:any = -1;
   checkedGift = false;
@@ -128,7 +141,8 @@ export class HeaderComponent implements OnInit{
   open(): void {
 
     if (this.user){
-      this.visible = true;
+      this.visibleCart = true;
+      this.getItemsCart()
     }
     else{
       this.main.createNotification("info","Đăng nhập để mở giỏ hàng")
@@ -137,12 +151,12 @@ export class HeaderComponent implements OnInit{
   }
 
   close(): void {
-    this.visible = false;
+    this.visibleCart = false;
   }
 
   remote(page:any){
     this.router.navigate([page])
-    this.visible = false;
+    this.visibleCart = false;
   }
 
   openSearch(){
@@ -155,6 +169,44 @@ export class HeaderComponent implements OnInit{
     this.isSearing=false
   }
 
+  getItemsCart(){
+    this.loading = true
+    this.crud.get("cart",this.user.id).subscribe((response:any)=>{
+      this.itemsCart = response.rows
+      this.cal_Info_Cart()
+      // this.itemsCartChange.emit(this.itemsCart)
+
+
+    })
+
+  }
+  changeQuantityItemInCart(item:any){
+    for (let i of this.itemsCart){
+      if (i.id==item.id){
+        i.quantity = item.quantity
+        break
+      }
+    }
+  }
+
+  removeItemInCart(data:any){
+    const id = data.id
+    const quantity = data.quantity
+    this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
+    this.total-=quantity
+    this.crud.delete("cart",id).subscribe((res:any)=>{
+      console.log(res);
+      if (res.result=='success'){
+        console.log(this.itemsCart);
+
+
+      }
+      else{
+        this.main.createNotification("error","Xóa sản phẩm khỏi giỏ hàng không thành công")
+      }
+    })
+  }
+
   // changeQuantityItem(item:any){
   //   this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
 
@@ -162,23 +214,22 @@ export class HeaderComponent implements OnInit{
 
   // }
 
-  changeQuantityItem(item:any){
+  cal_Info_Cart(){
     this.total = 0
     this.subtotal=0
 
     for (let ite of this.itemsCart){
-      if (item.id==ite.id){
-        ite.quantity = item.quantity
-      }
       this.total+=ite.quantity*1
       this.subtotal+=ite.quantity*this.main.getPrice(ite)
     }
-    if (item.quantity==0){
-      this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
-    }
-    this.itemsCartChange.emit(this.itemsCart)
-    this.subtotalChange.emit(this.subtotal)
     this.totalChange.emit(this.total)
+    this.loading=false
+    // if (item.quantity==0){
+    //   this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
+    // }
+    // this.itemsCartChange.emit(this.itemsCart)
+    // this.subtotalChange.emit(this.subtotal)
+    // this.totalChange.emit(this.total)
     // console.log(this.subtotal,this.total);
 
     // this.putItemCartToSession(this.itemsCart)
