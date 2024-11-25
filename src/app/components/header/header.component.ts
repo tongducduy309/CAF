@@ -42,20 +42,22 @@ export class HeaderComponent implements OnInit{
       if (event instanceof NavigationEnd)
     {
         // Route change detected
+        console.log(event.url);
+        const s = event.url.split("/")[1]
         this.checkUser(event.urlAfterRedirects)
-        switch (event.urlAfterRedirects){
-          case '/home':
+        switch (s){
+          case 'home':
             this.bg_header = 'transparent'
             this.btnShowCart = true
             this.visible=true
             break
-          case '/cart':
-          case '/checkout':
+          case 'cart':
+          case 'checkout':
             this.bg_header = '#000'
             this.btnShowCart = false
             this.visible=true
             break
-          case '/dashboard':
+          case 'dashboard':
             this.visible = false
             break
 

@@ -12,8 +12,9 @@ export class FooterComponent {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
     {
-        switch (event.urlAfterRedirects){
-          case '/dashboard':
+      const s = event.url.split("/")[1]
+        switch (s){
+          case 'dashboard':
             this.visible = false
             break
 

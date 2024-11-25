@@ -10,12 +10,21 @@
         <li nz-submenu nzOpen nzTitle="Quản lí đơn hàng" nzIcon="container">
           <ul>
             <li nz-menu-item nzSelected>Tất cả</li>
-            <li nz-menu-item>option6</li>
-            <li nz-menu-item>option7</li>
-            <li nz-menu-item>option8</li>
+            <li nz-menu-item>Chờ xác nhận</li>
+            <li nz-menu-item>Đang pha chế</li>
+            <li nz-menu-item>Đang giao hàng</li>
+            <li nz-menu-item>Đã nhận</li>
+            <li nz-menu-item>Hủy & Hoàn trả</li>
           </ul>
         </li>
         <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm" nzIcon="appstore-add">
+          <ul>
+            <li nz-menu-item>Tất cả</li>
+            <li nz-menu-item>Chương trình khuyến mãi</li>
+            <li nz-menu-item>Bán chạy</li>
+          </ul>
+        </li>
+        <li nz-submenu nzOpen  nzTitle="Quản lí người dùng" nzIcon="appstore-add">
           <ul>
             <li nz-menu-item>Tất cả</li>
             <li nz-menu-item>Chương trình khuyến mãi</li>
@@ -33,6 +42,6 @@
         </li>
       </ul>
     </nz-sider>
-    <nz-content class="inner-content">Content</nz-content>
+    <nz-content class="inner-content"><router-outlet></router-outlet></nz-content>
   </nz-layout>
 </nz-layout>

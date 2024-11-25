@@ -45,6 +45,7 @@ import { ManageAddressComponent } from './components/manage-address/manage-addre
 import { NoteProductComponent } from './components/note-product/note-product.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
 registerLocaleData(en);
 
 
@@ -87,7 +88,8 @@ export let pages = [
   CheckoutComponent,
   AccountComponent,
   DashboardComponent,
-  OrdersComponent
+  OrdersComponent,
+  ManageProductsComponent
 ]
 
 @NgModule({

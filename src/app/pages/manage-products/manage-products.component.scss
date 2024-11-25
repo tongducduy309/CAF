@@ -1,0 +1,81 @@
+section{
+  padding: 20px 0;
+}
+.title{
+  color: #000;
+  font-size: 42px;
+  line-height: 50px;
+  font-weight: 700;
+}
+.subtitle{
+  color: #000;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.content{
+  color: #69c0ff;
+  font-size: 20px;
+  line-height: 22px;
+  font-weight: 500;
+}
+
+.label{
+  display: block;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.group{
+  margin-bottom: 20px;
+}
+
+.item{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+
+.dynamic-delete-button {
+  cursor: pointer;
+  position: relative;
+  font-size: 24px;
+  color: #999;
+  transition: all 0.3s;
+  margin-left: 10px;
+}
+
+.dynamic-delete-button:hover {
+  color: #777;
+}
+
+.add-button-size{
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.group-box{
+  display: flex;
+  .box{
+    // position: relative;
+    // display: block;
+    // width: 100%;
+
+    box-shadow: 0 7px 25px rgba(0, 0, 0,0.3);
+    border-radius: 10px;
+    margin-right: 20px;
+    padding: 20px;
+    // margin-bottom: 20px;
+  }
+
+}
+
+::ng-deep .avatar-uploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}

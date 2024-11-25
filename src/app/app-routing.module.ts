@@ -21,6 +21,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { AccountComponent } from './pages/account/account.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
+import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
 
 const routes: Routes = [
 
@@ -128,7 +129,10 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    component:DashboardComponent
+    component:DashboardComponent,
+    children:[
+      {path:"manage-products",component:ManageProductsComponent}
+    ]
   },
   {
     path:'orders',

@@ -1,0 +1,100 @@
+<section>
+  <div class="group-box">
+    <div class="box">
+      <p class="subtitle" style="color: #8d8d8d;">Sản phẩm đang mở bán</p>
+      <p class="content">12</p>
+    </div>
+    <div class="box">
+      <p class="subtitle" style="color: #8d8d8d;">Sản phẩm đang khóa</p>
+      <p class="content">12</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <button nz-button nzType="primary" nzSize="large" nzShape="round">
+    <span nz-icon nzType="plus" nzTheme="outline"></span>
+    Thêm sản phẩm mới
+  </button>
+  <nz-modal [(nzVisible)]="isFormAddProduct" nzTitle="Thêm sản phẩm" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Xác nhận" nzCancelText="Hủy">
+    <ng-container *nzModalContent>
+      <div nz-row>
+        <div class="left" nz-col [nzSpan]="8">
+          <nz-upload
+          class="avatar-uploader"
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          nzName="avatar"
+          nzListType="picture-card"
+          [nzShowUploadList]="false"
+          (nzChange)="handleChange($event)"
+          >
+            <div *ngIf="!this.product.img">
+              <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                <div class="ant-upload-text">Tải lên</div>
+            </div>
+            <img *ngIf="this.product.img" [src]="this.product.img" style="width: 150px; height: 100px;object-fit: cover;" />
+          </nz-upload>
+          <div class="group">
+            <span class="label">Hiện/Ẩn sản phẩm:</span>
+            <nz-switch [(ngModel)]="product.shelf_status"></nz-switch>
+          </div>
+        </div>
+        <div class="right" nz-col [nzSpan]="16">
+          <div class="group">
+            <span class="label">Tên sản phẩm:</span>
+            <input nz-input placeholder="Tên sản phẩm" [(ngModel)]="product.name" type="text" />
+          </div>
+
+          <div class="group">
+            <span class="label">Giá bán:</span>
+            <input nz-input placeholder="Giá bán" [(ngModel)]="product.cost" type="text" />
+          </div>
+
+
+
+          <div class="group">
+            <span class="label">Kích cỡ và giá:</span>
+            <div class="item" *ngFor="let item of product.listsize; index as i">
+              <input
+              class="passenger-input"
+              nz-input
+              placeholder="Kích cỡ"
+              />
+              <span style="margin: 0 10px;">:</span>
+              <input
+              class="passenger-input"
+              nz-input
+              placeholder="Giá bán"
+              />
+              <span
+                nz-icon
+                nzType="minus-circle-o"
+                class="dynamic-delete-button"
+                (click)="removeSize(i)"
+              ></span>
+            </div>
+
+            <div style="width: 100%;display: flex;justify-content: center;">
+              <button nz-button nzType="dashed" class="add-button-size" (click)="addSize()">
+                <span nz-icon nzType="plus"></span>
+                Thêm kích cỡ
+              </button>
+            </div>
+          </div>
+
+          <div class="group">
+            <span class="label">Mô tả</span>
+            <textarea
+            nz-input
+            placeholder="Viết mô tả..."
+            [(ngModel)] = "product.description"
+            [nzAutosize]="{ minRows: 6, maxRows: 6 }"
+          ></textarea>
+          </div>
+
+
+        </div>
+      </div>
+    </ng-container>
+  </nz-modal>
+</section>
