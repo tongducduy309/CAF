@@ -1,8 +1,8 @@
 
 <div class="product-item" [ngStyle]="{'background-color':bg, 'color':color_text}">
 
-    <div class="tag-sale" *ngIf="product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
-    <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/1_f9e82651-1554-4bdc-a3bd-a8f8d1c454eb_306x203.png?v=1672658975" alt=""></div>
+    <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
+    <div><img [src]="product.img" alt=""></div>
     <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
         <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
         <!-- <span nz-icon nzType="swap" nzTheme="outline"></span>

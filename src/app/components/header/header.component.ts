@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit{
         // Route change detected
         console.log(event.url);
         const s = event.url.split("/")[1]
-        this.checkUser(event.urlAfterRedirects)
+
         switch (s){
           case 'home':
             this.bg_header = 'transparent'
@@ -66,8 +66,11 @@ export class HeaderComponent implements OnInit{
             this.btnShowCart = true
             this.visible=true
         }
+
+        if(s!='dashboard')this.checkUser(event.urlAfterRedirects)
       }
     });
+
     this.getCategories();
 
 

@@ -2,17 +2,17 @@
   <div class="group-box">
     <div class="box">
       <p class="subtitle" style="color: #8d8d8d;">Sản phẩm đang mở bán</p>
-      <p class="content">12</p>
+      <p class="content">{{product_on_shelf}}</p>
     </div>
     <div class="box">
       <p class="subtitle" style="color: #8d8d8d;">Sản phẩm đang khóa</p>
-      <p class="content">12</p>
+      <p class="content">{{product_off_shelf}}</p>
     </div>
   </div>
 </section>
 
 <section>
-  <button nz-button nzType="primary" nzSize="large" nzShape="round">
+  <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="openFormAddProduct()">
     <span nz-icon nzType="plus" nzTheme="outline"></span>
     Thêm sản phẩm mới
   </button>
@@ -20,7 +20,7 @@
     <ng-container *nzModalContent>
       <div nz-row>
         <div class="left" nz-col [nzSpan]="8">
-          <nz-upload
+          <!-- <nz-upload
           class="avatar-uploader"
           nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
           nzName="avatar"
@@ -28,12 +28,15 @@
           [nzShowUploadList]="false"
           (nzChange)="handleChange($event)"
           >
-            <div *ngIf="!this.product.img">
-              <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
-                <div class="ant-upload-text">Tải lên</div>
-            </div>
-            <img *ngIf="this.product.img" [src]="this.product.img" style="width: 150px; height: 100px;object-fit: cover;" />
-          </nz-upload>
+
+          </nz-upload> -->
+
+          <div *ngIf="!this.product.img">
+            <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+              <div class="ant-upload-text">Tải lên</div>
+              <input type="file" #img_product_form>
+          </div>
+          <img *ngIf="this.product.img" [src]="this.product.img" style="width: 150px; height: 100px;object-fit: cover;" />
           <div class="group">
             <span class="label">Hiện/Ẩn sản phẩm:</span>
             <nz-switch [(ngModel)]="product.shelf_status"></nz-switch>
@@ -45,11 +48,6 @@
             <input nz-input placeholder="Tên sản phẩm" [(ngModel)]="product.name" type="text" />
           </div>
 
-          <div class="group">
-            <span class="label">Giá bán:</span>
-            <input nz-input placeholder="Giá bán" [(ngModel)]="product.cost" type="text" />
-          </div>
-
 
 
           <div class="group">
@@ -59,18 +57,21 @@
               class="passenger-input"
               nz-input
               placeholder="Kích cỡ"
+              [(ngModel)]="item.size"
               />
               <span style="margin: 0 10px;">:</span>
               <input
               class="passenger-input"
               nz-input
               placeholder="Giá bán"
+              [(ngModel)]="item.cost"
               />
               <span
                 nz-icon
                 nzType="minus-circle-o"
                 class="dynamic-delete-button"
                 (click)="removeSize(i)"
+
               ></span>
             </div>
 
