@@ -1,1 +1,22 @@
-<p>item-in-bill works!</p>
+
+<div class="product">
+  <div class="left">
+    <img [src]="product.img" alt="">
+
+  </div>
+  <div class="center">
+    <p class="name">{{product.name}}</p>
+    <div>
+      <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
+      <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
+    </div>
+    <p class="note">Ghi chú: {{product.note}}</p>
+  </div>
+  <div class="right">
+    <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
+    <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
+
+
+
+  </div>
+</div>

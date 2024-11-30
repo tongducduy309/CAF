@@ -1,5 +1,5 @@
 <div class="item-shopping">
-    <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/51_lWSE15NL._SL1000_-removebg-preview_x125.png?v=1672644074" alt=""></div>
+    <div><img [src]="item.img" alt=""></div>
     <div class="information">
         <div class="top">
             <span class="name" (click)="remote('products/'+item.name_id)">{{item.name}}</span>

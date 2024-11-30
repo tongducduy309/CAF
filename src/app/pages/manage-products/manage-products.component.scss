@@ -39,7 +39,22 @@ section{
   margin-bottom: 10px;
 }
 
+.upload{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: #fafafa;
+  border: 1px dashed #d9d9d9;
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  span{
+    margin-bottom: 10px;
+  }
 
+}
 
 .dynamic-delete-button {
   cursor: pointer;
@@ -78,4 +93,44 @@ section{
 ::ng-deep .avatar-uploader > .ant-upload {
   width: 128px;
   height: 128px;
+}
+
+::ng-deep .ant-drawer-body{
+  padding: 20px;
+}
+
+::ng-deep .ant-drawer-title,::ng-deep .ant-drawer-close{
+  color: #fff !important;
+
+}
+
+::ng-deep .ant-drawer-title{
+  font-weight: 700;
+  font-size: 20px;
+
+}
+
+::ng-deep .ant-drawer-content-wrapper{
+  min-width: 70%;
+}
+
+.flashsales-form{
+  .content{
+    color: #000;
+  }
+  .btn{
+    background-color: #262626 !important;
+    border: none;
+    width: 50%;
+    height: 50px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn:hover{
+    background-color: #000 !important;
+    transition: 0,5s;
+  }
 }

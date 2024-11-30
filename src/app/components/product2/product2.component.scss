@@ -1,5 +1,5 @@
 
-.product-note{
+.product{
     color: #ffff;
     border-radius: 15px;
     padding: 15px 15px 15px 0px;
@@ -15,9 +15,12 @@
       font-weight: 700;
     }
 
+
+
     img{
-      width: 100%;
-      object-fit: cover;
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
     }
     .icons{
       position: absolute;
@@ -42,16 +45,23 @@
       .price{
         margin-right: 10px;
         font-size: 14px;
+        display: block;
       }
       .cost{
         opacity: .7;
         text-decoration: line-through;
         font-size: 12px;
       }
+      .name{
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* number of lines to show */
+                line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
       .btnAddToCart{
             color: #fff;
             transition: all .5s;
-            padding-bottom: 5px;
             line-height: 1;
             font-weight: 700;
             border-bottom: 1px solid #fff;

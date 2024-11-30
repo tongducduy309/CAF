@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-detail-product',
@@ -10,13 +11,13 @@ import { CrudService } from 'src/services/crud.service';
 })
 export class DetailProductComponent extends Page implements OnInit {
 
-  imgs = [
-    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
-    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
-    "https://coffee-workdo.myshopify.com/cdn/shop/products/3_23b7a8b2-85c6-4826-bbb5-0274ec262ef1_600x600.png?v=1672659207",
-    "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+  // imgs = [
+  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
+  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/3_23b7a8b2-85c6-4826-bbb5-0274ec262ef1_600x600.png?v=1672659207",
+  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
 
-  ]
+  // ]
   products_best_sell:any=[
   ]
   selectedSize = 0;
@@ -39,15 +40,22 @@ export class DetailProductComponent extends Page implements OnInit {
 
   writing_review:any
 
+  products_for_best:any = []
+
+  isFormAddToCart = false
+  isFormBuyNow = false
+
+  product_form:any = {}
 
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, ){
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService){
     super();
     this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
       const id = params.get('id')
       this.getIdProduct(id)
       this.getCustomerReviews(id)
+      this.getBestProducts()
     });
   }
 
@@ -88,6 +96,13 @@ export class DetailProductComponent extends Page implements OnInit {
       this.loaded()
     })
   }
+
+  getBestProducts(){
+    this.crud.get("products-by-customer-reviews","2").subscribe((products:any)=>{
+      this.products_for_best=products
+      console.log(products);
+    })
+  }
   quantity = 1
 
   writeReview(){
@@ -107,10 +122,15 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   async submitReview(){
-    this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id,pid:this.product.id})
+    this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id})
     .then(response => response)
     .then(data => {
-        if (data.status==200) console.log("Successful Submit Review");
+        if (data.status==200) {
+          this.main.createNotification("success","Viết bài đánh giá thành công")
+        }
+        else{
+          this.main.createNotification("info","Viết bài đánh giá không thành công")
+        }
     })
     .catch(error => {
         console.error('Error:', error);
@@ -135,18 +155,47 @@ export class DetailProductComponent extends Page implements OnInit {
 
   }
 
-  addToCart_(){
+  AddToCart(product:any){
+    console.log("Add To Cart");
+    console.log(this.product);
     const product_c = {
       id:this.product.id[this.selectedSize],
       pid:this.product.id,
       name:this.product.name,
-      quantity:this.product.quantity,
+      quantity:product.quantity,
       sale:this.product.sale[this.selectedSize],
       cost:this.product.cost[this.selectedSize],
       size:this.product.size[this.selectedSize],
-      name_id: this.product.name_id
+      name_id: this.product.name_id,
+      note:product.note
     }
     this.addToCart(product_c)
   }
+
+  openFormAddToCart(){
+    this.product_form = {...this.product}
+    this.product_form["note"]=''
+    this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
+    this.isFormAddToCart = true
+  }
+
+  openFormBuyNow(){
+    this.product_form = {...this.product}
+    this.product_form["note"]=''
+    this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
+    this.isFormBuyNow = true
+  }
+
+  BuyNow(product:any){
+    const product_c = {
+      id:this.product.id[this.selectedSize],
+      quantity:product.quantity,
+      note:product.note
+    }
+    console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
+    this.router.navigate([`checkout`],{ queryParams: {...product_c} })
+  }
+
+
 
 }

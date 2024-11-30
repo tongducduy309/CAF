@@ -12,11 +12,54 @@
 </section>
 
 <section>
-  <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="openFormAddProduct()">
+  <button nz-button nzType="primary" nzSize="large" nzShape="round" (click)="openFormAddProduct()" style="margin-bottom: 20px;">
     <span nz-icon nzType="plus" nzTheme="outline"></span>
     Thêm sản phẩm mới
   </button>
-  <nz-modal [(nzVisible)]="isFormAddProduct" nzTitle="Thêm sản phẩm" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Xác nhận" nzCancelText="Hủy">
+
+  <nz-table #basicTable [nzData]="products">
+    <thead>
+      <tr>
+        <th nzAlign = "center" nzLeft>STT</th>
+        <th nzLeft>Hình ảnh</th>
+        <th nzLeft>Sản phẩm</th>
+        <th>Danh mục</th>
+        <th>Kích thước</th>
+        <th>Giá bán</th>
+        <th>Mô tả</th>
+        <th>Ngày tạo</th>
+        <th>Trạng thái</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data;index as i">
+        <td nzAlign = "center" nzLeft>{{i+1}}</td>
+        <td nzLeft><img style="width: 70px;height: 70px;object-fit: contain;" [src]="data.img" alt=""></td>
+        <td nzLeft>{{data.name}}</td>
+        <td>{{data.c_name}}</td>
+        <td><p *ngFor="let s of data.size">{{s}}</p></td>
+        <td> <p *ngFor="let c of data.cost"> {{main.formatPrice(c)}}</p></td>
+        <td>{{data.description}}</td>
+        <td>{{formatDateToString(data.created)}}</td>
+        <td>{{data.shelf_status?'Đang bán':'Tạm ẩn'}}</td>
+        <td>
+          <a style="display: block;" (click)="openFromFlashSales(i)">Sự kiện</a>
+          <div style="display: flex;">
+            <a style="display: inline-block;" (click)="modifyProduct(i)">Sửa</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a nz-popconfirm
+            nzPopconfirmTitle="Xoá sản phẩm này chứ?"
+            nzOkText="Đồng ý"
+            nzCancelText="Không đồng ý"
+            (nzOnConfirm)="confirmDelete(data.name_id,data.img)"
+            nzPopconfirmPlacement="bottomRight">Xóa</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-modal [(nzVisible)]="isFormAddProduct" [nzTitle]="formTitle" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzOkText="Xác nhận" nzCancelText="Hủy">
     <ng-container *nzModalContent>
       <div nz-row>
         <div class="left" nz-col [nzSpan]="8">
@@ -31,12 +74,13 @@
 
           </nz-upload> -->
 
-          <div *ngIf="!this.product.img">
+          <div *ngIf="!this.product.img" class="upload" (click)="chooseImg()">
             <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
-              <div class="ant-upload-text">Tải lên</div>
-              <input type="file" #img_product_form>
+            <div class="ant-upload-text">Tải lên</div>
+
           </div>
-          <img *ngIf="this.product.img" [src]="this.product.img" style="width: 150px; height: 100px;object-fit: cover;" />
+          <input type="file" #img_product_form style="display: none;" (change)="changeImg($event)">
+          <img *ngIf="this.product.img" [src]="this.product.img" style="width: 150px; height: 150px;object-fit: contain;cursor: pointer;margin-bottom: 20px;" (click)="chooseImg()"/>
           <div class="group">
             <span class="label">Hiện/Ẩn sản phẩm:</span>
             <nz-switch [(ngModel)]="product.shelf_status"></nz-switch>
@@ -47,6 +91,14 @@
             <span class="label">Tên sản phẩm:</span>
             <input nz-input placeholder="Tên sản phẩm" [(ngModel)]="product.name" type="text" />
           </div>
+
+          <div class="group">
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Chọn danh mục" [(ngModel)]="product.cid" style="width: 100%;">
+              <nz-option *ngFor="let cate of categories" [nzLabel]="cate.name" [nzValue]="cate.id"></nz-option>
+            </nz-select>
+          </div>
+
+
 
 
 
@@ -98,4 +150,81 @@
       </div>
     </ng-container>
   </nz-modal>
+  <nz-drawer
+      [nzVisible]="isFormFlashSales"
+      nzPlacement="right"
+      nzTitle="Khuyến Mãi"
+      (nzOnClose)="closeFormFlashSales()"
+    >
+      <ng-container *nzDrawerContent>
+        <div class="flashsales-form">
+          <div style="display: flex;justify-content: start;margin-bottom: 20px;align-items: center;">
+            <img *ngIf="this.fs_product.img" [src]="this.fs_product.img" style="width: 150px; height: 150px;object-fit: contain;cursor: pointer;margin-right: 10px;" (click)="chooseImg()"/>
+            <div>
+              <div class="group">
+                <span class="label">Tên sản phẩm:</span>
+                <p class="content">
+                  {{fs_product.name}}
+                </p>
+              </div>
+
+              <div class="group">
+                <span class="label">Danh mục:</span>
+                <p class="content">
+                  {{fs_product.c_name}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="group">
+            <span class="label">Kích cỡ và giá:</span>
+            <div class="item" *ngFor="let item of fs_product.listsize; index as i">
+              <input
+              nz-input
+              placeholder="Kích cỡ"
+              [(ngModel)]="item.size"
+              disabled
+              />
+              <span style="margin: 0 10px;">:</span>
+              <input
+              nz-input
+              placeholder="Giá bán"
+              [(ngModel)]="item.cost"
+              disabled
+              />
+              <span style="margin: 0 10px;">:</span>
+              <input
+              nz-input
+              style="margin-right: 5px;"
+              placeholder="Phần trăm giảm"
+              [(ngModel)]="item.sale"
+              />
+
+              <nz-range-picker *ngIf="item.datesale[0]!=null&&item.datesale[1]!=null" nzShowTime nzFormat="dd/MM/yyyy HH:mm:ss" style="width: 100%" nzAllowClear  [(ngModel)]="item.datesale" (ngModelChange)="onChangeDateFlashSales($event,i)"></nz-range-picker>
+              <nz-range-picker *ngIf="item.datesale[0]==null&&item.datesale[1]==null" nzShowTime nzFormat="dd/MM/yyyy HH:mm:ss" style="width: 100%" nzAllowClear  ngModel (ngModelChange)="onChangeDateFlashSales($event,i)"></nz-range-picker>
+              <span
+                nz-icon
+                nzType="close-circle"
+                class="dynamic-delete-button"
+                (click)="removeContentSale(i)"
+
+              ></span>
+            </div>
+
+          </div>
+          <div style="width: 100%;display: flex;justify-content: center;">
+            <button nz-button nzType="primary" class="btn" (click)="submitFlashSales()">
+              <span nz-icon nzType="check" style="font-size: 20px;"></span>
+              Cập nhật
+
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </nz-drawer>
 </section>

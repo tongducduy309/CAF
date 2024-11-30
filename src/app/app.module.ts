@@ -5,10 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
+import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
+import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -46,7 +45,10 @@ import { NoteProductComponent } from './components/note-product/note-product.com
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
-registerLocaleData(en);
+import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
+import { VouchersComponent } from './pages/vouchers/vouchers.component';
+import { ItemInBillComponent } from './components/item-in-bill/item-in-bill.component';
+registerLocaleData(vi);
 
 
 
@@ -63,7 +65,8 @@ export let components:any = [
   SearchToolComponent,
   BoxAddressComponent,
   ManageAddressComponent,
-  NoteProductComponent
+  NoteProductComponent,
+  ItemInBillComponent
 ]
 
 export let pages = [
@@ -89,7 +92,9 @@ export let pages = [
   AccountComponent,
   DashboardComponent,
   OrdersComponent,
-  ManageProductsComponent
+  ManageProductsComponent,
+  FlashSalesComponent,
+  VouchersComponent
 ]
 
 @NgModule({
@@ -104,7 +109,7 @@ export let pages = [
     NgZorroAntModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: vi_VN }
   ],
   bootstrap: [AppComponent]
 })

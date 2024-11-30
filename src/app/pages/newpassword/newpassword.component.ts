@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Page } from 'src/app/classes/page';
+import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-newpassword',
   templateUrl: './newpassword.component.html',
   styleUrls: ['./newpassword.component.scss']
 })
-export class NewpasswordComponent implements OnInit{
+export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
 
-  user_email = ''
-  user_password = ''
+  user:any = {}
   passwordVisible = false;
-  message = ''
   isFormLogin = true;
 
   isValidEmail_RPW = true
@@ -20,18 +21,49 @@ export class NewpasswordComponent implements OnInit{
 
   token:any = ''
 
-  constructor(private route:Router, private routed:ActivatedRoute){
-
+  constructor(private router:Router, private routed:ActivatedRoute, private main:MainService, private crud:CrudService){
+    super()
+  }
+  ngAfterViewInit(): void {
+    Promise.resolve().then(()=> {
+      this.loaded()
+    })
   }
 
   ngOnInit(): void {
-    this.routed.paramMap.subscribe((params: any) => {
+    this.routed.queryParamMap.subscribe((params: any) => {
       this.token = params.get('token');
-
+      this.user.email = params.get('email');
+      console.log(this.user.email,this.token);
     });
   }
 
-  submit(){
+  isValidPassword(s:string){
+    if (s.trim().length<8) return false
+    return true
+  }
 
+  submit(){
+    if (!this.isValidPassword(this.user.password)) {
+      this.main.createNotification('error', 'Mật khẩu phải dài hơn 8 kí tự');
+      return;
+    }
+
+    if (this.user.password!=this.user.confirm_password) {
+      this.main.createNotification('error', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
+      return;
+    }
+
+    console.log(this.user);
+
+    this.crud.put("users/password",{token:this.token,password:this.user.password, email:this.user.email}).then(res=>res.json()).then(data=>{
+      if (data.result=='success'){
+        this.main.createNotification("success","Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại")
+        this.router.navigate(['account/login'])
+      }
+      else{
+        this.main.createNotification("info","Đặt lại mật khẩu không thành công")
+      }
+    })
   }
 }

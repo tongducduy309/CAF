@@ -1,21 +1,32 @@
 .rating-product{
-  font-family: 'Outfit';
   color: #fff;
   margin-bottom: 10px;
   img{
-    width: 100%;
+    width: 105px;
+    height: 105px;
+    object-fit: contain;
   }
   .name{
     color: #fff;
     font-size: 32px;
     line-height: 38px;
     font-weight: 700;
+    overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+              line-clamp: 1;
+      -webkit-box-orient: vertical;
   }
 
   .auther{
     font-size: 16px;
     line-height: 16px;
     font-weight: 500;
+    overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 1; /* number of lines to show */
+              line-clamp: 1;
+      -webkit-box-orient: vertical;
   }
 
   .comment{

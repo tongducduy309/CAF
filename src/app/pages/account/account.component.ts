@@ -49,7 +49,8 @@ export class AccountComponent extends Page implements OnInit {
               point:result.point,
               email:result.email,
               contactNumber: result.contactNumber,
-              ranking:this.getRanking(result.point)
+              ranking:this.getRanking(result.point),
+              id_address_default:result.id_address_default
             })
           }
         }
@@ -81,10 +82,11 @@ export class AccountComponent extends Page implements OnInit {
     return 'Thành viên mới'
   }
 
-  chooseAddress(a:any){
-    this.address_user_choosing = a
-    this.isMannageAddress=false
-  }
+  // chooseAddress(a:any){
+  //   this.address_user_choosing = a
+  //   console.log(a);
+  //   this.isMannageAddress=false
+  // }
 
 }
 

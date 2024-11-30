@@ -5,19 +5,15 @@
   <div class="banner-center-content">
     <div class="subtitle">CoffeeStore</div>
     <h2 class="content">Chocolate Coffee</h2>
-    <p>Coffee that fuels your dreams. Life is short, stay awake for it. Coffee, Art, and Vintage. Fuel for your creativity.</p>
-    <a href="" class="link-btn">Show products</a>
+    <p>Mang đến hương vị ngon, ngọt, mát lành. Mang đến năng lượng cho bạn mỗi ngày.</p>
   </div>
 </section>
-<section *ngIf="must_load<=0" class="second-section">
+<!-- <section *ngIf="must_load<=0" class="second-section">
   <div class="container">
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <ul class="tabs">
-        <li class="selected"><p>Bán Chạy</p></li>
-        <li><p>Trà Trái Cây</p></li>
-        <li><p>Trà Sữa</p></li>
-        <li><p>Cà Phê</p></li>
-        <li><p>Bánh Ăn Kèm</p></li>
+        <li *ngFor="let cate of categories" [ngClass]="{'selected':selected_tab==cate.id}" (click)="selected_tab=cate.id"><p>{{cate.name}}</p></li>
+
       </ul>
       <a href="/all-products" class="link-btn">XEM THÊM</a>
     </div>
@@ -29,30 +25,31 @@
     <div class="next btn">
       <span nz-icon nzType="right" nzTheme="outline" style="color: #fff;"></span>
     </div>
-    <nz-carousel nzEffect="scrollx" nzAutoPlay [nzDots]="false">
-      <div nz-carousel-content *ngFor="let i of [1,2,3]">
+    <nz-carousel nzEffect="scrollx" nzAutoPlay="true" [nzDots]="false" (nzAfterChange)="changeTab($event)">
+      <div nz-carousel-content *ngFor="let i of categories">
         <div>
-          <div nz-row [nzGutter]="[40,20]">
-            <!-- <app-product2 nz-col [nzSpan]="8" *ngFor="let i of [1,2,3,4,5,6]"></app-product2> -->
+          <div nz-row [nzGutter]="[40,20]" *ngIf="products_by_cate[selected_tab]&&products_by_cate[selected_tab].length>0">
+            <app-product2 nz-col [nzSpan]="8" *ngFor="let product of products_by_cate[selected_tab]" [product]="product"></app-product2>
 
           </div>
+          <h3 style="color: #fff;" *ngIf="!products_by_cate[selected_tab]||products_by_cate[selected_tab].length==0">Đang cập nhật...</h3>
         </div>
-        <!-- <h3>{{i}}</h3> -->
+
       </div>
     </nz-carousel>
   </div>
   </div>
-</section>
+</section> -->
 <section *ngIf="must_load<=0" class="third-section">
   <div class="container">
     <div class="bean">
-      <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload"></video>
+      <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload" style="border-radius: 10px;"></video>
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
         <div nz-col nzSpan="8">
           <div class="subtitle">CoffeeStore</div>
           <h3 class="content">The best coffee</h3>
-          <p>As the coffee shop market becomes more popular, the number of cafe websites is growing. The internet and social media play an important role in finding new customers.</p>
-          <a href="/all-products" class="link-btn">Show products</a>
+          <p>Sự kết hợp hoàn hảo giữa cà phê và sữa. Cà phê hòa tan thượng hạng hòa quyện cùng sữa tươi béo ngậy, tạo nên hương vị thơm ngon, dễ uống. Sản phẩm tiện lợi, giúp bạn thưởng thức ly cà phê thơm ngon mọi lúc mọi nơi, ngay cả khi bận rộn.</p>
+          <a href="/all-products" class="link-btn">Xem thêm</a>
         </div>
         <div nz-col nzSpan="8">
           <!-- <app-product2></app-product2> -->
@@ -69,18 +66,17 @@
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Fresh roasted coffee <br> with 24h delivery blogs</h3>
-        <p>Denver Biscuit cafe knows how to entice future customers. A video takes viewers all the way from the preparation of one of their desserts to the service.</p>
-        <a href="/all-products" class="link-btn">Show products</a>
+        <h3 class="content">Thưởng thức vị ngon <br> được giao nhanh trong vòng 15 phút</h3>
+        <p>Coffee Store sẽ luôn cố gắng mang đến trải nghiệm tốt nhất cho bạn.</p>
+        <a href="/all-products" class="link-btn">Xem thêm</a>
       </div>
       <div nz-col nzSpan="8">
-        <div class="subtitle fw-500">Choose the origin of the coffee:</div>
-        <h3 class="content">Spain</h3>
+        <div class="subtitle fw-500">Nguyên liệu được nhập trực tiếp từ</div>
+        <h3 class="content">Việt Nam</h3>
         <img style="opacity: .4;" src="../../../assets/images/flying-coffee.webp" alt="">
       </div>
       <div nz-col nzSpan="8">
-        <app-rating-product></app-rating-product>
-        <app-rating-product></app-rating-product>
+        <app-rating-product *ngFor="let cs of best_customer_reviews" [review]="cs"></app-rating-product>
       </div>
     </div>
   </div>
@@ -90,7 +86,7 @@
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <div>
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Coffee Shop Best Discount ‘s Product</h3>
+        <h3 class="content">Khuyến mãi <br> cực khủng</h3>
       </div>
       <div>
         <a href="/all-products" class="link-btn">XEM THÊM</a>
@@ -108,14 +104,14 @@
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Shop Best Seller <br> Product</h3>
-        <p>Coffee is a drink prepared from roasted coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily due to its caffeine content.</p>
-        <a href="/all-products" class="link-btn">Show Products</a>
+        <h3 class="content">Sản phẩm <br> thịnh hành</h3>
+        <p>Cà phê sữa đá từ lâu đã trở thành thức uống quốc dân của người Việt. Với hương vị đậm đà của cà phê hòa quyện cùng vị béo ngậy của sữa tươi, cà phê sữa đá chinh phục mọi khẩu vị, từ người lớn đến trẻ nhỏ.</p>
+        <a href="/all-products" class="link-btn">Xem thêm</a>
       </div>
       <div nz-col nzSpan="8" style="display: flex;justify-content: center;align-items: center;">
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
       </div>
-      <div nz-col nzSpan="8">
+      <div nz-col [nzSpan]="8">
         <app-product2 [product]="this.products_best_discount[0]"></app-product2>
       </div>
     </div>
@@ -127,8 +123,8 @@
       <img src="../../../assets/images/Subscribe-banner.webp" alt="">
       <div class="subcribe-column">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Subscribe newsletter and get <br> -20% off</h3>
-        <p>It is the most popular hot drink in the world. Seeds of the Coffea plant's fruits are separated to produce unroasted green coffee beans.</p>
+        <h3 class="content">Đăng ký thành viên mới <br> -20% tổng hóa đơn</h3>
+        <p>Đăng ký ngay để nhận mã giảm giá 20% và nhiều quà tặng hấp dẫn khác. Cơ hội sở hữu sản phẩm chất lượng với giá hời đang chờ bạn!</p>
 
       </div>
     </div>

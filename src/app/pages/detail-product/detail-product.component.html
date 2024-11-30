@@ -1,5 +1,5 @@
 
-<section class="first-section" id="head" *ngIf="must_load==0">
+<section class="first-section" id="head">
   <div class="container">
     <div nz-row class="show-product" [nzGutter]="[40]">
       <div nz-col nzSpan="13">
@@ -11,7 +11,7 @@
             </div>
           </div> -->
           <div nz-col nzSpan="24" class="main-img">
-            <img [src]="imgs[selected_img_product]" alt="">
+            <img [src]="product.img" alt="">
           </div>
         </div>
       </div>
@@ -23,10 +23,10 @@
         </div> -->
         <div nz-row class="group" style="display: flex;align-items: center;">
           <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
-          <a href="/products/{{product.id}}/#customer_review_section" style="font-size: 20px;" class="btn">
+          <!-- <a href="/products/{{product.name_id}}/#customer_review_section" style="font-size: 20px;" class="btn">
             <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 5px;font-size: 20px;color: #fff;"></span>
             <span style="font-weight: 700;color: #fff;">Viết đánh giá</span>
-          </a>
+          </a> -->
           <ng-template #rateIcon><span nz-icon nzType="star" [nzTheme]="product?.point==0?'outline':'fill'"></span></ng-template>
         </div>
         <div class="group">
@@ -47,7 +47,8 @@
           </nz-select>
         </div>
         <div class="group description" style="font-size: 16px;font-weight: 700;" *ngIf="product.description">
-          <span>{{product.description}}</span>
+          <span style="font-size: 16px;font-weight: 700;">Mô tả: </span>
+          <span class="description">{{product.description}}</span>
         </div>
         <div nz-row class="group" >
           <div nz-col nzSpan="12" class="group-qty">
@@ -59,8 +60,8 @@
             </div>
           </div>
           <div nz-col nzSpan="12" style="display: flex; align-items: center;">
-            <span class="price">{{(product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize]}}</span>
-            <span class="cost" *ngIf="product.sale[selectedSize]">{{product.cost[selectedSize]}}</span>
+            <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
+          <span class="cost" *ngIf="product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
             <span style="font-size: 22px;
             color: #a7897b;
             font-weight: 900;
@@ -69,12 +70,12 @@
         </div>
         <div nz-row class="group" [nzGutter]="[20]">
           <div nz-col nzSpan="12">
-            <div class="btnAddToCart" (click)="addToCart_()">
+            <div class="btnAddToCart" (click)="openFormAddToCart()">
               <span>Thêm Vào Giỏ</span>
             </div>
           </div>
           <div nz-col nzSpan="12">
-            <div class="btnBuyItNow">
+            <div class="btnBuyItNow" (click)="openFormBuyNow()">
               <span>Đặt món</span>
             </div>
           </div>
@@ -85,9 +86,10 @@
 
       </div>
     </div>
+
   </div>
 </section>
-<section class="customer-review-section" id="customer_review_section" *ngIf="must_load==0">
+<section class="customer-review-section" id="customer_review_section" >
   <div class="container" style="margin-bottom: 20px;">
     <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Bài Đánh Giá</div>
 
@@ -166,17 +168,15 @@
         <div nz-col nzSpan="8">
           <div class="subtitle">CoffeeStore</div>
           <h3 class="content">The best coffee</h3>
-          <p>As the coffee shop market becomes more popular, the number of cafe websites is growing. The internet and social media play an important role in finding new customers.</p>
-          <a href="" class="link-btn">Show products</a>
+          <p>Sự kết hợp hoàn hảo giữa cà phê và sữa. Cà phê hòa tan thượng hạng hòa quyện cùng sữa tươi béo ngậy, tạo nên hương vị thơm ngon, dễ uống. Sản phẩm tiện lợi, giúp bạn thưởng thức ly cà phê thơm ngon mọi lúc mọi nơi, ngay cả khi bận rộn.</p>
+          <a href="/all-products" class="link-btn">Xem thêm</a>
         </div>
-        <div nz-col nzSpan="8">
-          <!-- <app-product2></app-product2> -->
-        </div>
-        <div nz-col nzSpan="8">
-          <!-- <app-product2></app-product2> -->
+        <div nz-col nzSpan="8" *ngFor="let p of products_for_best">
+          <app-product2 [product]="p"></app-product2>
         </div>
       </div>
       </div>
   </div>
 </section>
-
+<app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product_form" (submitEmitter)="AddToCart($event)"></app-note-product>
+<app-note-product [title]="'Đặt món'" [(visible)]="isFormBuyNow" [product]="product_form" (submitEmitter)="BuyNow($event)"></app-note-product>

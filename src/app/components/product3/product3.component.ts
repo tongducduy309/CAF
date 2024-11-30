@@ -26,8 +26,6 @@ export class Product3Component implements OnInit {
   }
 
   AddToCart(product:any){
-    console.log("Add To Cart");
-    console.log(this.product);
     const product_c = {
       id:this.product.id[this.selectedSize],
       pid:this.product.id,

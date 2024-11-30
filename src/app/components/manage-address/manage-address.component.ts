@@ -45,9 +45,13 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
   if (this.isModify)
   {
 
-    this.list_address[this.addModifying] = this.addressForm
-    this.crud.put("address-of-user",this.addressForm).then(response => response.json())
+    this.list_address[this.addModifying] = {...this.addressForm}
+    // this.list_address = [...this.list_address]
+
+    console.log(this.list_address[this.addModifying]);
+    this.crud.put("address-of-user",{...this.addressForm,uid:this.user.id}).then(response => response.json())
     .then((data:any) => {
+      console.log(data);
         if (data.result=='success') {
           this.main.createNotification("success","Thay đổi địa chỉ thành công")
         }
@@ -140,7 +144,8 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
  }
 
  getAddressOfUser(){
-  this.crud.get("address-of-user",this.user.id).subscribe((address:any)=>{
+  console.log(this.user.id_address_default);
+  this.crud.get("address-of-user",`${this.user.id}/${this.user.id_address_default}`).subscribe((address:any)=>{
     console.log(address);
     if (address.result=='success'){
       this.list_address = address.rows

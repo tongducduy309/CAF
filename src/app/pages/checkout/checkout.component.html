@@ -17,7 +17,7 @@
             </div>
             <div class="group">
               <p class="label">Email: <b>(Trạng thái đơn hàng sẽ được gửi về email này)</b></p>
-              <input nz-input placeholder="Email" [(ngModel)]="user.email" disabled/>
+              <input nz-input placeholder="Email" [ngModel]="user.email" disabled/>
             </div>
           </div>
 
@@ -64,26 +64,7 @@
             <h4 class="subtitle">Sản phẩm</h4>
           </div>
           <div class="list-products">
-            <div class="product" *ngFor="let product of products">
-              <div class="left">
-                <img src="https://cdn.shopify.com/s/files/1/0700/3193/3753/products/1_40d003d7-1668-439c-b798-ddfbaa3b90b0_64x64.png?v=1672651773" alt="">
-
-              </div>
-              <div class="center">
-                <p class="name">{{product.name}}</p>
-                <div>
-                  <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
-                  <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
-                </div>
-              </div>
-              <div class="right">
-                <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
-                <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
-
-
-
-            </div>
-            </div>
+            <app-item-in-bill *ngFor="let product of products" [product]="product"></app-item-in-bill>
           </div>
         </div>
         <div class="total">

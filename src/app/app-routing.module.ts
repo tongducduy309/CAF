@@ -22,6 +22,8 @@ import { AccountComponent } from './pages/account/account.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
+import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
+import { VouchersComponent } from './pages/vouchers/vouchers.component';
 
 const routes: Routes = [
 
@@ -37,7 +39,7 @@ const routes: Routes = [
   },
   {
     path:'account',
-    component:AccountComponent
+    component:AccountComponent,
   },
   {
     path:'account/login',
@@ -112,11 +114,7 @@ const routes: Routes = [
     component:TermsAndConditionsComponent
   },
   {
-    path:'checkout/b',
-    component:CheckoutComponent
-  },
-  {
-    path:'checkout/c',
+    path:'checkout',
     component:CheckoutComponent
   },
   {
@@ -131,7 +129,9 @@ const routes: Routes = [
     path:'dashboard',
     component:DashboardComponent,
     children:[
-      {path:"manage-products",component:ManageProductsComponent}
+      {path:"manage-products",component:ManageProductsComponent},
+      {path:"flash-sales",component:FlashSalesComponent},
+      {path:"vouchers",component:VouchersComponent}
     ]
   },
   {

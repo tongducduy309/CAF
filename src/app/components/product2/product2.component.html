@@ -1,9 +1,9 @@
 
-<div nz-row class="product-note" nzGutter="20" [ngStyle]="{'background-color':bg}" *ngIf="product">
+<div nz-row class="product" nzGutter="10" [ngStyle]="{'background-color':bg}" *ngIf="product">
   <div nz-col nzSpan = "10">
-    <div class="group" style="display: flex;align-items: center;height: 100%;">
-      <div class="tag-sale"><span>-14%</span></div>
-      <div><img src="https://coffee-workdo.myshopify.com/cdn/shop/products/1_6ea37d25-5b98-4ae3-90c2-fae660407b3d_600x600.png?v=1672651340" alt=""></div>
+    <div class="group" style="display: flex;align-items: center;height: 100%; justify-content: center;">
+      <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
+    <div style="display: flex;justify-content: center;align-items: center;" ><img [src]="product.img" alt=""></div>
       <div class="icons" style="display: flex;flex-direction: column;justify-content: space-between;">
         <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
         <!-- <span nz-icon nzType="eye" nzTheme="outline"></span>
@@ -26,8 +26,8 @@
         </div>
         <div nz-row class="group" >
           <div nz-col nzSpan="12" style="font-weight: 800;">
-              <div class="price"><span>{{main.formatPrice((product.sale[selectedSize]>0)?(product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100)):product.cost[selectedSize])}}</span></div>
-              <div class="cost" *ngIf="product.sale[selectedSize]>0"><span>{{main.formatPrice(product.cost[selectedSize])}}</span></div>
+            <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
+            <span class="cost" *ngIf="product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
           </div>
           <div nz-col nzSpan="12" style="display: flex; align-items: center;">
               <div class="btnAddToCart" style="font-weight: 700;"  (click)="openFormAddToCart()">
@@ -37,7 +37,7 @@
         </div>
       </div>
   </div>
-  <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (productEmitter)="AddToCart($event)"></app-note-product>
+  <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (submitEmitter)="AddToCart($event)"></app-note-product>
 
 </div>
 

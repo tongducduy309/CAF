@@ -1,18 +1,18 @@
 <div nz-row class="rating-product" [nzGutter]="[20]">
   <div nz-col [nzSpan]="8" style="display: flex;align-items: center;justify-content: center;">
-    <img src="https://coffee-workdo.myshopify.com/cdn/shop/products/3.png?v=1672642716" alt="">
+    <a [href]="'products/'+review.name_id"><img [src]="review.img" alt=""></a>
   </div>
   <div nz-col [nzSpan]="16">
-    <h3 class="name">Chocolate Brew</h3>
-    <p class="comment">I love the atmosphere at Taste & See Coffee Shop and Gallery. It's the perfect place to relax and enjoy a cup of coffee.</p>
+    <a [href]="'products/'+review.name_id" class="name">{{review.p_name}}</a>
+    <p class="comment">{{review.comment}}</p>
     <div style="display: flex;justify-content: space-between;align-items: center;">
       <span class="auther">
-        Robert
+        {{review.name}}
       </span>
       <span>
-        <nz-rate [ngModel]="4" [nzCharacter]="rateIcon" nzDisabled></nz-rate>
+        <nz-rate [ngModel]="review.point" [nzCharacter]="rateIcon" nzDisabled></nz-rate>
         <ng-template #rateIcon><span nz-icon nzType="star" nzTheme="fill" style="font-size: 10px;"></span></ng-template>
-        4.5/
+        {{review.point}}.0/
         <b>5.0</b>
       </span>
     </div>

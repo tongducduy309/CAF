@@ -44,29 +44,48 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     })
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.checkUser()
     this.route.queryParamMap.subscribe(params => {
       const quantity = parseInt(params.get('quantity')||'0')
       const id = params.get('id')
-      if (!quantity||!id) {
-        this.router.navigate([''])
-      }
-      this.crud.get('products/ids',params.get('id')+"").subscribe((products:any)=>{
-        if (products.length==1){
-          const product = products[0]
-          this.products.push({...product,quantity:quantity})
-          this.bill.subtotal = (quantity||0) * this.main.getPrice(product)
-          this.bill.ship = 0
-          this.bill.discount = 0
-          this.bill.cost = this.bill.subtotal+this.bill.ship
-          this.bill.methodPayment = '1'
+      const note = params.get('note')
+      if (quantity&&id){
+        this.crud.get('product',id!).subscribe((product:any)=>{
+          // console.log(products);
+          product = product.rows
+          this.products.push({...product,quantity:quantity,note:note})
+          this.cal_Info_list()
           this.loaded()
-        }
-      })
+        })
+      }
+      else{
+        this.getItemsCart()
+      }
     });
 
-    this.checkUser()
 
+
+  }
+
+  getItemsCart(){
+    this.crud.get("cart",this.user.id).subscribe((response:any)=>{
+      this.products = response.rows
+      this.cal_Info_list()
+      this.loaded()
+
+    })
+
+  }
+
+  cal_Info_list(){
+    for (let product of this.products){
+      this.bill.subtotal += (product.quantity||0) * this.main.getPrice(product)
+    }
+    this.bill.ship = 0
+    this.bill.discount = 0
+    this.bill.cost = this.bill.subtotal+this.bill.ship
+    this.bill.methodPayment = '1'
   }
 
 

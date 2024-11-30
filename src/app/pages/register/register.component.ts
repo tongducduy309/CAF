@@ -84,7 +84,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
   }
 
   isValidPassword(s:string){
-    if (s.trim().length<=8) return false
+    if (s.trim().length<8) return false
     return true
   }
 

@@ -1,4 +1,9 @@
 <section class="all-products" style="padding-bottom: 80px;">
+  <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
+    <ng-template #tpl>
+      <span nz-icon nzType="up-circle" nzTheme="fill" style="font-size: 30px; color: #262626;"></span>
+    </ng-template>
+  </nz-back-top>
   <div nz-row class="all-product-list" nzGutter="16px">
     <div nz-col class="filters" nzSpan="8">
       <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Bộ lọc</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">Bỏ lọc</span></div>
@@ -110,18 +115,18 @@
       </div>
 
 
-          <div *ngIf="name_cate_products.length>0">
-            <div *ngFor="let n of name_cate_products" style="margin-top: 20px;">
-              <div class="name-category"><p>{{n.name}}</p></div>
-              <div nz-row [nzGutter]="[12,24]" >
+      <div *ngIf="name_cate_products.length>0">
+        <div *ngFor="let n of name_cate_products" style="margin-top: 20px;">
+          <div class="name-category"><p>{{n.name}}</p></div>
+          <div nz-row [nzGutter]="[12,24]" >
 
-                <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v[n.id]" [product]="product"  (addToCartEmitter)="AddToCart($event)"></app-product3>
-              </div>
-            </div>
-
+            <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v[n.id]" [product]="product"  (addToCartEmitter)="AddToCart($event)"></app-product3>
           </div>
+        </div>
 
-          <h3 class="title" *ngIf="name_cate_products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
+      </div>
+
+      <h3 class="title" *ngIf="name_cate_products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
     </div>
   </div>
 </section>

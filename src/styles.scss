@@ -20,6 +20,10 @@ background-color: #242424;
 
 }
 
+.cdk-global-scrollblock{
+  overflow-y:visible;
+}
+
 body{
   font-family: 'Josefin';
 }
@@ -61,6 +65,10 @@ section{
 
   &:hover::before{
     background: #a7897b !important;
+  }
+
+  &:hover{
+    color: #fff;
   }
 
   [nz-input]:focus{

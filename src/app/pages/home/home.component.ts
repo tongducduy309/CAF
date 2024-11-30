@@ -21,6 +21,14 @@ export class HomeComponent extends Page implements OnInit{
 
   products_best_discount: any = []
 
+  products_by_cate: any = {}
+
+  selected_tab = 2
+
+  categories:any = []
+
+  best_customer_reviews:any = []
+
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
     super()
   }
@@ -28,17 +36,59 @@ export class HomeComponent extends Page implements OnInit{
 
     this.animationFirstSectionContent();
     this.getAllProducts();
+    // this.getCategories();
+    this.getBestCustomerReviews();
   }
 
 
   // ============================GET DATA=============================
   getAllProducts(){
-    this.crud.get('products','all').subscribe((data)=>{
-      this.products_best_discount=data
-      console.log(this.products_best_discount);
+    this.crud.get('products','all').subscribe((data:any)=>{
+      this.products_best_discount = data.sort((a:any, b:any) =>  b.sale.reduce((a:any, b:any) => a + b, 0) - a.sale.reduce((a:any, b:any) => a + b, 0)).slice(0,4);
+      this.products_by_cate = {}
+      for (let p of data){
+        if (!(p.cid in this.products_by_cate)){
+          this.products_by_cate[p.cid] = [p]
+        }
+        else {
+          if (this.products_by_cate[p.cid].length<6)
+          this.products_by_cate[p.cid].push(p)
+        }
+      }
+
+      console.log(this.products_by_cate);
       this.loaded()
     });
 
+  }
+
+  // getCategories(){
+
+  //   this.crud.get("categories","all").subscribe((categories:any)=>{
+  //     // this.categories.drinks = categories.filter((category:any)=>category.type==0)
+  //     // this.categories.food = categories.filter((category:any)=>category.type==1)
+  //     // this.categories = []
+  //     // Object.keys(categories).forEach((key:any)=>{
+  //     //   this.categories.push({
+  //     //     name:key,
+  //     //     values:categories[key]
+  //     //   })
+  //     // })
+  //     this.categories=categories.slice(0,6)
+  //     console.log(categories);
+  //     this.loaded()
+  //   })
+  // }
+
+  getProductsBestDiscount(){
+
+  }
+
+  getBestCustomerReviews(){
+    this.crud.get("best-customer-reviews","2").subscribe((res:any)=>{
+      this.best_customer_reviews  = res
+      console.log(res);
+    })
   }
   change(){
     this.route.navigate(['login'])
@@ -46,9 +96,9 @@ export class HomeComponent extends Page implements OnInit{
 
   animationFirstSectionContent(){
     const contents = [
-      'Chocolate Coffee',
-    'Choose the origin of the coffee',
-    'Freshly roasted coffee <b>and barista accessories.</b>'
+      'Cà phê đậm vị',
+    'Trái cây nguyên chất',
+    'Thơm mát <b>ngọt vị.</b>'
     ]
     const content = this.elRef.nativeElement.querySelector('.banner-center-content .content')
     let i=0
@@ -58,6 +108,10 @@ export class HomeComponent extends Page implements OnInit{
         if (i==3) i=0
       }
     },2000)
+  }
+
+  changeTab(page:any){
+    this.selected_tab = this.categories[page].id
   }
 
 

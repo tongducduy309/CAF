@@ -2,7 +2,7 @@
 <div class="product-item" [ngStyle]="{'background-color':bg, 'color':color_text}">
 
     <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
-    <div><img [src]="product.img" alt=""></div>
+    <div style="display: flex;justify-content: center;align-items: center;"><a [href]="'products/'+this.product.name_id"><img [src]="product.img" alt=""></a></div>
     <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
         <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
         <!-- <span nz-icon nzType="swap" nzTheme="outline"></span>
@@ -21,9 +21,9 @@
             </nz-select>
         </div>
     </div>
-    <div nz-row class="group" style="display: flex; justify-content: space-between;margin-top: 10px;">
+    <div nz-row class="group" style="display: flex; justify-content: space-between;margin-top: 10px; align-items: center;">
         <div style="font-weight: 800;" [ngStyle]="{'color':color_text}">
-          <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
+          <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
           <span class="cost" *ngIf="product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
         </div>
         <div class="btnAddToCart" style="font-weight: 700;" (click)="openFormAddToCart()">
@@ -31,5 +31,5 @@
         </div>
     </div>
 
-    <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (productEmitter)="AddToCart($event)"></app-note-product>
+    <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (submitEmitter)="AddToCart($event)"></app-note-product>
 </div>

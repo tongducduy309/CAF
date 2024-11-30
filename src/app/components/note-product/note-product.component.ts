@@ -11,7 +11,7 @@ export class NoteProductComponent implements OnInit{
   @Output() visibleChange = new EventEmitter<boolean>();
   @Input() title = 'Thêm vào giỏ'
   @Input() product:any
-  @Output() productEmitter = new EventEmitter();
+  @Output() submitEmitter = new EventEmitter();
   ngOnInit(): void {
   }
 
@@ -20,7 +20,7 @@ export class NoteProductComponent implements OnInit{
   }
 
   submit(){
-    this.productEmitter.emit({note:this.product.note,quantity:this.product.quantity})
+    this.submitEmitter.emit({note:this.product.note,quantity:this.product.quantity})
     this.visibleChange.emit(false)
   }
 

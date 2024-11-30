@@ -9,7 +9,7 @@
 
         <li nz-submenu nzOpen nzTitle="Quản lí đơn hàng" nzIcon="container">
           <ul>
-            <li nz-menu-item nzSelected>Tất cả</li>
+            <li nz-menu-item [nzSelected]="titlePage=='orders-all'">Tất cả</li>
             <li nz-menu-item>Chờ xác nhận</li>
             <li nz-menu-item>Đang pha chế</li>
             <li nz-menu-item>Đang giao hàng</li>
@@ -17,18 +17,17 @@
             <li nz-menu-item>Hủy & Hoàn trả</li>
           </ul>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm" nzIcon="appstore-add">
+        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add">
           <ul>
-            <li nz-menu-item>Tất cả</li>
-            <li nz-menu-item>Chương trình khuyến mãi</li>
-            <li nz-menu-item>Bán chạy</li>
+            <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Tất cả</li>
+            <li nz-menu-item (click)="remote('flash-sales')" [nzSelected]="titlePage=='flash-sales'">Chương trình khuyến mãi</li>
+            <li nz-menu-item (click)="remote('vouchers')" [nzSelected]="titlePage=='vouchers'">Phiếu giảm giá</li>
           </ul>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí người dùng" nzIcon="appstore-add">
+        <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user">
           <ul>
-            <li nz-menu-item>Tất cả</li>
-            <li nz-menu-item>Chương trình khuyến mãi</li>
-            <li nz-menu-item>Bán chạy</li>
+            <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Khách hàng</li>
+            <li nz-menu-item>Nhân viên</li>
           </ul>
         </li>
 

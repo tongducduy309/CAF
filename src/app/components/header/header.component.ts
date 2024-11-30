@@ -192,6 +192,8 @@ export class HeaderComponent implements OnInit{
         break
       }
     }
+    this.cal_Info_Cart()
+
   }
 
   removeItemInCart(data:any){

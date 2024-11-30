@@ -72,11 +72,11 @@ p{
   .banner-center-content{
     z-index: 2;
     color: #fff;
-    font-family: 'Outfit';
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
 
     h2{
       color: #fff;
@@ -112,8 +112,8 @@ p{
 .second-section{
   background-color: #000;
   [nz-carousel-content] {
-    text-align: center;
-    height: 160px;
+    // text-align: center;
+    height: 400px;
     background: transparent;
     color: #fff;
     overflow: hidden;

@@ -88,45 +88,5 @@
   border-radius: 8px;
 }
 
-.product{
-  display: flex;
-  margin-bottom: 10px;
-  .left{
-    flex: 1;
-    margin-right: 10px;
-    position: relative;
-  }
-  .center{
-    flex: 3;
-    &>div{
-      display: flex;
-    }
-    .size{
-      margin-right: 10px;
-    }
-  }
-  .right{
-    flex: 1;
-    font-weight: 800;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: flex-end;
-  }
-  .name{
-    overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 1; /* number of lines to show */
-              line-clamp: 1;
-      -webkit-box-orient: vertical;
-  }
-  .price{
-    font-size: 14px;
-  }
-  .cost{
-    opacity: .7;
-    text-decoration: line-through;
-    font-size: 12px;
-  }
-}
+
 
