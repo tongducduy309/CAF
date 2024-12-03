@@ -172,7 +172,7 @@
           <a href="/all-products" class="link-btn">Xem thêm</a>
         </div>
         <div nz-col nzSpan="8" *ngFor="let p of products_for_best">
-          <app-product2 [product]="p"></app-product2>
+          <app-product2 [product]="p" (addToCartEmitter)="addToCart($event)"></app-product2>
         </div>
       </div>
       </div>

@@ -24,7 +24,7 @@
           <div class="block">
             <h4 class="subtitle">Phương thức thanh toán</h4>
             <div class="group">
-              <nz-radio-group [(ngModel)]="bill.methodPayment">
+              <nz-radio-group [(ngModel)]="bill.paymentmethod">
 
                 <label nz-radio nzValue="1">Thanh toán khi nhận hàng</label>
                 <label nz-radio nzValue="2">Thanh toán bằng thẻ tín dụng</label>
@@ -32,22 +32,22 @@
             </div>
           </div>
 
-          <div class="block">
+          <div class="block" >
             <h4 class="subtitle">Điền thông tin thẻ</h4>
             <div class="group">
               <p class="label">Số thẻ:</p>
-              <input nz-input placeholder="Địa chỉ" [(ngModel)]="user.card.serial" />
+              <input nz-input placeholder="Địa chỉ" [(ngModel)]="user.card.serial" [disabled]="bill.paymentmethod=='1'"/>
             </div>
 
             <div class="group">
               <div nz-row [nzGutter]="[24,24]">
                 <div nz-col [nzSpan]="12">
                   <p class="label">Ngày hết hạn:</p>
-                  <input nz-input placeholder="MM/YYYY" [(ngModel)]="user.card.date" />
+                  <input nz-input placeholder="MM/YYYY" [(ngModel)]="user.card.date" [disabled]="bill.paymentmethod=='1'"/>
                 </div>
                 <div nz-col [nzSpan]="12">
                   <p class="label">Mã CVV/CVC:</p>
-                  <input nz-input placeholder="XXX" [(ngModel)]="user.card.code" />
+                  <input nz-input placeholder="XXX" [(ngModel)]="user.card.code" [disabled]="bill.paymentmethod=='1'"/>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
         <div class="total">
           <div class="group" style="margin-bottom: 20px;">
             <p class="label">Mã giảm giá:</p>
-            <input nz-input placeholder="Mã giảm giá" [(ngModel)]="code_gift" />
+            <input nz-input placeholder="Mã giảm giá" [(ngModel)]="code_gift" (blur)="verifyCode()"/>
           </div>
           <div class="group">
             <div class="inline">
@@ -79,19 +79,19 @@
             </div>
             <div class="inline">
               <b>Phí vận chuyển:</b>
-              <div>{{main.formatPrice(bill.ship)}} <span>VND</span></div>
+              <div>{{main.formatPrice(bill.delivery_fee)}} <span>VND</span></div>
             </div>
-            <div class="inline">
+            <div class="inline" *ngIf="bill.discount>0">
               <b>Giảm giá:</b>
-              <div>{{bill.discount}} <span>VND</span></div>
+              <div>-{{bill.discount}}<span>%</span></div>
             </div>
             <div class="inline" *ngIf="bill.discount>0">
               <b></b>
-              <div class="cost">{{main.formatPrice(100000)}} <span>VND</span></div>
+              <div class="cost-not-discount">{{main.formatPrice(bill.cost/(1-bill.discount/100))}} <span>VND</span></div>
             </div>
             <div class="inline">
               <b>Tổng:</b>
-              <div style="font-weight: 600;">{{main.formatPrice(bill.cost)}} <span>VND</span></div>
+              <div class="cost" style="font-weight: 600;">{{main.formatPrice(bill.cost)}} <span>VND</span></div>
             </div>
           </div>
         </div>

@@ -77,6 +77,36 @@ section{
 
 }
 
+.min-height{
+  animation: min-height 1.2s normal forwards;
+}
+
+.max-height{
+  animation: max-height 1.2s normal forwards;
+}
+
+@keyframes min-height {
+  to{
+    height: 0;
+    opacity: 0;
+  }
+  from{
+    height: 700px;
+    opacity: 1;
+  }
+}
+
+@keyframes max-height {
+  from{
+    height: 0;
+    opacity: 0;
+  }
+  to{
+    height: 700px;
+    opacity: 1;
+  }
+}
+
 
 
 

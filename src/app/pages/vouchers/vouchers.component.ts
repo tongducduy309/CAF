@@ -25,10 +25,10 @@ export class VouchersComponent {
     return null
   }
 
-  modify(indẽ:any){
+  modify(index:any){
 
   }
   confirmDelete(){
-    
+
   }
 }

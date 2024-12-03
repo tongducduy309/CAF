@@ -42,10 +42,14 @@
 
     font-size: 18px;
 
-    .cost{
+    .cost-not-discount{
       text-decoration: line-through;
       opacity: .7;
       font-style: italic;
+      font-weight: 600;
+    }
+
+    .cost{
       font-weight: 600;
     }
   }

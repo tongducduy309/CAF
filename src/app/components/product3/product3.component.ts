@@ -47,7 +47,4 @@ export class Product3Component implements OnInit {
     this.isFormAddToCart = true
   }
 
-  detailProduct(){
-    this.router.navigate([+"#head"])
-  }
 }

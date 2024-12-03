@@ -43,7 +43,8 @@ export class HomeComponent extends Page implements OnInit{
 
   // ============================GET DATA=============================
   getAllProducts(){
-    this.crud.get('products','all').subscribe((data:any)=>{
+    this.crud.get('products','all').subscribe((res:any)=>{
+      const data = res.data
       this.products_best_discount = data.sort((a:any, b:any) =>  b.sale.reduce((a:any, b:any) => a + b, 0) - a.sale.reduce((a:any, b:any) => a + b, 0)).slice(0,4);
       this.products_by_cate = {}
       for (let p of data){
@@ -86,7 +87,7 @@ export class HomeComponent extends Page implements OnInit{
 
   getBestCustomerReviews(){
     this.crud.get("best-customer-reviews","2").subscribe((res:any)=>{
-      this.best_customer_reviews  = res
+      this.best_customer_reviews  = res.data
       console.log(res);
     })
   }

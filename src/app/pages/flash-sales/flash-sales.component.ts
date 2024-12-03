@@ -18,7 +18,7 @@ export class FlashSalesComponent implements OnInit{
 
   getFlashSales(){
     this.crud.get("flash-sales","all").subscribe((res:any)=>{
-      this.fs = res
+      this.fs = res.data
       console.log(res);
     })
   }

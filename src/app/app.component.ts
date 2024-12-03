@@ -27,6 +27,7 @@ export class AppComponent{
 
   change(componentRef:any){
     componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
+      console.log(res);
       if (this.user){
         this.crud.addData("cart",{pid:res.id,uid:this.user.id,quantity:res.quantity*1,note:res.note}).then(response=>response.json()).then(data=>{
           if (data.result='success'){
@@ -63,28 +64,28 @@ export class AppComponent{
 
   }
 
-  async getUser():Promise<any>{
+  // async getUser():Promise<any>{
 
-    return new Promise(async (resolve, reject) => {
-      const token = this.main.getCookie("u-caf")
+  //   return new Promise(async (resolve, reject) => {
+  //     const token = this.main.getCookie("u-caf")
 
-      if(token){
-        const result = await this.userS.getUser(null,null,token)
-        if (result){
-          if (result.result=='Success'){
-            resolve({id:result.id})
-          }
-        }
-        resolve(null)
-
-
-      }
+  //     if(token){
+  //       const result = await this.userS.getUser(null,null,token)
+  //       if (result){
+  //         if (result.result=='Success'){
+  //           resolve({id:result.id})
+  //         }
+  //       }
+  //       resolve(null)
 
 
-    });
+  //     }
 
 
-  }
+  //   });
+
+
+  // }
 
 
 

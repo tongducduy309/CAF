@@ -36,10 +36,10 @@ export class AccountComponent extends Page implements OnInit {
   async getUser():Promise<any>{
 
     return new Promise(async (resolve, reject) => {
-      const token = this.main.getCookie("u-caf")
+      const user = this.main.getCookie("u-caf")
 
-      if(token){
-        const result = await this.userS.getUser(null,null,token)
+      if(user){
+        const result = await this.userS.getUser(null,null,user.token)
         if (result){
           if (result.result=='Success'){
             resolve({

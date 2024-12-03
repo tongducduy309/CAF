@@ -40,9 +40,9 @@ export class SearchToolComponent implements OnInit{
   findProducts(){
     if(this.key.trim().length>0){
       console.log(this.key.trim().toLowerCase());
-      this.crud.get("products",this.key.trim().toLowerCase()).subscribe((products)=>{
-        this.results = products
-        console.log("search",products);
+      this.crud.get("products",this.key.trim().toLowerCase()).subscribe((res:any)=>{
+        this.results = res.data
+        // console.log("search",res);
         this.isFinding=false
       })
     }

@@ -64,7 +64,8 @@ export class DetailProductComponent extends Page implements OnInit {
 
   getIdProduct(id:any){
 
-    this.crud.get("products",id).subscribe((product:any)=>{
+    this.crud.get("products",id).subscribe((res:any)=>{
+      const product =res.data
       if (product[0])
         this.product = product[0]
 
@@ -80,9 +81,9 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   getCustomerReviews(id:any){
-    this.crud.get('customer-reviews',id).subscribe((cs:any)=>{
+    this.crud.get('customer-reviews',id).subscribe((res:any)=>{
       let sum = 0
-      console.log(cs.length);
+      const cs = res.data
       for (let c of cs){
         sum+=c.point
         console.log(sum);
@@ -98,9 +99,9 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   getBestProducts(){
-    this.crud.get("products-by-customer-reviews","2").subscribe((products:any)=>{
-      this.products_for_best=products
-      console.log(products);
+    this.crud.get("products-by-customer-reviews","2").subscribe((res:any)=>{
+      this.products_for_best=res.data
+
     })
   }
   quantity = 1
@@ -123,9 +124,9 @@ export class DetailProductComponent extends Page implements OnInit {
 
   async submitReview(){
     this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id})
-    .then(response => response)
+    .then(response => response.json())
     .then(data => {
-        if (data.status==200) {
+        if (data.result='success') {
           this.main.createNotification("success","Viết bài đánh giá thành công")
         }
         else{

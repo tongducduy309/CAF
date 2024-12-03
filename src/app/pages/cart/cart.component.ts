@@ -30,10 +30,8 @@ export class CartComponent extends Page implements AfterViewInit{
 
   getItemsCart(){
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
-      this.itemsCart = response.rows
-      for (let item of this.itemsCart){
-        this.subtotal+=item.quantity*this.main.getPrice(item)
-      }
+      this.itemsCart = response.data
+      this.cal_Info_Cart()
       // console.log(this.itemsCart);
       this.loaded()
     })
@@ -101,6 +99,32 @@ export class CartComponent extends Page implements AfterViewInit{
 
     this.changeQuantityEmitter.emit(item)
 
+
+  }
+
+  removeItemInCart(data:any){
+    const id = data.id
+
+    this.crud.delete("cart",id).subscribe((res:any)=>{
+      console.log(res);
+      if (res.result=='success'){
+        console.log(this.itemsCart);
+        this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
+        this.cal_Info_Cart()
+
+      }
+      else{
+        this.main.createNotification("error","Xóa sản phẩm khỏi giỏ hàng không thành công")
+      }
+    })
+  }
+
+  cal_Info_Cart(){
+    this.subtotal=0
+
+    for (let ite of this.itemsCart){
+      this.subtotal+=ite.quantity*this.main.getPrice(ite)
+    }
 
   }
 }

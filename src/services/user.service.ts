@@ -23,11 +23,11 @@ export class UserService {
       // console.log(result);
       if (result){
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",token,43200)
+          this.main.setCookie("u-caf",JSON.stringify({token:token,uid:result.id,email:result.email,fullname:result.fullname}),43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:token})
         }
-        if (result.result=='Not Verified')
+        if (result.result=='Not Verify')
           this.main.createNotification("info","Tài khoản chưa được xác thực")
         if (result.result=='Not Exist'){
           this.main.createNotification("info","Tài khoản không tồn tại")
@@ -45,12 +45,13 @@ export class UserService {
     return new Promise(async (resolve, reject) => {
       const result = await this.getUser(email,password)
       if (result){
+        console.log(result);
         if (result.result=='Success'){
-          this.main.setCookie("u-caf",result.token,43200)
+          this.main.setCookie("u-caf",JSON.stringify({token:result.token,uid:result.id,email:result.email,fullname:result.fullname}),43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
         }
-        if (result.result=='Not Verified')
+        if (result.result=='Not Verify')
           this.main.createNotification("info","Tài khoản chưa được xác thực")
         if (result.result=='Wrong Password')
           this.main.createNotification("info","Mật khẩu chưa chính xác")

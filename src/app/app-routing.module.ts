@@ -24,6 +24,7 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
 import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
+import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 
 const routes: Routes = [
 
@@ -137,6 +138,10 @@ const routes: Routes = [
   {
     path:'orders',
     component:OrdersComponent
+  },
+  {
+    path:'bill/:bid',
+    component:DetailBillComponent
   },
   {
     path:'page-not-found',

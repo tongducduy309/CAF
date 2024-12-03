@@ -31,18 +31,18 @@ export class AllProductsComponent extends Page implements OnInit  {
   filter_name_cate_products:any = []
   categories:any = []
 
-  
+
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService) {
     super();
     this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
       const key = params.get('key')||''
       if (key!=''){
-        this.crud.get("all-products",key).subscribe((products:any)=>{
-          this.products=products
-          this.products_v=[...products]
+        this.crud.get("all-products",key).subscribe((res:any)=>{
+          this.products=res.data
+          this.products_v=[...this.products]
           this.loaded()
-          console.log(this.products);
+          // console.log(this.products);
         })
       }
       else{
@@ -58,8 +58,8 @@ export class AllProductsComponent extends Page implements OnInit  {
   }
 
   getAllProducts(){
-    this.crud.get("products","all").subscribe((products:any)=>{
-      for (let p of products){
+    this.crud.get("products","all").subscribe((res:any)=>{
+      for (let p of res.data){
         if (!(p.cid in this.products)){
           this.products[p.cid] = [p]
           this.name_cate_products.push({name:p.c_name,id:p.cid})
@@ -71,20 +71,20 @@ export class AllProductsComponent extends Page implements OnInit  {
       // this.products=products
       this.products_v={...this.products}
       this.loaded()
-      console.log(this.products);
+      // console.log(this.products);
     })
   }
 
   getCategories(){
 
-    this.crud.get("categories","group-by-type").subscribe((categories:any)=>{
+    this.crud.get("categories","group-by-type").subscribe((res:any)=>{
       // this.categories.drinks = categories.filter((category:any)=>category.type==0)
       // this.categories.food = categories.filter((category:any)=>category.type==1)
       this.categories = []
-      Object.keys(categories).forEach((key:any)=>{
+      Object.keys(res.data).forEach((key:any)=>{
         this.categories.push({
           name:key,
-          values:categories[key]
+          values:res.data[key]
         })
         this.filters_value.category.push(false)
       })

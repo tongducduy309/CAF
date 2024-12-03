@@ -48,6 +48,8 @@ import { ManageProductsComponent } from './pages/manage-products/manage-products
 import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { ItemInBillComponent } from './components/item-in-bill/item-in-bill.component';
+import { BillComponent } from './components/bill/bill.component';
+import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 registerLocaleData(vi);
 
 
@@ -66,7 +68,8 @@ export let components:any = [
   BoxAddressComponent,
   ManageAddressComponent,
   NoteProductComponent,
-  ItemInBillComponent
+  ItemInBillComponent ,
+  BillComponent
 ]
 
 export let pages = [
@@ -94,7 +97,8 @@ export let pages = [
   OrdersComponent,
   ManageProductsComponent,
   FlashSalesComponent,
-  VouchersComponent
+  VouchersComponent,
+  DetailBillComponent
 ]
 
 @NgModule({

@@ -94,7 +94,7 @@
     </div>
     <div nz-row [nzGutter]="[24,12]">
       <div nz-col [nzSpan]="6" *ngFor="let product of products_best_discount">
-        <app-product3 bg="#a7897b" color_text="#fff" [product]="product"></app-product3>
+        <app-product3 bg="#a7897b" color_text="#fff" [product]="product" (addToCartEmitter)="addToCart($event)"></app-product3>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
       </div>
       <div nz-col [nzSpan]="8">
-        <app-product2 [product]="this.products_best_discount[0]"></app-product2>
+        <app-product2 [product]="this.products_best_discount[0]" (addToCartEmitter)="addToCart($event)"></app-product2>
       </div>
     </div>
   </div>

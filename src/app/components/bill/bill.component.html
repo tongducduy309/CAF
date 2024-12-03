@@ -1,0 +1,34 @@
+<div class="bill">
+  <div class="top">
+    <div class="list-products">
+      <div class="product" *ngFor="let product of bill.products">
+        <div class="left">
+          <img [src]="product.img" alt="">
+
+        </div>
+        <div class="center">
+          <p class="name">{{product.name}}</p>
+          <div>
+            <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
+            <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
+          </div>
+          <p class="note">Ghi chú: {{product.note}}</p>
+        </div>
+        <div class="right">
+          <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
+          <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="btnDetail" [routerLink]="'/bill/'+bill.id">
+      <span >Chi tiết</span>
+    </div>
+
+  </div>
+  <div class="bottom">
+    <span><b>TỔNG</b>({{bill.products.length}} sản phẩm)<b>:</b> {{main.formatPrice(bill.cost)}} VND</span>
+  </div>
+</div>

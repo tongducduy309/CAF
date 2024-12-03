@@ -1,5 +1,5 @@
 
-<nz-ribbon nzText="Mặc định" nzColor="black" *ngIf="info&&info.default">
+<nz-ribbon nzText="Mặc định" nzColor="black" *ngIf="info&&info.default_">
   <div class="box" (click)="choose()">
     <div style="display: flex;">
       <p style="margin-right: 20px;"><b>{{info.receiver}}</b></p>
@@ -13,7 +13,7 @@
   </div>
 </nz-ribbon>
 
-<div class="box" *ngIf="info&&!info.default" (click)="choose()">
+<div class="box" *ngIf="info&&!info.default_" (click)="choose()">
   <div style="display: flex;" >
     <p style="margin-right: 20px;"><b>{{info.receiver}}</b></p>
     <p>Số điện thoại: {{info.contactnumber}}</p>

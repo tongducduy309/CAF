@@ -51,14 +51,14 @@ export class ManageProductsComponent implements OnInit{
   }
   getCategories(){
 
-    this.crud.get("categories","all").subscribe((categories:any)=>{
-      this.categories = categories
-      console.log(categories);
+    this.crud.get("categories","all").subscribe((res:any)=>{
+      this.categories = res.data
     })
   }
 
   getAllProducts(){
-    this.crud.get("products","all").subscribe((products:any)=>{
+    this.crud.get("products","all").subscribe((res:any)=>{
+      const products = res.data
       for (let p of products){
         if (p.shelf_status){
           this.product_on_shelf++
@@ -77,9 +77,6 @@ export class ManageProductsComponent implements OnInit{
     this.isFormAddProduct=false
   }
   handleOk(){
-    // this.crud.addData('products',this.product).then(response=>response.json()).then(data=>{
-    //   console.log(data);
-    // })
       const imageBlob = this.imgProduct.nativeElement.files[0];
       const file = new FormData();
       file.set('img', imageBlob);

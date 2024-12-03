@@ -105,22 +105,22 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
     }
 
     if (!this.isValid(this.user.fullname)) {
-      this.createNotification('error', 'Bắt buộc ghi đầy đủ họ và tên');
+      this.createNotification('info', 'Bắt buộc ghi đầy đủ họ và tên');
       return;
     }
 
     if (!this.isValidEmail(this.user.email)) {
-      this.createNotification('error', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
+      this.createNotification('info', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
       return;
     }
 
     if (!this.isValidPassword(this.user.password)) {
-      this.createNotification('error', 'Mật khẩu phải dài hơn 8 kí tự');
+      this.createNotification('info', 'Mật khẩu phải dài hơn 8 kí tự');
       return;
     }
 
     if (this.user.password!=this.user.confirm_password) {
-      this.createNotification('error', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
+      this.createNotification('info', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
       return;
     }
 
@@ -128,6 +128,13 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       email:this.user.email,
       fullname:this.user.fullname,
       password:this.user.password
+    }).then(res=>res.json()).then(data=>{
+      if (data.result='success'){
+        this.submited = true
+      }
+      else{
+        this.main.createNotification("error","Xảy ra lỗi")
+      }
     })
 
 
@@ -138,7 +145,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
     //   email: this.Email_Fill
     // })
 
-    this.submited = true
+
 
     // this.createNotification('success', 'Thanks for registering!');
 

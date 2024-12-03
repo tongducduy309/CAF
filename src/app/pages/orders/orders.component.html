@@ -16,11 +16,12 @@
 <section class="content-section">
   <div class="container">
     <nz-tabset>
-      <nz-tab [nzTitle]="titleTemplate" *ngFor="let tab of tabs">
+      <nz-tab [nzTitle]="titleTemplate" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
         <ng-template #titleTemplate>
           <span *ngIf="tab.icon.length>0" nz-icon [nzType]="tab.icon" nzTheme="outline"></span>
           {{ tab.name }}
         </ng-template>
+        <app-bill *ngFor="let bill of bills_v" [bill]="bill"></app-bill>
       </nz-tab>
   </nz-tabset>
   </div>

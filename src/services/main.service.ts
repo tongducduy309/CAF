@@ -36,12 +36,20 @@ export class MainService {
 
   }
 
-  getCookie(name: string): string | null {
+  equalObject(obj1:any,obj2:any){
+
+    for (let key of Object.keys(obj1)){
+      if (obj1[key]!=obj2[key]) return false
+    }
+    return true
+  }
+
+  getCookie(name: string): {} | any{
     const cookies = document.cookie.split(';');
     for (const cookie of cookies) {
       const parts = cookie.trim().split('=');
       if (parts[0] === name) {
-        return decodeURIComponent(parts[1]);
+        return JSON.parse(decodeURIComponent(parts[1]));
       }
     }
     return null;
@@ -61,12 +69,30 @@ export class MainService {
     }
   }
 
+  formatEncode(n:any,a:any){
+    let s=n+"";
+    while (s.length<a) s='0'+s;
+    let x='';
+    for (let i=0;i<a;i++) x+=s[i];
+
+
+    return x;
+}
+  createID(){
+    let date = new Date();
+    let d=[date.getDate(),date.getMonth(),(date.getFullYear()+"").slice(2,4),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
+    let n=[2,2,2,2,2,2,4];
+    let id='';
+    for (let i=0;i<d.length;i++) id+=this.formatEncode(d[i],n[i]);
+    return id;
+  }
+
   formatPrice(num:any) {
     try {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
     catch (e){
-      console.log('Format Error');
+      return '0'
     }
     return num
   }

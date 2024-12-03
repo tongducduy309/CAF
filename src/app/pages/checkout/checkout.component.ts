@@ -51,9 +51,9 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       const id = params.get('id')
       const note = params.get('note')
       if (quantity&&id){
-        this.crud.get('product',id!).subscribe((product:any)=>{
+        this.crud.get('product',id!).subscribe((res:any)=>{
           // console.log(products);
-          product = product.rows
+          const product = res.data
           this.products.push({...product,quantity:quantity,note:note})
           this.cal_Info_list()
           this.loaded()
@@ -70,7 +70,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   getItemsCart(){
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
-      this.products = response.rows
+      this.products = response.data
       this.cal_Info_list()
       this.loaded()
 
@@ -82,16 +82,18 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     for (let product of this.products){
       this.bill.subtotal += (product.quantity||0) * this.main.getPrice(product)
     }
-    this.bill.ship = 0
+    this.bill.delivery_fee = (this.bill.subtotal>=200000)?0:10000
     this.bill.discount = 0
-    this.bill.cost = this.bill.subtotal+this.bill.ship
-    this.bill.methodPayment = '1'
+    this.bill.cost = this.bill.subtotal+this.bill.delivery_fee
+    this.bill.cost -= this.bill.cost*this.bill.discount/100
+    this.bill.paymentmethod = '1'
   }
 
 
 
   async checkUser(){
     this.user = await this.getUser();
+    console.log(this.user);
     if (!this.user)
     {
       this.router.navigate([''])
@@ -111,13 +113,13 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
   async getUser():Promise<any>{
 
     return new Promise(async (resolve, reject) => {
-      const token = this.main.getCookie("u-caf")
+      const user = this.main.getCookie("u-caf")
 
-      if(token){
-        const result = await this.userS.getUser(null,null,token)
+      if(user){
+        const result = await this.userS.getUser(null,null,user.token)
         if (result){
           if (result.result=='Success'){
-            resolve({id:result.id,email:result.email})
+            resolve({id:result.id,email:result.email,fullname:result.fullname})
           }
         }
         resolve(null)
@@ -141,6 +143,63 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       this.main.createNotification("info","Cung cấp thêm thông tin giao hàng")
       this.isMannageAddress=true
     }
+    else{
+      console.log({
+        user:{
+          ...this.address_user_choosing,
+          email:this.user.email,
+          fullname:this.user.fullname,
+          id:this.user.id
+        },
+        bill:{
+          ...this.bill,
+          products:this.products,
+          id:this.main.createID(),
+          payment_status:this.bill.paymentmethod==2
+        }
+      });
+      this.crud.addData("checkout",{
+        user:{
+          ...this.address_user_choosing,
+          email:this.user.email,
+          fullname:this.user.fullname,
+          id:this.user.id
+        },
+        bill:{
+          ...this.bill,
+          id:this.main.createID(),
+          products:this.products,
+          payment_status:this.bill.paymentmethod==2
+        }
+      }).then(res=>res.json()).then(data=>{
+        console.log(data);
+        if (data.result=='success'){
+          this.main.createNotification("success","Thanh toán thành công")
+        }
+        else{
+          this.main.createNotification("info","Thanh toán thất bại")
+        }
+      })
+    }
   }
+
+  verifyCode(){
+   if (this.code_gift.trim()){
+    this.crud.get("voucher",this.code_gift).subscribe((res:any)=>{
+      if (res.result=='success'){
+        const row = res.rows[0]
+        this.bill.discount = row.discount
+        this.bill.cost = this.bill.subtotal+this.bill.delivery_fee
+        this.bill.cost -= this.bill.cost*this.bill.discount/100
+        this.main.createNotification("success",`Đang sử dụng mã giảm giá ${this.bill.discount}%`)
+      }
+      else{
+        this.main.createNotification("info","Mã giảm giá không tồn tại hoặc đã hết hạn")
+      }
+    })
+   }
+  }
+
+
 
 }

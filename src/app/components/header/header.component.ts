@@ -102,10 +102,10 @@ export class HeaderComponent implements OnInit{
   async getUser():Promise<any>{
 
     return new Promise(async (resolve, reject) => {
-      const token = this.main.getCookie("u-caf")
-
-      if(token){
-        const result = await this.userS.getUser(null,null,token)
+      const user = this.main.getCookie("u-caf")
+      // console.log(user);
+      if(user){
+        const result = await this.userS.getUser(null,null,user.token)
         if (result){
           if (result.result=='Success'){
             resolve({id:result.id})
@@ -126,7 +126,9 @@ export class HeaderComponent implements OnInit{
 
   getCategories(){
     this.crud.get("categories","group-by-type").subscribe((categories:any)=>{
-      this.categories=categories
+      if (categories.result='success'){
+        this.categories=categories.data
+      }
       // console.log(categories);
 
     })
@@ -177,7 +179,7 @@ export class HeaderComponent implements OnInit{
   getItemsCart(){
     this.loading = true
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
-      this.itemsCart = response.rows
+      this.itemsCart = response.data
       this.cal_Info_Cart()
       // this.itemsCartChange.emit(this.itemsCart)
 
