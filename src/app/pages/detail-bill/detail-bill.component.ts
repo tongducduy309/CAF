@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-bill',
@@ -12,13 +13,18 @@ import { MainService } from 'src/services/main.service';
 export class DetailBillComponent extends Page implements AfterViewInit {
   bill:any = {}
 
-  constructor(private route: ActivatedRoute, private crud:CrudService, public main:MainService){
+  constructor(private route: ActivatedRoute, private crud:CrudService, public main:MainService, private location:Location){
     super()
     this.route.paramMap.subscribe(async (params) => {
       const bid = params.get('bid')
       this.getBill(bid)
     });
   }
+
+  back(){
+    this.location.back();
+  }
+
   ngAfterViewInit(): void {
     Promise.resolve().then(()=> {
       // this.getUser()
@@ -36,6 +42,27 @@ export class DetailBillComponent extends Page implements AfterViewInit {
           console.log(res);
           if (res.data){
             this.bill = res.data
+            switch (this.bill.status){
+              case 1:
+                this.bill.status = 'Đang pha chế'
+                this.bill.status_color = 'orange'
+                break;
+              case 2:
+                this.bill.status = 'Đang giao hàng'
+                this.bill.status_color = 'purple'
+                break;
+              case 3:
+                this.bill.status = 'Đã nhận'
+                this.bill.status_color = 'green'
+                break;
+              case 4:
+                this.bill.status = 'Hủy'
+                this.bill.status_color = 'red'
+                break;
+              default:
+                this.bill.status = 'Chờ xác nhận'
+                this.bill.status_color = 'blue'
+            }
             return;
           }
         }
