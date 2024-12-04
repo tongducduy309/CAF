@@ -108,7 +108,7 @@ export class HeaderComponent implements OnInit{
         const result = await this.userS.getUser(null,null,user.token)
         if (result){
           if (result.result=='Success'){
-            resolve({id:result.id})
+            resolve({id:result.id,role:result.role})
           }
         }
         resolve(null)
@@ -248,6 +248,7 @@ export class HeaderComponent implements OnInit{
   logout(){
     this.userS.logout()
     this.user = null
+    this.total = 0
   }
 
 }

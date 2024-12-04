@@ -19,19 +19,35 @@
     <div nz-row [nzGutter]="[24,24]">
       <div nz-col [nzSpan]="12">
         <div class="name">
-          <p><b>Họ và tên:</b> {{user.fullname}}<span class="btn">
-            <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"
-            ></span>Thay đổi họ và tên
-          </span></p>
+          <div *ngIf="!changing_fullname" style="display: flex;align-items: center;margin-bottom: 10px;">
+            <p><b>Họ và tên:</b> {{user.fullname}}</p>
+            <div class="btn" (click)="changing_fullname=true" >
+              <span nz-icon nzType="edit" nzTheme="outline"
+              ></span>Thay đổi họ và tên
+            </div>
+          </div>
+          <div *ngIf="changing_fullname">
+            <div style="display: flex;align-items: center;margin-bottom: 10px;">
+              <b style="text-wrap: nowrap;margin-right: 20px;">Họ và tên:</b>
+              <input nz-input type="text">
+
+            </div>
+            <div class="btn" (click)="submitChangeFullName()" style="width: 100%;margin-top: 10px;text-align: center;">
+              <span nz-icon nzType="check" nzTheme="outline"
+              ></span>Xác nhận
+            </div>
+          </div>
         </div>
         <p><b>Email:</b> {{user.email}}</p>
         <!-- <p><b>Số điện thoại:</b> {{user.contactNumber}}</p> -->
         <div class="password">
-          <p><b>Mật khẩu:</b>
-            <span class="btn">
-              <span nz-icon nzType="edit" nzTheme="outline" [routerLink]="['/account/new-password']"
+          <div style="display: flex;align-items: center;margin-bottom: 10px;">
+            <p><b>Mật khẩu:</b> &#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</p>
+            <div class="btn" (click)="changePassword()">
+              <span nz-icon nzType="edit" nzTheme="outline"
               ></span>Thay đổi mật khẩu
-            </span></p>
+            </div>
+          </div>
 
         </div>
       </div>

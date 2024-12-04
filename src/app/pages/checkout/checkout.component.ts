@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
@@ -34,6 +34,12 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   isMannageAddress = false
 
+  processing = false
+
+  inCart = false
+
+  @Output() totalEmitter = new EventEmitter()
+
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
     super()
     this.must_load = 2
@@ -51,6 +57,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       const id = params.get('id')
       const note = params.get('note')
       if (quantity&&id){
+        this.inCart=false
         this.crud.get('product',id!).subscribe((res:any)=>{
           // console.log(products);
           const product = res.data
@@ -61,6 +68,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       }
       else{
         this.getItemsCart()
+        this.inCart=true
       }
     });
 
@@ -144,20 +152,8 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       this.isMannageAddress=true
     }
     else{
-      console.log({
-        user:{
-          ...this.address_user_choosing,
-          email:this.user.email,
-          fullname:this.user.fullname,
-          id:this.user.id
-        },
-        bill:{
-          ...this.bill,
-          products:this.products,
-          id:this.main.createID(),
-          payment_status:this.bill.paymentmethod==2
-        }
-      });
+      this.processing = true
+
       this.crud.addData("checkout",{
         user:{
           ...this.address_user_choosing,
@@ -170,15 +166,19 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
           id:this.main.createID(),
           products:this.products,
           payment_status:this.bill.paymentmethod==2
-        }
+        },
+        inCart:this.inCart
       }).then(res=>res.json()).then(data=>{
         console.log(data);
         if (data.result=='success'){
           this.main.createNotification("success","Thanh toán thành công")
+          this.totalEmitter.emit(0)
+          this.router.navigate(['orders'])
         }
         else{
           this.main.createNotification("info","Thanh toán thất bại")
         }
+        this.processing = false
       })
     }
   }

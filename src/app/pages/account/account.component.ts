@@ -19,6 +19,8 @@ export class AccountComponent extends Page implements OnInit {
 
   address_user_choosing:any = null
 
+  changing_fullname = false
+
   constructor(private location:Location, private main:MainService, private userS:UserService, private router:Router, private crud:CrudService){
     super()
   }
@@ -45,7 +47,7 @@ export class AccountComponent extends Page implements OnInit {
             resolve({
               id:result.id,
               fullname:result.fullname,
-              token:result.token,
+              token:user.token,
               point:result.point,
               email:result.email,
               contactNumber: result.contactNumber,
@@ -87,6 +89,15 @@ export class AccountComponent extends Page implements OnInit {
   //   console.log(a);
   //   this.isMannageAddress=false
   // }
+
+  submitChangeFullName(){
+    this.changing_fullname = false
+  }
+
+  changePassword(){
+    console.log(this.user.token);
+    this.router.navigate(['account/new-password'],{queryParams:{'token':this.user.token}})
+  }
 
 }
 

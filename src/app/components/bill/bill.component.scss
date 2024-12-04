@@ -30,8 +30,14 @@
   }
   .bottom{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 20px;
+
+    .date-created{
+      color: #a1a1a1;
+      font-style: italic;
+      font-size: 12px;
+    }
   }
 }
 

@@ -62,6 +62,12 @@ export class AppComponent{
 
     })
 
+    componentRef.totalEmitter?.subscribe((res:any)=>{
+      // console.log(res);
+      this.total = res
+
+    })
+
   }
 
   // async getUser():Promise<any>{

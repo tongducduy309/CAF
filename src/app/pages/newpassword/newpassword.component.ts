@@ -54,12 +54,23 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
       return;
     }
 
-    console.log(this.user);
+
 
     this.crud.put("users/password",{token:this.token,password:this.user.password, email:this.user.email}).then(res=>res.json()).then(data=>{
       if (data.result=='success'){
+
+        const user = this.main.getCookie("u-caf")
+        if (user){
+          if (user.token==this.token){
+            this.main.createNotification("success","Thay đổi mật khẩu thành công")
+            this.main.setCookie("u-caf",JSON.stringify({token:data.data,uid:user.uid,email:user.email,fullname:user.fullname}),43200)
+            this.router.navigate(['account'])
+            return;
+          }
+        }
         this.main.createNotification("success","Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại")
         this.router.navigate(['account/login'])
+
       }
       else{
         this.main.createNotification("info","Đặt lại mật khẩu không thành công")

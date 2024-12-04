@@ -53,9 +53,9 @@
             </div>
           </div>
 
-          <div class="btnCheckout" (click)="submit()">
+          <button class="btnCheckout" (click)="submit()" [disabled]="processing">
             <span>THANH TOÁN</span>
-          </div>
+          </button>
         </div>
       </div>
       <div nz-col [nzSpan]="11">

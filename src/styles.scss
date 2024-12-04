@@ -34,6 +34,8 @@ section{
 
 
 
+
+
 .btn{
   user-select: none;
   cursor: pointer;
@@ -75,6 +77,11 @@ section{
     outline: 0 !important;
   }
 
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .min-height{
