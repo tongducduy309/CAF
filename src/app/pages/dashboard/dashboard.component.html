@@ -9,12 +9,8 @@
 
         <li nz-submenu nzOpen nzTitle="Quản lí đơn hàng" nzIcon="container">
           <ul>
-            <li nz-menu-item [nzSelected]="titlePage=='orders-all'">Tất cả</li>
-            <li nz-menu-item>Chờ xác nhận</li>
-            <li nz-menu-item>Đang pha chế</li>
-            <li nz-menu-item>Đang giao hàng</li>
-            <li nz-menu-item>Đã nhận</li>
-            <li nz-menu-item>Hủy & Hoàn trả</li>
+            <li nz-menu-item (click)="remote('orders')" [nzSelected]="titlePage=='orders'">Tất cả</li>
+
           </ul>
         </li>
         <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add">

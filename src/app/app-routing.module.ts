@@ -25,6 +25,7 @@ import { ManageProductsComponent } from './pages/manage-products/manage-products
 import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
+import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 
 const routes: Routes = [
 
@@ -132,7 +133,8 @@ const routes: Routes = [
     children:[
       {path:"manage-products",component:ManageProductsComponent},
       {path:"flash-sales",component:FlashSalesComponent},
-      {path:"vouchers",component:VouchersComponent}
+      {path:"vouchers",component:VouchersComponent},
+      {path:"orders",component:ManageOrdersComponent}
     ]
   },
   {

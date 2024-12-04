@@ -1,34 +1,40 @@
-<nz-table #basicTable [nzData]="vouchers">
-  <thead>
-    <tr>
-      <th nzAlign = "center" nzLeft>STT</th>
-      <th nzLeft>Trạng thái</th>
-      <th nzLeft>Mã giảm giá</th>
-      <th>Thời gian bắt đầu</th>
-      <th>Thời gian kết thúc</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let data of basicTable.data;index as i">
-      <td nzAlign = "center" nzLeft>{{i+1}}</td>
-      <td nzLeft><img style="width: 70px;height: 70px;object-fit: contain;" [src]="data.img" alt=""></td>
-      <td nzLeft>{{data.name}}</td>
-      <td>{{data.c_name}}</td>
-      <td>{{data.size}}</td>
-      <td>{{data.sale}}%</td>
-      <td>{{formatDateToString(data.datesale_from)}}</td>
-      <td>{{formatDateToString(data.datesale_to)}}</td>
-      <td>
-        <a style="display: inline-block;" (click)="modify(i)">Sửa</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a nz-popconfirm
-          nzPopconfirmTitle="Xoá sản phẩm này chứ?"
-          nzOkText="Đồng ý"
-          nzCancelText="Không đồng ý"
-          (nzOnConfirm)="confirmDelete()"
-          nzPopconfirmPlacement="bottomRight">Xóa</a>
-      </td>
-    </tr>
-  </tbody>
-</nz-table>
+<section>
+  <button nz-button nzType="primary" nzSize="large" nzShape="round" style="margin-bottom: 20px;">
+    <span nz-icon nzType="plus" nzTheme="outline"></span>
+    Tạo voucher mới
+  </button>
+  <nz-table #basicTable [nzData]="vouchers">
+    <thead>
+      <tr>
+        <th nzAlign = "center" nzLeft>STT</th>
+        <th nzLeft>Trạng thái</th>
+        <th nzLeft>Mã giảm giá</th>
+        <th>Thời gian bắt đầu</th>
+        <th>Thời gian kết thúc</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data;index as i">
+        <td nzAlign = "center" nzLeft>{{i+1}}</td>
+        <td nzLeft><img style="width: 70px;height: 70px;object-fit: contain;" [src]="data.img" alt=""></td>
+        <td nzLeft>{{data.name}}</td>
+        <td>{{data.c_name}}</td>
+        <td>{{data.size}}</td>
+        <td>{{data.sale}}%</td>
+        <td>{{formatDateToString(data.datesale_from)}}</td>
+        <td>{{formatDateToString(data.datesale_to)}}</td>
+        <td>
+          <a style="display: inline-block;" (click)="modify(i)">Sửa</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a nz-popconfirm
+            nzPopconfirmTitle="Xoá sản phẩm này chứ?"
+            nzOkText="Đồng ý"
+            nzCancelText="Không đồng ý"
+            (nzOnConfirm)="confirmDelete()"
+            nzPopconfirmPlacement="bottomRight">Xóa</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</section>

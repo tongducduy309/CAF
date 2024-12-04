@@ -51,6 +51,7 @@ import { ItemInBillComponent } from './components/item-in-bill/item-in-bill.comp
 import { BillComponent } from './components/bill/bill.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
+import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 registerLocaleData(vi);
 
 
@@ -100,7 +101,8 @@ export let pages = [
   ManageProductsComponent,
   FlashSalesComponent,
   VouchersComponent,
-  DetailBillComponent
+  DetailBillComponent,
+  ManageOrdersComponent
 ]
 
 @NgModule({
