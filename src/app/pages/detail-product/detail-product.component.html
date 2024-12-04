@@ -1,4 +1,8 @@
-
+<nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
+  <ng-template #tpl>
+    <span nz-icon nzType="up-circle" nzTheme="fill" style="font-size: 30px; color: #262626;"></span>
+  </ng-template>
+</nz-back-top>
 <section class="first-section" id="head">
   <div class="container">
     <div nz-row class="show-product" [nzGutter]="[40]">
@@ -23,10 +27,6 @@
         </div> -->
         <div nz-row class="group" style="display: flex;align-items: center;">
           <nz-rate [(ngModel)]="rating_of_product.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
-          <!-- <a href="/products/{{product.name_id}}/#customer_review_section" style="font-size: 20px;" class="btn">
-            <span nz-icon nzType="edit" nzTheme="outline" style="margin-right: 5px;font-size: 20px;color: #fff;"></span>
-            <span style="font-weight: 700;color: #fff;">Viết đánh giá</span>
-          </a> -->
           <ng-template #rateIcon><span nz-icon nzType="star" [nzTheme]="product?.point==0?'outline':'fill'"></span></ng-template>
         </div>
         <div class="group">
@@ -92,7 +92,6 @@
 <section class="customer-review-section" id="customer_review_section" >
   <div class="container" style="margin-bottom: 20px;">
     <div class="content" style="color: #fff;text-align: center;width: 100%;margin-bottom: 20px;">Bài Đánh Giá</div>
-
     <div style="display: flex;align-items: center;justify-content: center;" class="sub">
       <div class="block">
         <div>
@@ -107,6 +106,49 @@
       </div>
       <div class="block">
         <div>
+          <div style="display: flex;align-items: center;">
+            <nz-rate [ngModel]="5" [nzCharacter]="rateIcon3" nzDisabled style="margin-right: 20px;"></nz-rate>
+
+            <span class="text">({{count_of_level_point[4]}})</span>
+
+          </div>
+        </div>
+        <div>
+          <div style="display: flex;align-items: center;">
+            <nz-rate [ngModel]="4" [nzCharacter]="rateIcon3" nzDisabled style="margin-right: 20px;"></nz-rate>
+
+            <span class="text">({{count_of_level_point[3]}})</span>
+
+          </div>
+        </div>
+        <div>
+          <div style="display: flex;align-items: center;">
+            <nz-rate [ngModel]="3" [nzCharacter]="rateIcon3" nzDisabled style="margin-right: 20px;"></nz-rate>
+
+            <span class="text">({{count_of_level_point[2]}})</span>
+
+          </div>
+        </div>
+        <div>
+          <div style="display: flex;align-items: center;">
+            <nz-rate [ngModel]="2" [nzCharacter]="rateIcon3" nzDisabled style="margin-right: 20px;"></nz-rate>
+
+            <span class="text">({{count_of_level_point[1]}})</span>
+
+          </div>
+        </div>
+        <div>
+          <div style="display: flex;align-items: center;">
+            <nz-rate [ngModel]="1" [nzCharacter]="rateIcon3" nzDisabled style="margin-right: 20px;"></nz-rate>
+
+            <span class="text">({{count_of_level_point[0]}})</span>
+
+          </div>
+        </div>
+        <ng-template #rateIcon3><span nz-icon nzType="star" nzTheme="fill"></span></ng-template>
+      </div>
+      <div class="block">
+        <div>
           <div class="btn" (click)="writeReview()">
             {{(writing_review)?'Hủy đánh giá':'Viết đánh giá'}}
           </div>
@@ -114,14 +156,14 @@
       </div>
     </div>
   </div>
-  <div class="container w-600">
+  <div class="container w-600" style="margin-bottom: 20px;">
 
 
     <div class="form" [ngClass]="{'max-height':writing_review,'min-height':writing_review==false}">
       <div class="content" style="color: #000;text-align: center;width: 100%;margin-bottom: 20px;">Viết Đánh Giá</div>
 
       <div class="group">
-        <span class="label">Đánh Giá</span>
+        <span class="label">Đánh Giá (Điểm đánh giá)</span>
         <nz-rate [(ngModel)]="form_review.point" [nzCharacter]="rateIconReview" style="margin-right: 20px;" (ngModelChange)="changeRating_Review($event)" (nzOnHoverChange)="hoverRating_Review($event)"></nz-rate>
         <ng-template #rateIconReview><span nz-icon nzType="star" [nzTheme]="form_review?.point==0?'outline':'fill'"></span></ng-template>
       </div>
@@ -159,6 +201,19 @@
     </div>
 
   </div>
+
+  <div class="container w-600">
+    <div class="list-customer-reviews" style="overflow: hidden;">
+      <app-customer-review *ngFor="let cs of customer_reviews.slice(0,number_showing)" [customer_review]="cs"></app-customer-review>
+    </div>
+    <div style="display:flex;width: 100%;justify-content: center;" *ngIf="number_showing<customer_reviews.length">
+      <div class="btnShowMore" (click)="showMore()">
+        Xem thêm
+      </div>
+    </div>
+  </div>
+
+
 </section>
 <section class="best-products-section" *ngIf="must_load==0">
   <div class="container">
@@ -171,9 +226,9 @@
           <p>Sự kết hợp hoàn hảo giữa cà phê và sữa. Cà phê hòa tan thượng hạng hòa quyện cùng sữa tươi béo ngậy, tạo nên hương vị thơm ngon, dễ uống. Sản phẩm tiện lợi, giúp bạn thưởng thức ly cà phê thơm ngon mọi lúc mọi nơi, ngay cả khi bận rộn.</p>
           <a href="/all-products" class="link-btn">Xem thêm</a>
         </div>
-        <div nz-col nzSpan="8" *ngFor="let p of products_for_best">
+        <!-- <div nz-col nzSpan="8" *ngFor="let p of products_for_best">
           <app-product2 [product]="p" (addToCartEmitter)="addToCart($event)"></app-product2>
-        </div>
+        </div> -->
       </div>
       </div>
   </div>

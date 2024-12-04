@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit{
   @Input() user:any=null;
   @Output() userChange = new EventEmitter();
 
-  @ViewChild('process') process: any;
   bg_header = '#000'
   btnShowCart = true
 

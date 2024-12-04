@@ -27,6 +27,7 @@ export class NoteProductComponent implements OnInit{
   changeQuantity(){
     this.product.quantity = this.product.quantity.replace(/\D/g, '');
     if(this.product.quantity<1) this.product.quantity=1
+    if(this.product.quantity>99) this.product.quantity=99
   }
 
   removeQuantity(){
@@ -36,7 +37,9 @@ export class NoteProductComponent implements OnInit{
   }
 
   addQuantity(){
-    this.product.quantity++;
+    if (this.product.quantity<99)
+      this.product.quantity++;
+
 
   }
 }

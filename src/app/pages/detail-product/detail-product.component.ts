@@ -40,22 +40,28 @@ export class DetailProductComponent extends Page implements OnInit {
 
   writing_review:any
 
-  products_for_best:any = []
+  // products_for_best:any = []
 
   isFormAddToCart = false
   isFormBuyNow = false
 
   product_form:any = {}
 
+  number_showing = 2
+
+  count_of_level_point = [0,0,0,0,0]
+
+  pid:any
+
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService){
     super();
     this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
-      const id = params.get('id')
-      this.getIdProduct(id)
-      this.getCustomerReviews(id)
-      this.getBestProducts()
+      this.pid = params.get('id')
+      this.getIdProduct(this.pid)
+      this.getCustomerReviews(this.pid)
+      // this.getBestProducts()
     });
   }
 
@@ -85,11 +91,13 @@ export class DetailProductComponent extends Page implements OnInit {
       let sum = 0
       const cs = res.data
       for (let c of cs){
+        this.count_of_level_point[c.point-1]++
         sum+=c.point
         console.log(sum);
       }
 
       this.customer_reviews = cs
+      console.log(cs);
       this.rating_of_product.customer = cs.length
       if (cs.length>0){
         this.rating_of_product.point = Math.floor(sum/cs.length)
@@ -98,13 +106,15 @@ export class DetailProductComponent extends Page implements OnInit {
     })
   }
 
-  getBestProducts(){
-    this.crud.get("products-by-customer-reviews","2").subscribe((res:any)=>{
-      this.products_for_best=res.data
+  // getBestProducts(){
+  //   this.crud.get("products-by-customer-reviews","2").subscribe((res:any)=>{
+  //     this.products_for_best=res.data
 
-    })
-  }
+  //   })
+  // }
   quantity = 1
+
+  
 
   writeReview(){
     this.form_review = {}
@@ -123,11 +133,24 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   async submitReview(){
+    if (!this.form_review.point||this.form_review.point==0){
+      this.main.createNotification("info","Vui lòng chọn điểm đánh giá")
+      return;
+    }
+    if (!this.form_review.comment||this.form_review.comment.trim().length==0){
+      this.main.createNotification("info","Vui lòng viết nhận xét")
+      return;
+    }
+    if (!this.form_review.name||this.form_review.name.trim().length==0){
+      this.main.createNotification("info","Vui lòng điền họ và tên")
+      return;
+    }
     this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id})
     .then(response => response.json())
     .then(data => {
         if (data.result='success') {
           this.main.createNotification("success","Viết bài đánh giá thành công")
+          this.getCustomerReviews(this.pid)
         }
         else{
           this.main.createNotification("info","Viết bài đánh giá không thành công")
@@ -143,6 +166,7 @@ export class DetailProductComponent extends Page implements OnInit {
   changeQuantity(){
     this.product.quantity = this.product.quantity.replace(/\D/g, '');
     if(this.product.quantity<1) this.product.quantity=1
+    if(this.product.quantity>99) this.product.quantity=99
   }
 
   removeQuantity(){
@@ -152,7 +176,9 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   addQuantity(){
-    this.product.quantity++;
+    if (this.product.quantity<99)
+      this.product.quantity++;
+
 
   }
 
@@ -196,6 +222,15 @@ export class DetailProductComponent extends Page implements OnInit {
     console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
     this.router.navigate([`checkout`],{ queryParams: {...product_c} })
   }
+
+  showMore(){
+    this.number_showing+=2
+    if (this.number_showing>this.customer_reviews.length){
+      this.number_showing=this.customer_reviews.length
+    }
+  }
+
+
 
 
 

@@ -34,6 +34,17 @@ p{
   font-weight: 400;
 }
 
+.btnShowMore{
+  color: #fff;
+  width: max-content;
+  height: max-content;
+  cursor: pointer;
+
+  &:hover{
+    opacity: .7;
+  }
+}
+
 .btn{
   margin: 0 auto;
   padding: 10px 20px;

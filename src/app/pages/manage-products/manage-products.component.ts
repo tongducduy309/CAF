@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
-import { Observable, Observer } from 'rxjs';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
@@ -36,8 +35,7 @@ export class ManageProductsComponent implements OnInit{
 
   formTitle = 'Thêm sản phẩm'
 
-  @ViewChild('img_product_form', { static: false })
-  imgProduct!: ElementRef;
+  @ViewChild('img_product_form', { static: false }) imgProduct!: ElementRef;
 
 
 

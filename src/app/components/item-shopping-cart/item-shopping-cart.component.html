@@ -29,9 +29,9 @@
         <p class="note">Ghi chú: {{item.note}}</p>
         <div>
           <div class="quantity">
-            <span nz-icon nzType="minus" nzTheme="outline" (click)="removeQuantity()"></span>
+            <span nz-icon nzType="minus" nzTheme="outline" #btnSub (click)="removeQuantity()"></span>
             <input type="text" [(ngModel)]="item.quantity" (blur)="changeQuantity()">
-            <span nz-icon nzType="plus" nzTheme="outline" (click)="addQuantity()"></span>
+            <span nz-icon nzType="plus" nzTheme="outline" #btnPlus (click)="addQuantity()"></span>
           </div>
         </div>
     </div>

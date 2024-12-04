@@ -129,11 +129,16 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       fullname:this.user.fullname,
       password:this.user.password
     }).then(res=>res.json()).then(data=>{
-      if (data.result='success'){
+      if (data.result=='success'){
         this.submited = true
       }
       else{
-        this.main.createNotification("error","Xảy ra lỗi")
+        if(data.result=='existed'){
+          this.main.createNotification("info","Email đã tồn tại")
+        }
+        else{
+          this.main.createNotification("error","Xảy ra lỗi")
+        }
       }
     })
 

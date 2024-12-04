@@ -50,6 +50,7 @@ import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { ItemInBillComponent } from './components/item-in-bill/item-in-bill.component';
 import { BillComponent } from './components/bill/bill.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
+import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
 registerLocaleData(vi);
 
 
@@ -69,7 +70,8 @@ export let components:any = [
   ManageAddressComponent,
   NoteProductComponent,
   ItemInBillComponent ,
-  BillComponent
+  BillComponent,
+  CustomerReviewComponent
 ]
 
 export let pages = [

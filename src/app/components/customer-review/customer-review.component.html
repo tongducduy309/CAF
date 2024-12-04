@@ -1,0 +1,17 @@
+
+<div class="customer-review">
+  <div style="display: flex;align-items: start;justify-content:space-between; margin-bottom:  10px;">
+    <div style="display: flex;align-items: center;">
+      <nz-rate [(ngModel)]="customer_review.point" [nzCharacter]="rateIcon" style="margin-right: 20px;" nzDisabled></nz-rate>
+    <ng-template #rateIcon><span nz-icon nzType="star" nzTheme="fill"></span></ng-template>
+      <span class="text">{{customer_review.point==0?'':customer_review.point}}.0 / <b>5.0</b></span>
+    </div>
+    <span>{{formatDateToString(customer_review.created)}}</span>
+  </div>
+  <p class="label">{{customer_review.name}}</p>
+  <blockquote>
+    <cite style="text-wrap: wrap;">
+      "{{customer_review.comment}}"
+    </cite>
+</blockquote>
+</div>

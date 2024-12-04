@@ -10,16 +10,13 @@ import { UserService } from 'src/services/user.service';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent extends Page implements AfterViewInit{
+export class CartComponent extends Page{
   @Input() itemsCart:any = []
   subtotal = 0
   user:any={}
   constructor(private location:Location, public main:MainService, private crud:CrudService,private router:Router, private userS:UserService){
     super()
     this.must_load = 1
-  }
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> this.getItemsCart())
   }
   ngOnInit(): void {
     this.checkUser()
@@ -46,7 +43,6 @@ export class CartComponent extends Page implements AfterViewInit{
       this.router.navigate([''])
     }
     else{
-      this.loaded()
       this.getItemsCart()
     }
 
