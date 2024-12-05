@@ -22,19 +22,19 @@
         </li>
         <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user" *ngIf="user.role>1">
           <ul>
-            <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Khách hàng</li>
-            <li nz-menu-item>Nhân viên</li>
+            <li nz-menu-item (click)="remote('accounts-customer')" [nzSelected]="titlePage=='accounts-customer'">Khách hàng</li>
+            <li nz-menu-item (click)="remote('accounts-staff')" [nzSelected]="titlePage=='accounts-staff'">Nhân viên</li>
           </ul>
         </li>
 
-        <li nz-submenu nzTitle="Thống kê" nzIcon="line-chart" *ngIf="user.role>1">
+        <!-- <li nz-submenu nzTitle="Thống kê" nzIcon="line-chart" *ngIf="user.role>1">
           <ul>
             <li nz-menu-item>option9</li>
             <li nz-menu-item>option10</li>
             <li nz-menu-item>option11</li>
             <li nz-menu-item>option12</li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </nz-sider>
     <nz-content class="inner-content"><router-outlet></router-outlet></nz-content>

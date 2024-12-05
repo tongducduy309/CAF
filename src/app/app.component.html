@@ -1,5 +1,5 @@
 
-<nz-spin [nzSpinning]="loading" nzSize="large" nzTip="Đợi Giây Lát...">
+<nz-spin [nzSpinning]="loading" nzSize="large" nzTip="Đợi Giây Lát... Nếu quá lâu vui lòng tải lại trang">
   <app-header [(total)]="total" [(user)]="user" ></app-header>
   <router-outlet (activate)="change($event)"></router-outlet>
   <app-footer ></app-footer>

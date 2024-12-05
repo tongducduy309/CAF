@@ -10,12 +10,15 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./vouchers.component.scss']
 })
 export class VouchersComponent implements OnInit{
+  vouchers_v:any = []
   vouchers:any = []
-
   voucher:any = {
   }
 
+  date_status = '0'
+
   isFormVoucher=false
+  loading = true
 
   constructor(private i18n: NzI18nService, private main:MainService, private crud:CrudService){
     const custom = vi_VN
@@ -30,6 +33,8 @@ export class VouchersComponent implements OnInit{
     this.crud.get("vouchers",'all').subscribe((res:any)=>{
       if (res.result=='success'){
         this.vouchers=res.data
+        this.vouchers_v = [...this.vouchers]
+        this.loading=false
       }
     })
   }
@@ -77,6 +82,8 @@ export class VouchersComponent implements OnInit{
     this.crud.delete("voucher",id).subscribe((res:any)=>{
       if (res.result=='success'){
         this.vouchers = this.vouchers.filter((v:any)=>v.id!=id)
+        this.vouchers_v = [...this.vouchers]
+        this.date_status = '0'
         this.main.createNotification("success","Xóa thành công")
       }
       else{
@@ -112,6 +119,8 @@ export class VouchersComponent implements OnInit{
       if (data.result=='success'){
         this.main.createNotification("success","Thêm phiếu khuyến mãi thành công")
         this.vouchers = [...this.vouchers,{...this.voucher,id:data.data,date_from:this.voucher.date[0],date_to:this.voucher.date[1]}]
+        this.vouchers_v = [...this.vouchers]
+        this.date_status= '0'
       }else{
         this.main.createNotification("info","Thêm phiếu khuyến mãi thất bại")
       }
@@ -147,5 +156,15 @@ export class VouchersComponent implements OnInit{
   onChangeDate(date:Date[]){
     this.voucher.date=[this.formatDate(date[0]),this.formatDate(date[1])]
     // console.log(this.voucher.date[0],this.voucher.date[1]);
+  }
+
+  changeDateStatus(){
+    if (this.date_status=='0'){
+      this.vouchers_v = [...this.vouchers]
+    }
+    else {
+      this.vouchers_v = this.vouchers.filter((v:any)=>v.date_status==(this.date_status=='1'))
+    }
+
   }
 }

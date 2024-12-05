@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit{
       }
     });
 
-    this.getCategories();
+    // this.getCategories();
 
 
   }
@@ -123,15 +123,16 @@ export class HeaderComponent implements OnInit{
 
 
 
-  getCategories(){
-    this.crud.get("categories","group-by-type").subscribe((categories:any)=>{
-      if (categories.result='success'){
-        this.categories=categories.data
-      }
-      // console.log(categories);
+  // getCategories(){
+  //   this.crud.get("categories","all").subscribe((res:any)=>{
+  //     if (res.result='success'){
+  //       this.categories=res.data
+  //       console.log(this.categories);
+  //     }
 
-    })
-  }
+
+  //   })
+  // }
   account(){
     if (this.userS.isVerify==false){
       this.router.navigate(["account/login"])

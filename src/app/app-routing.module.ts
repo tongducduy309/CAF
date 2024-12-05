@@ -67,18 +67,18 @@ const routes: Routes = [
     path:'products/:id',
     component:DetailProductComponent
   },
-  {
-    path:'collections',
-    component:CollectionsComponent
-  },
+  // {
+  //   path:'collections',
+  //   component:CollectionsComponent
+  // },
   {
     path:'all-products',
     component:AllProductsComponent
   },
-  {
-    path:'all-products/:key',
-    component:AllProductsComponent
-  },
+  // {
+  //   path:'all-products/:key',
+  //   component:AllProductsComponent
+  // },
   {
     path:'cart',
     component:CartComponent
@@ -87,22 +87,22 @@ const routes: Routes = [
     path:'about-us',
     component:AboutUsComponent
   },
-  {
-    path:'contact-with-us',
-    component:ContactWithUsComponent
-  },
-  {
-    path:'faq',
-    component:FaqComponent
-  },
+  // {
+  //   path:'contact-with-us',
+  //   component:ContactWithUsComponent
+  // },
+  // {
+  //   path:'faq',
+  //   component:FaqComponent
+  // },
   {
     path:'privacy-policy',
     component:PrivacyPolicyComponent
   },
-  {
-    path:'search',
-    component:SearchComponent
-  },
+  // {
+  //   path:'search',
+  //   component:SearchComponent
+  // },
   {
     path:'terms-and-conditions',
     component:TermsAndConditionsComponent
@@ -119,14 +119,14 @@ const routes: Routes = [
     path:'checkout',
     component:CheckoutComponent
   },
-  {
-    path:'blogs',
-    component:BlogsComponent
-  },
-  {
-    path:'blogs/:name',
-    component:DetailBlogComponent
-  },
+  // {
+  //   path:'blogs',
+  //   component:BlogsComponent
+  // },
+  // {
+  //   path:'blogs/:name',
+  //   component:DetailBlogComponent
+  // },
   {
     path:'dashboard',
     component:DashboardComponent,

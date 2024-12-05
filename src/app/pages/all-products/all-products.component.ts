@@ -35,25 +35,20 @@ export class AllProductsComponent extends Page implements OnInit  {
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService) {
     super();
     this.must_load=2
-    this.route.paramMap.subscribe(async (params) => {
-      const key = params.get('key')||''
-      if (key!=''){
-        this.crud.get("all-products",key).subscribe((res:any)=>{
-          this.products=res.data
-          this.products_v=[...this.products]
-          this.loaded()
-          // console.log(this.products);
-        })
-      }
-      else{
-        this.getAllProducts();
-      }
-    });
+    // this.route.queryParamMap.subscribe(async params => {
+    //   const cid = parseInt(params.get('cid')||'-1')
+    //   if (cid!=-1){
+    //     this.getAllProducts();
+    //   }
+    //   else{
+
+    //   }
+    // });
   }
 
   ngOnInit(): void {
 
-
+    this.getAllProducts();
     this.getCategories();
   }
 
@@ -77,58 +72,20 @@ export class AllProductsComponent extends Page implements OnInit  {
 
   getCategories(){
 
-    this.crud.get("categories","group-by-type").subscribe((res:any)=>{
+    this.crud.get("categories","all").subscribe((res:any)=>{
       // this.categories.drinks = categories.filter((category:any)=>category.type==0)
       // this.categories.food = categories.filter((category:any)=>category.type==1)
-      this.categories = []
-      Object.keys(res.data).forEach((key:any)=>{
-        this.categories.push({
-          name:key,
-          values:res.data[key]
-        })
+      this.categories = res.data
+      for (let c of this.categories){
         this.filters_value.category.push(false)
-      })
+      }
       // this.categories=categories
       // console.log(categories);
       this.loaded()
     })
   }
 
-  selectedSort = '0';
-  panels = [
-    {
-      active: true,
-      name: 'Availability',
-    },
-    {
-      active: true,
-      name: 'Price'
-    },
-    {
-      active: true,
-      name: 'Product type'
-    },
-    {
-      active: true,
-      name: 'Brand'
-    },
-    {
-      active: true,
-      name: 'Color'
-    },
-    {
-      active: true,
-      name: 'Material'
-    },
-    {
-      active: true,
-      name: 'Size'
-    },
-    {
-      active: true,
-      name: 'Style'
-    },
-  ];
+  panels = [true,true,true];
 
   log(values: string[]): void {
     console.log(values);
@@ -294,13 +251,13 @@ export class AllProductsComponent extends Page implements OnInit  {
   }
 
   sortBy(){
-    this.products_v = [...this.products]
-    switch(this.selectedSort){
+    // this.products_v = [...this.products]
+    // switch(this.selectedSort){
 
-      case '1':
-        // this.products_v.sort((a,b)=>a.)
-        break
-    }
+    //   case '1':
+    //     // this.products_v.sort((a,b)=>a.)
+    //     break
+    // }
   }
 
   AddToCart(product:any){

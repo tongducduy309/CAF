@@ -4,6 +4,7 @@ import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-checkout',
@@ -40,7 +41,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   @Output() totalEmitter = new EventEmitter()
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
+  constructor (private location:Location,private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
     super()
     this.must_load = 2
   }
@@ -48,6 +49,10 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     Promise.resolve().then(()=> {
     })
+  }
+
+  back(){
+    this.location.back();
   }
 
   async ngOnInit(): Promise<void> {
@@ -101,18 +106,25 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   async checkUser(){
     this.user = await this.getUser();
-    console.log(this.user);
+    // console.log(this.user);
     if (!this.user)
     {
       this.router.navigate([''])
     }
     else{
-      this.user = {...this.user,card:{
-        serial:'',
-        code:'',
-        date:''
-      }}
-      this.loaded()
+      if (this.user.role>0){
+        this.main.createNotification("info","Tài khoản admin/nhân viên không thể thực hiện thao tác này")
+        this.back()
+        return
+      }
+      else{
+        this.user = {...this.user,card:{
+          serial:'',
+          code:'',
+          date:''
+        }}
+        this.loaded()
+      }
       // this.getAddressOfUser()
     }
 
@@ -127,7 +139,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
         const result = await this.userS.getUser(null,null,user.token)
         if (result){
           if (result.result=='Success'){
-            resolve({id:result.id,email:result.email,fullname:result.fullname})
+            resolve({id:result.id,email:result.email,fullname:result.fullname,role:result.role})
           }
         }
         resolve(null)

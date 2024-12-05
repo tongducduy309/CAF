@@ -19,7 +19,6 @@ export class AppComponent{
   total = 0
 
   constructor (private crud:CrudService, private main:MainService, private userS:UserService){
-
     // this.getItemsCart()
   }
 
@@ -27,8 +26,12 @@ export class AppComponent{
 
   change(componentRef:any){
     componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
-      console.log(res);
+
       if (this.user){
+        if (this.user.role>0){
+          this.main.createNotification("info","Tài khoản admin/nhân viên không thể thực hiện thao tác này")
+          return
+        }
         this.crud.addData("cart",{pid:res.id,uid:this.user.id,quantity:res.quantity*1,note:res.note}).then(response=>response.json()).then(data=>{
           if (data.result='success'){
 

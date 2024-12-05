@@ -15,7 +15,6 @@ import { vi_VN } from 'ng-zorro-antd/i18n';
 export class ManageProductsComponent implements OnInit{
   isFormAddProduct=false
   isFormFlashSales=false
-  loading = false;
 
   product:any = {
     listsize:[],
@@ -40,7 +39,7 @@ export class ManageProductsComponent implements OnInit{
 
 
   constructor(private messageService: NzMessageService, private crud:CrudService, private http: HttpClient, public main:MainService, private i18n: NzI18nService) {}
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     const custom = vi_VN
     custom.DatePicker.lang.rangePlaceholder = ['Thời gian bắt đầu','Thời gian kết thúc']
     this.i18n.setLocale(custom);
@@ -80,7 +79,7 @@ export class ManageProductsComponent implements OnInit{
       file.set('img', imageBlob);
       file.set('name',this.product.name)
       file.set('listsize',JSON.stringify(this.product.listsize))
-      file.set('cid','2')
+      file.set('cid',this.product.cid)
       file.set('description',this.product.description)
       file.set('shelf_status',this.product.shelf_status)
       this.http.post('https://api-caf.vercel.app/api/post/products', file).subscribe((response:any)=>{
@@ -118,7 +117,7 @@ export class ManageProductsComponent implements OnInit{
 
   handleChange(info: { file: NzUploadFile }): void {
     this.getBase64(info.file!.originFileObj!, (img: string) => {
-      this.loading = false;
+
       this.product.img = img;
     });
   }
@@ -144,7 +143,7 @@ export class ManageProductsComponent implements OnInit{
 
   changeImg(event:any){
     this.getBase64(event.target.files[0], (img: string) => {
-      this.loading = false;
+
       this.product.img = img;
     });
   }

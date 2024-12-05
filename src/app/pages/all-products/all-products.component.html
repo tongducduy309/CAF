@@ -36,14 +36,14 @@
             <nz-collapse-panel
               nzHeader="Xu hướng"
               nzActive="true"
-              [nzExtra]="extraTpl1"
-              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzExtra]="extraTpl0"
+              (nzActiveChange) = "panels[0] = !panels[0]"
               [nzShowArrow] = "false"
             >
               <label nz-checkbox [(ngModel)]="filters_value.trend[0]" (ngModelChange)="changeItemFilters('trend_0_0',$event)">Mới nhất</label>
               <!-- <label nz-checkbox [(ngModel)]="filters_value.trend[1]">Best seller</label> -->
-              <ng-template #extraTpl1>
-                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              <ng-template #extraTpl0>
+                <span nz-icon [nzType]="panels[0]?'minus':'plus'"></span>
               </ng-template>
             </nz-collapse-panel>
         </nz-collapse>
@@ -55,7 +55,7 @@
               nzHeader="Giá"
               nzActive="true"
               [nzExtra]="extraTpl1"
-              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              (nzActiveChange) = "panels[1] = !panels[1]"
               [nzShowArrow] = "false"
             >
               <ul>
@@ -65,7 +65,7 @@
                 <li><label nz-checkbox [(ngModel)]="filters_value.price[3]" (ngModelChange)="changeItemFilters('price_3_60000_9999999999',$event)">Từ 60.000 trở lên</label></li>
               </ul>
               <ng-template #extraTpl1>
-                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+                <span nz-icon [nzType]="panels[1]?'minus':'plus'"></span>
               </ng-template>
             </nz-collapse-panel>
         </nz-collapse>
@@ -76,22 +76,19 @@
             <nz-collapse-panel
               nzHeader="Danh mục"
               nzActive="true"
-              [nzExtra]="extraTpl1"
-              (nzActiveChange) = "panels[1].active = !panels[1].active"
+              [nzExtra]="extraTpl2"
+              (nzActiveChange) = "panels[2] = !panels[2]"
               [nzShowArrow] = "false"
             >
             <!-- <label nz-checkbox *ngFor="let cate of categories" >{{cate.name}}</label> -->
-            <div *ngFor="let cate of categories;index as i">
-              <p class="subtitle">{{cate.name}}</p>
-              <ul>
-                <li *ngFor="let value of cate.values;index as j">
-                  <label nz-checkbox [(ngModel)]="filters_value.category[i*((i>0)?categories[i-1].length:0)+j]" (ngModelChange)="changeItemFilters('category_'+(i*((i>0)?categories[i-1].length:0)+j)+'_'+value.id,$event)">{{value.name}}</label>
+            <ul>
+              <li *ngFor="let value of categories;index as i">
+                <label nz-checkbox [(ngModel)]="filters_value.category[i]" (ngModelChange)="changeItemFilters('category_'+(i)+'_'+value.id,$event)">{{value.name}}</label>
 
-                </li>
-              </ul>
-            </div>
-              <ng-template #extraTpl1>
-                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
+              </li>
+            </ul>
+              <ng-template #extraTpl2>
+                <span nz-icon [nzType]="panels[2]?'minus':'plus'"></span>
               </ng-template>
             </nz-collapse-panel>
         </nz-collapse>
