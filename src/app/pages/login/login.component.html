@@ -34,7 +34,7 @@
     </div>
     <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
       <span class="span_forgotPassword" (click)="this.router.navigate(['account/login/reset-your-password'])">Quên mật khẩu?</span>
-      <button nz-button nzType="primary" (click)="submit()" class="btnLogin" >
+      <button nz-button nzType="primary" (click)="submit()" class="btnLogin" [disabled]="processing">
         Đăng Nhập
         <span nz-icon nzType="arrow-right"></span>
       </button>

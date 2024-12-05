@@ -21,6 +21,8 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
 
   resetYP_email = ''
 
+  processing = false
+
   constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService){
     super()
     // this.must_load=1
@@ -85,11 +87,13 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
       this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")
       return;
     }
+    this.processing=true
     const user = await this.userS.login_method_2(this.user_email,this.user_password)
     if (user){
       this.UserEmitter.emit(user)
       this.router.navigate([''])
     }
+    this.processing=false
 
   }
 

@@ -24,6 +24,8 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
   passwordVisible=false
 
+  processing=false
+
   constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService) {
 
     super()
@@ -123,7 +125,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       this.createNotification('info', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
       return;
     }
-
+    this.processing=true
     this.crud.addData("register",{
       email:this.user.email,
       fullname:this.user.fullname,
@@ -140,6 +142,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
           this.main.createNotification("error","Xảy ra lỗi")
         }
       }
+      this.processing=false
     })
 
 

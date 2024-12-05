@@ -187,7 +187,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
    if (this.code_gift.trim()){
     this.crud.get("voucher",this.code_gift).subscribe((res:any)=>{
       if (res.result=='success'){
-        const row = res.rows[0]
+        const row = res.data
         this.bill.discount = row.discount
         this.bill.cost = this.bill.subtotal+this.bill.delivery_fee
         this.bill.cost -= this.bill.cost*this.bill.discount/100
@@ -197,6 +197,9 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
         this.main.createNotification("info","Mã giảm giá không tồn tại hoặc đã hết hạn")
       }
     })
+   }else{
+    this.bill.discount = 0
+    this.bill.cost = this.bill.subtotal+this.bill.delivery_fee
    }
   }
 

@@ -1,0 +1,26 @@
+::ng-deep .ant-drawer-body{
+  padding: 20px;
+}
+.group{
+  margin-bottom: 20px;
+}
+.btn{
+  background-color: #262626 !important;
+  border: none;
+  width: 50%;
+  height: 50px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover{
+  background-color: #000 !important;
+  transition: 0,5s;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,14 +1,27 @@
 <section>
-  <button nz-button nzType="primary" nzSize="large" nzShape="round" style="margin-bottom: 20px;">
-    <span nz-icon nzType="plus" nzTheme="outline"></span>
-    Tạo voucher mới
-  </button>
+  <div class="header">
+    <button nz-button nzType="primary" nzSize="large" nzShape="round" style="margin-bottom: 20px;" (click)="openFormVoucher()">
+      <span nz-icon nzType="plus" nzTheme="outline"></span>
+      Tạo voucher mới
+    </button>
+
+    <div>
+      <span class="label" style="margin-right: 10px;">Trạng thái:</span>
+      <nz-select ngModel="0">
+        <nz-option nzValue="0" nzLabel="Tất cả"></nz-option>
+        <nz-option nzValue="1" nzLabel="Đang sử dụng"></nz-option>
+        <nz-option nzValue="2" nzLabel="Vô hiệu"></nz-option>
+      </nz-select>
+    </div>
+  </div>
   <nz-table #basicTable [nzData]="vouchers">
     <thead>
       <tr>
         <th nzAlign = "center" nzLeft>STT</th>
         <th nzLeft>Trạng thái</th>
         <th nzLeft>Mã giảm giá</th>
+        <th nzLeft>Phần trăm giảm</th>
+        <th nzLeft>Số lượng</th>
         <th>Thời gian bắt đầu</th>
         <th>Thời gian kết thúc</th>
         <th></th>
@@ -17,24 +30,83 @@
     <tbody>
       <tr *ngFor="let data of basicTable.data;index as i">
         <td nzAlign = "center" nzLeft>{{i+1}}</td>
-        <td nzLeft><img style="width: 70px;height: 70px;object-fit: contain;" [src]="data.img" alt=""></td>
-        <td nzLeft>{{data.name}}</td>
-        <td>{{data.c_name}}</td>
-        <td>{{data.size}}</td>
-        <td>{{data.sale}}%</td>
-        <td>{{formatDateToString(data.datesale_from)}}</td>
-        <td>{{formatDateToString(data.datesale_to)}}</td>
+        <td nzLeft><nz-tag [nzColor]="data.date_status?'green':'red'">{{data.date_status?'Đang sử dụng':'Vô hiệu'}}</nz-tag></td>
+        <td>{{data.code}}</td>
+        <td>{{data.discount}}%</td>
+        <td>{{data.quantity}}</td>
+        <td>{{formatDateToString(data.date_from)}}</td>
+        <td>{{formatDateToString(data.date_to)}}</td>
         <td>
-          <a style="display: inline-block;" (click)="modify(i)">Sửa</a>
-            <nz-divider nzType="vertical"></nz-divider>
             <a nz-popconfirm
             nzPopconfirmTitle="Xoá sản phẩm này chứ?"
             nzOkText="Đồng ý"
             nzCancelText="Không đồng ý"
-            (nzOnConfirm)="confirmDelete()"
+            (nzOnConfirm)="confirmDelete(data.id)"
             nzPopconfirmPlacement="bottomRight">Xóa</a>
         </td>
       </tr>
     </tbody>
   </nz-table>
+
+  <nz-drawer
+      [nzVisible]="isFormVoucher"
+      nzPlacement="right"
+      nzTitle="Phiếu giảm giá"
+      (nzOnClose)="closeFormVoucher()"
+    >
+      <ng-container *nzDrawerContent>
+        <div class="flashsales-form">
+          <div style="display: flex;justify-content: start;margin-bottom: 20px;align-items: center;">
+
+            <div>
+              <div class="group">
+                <span class="label">Mã giảm giá:</span>
+                <div style="display: flex;align-items: center;">
+                  <input
+              nz-input
+              placeholder="Mã giảm giá"
+              [(ngModel)]="voucher.code"
+              />
+              <button nz-button nzType="primary" style="background-color: #000;border: none;">
+                <span nz-icon nzType="retweet"></span>
+              </button>
+                </div>
+              </div>
+              <div class="group">
+                <span class="label">Phần trăm giảm:</span>
+                <input
+              nz-input
+              placeholder="Phần trăm giảm"
+              [(ngModel)]="voucher.discount"
+              />
+              </div>
+
+              <div class="group">
+                <span class="label">Số lượng:</span>
+                <input
+              nz-input
+              placeholder="Số lượng"
+              [(ngModel)]="voucher.quantity" (blur)="changeQuantity()"
+              />
+              </div>
+
+
+              <div class="group">
+                <span class="label">Thời gian:</span>
+                <nz-range-picker  nzShowTime nzFormat="dd/MM/yyyy HH:mm:ss" style="width: 100%" nzAllowClear [(ngModel)]="voucher.datesale" (ngModelChange)="onChangeDate($event)"></nz-range-picker>
+              </div>
+
+            </div>
+          </div>
+
+          <div style="width: 100%;display: flex;justify-content: center;">
+            <button nz-button nzType="primary" class="btn" (click)="submitVoucher()">
+              <span nz-icon nzType="check" style="font-size: 20px;"></span>
+              Cập nhật
+
+            </button>
+          </div>
+        </div>
+      </ng-container>
+  </nz-drawer>
 </section>

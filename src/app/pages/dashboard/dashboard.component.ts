@@ -13,6 +13,7 @@ import { UserService } from 'src/services/user.service';
 export class DashboardComponent extends Page{
   isCollapsed = false;
   titlePage = ''
+  user:any = {}
 
   constructor (private router:Router, private crud:CrudService, private main:MainService, private userS:UserService){
     super();
@@ -34,6 +35,7 @@ export class DashboardComponent extends Page{
     this.crud.get("check-admin",user.token).subscribe((res:any)=>{
       if (res.result=='success'){
         this.main.createNotification("success","Bảng điều khiển")
+        this.user=res.data
         this.loaded()
       }
       else this.router.navigate(['page-not-found'])

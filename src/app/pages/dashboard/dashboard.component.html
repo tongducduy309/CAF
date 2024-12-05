@@ -13,21 +13,21 @@
 
           </ul>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add">
+        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add" *ngIf="user.role>1">
           <ul>
             <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Sản phẩm</li>
             <li nz-menu-item (click)="remote('flash-sales')" [nzSelected]="titlePage=='flash-sales'">Chương trình khuyến mãi</li>
             <li nz-menu-item (click)="remote('vouchers')" [nzSelected]="titlePage=='vouchers'">Phiếu giảm giá</li>
           </ul>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user">
+        <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user" *ngIf="user.role>1">
           <ul>
             <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Khách hàng</li>
             <li nz-menu-item>Nhân viên</li>
           </ul>
         </li>
 
-        <li nz-submenu nzTitle="Thống kê" nzIcon="line-chart">
+        <li nz-submenu nzTitle="Thống kê" nzIcon="line-chart" *ngIf="user.role>1">
           <ul>
             <li nz-menu-item>option9</li>
             <li nz-menu-item>option10</li>

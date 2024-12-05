@@ -5,7 +5,7 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { NzI18nService } from 'ng-zorro-antd/i18n';
-import { en_US, vi_VN } from 'ng-zorro-antd/i18n';
+import { vi_VN } from 'ng-zorro-antd/i18n';
 
 @Component({
   selector: 'app-manage-products',
