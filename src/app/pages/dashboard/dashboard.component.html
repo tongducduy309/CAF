@@ -7,11 +7,16 @@
         <span>Chuyển tới trang chủ</span>
       </li> -->
 
-        <li nz-submenu nzOpen nzTitle="Quản lí đơn hàng" nzIcon="container">
-          <ul>
-            <li nz-menu-item (click)="remote('orders')" [nzSelected]="titlePage=='orders'">Tất cả</li>
-
-          </ul>
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          (click)="remote('orders')"
+          [nzTooltipTitle]="isCollapsed ? 'Quản lí đơn hàng' : ''"
+          [nzSelected]="titlePage=='orders'"
+        >
+          <span nz-icon nzType="container"></span>
+          <span>Quản lí đơn hàng</span>
         </li>
         <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add" *ngIf="user.role>1">
           <ul>
@@ -35,7 +40,19 @@
             <li nz-menu-item>option12</li>
           </ul>
         </li> -->
+
+        <li
+          nz-menu-item
+          nz-tooltip
+          nzTooltipPlacement="right"
+          (click)="userS.logout()"
+          [nzTooltipTitle]="isCollapsed ? 'Đăng xuất' : ''"
+        >
+          <span nz-icon nzType="logout"></span>
+          <span>Đăng xuất</span>
+        </li>
       </ul>
+
     </nz-sider>
     <nz-content class="inner-content"><router-outlet></router-outlet></nz-content>
   </nz-layout>

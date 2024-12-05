@@ -15,19 +15,12 @@ export class DashboardComponent extends Page{
   titlePage = ''
   user:any = {}
 
-  constructor (private router:Router, private crud:CrudService, private main:MainService, private userS:UserService){
+  constructor (private router:Router, private crud:CrudService, private main:MainService, public userS:UserService){
     super();
 
     this.checkUser()
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd)
-    {
-        this.titlePage = event.url.split("/")[2]
-        console.log(this.titlePage);
 
-      }
-    });
   }
 
   async checkUser(){
@@ -36,6 +29,16 @@ export class DashboardComponent extends Page{
       if (res.result=='success'){
         this.main.createNotification("success","Bảng điều khiển")
         this.user=res.data
+        this.router.events.subscribe((event) => {
+          if (event instanceof NavigationEnd)
+        {
+            this.titlePage = event.url.split("/")[2]
+            if (this.user.role<2){
+              this.router.navigate(['dashboard/orders'])
+            }
+
+          }
+        });
         this.loaded()
       }
       else this.router.navigate(['page-not-found'])

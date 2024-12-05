@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CrudService } from 'src/services/crud.service';
 
 @Component({
   selector: 'app-manage-orders',
   templateUrl: './manage-orders.component.html',
   styleUrls: ['./manage-orders.component.scss']
 })
-export class ManageOrdersComponent {
+export class ManageOrdersComponent implements OnInit{
   tabs = [
     // {
     //   name: 'Tất cả',
@@ -39,7 +40,27 @@ export class ManageOrdersComponent {
     }
   ];
 
+
+
   count_status = [0,0,0,0,0]
+
+  bills:any =  {}
+  constructor (private crud:CrudService){
+
+  }
+  ngOnInit(): void {
+    this.getBills()
+  }
+
+  getBills(){
+    this.crud.get("bills","all").subscribe((res:any)=>{
+      if(res.result=='success'){
+        this.bills = res.data
+        console.log(res.data);
+      }
+    })
+  }
+
 
   changeStatus(status:any){
 

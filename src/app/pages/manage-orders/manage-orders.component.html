@@ -1,7 +1,7 @@
 
 
 <nz-tabset nzType="editable-card" nzHideAdd>
-  <nz-tab [nzTitle]="tab.name +'('+count_status[tab.status]+')'" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
+  <nz-tab [nzTitle]="tab.name +'('+(bills[tab.status]?bills[tab.status].length:0)+')'" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
     <!-- <ng-template #titleTemplate>
       <span *ngIf="tab.icon.length>0" nz-icon [nzType]="tab.icon" nzTheme="outline"></span>
       {{ tab.name }}

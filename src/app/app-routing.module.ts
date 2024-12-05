@@ -26,6 +26,7 @@ import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
+import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 
 const routes: Routes = [
 
@@ -134,7 +135,9 @@ const routes: Routes = [
       {path:"manage-products",component:ManageProductsComponent},
       {path:"flash-sales",component:FlashSalesComponent},
       {path:"vouchers",component:VouchersComponent},
-      {path:"orders",component:ManageOrdersComponent}
+      {path:"orders",component:ManageOrdersComponent},
+      {path:"accounts-customer",component:ManageAccountsComponent},
+      {path:"accounts-staff",component:ManageAccountsComponent}
     ]
   },
   {
