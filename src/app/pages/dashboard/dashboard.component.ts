@@ -17,13 +17,6 @@ export class DashboardComponent extends Page implements OnInit{
 
   constructor (private router:Router, private crud:CrudService, private main:MainService, public userS:UserService){
     super();
-
-
-
-  }
-  async ngOnInit(): Promise<void> {
-
-    await this.checkUser()
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
     {
@@ -32,6 +25,13 @@ export class DashboardComponent extends Page implements OnInit{
 
       }
     });
+
+
+  }
+  async ngOnInit(): Promise<void> {
+
+    await this.checkUser()
+
 
   }
 

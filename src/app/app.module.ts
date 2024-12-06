@@ -53,6 +53,7 @@ import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ShowFullInvoiceComponent } from './components/show-full-invoice/show-full-invoice.component';
+import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 
 registerLocaleData(vi);
 
@@ -106,7 +107,8 @@ export let pages = [
   FlashSalesComponent,
   VouchersComponent,
   DetailBillComponent,
-  ManageOrdersComponent
+  ManageOrdersComponent,
+  ManageAccountsComponent
 ]
 
 @NgModule({

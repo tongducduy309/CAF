@@ -1,1 +1,26 @@
-<p>manage-accounts works!</p>
+<nz-table #basicTable [nzData]="accounts">
+  <thead>
+    <tr>
+      <th nzAlign = "center" nzLeft>STT</th>
+      <th nzLeft>Họ và tên</th>
+      <th nzLeft>Email</th>
+      <th>Điểm</th>
+      <th>Tài khoản</th>
+      <th>Trạng thái</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data;index as i">
+      <td nzAlign = "center" nzLeft>{{i+1}}</td>
+      <td nzLeft>{{data.fullname}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.point}}</td>
+      <td>{{data.verify?'Đã xác thực':'Chưa xác thực'}}</td>
+      <td>{{data.status?'Hoạt động':'Tạm khóa'}}</td>
+      <td>
+        <a (click)="blockAccount(i)">{{data.status?'Khóa':'Mở khóa'}}</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
