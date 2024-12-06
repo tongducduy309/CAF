@@ -49,7 +49,10 @@ export class MainService {
     for (const cookie of cookies) {
       const parts = cookie.trim().split('=');
       if (parts[0] === name) {
-        return JSON.parse(decodeURIComponent(parts[1]));
+        let d = decodeURIComponent(parts[1])
+        if (d)
+          return JSON.parse(d);
+        return null
       }
     }
     return null;

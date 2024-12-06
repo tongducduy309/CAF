@@ -136,8 +136,7 @@ const routes: Routes = [
       {path:"flash-sales",component:FlashSalesComponent},
       {path:"vouchers",component:VouchersComponent},
       {path:"orders",component:ManageOrdersComponent},
-      {path:"accounts-customer",component:ManageAccountsComponent},
-      {path:"accounts-staff",component:ManageAccountsComponent}
+      {path:":title",component:ManageAccountsComponent}
     ]
   },
   {

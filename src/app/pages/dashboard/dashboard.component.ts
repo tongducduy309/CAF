@@ -21,7 +21,7 @@ export class DashboardComponent extends Page implements OnInit{
       if (event instanceof NavigationEnd)
     {
         this.titlePage = event.url.split("/")[2]
-        console.log(this.titlePage);
+        // console.log(this.titlePage);
 
       }
     });

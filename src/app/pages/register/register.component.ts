@@ -101,7 +101,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
 
   SendMess_Register(){
-    if (this.user.fullname.trim().length==0||this.user.email.trim().length==0||this.user.password.trim().length==0){
+    if (!this.user.fullname||!this.user.email||!this.user.password){
       this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")
       return;
     }
@@ -129,7 +129,8 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
     this.crud.addData("register",{
       email:this.user.email,
       fullname:this.user.fullname,
-      password:this.user.password
+      password:this.user.password,
+      role:'0'
     }).then(res=>res.json()).then(data=>{
       if (data.result=='success'){
         this.submited = true
