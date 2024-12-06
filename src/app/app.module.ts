@@ -52,6 +52,8 @@ import { BillComponent } from './components/bill/bill.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
+import { ShowFullInvoiceComponent } from './components/show-full-invoice/show-full-invoice.component';
+
 registerLocaleData(vi);
 
 
@@ -72,7 +74,9 @@ export let components:any = [
   NoteProductComponent,
   ItemInBillComponent ,
   BillComponent,
-  CustomerReviewComponent
+  CustomerReviewComponent,
+  DetailBillComponent,
+  ShowFullInvoiceComponent
 ]
 
 export let pages = [

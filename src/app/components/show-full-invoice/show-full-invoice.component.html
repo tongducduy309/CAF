@@ -1,0 +1,73 @@
+<nz-ribbon [nzText]="bill.status_text" [nzColor]="bill.status_color" >
+  <div class="bill">
+    <div class="header border-bottom">
+      <!-- <span nz-icon nzType="arrow-left" nzTheme="outline" (click)="back.emit()" style="margin-right: 20px;cursor: pointer;"></span> -->
+      <p class="subtitle"><b>Mã hóa đơn: </b>{{bill.id}}</p>
+      <span class="date-created">
+        Ngày tạo: {{formatDateToString(bill.created)}}
+      </span>
+    </div>
+    <div class="info_receiver border-bottom">
+      <h2 class="subtitle" style="margin-bottom: 20px;">Địa chỉ giao hàng:</h2>
+      <div class="group">
+        <p><b>Người nhận: </b>{{bill.receiver}}</p>
+      </div>
+      <div class="group">
+        <p><b>Số điện thoại: </b>{{bill.contactnumber}}</p>
+      </div>
+      <div class="group">
+        <p><b>Địa chỉ: </b>{{bill.address}}</p>
+      </div>
+    </div>
+    <div class="list-products">
+      <h2 class="subtitle" style="margin-bottom: 20px;">Danh sách sản phẩm: ({{total}} sản phẩm)</h2>
+      <div class="product" *ngFor="let product of bill.products">
+        <div class="left">
+          <img [src]="product.img" alt="">
+
+        </div>
+        <div class="center">
+          <p class="name">{{product.name}}</p>
+          <div>
+            <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
+            <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
+          </div>
+          <p class="note">Ghi chú: {{product.note}}</p>
+        </div>
+        <div class="right">
+          <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
+          <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="group">
+        <div class="inline">
+          <b>Tạm tính:</b>
+          <div>{{main.formatPrice(bill.subtotal)}} <span>VND</span></div>
+        </div>
+        <div class="inline">
+          <b>Phí vận chuyển:</b>
+          <div>{{main.formatPrice(bill.delivery_fee)}} <span>VND</span></div>
+        </div>
+        <div class="inline" *ngIf="bill.discount>0">
+          <b>Giảm giá:</b>
+          <div>-{{bill.discount}}<span>%</span></div>
+        </div>
+        <div class="inline" *ngIf="bill.discount>0">
+          <b></b>
+          <div class="cost-not-discount">{{main.formatPrice(bill.cost/(1-bill.discount/100))}} <span>VND</span></div>
+        </div>
+        <div class="inline">
+          <b>Tổng:</b>
+          <div class="cost" style="font-weight: 600;">{{main.formatPrice(bill.cost)}} <span>VND</span></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</nz-ribbon>

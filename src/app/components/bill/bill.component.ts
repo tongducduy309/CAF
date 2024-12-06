@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -6,12 +6,21 @@ import { MainService } from 'src/services/main.service';
   templateUrl: './bill.component.html',
   styleUrls: ['./bill.component.scss']
 })
-export class BillComponent {
+export class BillComponent implements OnChanges{
 
   @Input() bill:any = {}
+  total = 0
 
   constructor(public main:MainService){
 
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['bill']){
+      this.total=0
+      for (let p of this.bill.products){
+        this.total+=p.quantity*1
+      }
+    }
   }
 
   formatDateToString(s:any){

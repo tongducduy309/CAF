@@ -39,6 +39,8 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   inCart = false
 
+  total = 0
+
   @Output() totalEmitter = new EventEmitter()
 
   constructor (private location:Location,private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
@@ -54,6 +56,8 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
   back(){
     this.location.back();
   }
+
+
 
   async ngOnInit(): Promise<void> {
     await this.checkUser()
@@ -93,6 +97,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   cal_Info_list(){
     for (let product of this.products){
+      this.total+=product.quantity
       this.bill.subtotal += (product.quantity||0) * this.main.getPrice(product)
     }
     this.bill.delivery_fee = (this.bill.subtotal>=200000)?0:10000
@@ -165,7 +170,11 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     }
     else{
       this.processing = true
+      let total = 0
 
+      for (let p of this.products){
+        total+=p.quantity*1
+      }
       this.crud.addData("checkout",{
         user:{
           ...this.address_user_choosing,
@@ -177,7 +186,8 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
           ...this.bill,
           id:this.main.createID(),
           products:this.products,
-          payment_status:this.bill.paymentmethod==2
+          payment_status:this.bill.paymentmethod==2,
+          total:total
         },
         inCart:this.inCart
       }).then(res=>res.json()).then(data=>{

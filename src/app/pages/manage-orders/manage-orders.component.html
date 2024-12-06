@@ -1,11 +1,30 @@
 
-
-<nz-tabset nzType="editable-card" nzHideAdd>
-  <nz-tab [nzTitle]="tab.name +'('+(bills[tab.status]?bills[tab.status].length:0)+')'" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
+<nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
+  <ng-template #tpl>
+    <span nz-icon nzType="up-circle" nzTheme="fill" style="font-size: 30px; color: #262626;"></span>
+  </ng-template>
+</nz-back-top>
+<nz-tabset nzType="editable-card" nzHideAdd [nzSelectedIndex]="tab_status" (nzSelectedIndexChange)="changeStatus($event)">
+  <nz-tab [nzTitle]="tab.name +'('+(bills[tab.status]?bills[tab.status].length:0)+')'" *ngFor="let tab of tabs" >
     <!-- <ng-template #titleTemplate>
       <span *ngIf="tab.icon.length>0" nz-icon [nzType]="tab.icon" nzTheme="outline"></span>
       {{ tab.name }}
     </ng-template> -->
     <!-- <app-bill *ngFor="let bill of bills_v" [bill]="bill"></app-bill> -->
+    <div *ngIf="bills[tab_status]&&bills[tab_status].length>0">
+      <div class="display">
+        <div class="btn-prev btn"><span nz-icon nzType="left" nzTheme="outline" (click)="previous()"></span></div>
+        <app-show-full-invoice [bill]="bills[tab_status][choose_bill]"></app-show-full-invoice>
+        <div class="btn-next btn"><span nz-icon nzType="right" nzTheme="outline" (click)="next()"></span></div>
+      </div>
+      <div style="display: flex;justify-content: center;">
+        <div class="btns" *ngIf="tab_status<3">
+          <button nz-button nzType="primary" nzBlock (click)="confirmBill()">Xác nhận</button>
+          <button nz-button nzType="default" nzDanger>Hủy</button>
+
+        </div>
+      </div>
+    </div>
+
   </nz-tab>
 </nz-tabset>

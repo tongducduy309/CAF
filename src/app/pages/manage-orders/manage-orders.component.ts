@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
+import { MainService } from 'src/services/main.service';
 
 @Component({
   selector: 'app-manage-orders',
@@ -44,8 +45,12 @@ export class ManageOrdersComponent implements OnInit{
 
   count_status = [0,0,0,0,0]
 
+  tab_status = 0
+
+  choose_bill = 0
+
   bills:any =  {}
-  constructor (private crud:CrudService){
+  constructor (private crud:CrudService, private main:MainService){
 
   }
   ngOnInit(): void {
@@ -63,7 +68,8 @@ export class ManageOrdersComponent implements OnInit{
 
 
   changeStatus(status:any){
-
+    this.tab_status = status
+    this.choose_bill=0
     // if (status==-1)
     // {
     //   this.bills_v=[...this.bills]
@@ -71,5 +77,69 @@ export class ManageOrdersComponent implements OnInit{
     //   this.bills_v=this.bills.filter((bill:any)=>bill.status==status)
     // }
   }
+
+  previous(){
+    if (this.choose_bill>0)
+      this.choose_bill--
+  }
+  next(){
+    if (this.choose_bill<this.bills[this.tab_status].length-1)
+      this.choose_bill++
+  }
+
+  async confirmBill(){
+    const bill = {...this.bills[this.tab_status][this.choose_bill]}
+
+    if (await this.updateStatus(bill.status+1,bill.id)=='success'){
+      bill.status++
+      this.bills[this.tab_status].splice(this.choose_bill,1)
+      // console.log(bill,this.bills[bill.status+""]);
+      if (!this.bills[bill.status]){
+        this.bills[bill.status]=[bill]
+      }
+      else this.bills[bill.status].push(bill)
+
+      // while (this.bills[this.tab_status].length==0&&this.tab_status<2) this.tab_status++
+
+    }
+  }
+
+  async cancelBill(note:any){
+    const bill = {...this.bills[this.tab_status][this.choose_bill]}
+
+    if (await this.updateStatus(4,bill.id)=='success'){
+      bill.status=4
+      bill.note = note
+      this.bills[this.tab_status].splice(this.choose_bill,1)
+      if (!this.bills[bill.status]){
+        this.bills[bill.status]=[bill]
+      }
+      else this.bills[bill.status].push(bill)
+
+      // while (this.bills[this.tab_status].length==0&&this.tab_status<2) this.tab_status++
+
+    }
+  }
+
+  updateStatus(status:any,bid:any):Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.crud.put("bill/status",{id:bid,status:status}).then(res=>res.json()).then(data=>{
+        if(data.result=='success'){
+          this.main.createNotification("success",`Trạng thái của hóa đơn ${bid} đã được cập nhật`)
+          resolve('success')
+
+        }
+        else{
+          this.main.createNotification("info",`Cập nhật hóa đơn thất bại`)
+          resolve('fail')
+        }
+      })
+
+    });
+
+
+  }
+
+
 
 }
