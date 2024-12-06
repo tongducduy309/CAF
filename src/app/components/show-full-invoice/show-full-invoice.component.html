@@ -66,6 +66,9 @@
           <div class="cost" style="font-weight: 600;">{{main.formatPrice(bill.cost)}} <span>VND</span></div>
         </div>
       </div>
+      <div class="group">
+        <p *ngIf="bill.comment.length>0"><b>Lý do: </b>{{bill.comment}}</p>
+      </div>
 
 
     </div>

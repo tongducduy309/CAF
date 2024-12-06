@@ -50,6 +50,10 @@ export class ManageOrdersComponent implements OnInit{
   choose_bill = 0
 
   bills:any =  {}
+
+  isFormCancel = false
+
+  comment = ''
   constructor (private crud:CrudService, private main:MainService){
 
   }
@@ -104,12 +108,18 @@ export class ManageOrdersComponent implements OnInit{
     }
   }
 
-  async cancelBill(note:any){
+  async submitCancelBill(){
+
+    if (!this.comment) {
+      this.main.createNotification("info","Vui lòng nhập lý do hủy")
+      return
+    }
+    this.isFormCancel = false
     const bill = {...this.bills[this.tab_status][this.choose_bill]}
 
     if (await this.updateStatus(4,bill.id)=='success'){
       bill.status=4
-      bill.note = note
+      bill.comment = this.comment
       this.bills[this.tab_status].splice(this.choose_bill,1)
       if (!this.bills[bill.status]){
         this.bills[bill.status]=[bill]
@@ -138,6 +148,15 @@ export class ManageOrdersComponent implements OnInit{
     });
 
 
+  }
+
+  cancel(){
+    this.isFormCancel = false
+  }
+
+  openFOrmConFirmCancel(){
+    this.isFormCancel=true
+    this.comment = ''
   }
 
 

@@ -20,7 +20,7 @@
       <div style="display: flex;justify-content: center;">
         <div class="btns" *ngIf="tab_status<3">
           <button nz-button nzType="primary" nzBlock (click)="confirmBill()">Xác nhận</button>
-          <button nz-button nzType="default" nzDanger>Hủy</button>
+          <button nz-button nzType="default" nzDanger (click)="openFOrmConFirmCancel()">Hủy</button>
 
         </div>
       </div>
@@ -28,3 +28,25 @@
 
   </nz-tab>
 </nz-tabset>
+
+<nz-modal
+      [nzVisible]="isFormCancel"
+      nzTitle="Lý do hủy"
+      nzCentered
+      (nzOnCancel)="cancel()"
+      (nzOnOk)="submitCancelBill()"
+      nzOkText="Xác Nhận"
+      nzCancelText="Hủy"
+      class="note-product"
+      [nzStyle]="{ top: '20px' }"
+    >
+      <ng-container *nzModalContent>
+        <textarea
+        nz-input
+        placeholder="Lý do hủy..."
+        [(ngModel)] = "comment"
+        [nzAutosize]="{ minRows: 6, maxRows: 6 }"
+      ></textarea>
+
+      </ng-container>
+    </nz-modal>
