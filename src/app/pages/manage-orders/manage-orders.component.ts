@@ -117,7 +117,7 @@ export class ManageOrdersComponent implements OnInit{
     this.isFormCancel = false
     const bill = {...this.bills[this.tab_status][this.choose_bill]}
 
-    if (await this.updateStatus(4,bill.id)=='success'){
+    if (await this.updateStatusForCancelBill(this.comment,bill.id)=='success'){
       bill.status=4
       bill.comment = this.comment
       this.bills[this.tab_status].splice(this.choose_bill,1)
@@ -141,6 +141,25 @@ export class ManageOrdersComponent implements OnInit{
         }
         else{
           this.main.createNotification("info",`Cập nhật hóa đơn thất bại`)
+          resolve('fail')
+        }
+      })
+
+    });
+
+
+  }
+
+  updateStatusForCancelBill(comment:any,bid:any):Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.crud.put("bill/status/cancel",{id:bid,comment:comment}).then(res=>res.json()).then(data=>{
+        if(data.result=='success'){
+          this.main.createNotification("success",`Hóa đơn ${bid} đã được bị hủy`)
+          resolve('success')
+
+        }
+        else{
+          this.main.createNotification("info",`Hủy hóa đơn thất bại`)
           resolve('fail')
         }
       })
