@@ -21,6 +21,8 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
 
   token:any = ''
 
+  processing=false
+
   constructor(private router:Router, private routed:ActivatedRoute, private main:MainService, private crud:CrudService){
     super()
   }
@@ -55,7 +57,7 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
     }
 
 
-
+    this.processing=true
     this.crud.put("users/password",{token:this.token,password:this.user.password, email:this.user.email}).then(res=>res.json()).then(data=>{
       if (data.result=='success'){
 
@@ -65,16 +67,19 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
             this.main.createNotification("success","Thay đổi mật khẩu thành công")
             this.main.setCookie("u-caf",JSON.stringify({token:data.data,uid:user.uid,email:user.email,fullname:user.fullname}),43200)
             this.router.navigate([''])
-            return;
+
           }
         }
-        this.main.createNotification("success","Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại")
-        this.router.navigate(['account/login'])
+        else{
+          this.main.createNotification("success","Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại")
+          this.router.navigate(['account/login'])
+        }
 
       }
       else{
         this.main.createNotification("info","Đặt lại mật khẩu không thành công")
       }
+      this.processing=true
     })
   }
 }
