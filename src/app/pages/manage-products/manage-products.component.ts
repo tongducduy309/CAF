@@ -38,7 +38,7 @@ export class ManageProductsComponent implements OnInit{
 
 
 
-  constructor(private messageService: NzMessageService, private crud:CrudService, private http: HttpClient, public main:MainService, private i18n: NzI18nService) {}
+  constructor(private crud:CrudService, private http: HttpClient, public main:MainService, private i18n: NzI18nService) {}
   async ngOnInit(): Promise<void> {
     const custom = vi_VN
     custom.DatePicker.lang.rangePlaceholder = ['Thời gian bắt đầu','Thời gian kết thúc']

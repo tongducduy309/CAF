@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,6 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NewpasswordComponent } from './pages/newpassword/newpassword.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { Product1Component } from './components/product1/product1.component';
 import { DetailProductComponent } from './pages/detail-product/detail-product.component';
 import { Product2Component } from './components/product2/product2.component';
 import { CollectionComponent } from './components/collection/collection.component';
@@ -54,15 +53,18 @@ import { CustomerReviewComponent } from './components/customer-review/customer-r
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ShowFullInvoiceComponent } from './components/show-full-invoice/show-full-invoice.component';
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
-
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconDefinition } from '@ant-design/icons-angular';
+import {  NZ_ICONS } from 'ng-zorro-antd/icon';
+import { LeftOutline } from '@ant-design/icons-angular/icons';
+import { Product1Component } from './components/product1/product1.component';
 registerLocaleData(vi);
-
-
+const icons: IconDefinition[] = [LeftOutline];
 
 export let components:any = [
   HeaderComponent,
   FooterComponent,
-  Product1Component,
   Product2Component,
   Product3Component,
   CollectionComponent,
@@ -77,7 +79,8 @@ export let components:any = [
   BillComponent,
   CustomerReviewComponent,
   DetailBillComponent,
-  ShowFullInvoiceComponent
+  ShowFullInvoiceComponent,
+  Product1Component
 ]
 
 export let pages = [
@@ -120,11 +123,15 @@ export let pages = [
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgZorroAntModule
+    NgZorroAntModule,
+    NzRateModule
   ],
   providers: [
-    { provide: NZ_I18N, useValue: vi_VN }
+    { provide: NZ_I18N, useValue: vi_VN },
+    { provide: NZ_ICONS, useValue: [LeftOutline] }
+
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

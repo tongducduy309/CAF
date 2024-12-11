@@ -7,8 +7,7 @@
         <span>Chuyển tới trang chủ</span>
       </li> -->
 
-        <li
-          nz-menu-item
+        <nz-menu-item
           nz-tooltip
           nzTooltipPlacement="right"
           (click)="remote('orders')"
@@ -17,18 +16,18 @@
         >
           <span nz-icon nzType="container"></span>
           <span>Quản lí đơn hàng</span>
-        </li>
+        </nz-menu-item>
         <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add" *ngIf="user.role>1">
           <ul>
-            <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Sản phẩm</li>
-            <li nz-menu-item (click)="remote('flash-sales')" [nzSelected]="titlePage=='flash-sales'">Chương trình khuyến mãi</li>
-            <li nz-menu-item (click)="remote('vouchers')" [nzSelected]="titlePage=='vouchers'">Phiếu giảm giá</li>
+            <nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Sản phẩm</nz-menu-item>
+            <nz-menu-item (click)="remote('flash-sales')" [nzSelected]="titlePage=='flash-sales'">Chương trình khuyến mãi</nz-menu-item>
+            <nz-menu-item (click)="remote('vouchers')" [nzSelected]="titlePage=='vouchers'">Phiếu giảm giá</nz-menu-item>
           </ul>
         </li>
         <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user" *ngIf="user.role>1">
           <ul>
-            <li nz-menu-item (click)="remote('accounts-customer')" [nzSelected]="titlePage=='accounts-customer'">Khách hàng</li>
-            <li nz-menu-item (click)="remote('accounts-staff')" [nzSelected]="titlePage=='accounts-staff'">Nhân viên</li>
+            <nz-menu-item (click)="remote('accounts-customer')" [nzSelected]="titlePage=='accounts-customer'">Khách hàng</nz-menu-item>
+            <nz-menu-item (click)="remote('accounts-staff')" [nzSelected]="titlePage=='accounts-staff'">Nhân viên</nz-menu-item>
           </ul>
         </li>
 
@@ -41,8 +40,7 @@
           </ul>
         </li> -->
 
-        <li
-          nz-menu-item
+        <nz-menu-item
           nz-tooltip
           nzTooltipPlacement="right"
           (click)="userS.logout()"
@@ -50,7 +48,7 @@
         >
           <span nz-icon nzType="logout"></span>
           <span>Đăng xuất</span>
-        </li>
+        </nz-menu-item>
       </ul>
 
     </nz-sider>

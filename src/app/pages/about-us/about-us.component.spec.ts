@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AboutUsComponent } from './about-us.component';
+import { NgZorroAntModule } from 'src/app/ng-zorro-ant.module';
 
 describe('AboutUsComponent', () => {
   let component: AboutUsComponent;
@@ -8,7 +9,8 @@ describe('AboutUsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AboutUsComponent ]
+      declarations: [ AboutUsComponent ],
+      imports:[NgZorroAntModule]
     })
     .compileComponents();
 

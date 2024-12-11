@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ItemInBillComponent } from './item-in-bill.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
 
 describe('ItemInBillComponent', () => {
   let component: ItemInBillComponent;
@@ -8,6 +9,7 @@ describe('ItemInBillComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[SharedTestingModule],
       declarations: [ ItemInBillComponent ]
     })
     .compileComponents();

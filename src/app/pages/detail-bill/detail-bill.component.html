@@ -9,7 +9,7 @@
       <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
       Trở Về
     </div>
-    <app-show-full-invoice [bill]="bill"></app-show-full-invoice>
+    <app-show-full-invoice *ngIf="bill" [bill]="bill"></app-show-full-invoice>
 
   </div>
 </section>

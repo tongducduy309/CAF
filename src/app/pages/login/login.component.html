@@ -23,11 +23,10 @@
             />
           </nz-input-group>
           <ng-template #suffixTemplate>
-            <span style="cursor: pointer;"
-              nz-icon
+            <nz-icon style="cursor: pointer;"
               [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
               (click)="passwordVisible = !passwordVisible"
-            ></span>
+            ></nz-icon>
           </ng-template>
         </div>
       </div>
@@ -36,7 +35,7 @@
       <span class="span_forgotPassword" (click)="this.router.navigate(['account/login/reset-your-password'])">Quên mật khẩu?</span>
       <button nz-button nzType="primary" (click)="submit()" class="btnLogin" [disabled]="processing">
         Đăng Nhập
-        <span nz-icon nzType="arrow-right"></span>
+        <nz-icon [nzType]="'arrow-right'"></nz-icon>
       </button>
     </div>
     <div class="group border-top border-right border-left border-bottom group-container-btnRegister">
@@ -45,7 +44,7 @@
       </span>
       <button nz-button nzType="primary" (click)="register()" class="btnRegister" >
         Đăng Ký
-        <span nz-icon nzType="arrow-right"></span>
+        <nz-icon nzType="arrow-right"></nz-icon>
       </button>
     </div>
   </div>

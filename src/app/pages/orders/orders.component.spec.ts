@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrdersComponent } from './orders.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -8,7 +14,9 @@ describe('OrdersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrdersComponent ]
+      imports:[SharedTestingModule,NzBackTopModule,NzTabsModule,NzGridModule,NzIconModule],
+      declarations: [ OrdersComponent ],
+      
     })
     .compileComponents();
 

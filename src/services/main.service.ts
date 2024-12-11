@@ -9,34 +9,25 @@ export class MainService {
   constructor(private notification: NzNotificationService) { }
 
   getPrice(item:any){
+    if (!item) return 0
     if (!item.sale) item.sale=0
     return (item.cost-item.cost*(item.sale/100))
   }
 
-  setCookie(name: string, value: string, expires: number | null = null, path: string = '/', domain: string | null = null, secure: boolean = false, sameSite: 'strict' | 'lax' | 'none' | null = null) {
+  setCookie(name: string, value: string, expires: number | null = null) {
     let cookieString = `${name}=${encodeURIComponent(value)}`;
     if (expires) {
       const date = new Date();
       date.setTime(date.getTime() + expires *  60 * 1000);
       cookieString += `; expires=${date.toUTCString()}`;
     }
-    if (path) {
-      cookieString += `; path=${path}`;
-    }
-    if (domain) {
-      cookieString += `; domain=${domain}`;
-    }
-    if (secure) {
-      cookieString += `; secure`;
-    }
-    if (sameSite) {
-      cookieString += `; SameSite=${sameSite}`;
-    }
     document.cookie = cookieString;  
 
   }
 
   equalObject(obj1:any,obj2:any){
+    if (obj1&&obj2) return true
+    if (!obj1||!obj2) return false
 
     for (let key of Object.keys(obj1)){
       if (obj1[key]!=obj2[key]) return false
@@ -58,18 +49,17 @@ export class MainService {
     return null;
   }
 
-  deleteCookie(name: string, path: string = '/', domain: string | null = null) {
-    this.setCookie(name, '', -1, path, domain);
+  deleteCookie(name: string) {
+    this.setCookie(name, '', -1);
   }
 
-  createNotification(type: string, message: string, show=true): void {
-    if (show){
-      this.notification.create(
-        type,
-        'Thông Báo',
-        message
-      );
-    }
+  createNotification(type: string, message: string): void {
+    if (type!='success'&&type!='info'&&type!='warning') return;
+    this.notification.create(
+      type,
+      'Thông Báo',
+      message
+    );
   }
 
   formatEncode(n:any,a:any){

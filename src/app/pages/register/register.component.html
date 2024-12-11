@@ -41,18 +41,17 @@
         </div>
 
         <ng-template #suffixTemplate>
-          <span style="cursor: pointer;"
-            nz-icon
+          <nz-icon style="cursor: pointer;"
             [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
             (click)="passwordVisible = !passwordVisible"
-          ></span>
+          ></nz-icon>
         </ng-template>
     </div>
 
     <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;">
         <button nz-button nzType="primary" class="btnSendMess" (click)="SendMess_Register()" [disabled]="processing">
             Đăng Ký
-            <span nz-icon nzType="arrow-right"></span>
+            <nz-icon nzType="arrow-right"></nz-icon>
         </button>
     </div>
 

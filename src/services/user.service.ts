@@ -16,10 +16,13 @@ export class UserService {
 
   async login_method_1(token:any):Promise<any>{
 
-
+    if (!token) return null
     return new Promise(async (resolve, reject) => {
 
       const result = await this.getUser(null,null,token)
+
+      // resolve(result)
+      // return result
       // console.log(result);
       if (result){
         if (result.result=='Success'){
@@ -27,14 +30,23 @@ export class UserService {
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:token})
         }
+        resolve(null)
         if (result.result=='Not Verify')
+        {
           this.main.createNotification("info","Tài khoản chưa được xác thực")
-        if (result.result=='Not Exist'){
+        }
+
+        if (result.result=='Not Exist')
           this.main.createNotification("info","Tài khoản không tồn tại")
 
 
 
-        }
+
+        if (result.result=='Blocked')
+          this.main.createNotification("info","Tài khoản đang tạm khóa")
+      }
+      else{
+        resolve(null)
       }
 
 
@@ -42,6 +54,7 @@ export class UserService {
   }
 
   async login_method_2(email:any,password:any):Promise<any>{
+    if (!email || !password) return null
     return new Promise(async (resolve, reject) => {
       const result = await this.getUser(email,password)
       if (result){
@@ -51,16 +64,18 @@ export class UserService {
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
         }
+        resolve(null)
         if (result.result=='Not Verify')
           this.main.createNotification("info","Tài khoản chưa được xác thực")
         if (result.result=='Wrong Password')
           this.main.createNotification("info","Mật khẩu chưa chính xác")
-        if (result.result=='Not Exist'){
+        if (result.result=='Not Exist')
           this.main.createNotification("info","Tài khoản không tồn tại")
+        if (result.result=='Blocked')
+          this.main.createNotification("info","Tài khoản đang tạm khóa")
 
 
 
-        }
       }
       resolve(null)
 
@@ -71,7 +86,9 @@ export class UserService {
 
   getUser(email:any=null,password:any=null,token:any=null):Promise<any>{
     // console.log(email,password,token);
+
       return new Promise((resolve, reject) => {
+        // resolve(2)
         if (email&&password){
           this.crud.get('users',`${email}/${password}`).subscribe((result:any)=>{
             resolve(result)
@@ -81,11 +98,10 @@ export class UserService {
         else{
           if (token){
             this.crud.get('users',token).subscribe((user:any)=>{
-              // console.log(user);
               resolve(user)
             })
           }
-          // else resolve(null)
+          else resolve(null)
         }
 
       });

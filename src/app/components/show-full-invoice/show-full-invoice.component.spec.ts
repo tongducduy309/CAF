@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShowFullInvoiceComponent } from './show-full-invoice.component';
+import { MainService } from 'src/services/main.service';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 describe('ShowFullInvoiceComponent', () => {
   let component: ShowFullInvoiceComponent;
@@ -8,7 +12,9 @@ describe('ShowFullInvoiceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShowFullInvoiceComponent ]
+      imports:[SharedTestingModule,NzIconModule,NzBadgeModule],
+      declarations: [ ShowFullInvoiceComponent ],
+
     })
     .compileComponents();
 

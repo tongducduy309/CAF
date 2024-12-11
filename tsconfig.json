@@ -20,7 +20,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "allowJs": true,
+    "allowJs": false,
     "checkJs": false,
     "lib": [
       "ES2022",
@@ -32,6 +32,7 @@
       ]
     }
   },
+
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ManageAddressComponent } from './manage-address.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { NzDrawerModule } from 'ng-zorro-antd/drawer';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { BoxAddressComponent } from '../box-address/box-address.component';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 describe('ManageAddressComponent', () => {
   let component: ManageAddressComponent;
@@ -8,7 +13,8 @@ describe('ManageAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ManageAddressComponent ]
+      imports:[SharedTestingModule,NzDrawerModule, NzModalModule, NzBadgeModule],
+      declarations: [ ManageAddressComponent,BoxAddressComponent ]
     })
     .compileComponents();
 

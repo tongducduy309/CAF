@@ -196,20 +196,23 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
  }
 
   getAddressOfUser(){
-  this.crud.get("address-of-user",`${this.user.id}`).subscribe((address:any)=>{
-    console.log(address);
-    if (address.result=='success'){
-      this.list_address = address.data
-      for (let a of this.list_address){
-        if (a.default_){
-          this.chooseEmitter.emit(a)
-          break
+    if (this.user)
+    {
+      this.crud.get("address-of-user",`${this.user.id}`).subscribe((address:any)=>{
+        console.log(address);
+        if (address.result=='success'){
+          this.list_address = address.data
+          for (let a of this.list_address){
+            if (a.default_){
+              this.chooseEmitter.emit(a)
+              break
+            }
+          }
+
         }
-      }
 
+      })
     }
-
-  })
   }
 
   isValid(s:any){

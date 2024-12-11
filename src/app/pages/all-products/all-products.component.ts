@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
@@ -30,6 +31,10 @@ export class AllProductsComponent extends Page implements OnInit  {
   name_cate_products:any = []
   filter_name_cate_products:any = []
   categories:any = []
+
+  myForm = new FormGroup({
+    trend: new FormControl('')
+  });
 
 
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService) {

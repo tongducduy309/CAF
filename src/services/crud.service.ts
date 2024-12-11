@@ -39,7 +39,7 @@ export class CrudService {
 
   get(table:string,id:string){
 
-    return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`,{headers:new HttpHeaders('Content-type')});
+    return this.http.get(`https://api-caf.vercel.app/api/get/${table}/${id}`);
 
   }
 
@@ -64,10 +64,5 @@ export class CrudService {
 
   getInfoItemsCart(ids:any){
     return this.http.get(`https://api-caf.vercel.app/api/get/products/items-cart/${ids}`);
-  }
-
-  // ============================USER=============================
-  getUsers(){
-    return null;
   }
 }

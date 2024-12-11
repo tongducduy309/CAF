@@ -45,43 +45,6 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
     })
   }
 
-  // async getUser(){
-  //   let token_cookie = this.main.getCookie("u-caf")
-  //   console.log(token_cookie);
-  //   if(token_cookie!=null){
-
-  //     const user=await this.userS.login_method_1(token_cookie)
-  //     if (user){
-  //       this.UserEmitter.emit(user)
-  //       // console.log("Login",user);
-  //       this.router.navigate(['/'])
-  //       // this.loaded()
-  //     }
-  //   }
-  //   else{
-  //     this.loaded()
-  //   }
-  // }
-
-  formatEncode(n:any,a:any){
-    let code=['A','B','C','D','E','F','G','H','I','J'];
-    let s=n+"";
-    while (s.length<a) s='0'+s;
-    let x='';
-    for (let i=0;i<a;i++) x+=code[parseInt(s[i])];
-
-
-    return x;
-}
-  createID(){
-    let date = new Date();
-    let d=[date.getDate(),date.getMonth(),(date.getFullYear()+"").slice(2,4),date.getHours(),date.getMinutes(),date.getSeconds(),date.getMilliseconds()];
-    let n=[2,2,2,2,2,2,4];
-    let id='';
-    for (let i=0;i<d.length;i++) id+=d[i];
-    return id;
-  }
-
   async submit(){
     if (this.user_email.trim().length==0||this.user_password.trim().length==0){
       this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")

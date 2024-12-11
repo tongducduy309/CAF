@@ -20,7 +20,7 @@ export class Product3Component implements OnInit {
 
   isFormAddToCart = false
 
-  constructor(private router:Router, public main:MainService) { }
+  constructor(public main:MainService) { }
 
   ngOnInit(): void {
   }

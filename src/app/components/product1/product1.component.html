@@ -1,10 +1,23 @@
-<div class="product-item">
-  <img src="{{product.img}}" alt="" (click)="this.route.navigate(['products/{{product.id}}'])">
-  <div style="width: 100%;">
-    <span class="name" (click)="this.route.navigate(['products/{{product.id}}'])">{{product.name}}</span>
-    <div>
-      <span class="price">{{product.price}}</span>
-      <span *ngIf="product.cost!='0'" class="cost" >{{product.cost}}</span>
+
+<div nz-row class="product" nzGutter="10" *ngIf="product">
+  <div nz-col nzSpan = "10">
+    <div class="group" style="display: flex;align-items: center;height: 100%; justify-content: center;">
+      <div style="display: flex;justify-content: center;align-items: center;"><a [href]="'products/'+this.product.name_id"><img [src]="product.img" alt=""></a></div>
+
     </div>
   </div>
+  <div nz-col nzSpan="14">
+      <div class="product-info">
+        <div class="group">
+          <a class="name" [href]="'products/'+this.product.name_id" style="font-weight: 900;color: #000;">{{product.name}}</a>
+        <!-- </div>
+        <div class="group">
+          <span class="type" style="font-weight: 700;color: #000;">{{product.c_name}}</span>
+        </div> -->
+
+
+      </div>
+  </div>
+
 </div>
+

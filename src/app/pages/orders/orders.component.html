@@ -8,7 +8,7 @@
     <div nz-row>
       <div nz-col [nzSpan]="12">
         <div class="btn" (click)="back()">
-          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          <span nz-icon nzType="arrow-left"></span>
           Trở Về
         </div>
 
@@ -23,7 +23,7 @@
     <nz-tabset>
       <nz-tab [nzTitle]="titleTemplate" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
         <ng-template #titleTemplate>
-          <span *ngIf="tab.icon.length>0" nz-icon [nzType]="tab.icon" nzTheme="outline"></span>
+          <span nz-icon *ngIf="tab.icon.length>0" [nzType]="tab.icon"></span>
           {{ tab.name }}
         </ng-template>
         <app-bill *ngFor="let bill of bills_v" [bill]="bill"></app-bill>

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewpasswordComponent } from './newpassword.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { FormsModule } from '@angular/forms';
+import { NgZorroAntModule } from 'src/app/ng-zorro-ant.module';
 
 describe('NewpasswordComponent', () => {
   let component: NewpasswordComponent;
@@ -8,7 +11,8 @@ describe('NewpasswordComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewpasswordComponent ]
+      imports:[SharedTestingModule,NgZorroAntModule,FormsModule],
+      declarations: [ NewpasswordComponent ],
     })
     .compileComponents();
 

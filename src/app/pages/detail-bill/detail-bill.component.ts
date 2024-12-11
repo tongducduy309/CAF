@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./detail-bill.component.scss']
 })
 export class DetailBillComponent extends Page{
-  bill:any = {}
+  bill:any = null
 
   constructor(private route: ActivatedRoute, private crud:CrudService, private main:MainService, private location:Location){
     super()

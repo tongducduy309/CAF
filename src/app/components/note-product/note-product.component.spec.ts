@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NoteProductComponent } from './note-product.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 describe('NoteProductComponent', () => {
   let component: NoteProductComponent;
@@ -8,6 +10,7 @@ describe('NoteProductComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[SharedTestingModule,NzModalModule],
       declarations: [ NoteProductComponent ]
     })
     .compileComponents();

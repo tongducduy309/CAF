@@ -1,6 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +13,9 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      imports:[SharedTestingModule,NzLayoutModule,RouterTestingModule,NzToolTipModule],
+      declarations: [ DashboardComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
 
