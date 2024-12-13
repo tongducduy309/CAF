@@ -51,7 +51,7 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
     this.updateQuantity()
   }
 
-  removeQuantity(){
+  subQuantity(){
     if (this.item.quantity>1)
     {
       this.item.quantity--;
@@ -100,9 +100,9 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
 
   updateQuantity(){
     this.crud.put("cart",{id:this.item.id,quantity:this.item.quantity}).then(res=>res.json()).then(data=>{
-      if (data.result=='failed'){
-        this.main.createNotification("error","[Lỗi] Thay đổi số lượng giỏ hàng")
-      }
+      // if (data.result=='failed'){
+      //   this.main.createNotification("error","[Lỗi] Thay đổi số lượng giỏ hàng")
+      // }
     })
   }
 }

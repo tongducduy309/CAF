@@ -21,7 +21,7 @@ export class MainService {
       date.setTime(date.getTime() + expires *  60 * 1000);
       cookieString += `; expires=${date.toUTCString()}`;
     }
-    document.cookie = cookieString;  
+    document.cookie = cookieString;
 
   }
 
@@ -54,7 +54,7 @@ export class MainService {
   }
 
   createNotification(type: string, message: string): void {
-    if (type!='success'&&type!='info'&&type!='warning') return;
+    if (type!='success'&&type!='info'&&type!='warning'&&type!='error') return;
     this.notification.create(
       type,
       'Thông Báo',

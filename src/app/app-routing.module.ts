@@ -28,7 +28,7 @@ import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 
-const routes: Routes = [
+export const routes: Routes = [
 
   {
     path:'home',

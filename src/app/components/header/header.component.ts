@@ -178,6 +178,7 @@ export class HeaderComponent implements OnInit{
 
   getItemsCart(){
     this.loading = true
+    if (this.user.id)
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
       this.itemsCart = response.data
       this.cal_Info_Cart()
@@ -200,13 +201,13 @@ export class HeaderComponent implements OnInit{
 
   removeItemInCart(data:any){
     const id = data.id
-    const quantity = data.quantity
-    this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
-    this.total-=quantity
+
     this.crud.delete("cart",id).subscribe((res:any)=>{
       console.log(res);
       if (res.result=='success'){
-        console.log(this.itemsCart);
+        const quantity = data.quantity
+        this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
+        this.total-=quantity
 
 
       }

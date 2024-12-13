@@ -27,6 +27,8 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
     super()
     // this.must_load=1
   }
+
+  user=null
   ngAfterViewInit(): void {
     Promise.resolve().then(()=> {
       // this.getUser()
@@ -50,10 +52,15 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
       this.main.createNotification("info","Vui lòng điền đầy đủ thông tin")
       return;
     }
+
+    if (!this.isValidEmail(this.user_email)) {
+      this.main.createNotification('info', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
+      return;
+    }
     this.processing=true
-    const user = await this.userS.login_method_2(this.user_email,this.user_password)
-    if (user){
-      this.UserEmitter.emit(user)
+    this.user = await this.userS.login_method_2(this.user_email,this.user_password)
+    if (this.user){
+      this.UserEmitter.emit(this.user)
       this.router.navigate([''])
     }
     this.processing=false
@@ -81,14 +88,14 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
         if (r.result=='Not Exist'){
           this.main.createNotification("info","Tài khoản không tồn tại")
         }
-        if (r.result=='failed'){
-          this.main.createNotification("info","Quá trình xác thực bị lỗi [403]")
-        }
+        // if (r.result=='failed'){
+        //   this.main.createNotification("info","Quá trình xác thực bị lỗi [403]")
+        // }
       })
 
     }else
     {
-      this.main.createNotification('error', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
+      this.main.createNotification('info', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
     }
   }
 
