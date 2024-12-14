@@ -54,7 +54,7 @@ export class UserService {
   }
 
   async login_method_2(email:any,password:any):Promise<any>{
-    if (!email || !password) return null
+
     return new Promise(async (resolve, reject) => {
       const result = await this.getUser(email,password)
       if (result){
@@ -63,20 +63,29 @@ export class UserService {
           this.main.setCookie("u-caf",JSON.stringify({token:result.token,uid:result.id,email:result.email,fullname:result.fullname}),43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
+          return
         }
-        resolve(null)
-        if (result.result=='Not Verify')
-          this.main.createNotification("info","Tài khoản chưa được xác thực")
-        if (result.result=='Wrong Password')
-          this.main.createNotification("info","Mật khẩu chưa chính xác")
-        if (result.result=='Not Exist')
-          this.main.createNotification("info","Tài khoản không tồn tại")
-        if (result.result=='Blocked')
-          this.main.createNotification("info","Tài khoản đang tạm khóa")
+        else{
+          resolve(null)
+          if (result.result=='Not Verify')
+            this.main.createNotification("info","Tài khoản chưa được xác thực")
+          else
+          if (result.result=='Wrong Password')
+            this.main.createNotification("info","Mật khẩu chưa chính xác")
+          else
+          if (result.result=='Not Exist')
+            this.main.createNotification("info","Tài khoản không tồn tại")
+          else
+          if (result.result=='Blocked')
+            this.main.createNotification("info","Tài khoản đang tạm khóa")
+          return
+        }
+
 
 
 
       }
+      this.main.createNotification("error","Lỗi")
       resolve(null)
 
     });

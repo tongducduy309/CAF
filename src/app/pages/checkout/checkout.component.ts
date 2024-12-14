@@ -114,7 +114,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     // console.log(this.user);
     if (!this.user)
     {
-      this.router.navigate([''])
+      this.router.navigate(['home'])
     }
     else{
       if (this.user.role>0){
