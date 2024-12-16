@@ -1,0 +1,14 @@
+services:
+  coffee-and-tea:
+    container_name: coffee-and-tea
+    build: .
+    image: coffee-and-tea: v1
+    ports:
+      - 80:80
+    expose:
+      -80
+  networks:
+      - internalnet
+networks:
+  internalnet:
+    driver: bridge

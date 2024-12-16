@@ -63,7 +63,6 @@ export class UserService {
           this.main.setCookie("u-caf",JSON.stringify({token:result.token,uid:result.id,email:result.email,fullname:result.fullname}),43200)
           this.main.createNotification("success","Đăng nhập thành công")
           resolve({id:result.id,fullname:result.fullname,token:result.token})
-          return
         }
         else{
           resolve(null)
@@ -78,15 +77,19 @@ export class UserService {
           else
           if (result.result=='Blocked')
             this.main.createNotification("info","Tài khoản đang tạm khóa")
-          return
+          else{
+            this.main.createNotification("error","Lỗi")
+          }
         }
 
 
 
 
       }
-      this.main.createNotification("error","Lỗi")
-      resolve(null)
+      else{
+        this.main.createNotification("error","Lỗi")
+        resolve(null)
+      }
 
     });
 

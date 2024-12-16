@@ -175,6 +175,11 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
       for (let p of this.products){
         total+=p.quantity*1
       }
+
+      if (this.bill.products.length==0){
+        this.main.createNotification("info","Thanh toán thất bại")
+        return
+      }
       this.crud.addData("checkout",{
         user:{
           ...this.address_user_choosing,

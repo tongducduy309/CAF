@@ -1,29 +1,10 @@
-# Stage 1: Build the Angular application
-FROM node:alpine AS build
-
-# Setup the working directory
-WORKDIR /usr/src/app
-
-# Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
-
-# Install dependencies
+FROM node:20.18.0-alpine AS build
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-
-# Copy other files and folders to the working directory
+RUN npx ngcc --properties es2023 browser module main --first-only --create-ivy-entry-points
 COPY . .
-
-# Build Angular application in PROD mode
-RUN npm run build --prod
-
-# Stage 2: Serve the application using Nginx
-FROM nginx:alpine
-
-# Copy built Angular app files to Nginx HTML folder
-COPY --from=build /usr/src/app/dist/coffee-and-tea /usr/share/nginx/html
-
-# Expose port 80
+RUN npm run build
+FROM nginx:stable
+COPY --from=build /app/coffee-and-tea /usr/share/nginx/html
 EXPOSE 80
-
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]

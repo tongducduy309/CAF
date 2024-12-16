@@ -85,9 +85,7 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
         if (r.result=='success'){
           this.isSendEmailSuccess=true
         }
-        if (r.result=='Not Exist'){
-          this.main.createNotification("info","Tài khoản không tồn tại")
-        }
+        else this.main.createNotification("info","Tài khoản không tồn tại")
         // if (r.result=='failed'){
         //   this.main.createNotification("info","Quá trình xác thực bị lỗi [403]")
         // }

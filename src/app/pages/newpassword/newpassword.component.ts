@@ -62,13 +62,11 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
       if (data.result=='success'){
 
         const user = this.main.getCookie("u-caf")
-        if (user){
-          if (user.token==this.token){
+        if (user&&user.token==this.token){
             this.main.createNotification("success","Thay đổi mật khẩu thành công")
             this.main.setCookie("u-caf",JSON.stringify({token:data.data,uid:user.uid,email:user.email,fullname:user.fullname}),43200)
             this.router.navigate([''])
 
-          }
         }
         else{
           this.main.createNotification("success","Đặt lại mật khẩu thành công. Vui lòng đăng nhập lại")
