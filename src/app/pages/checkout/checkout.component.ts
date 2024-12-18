@@ -4,7 +4,6 @@ import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'app-checkout',
@@ -44,7 +43,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   @Output() totalEmitter = new EventEmitter()
 
-  constructor (private location:Location,private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
     super()
     this.must_load = 2
   }
@@ -54,9 +53,6 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     })
   }
 
-  back(){
-    this.location.back();
-  }
 
 
 
@@ -120,8 +116,8 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     else{
       if (this.user.role>0){
         this.main.createNotification("info","Tài khoản admin/nhân viên không thể thực hiện thao tác này")
-        this.back()
-        return
+
+
       }
       else{
         this.user = {...this.user,card:{
@@ -212,7 +208,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
   }
 
   verifyCode(){
-   if (this.code_gift.trim()){
+   if (this.code_gift.trim().length>0){
     this.crud.get("voucher",this.code_gift).subscribe((res:any)=>{
       if (res.result=='success'){
         const row = res.data

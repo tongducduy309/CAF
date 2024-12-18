@@ -46,8 +46,10 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
 
   changeQuantity(){
     this.item.quantity = this.item.quantity.replace(/\D/g, '');
-    if(this.item.quantity<1) this.item.quantity=1
-    if(this.item.quantity>99) this.item.quantity=99
+    if(this.item.quantity<1)
+      this.item.quantity=1
+    if(this.item.quantity>99)
+      this.item.quantity=99
     this.QuantityEmitter.emit(this.item)
     this.updateQuantity()
   }

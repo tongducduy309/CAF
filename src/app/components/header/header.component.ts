@@ -158,7 +158,6 @@ export class HeaderComponent implements OnInit{
 
 
   open(): void {
-
     if (this.user){
       this.visibleCart = true;
       this.getItemsCart()
@@ -190,8 +189,6 @@ export class HeaderComponent implements OnInit{
   }
 
   getItemsCart(){
-    this.loading = true
-    if (this.user.id)
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
       this.itemsCart = response.data
       this.cal_Info_Cart()
@@ -201,6 +198,7 @@ export class HeaderComponent implements OnInit{
     })
 
   }
+
   changeQuantityItemInCart(item:any){
     for (let i of this.itemsCart){
       if (i.id==item.id){
