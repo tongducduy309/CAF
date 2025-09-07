@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CrudService } from './crud.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CrudService', () => {
   let service: CrudService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule],
-
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     service = TestBed.inject(CrudService);
   });
 

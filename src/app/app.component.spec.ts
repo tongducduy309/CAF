@@ -11,7 +11,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
@@ -114,21 +114,17 @@ describe('AppComponent', () => {
   ]
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
+    declarations: [...components, ...pages],
+    imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         NgZorroAntModule,
         RouterTestingModule,
-        NzGridModule
-
-      ],
-      declarations: [...components,...pages],
-      providers:[{ provide: NZ_ICONS, useValue: [LeftOutline] }]
-    }).compileComponents();
+        NzGridModule],
+    providers: [{ provide: NZ_ICONS, useValue: [LeftOutline] }, provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents();
   });
 
   it('should create the app', () => {

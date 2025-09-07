@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NgZorroAntModule } from '../ng-zorro-ant.module';
 import { CrudService } from 'src/services/crud.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,29 +19,23 @@ import { LeftOutline } from '@ant-design/icons-angular/icons';
 
 
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterTestingModule,
-    FormsModule,
-    NgZorroAntModule,
-    NzNotificationModule,
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    NzInputModule,
-    NzGridModule,
-    NzRateModule,
-    NzIconModule,
-  ],
-  providers:[
-    CrudService,
-    UserService,
-    MainService,
-    { provide: NZ_ICONS, useValue: [LeftOutline] }
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
+@NgModule({ declarations: [],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [CommonModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
+        FormsModule,
+        NgZorroAntModule,
+        NzNotificationModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        NzInputModule,
+        NzGridModule,
+        NzRateModule,
+        NzIconModule], providers: [
+        CrudService,
+        UserService,
+        MainService,
+        { provide: NZ_ICONS, useValue: [LeftOutline] },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class SharedTestingModule { }

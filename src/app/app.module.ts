@@ -9,7 +9,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
@@ -114,24 +114,17 @@ export let pages = [
   ManageAccountsComponent
 ]
 
-@NgModule({
-  declarations: [...components,...pages],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    NgZorroAntModule,
-    NzRateModule
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: vi_VN },
-    { provide: NZ_ICONS, useValue: [LeftOutline] }
-
-  ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
-})
+@NgModule({ declarations: [...components, ...pages],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        NgZorroAntModule,
+        NzRateModule], providers: [
+        { provide: NZ_I18N, useValue: vi_VN },
+        { provide: NZ_ICONS, useValue: [LeftOutline] },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

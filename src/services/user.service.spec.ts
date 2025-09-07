@@ -3,7 +3,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { UserService } from './user.service';
 import { NzNotificationServiceModule } from 'ng-zorro-antd/notification';
 import { MainService } from './main.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,9 +12,10 @@ describe('UserService', () => {
   jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientModule,NzNotificationServiceModule,BrowserModule,
-        BrowserAnimationsModule]
-    });
+    imports: [NzNotificationServiceModule, BrowserModule,
+        BrowserAnimationsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+});
     service = TestBed.inject(UserService);
   });
 
