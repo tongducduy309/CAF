@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-customer-review',
-  templateUrl: './customer-review.component.html',
-  styleUrls: ['./customer-review.component.scss']
+    selector: 'app-customer-review',
+    templateUrl: './customer-review.component.html',
+    styleUrls: ['./customer-review.component.scss'],
+    standalone: false
 })
 export class CustomerReviewComponent {
   @Input() customer_review:any={}

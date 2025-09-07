@@ -8,9 +8,10 @@ import { NzI18nService } from 'ng-zorro-antd/i18n';
 import { vi_VN } from 'ng-zorro-antd/i18n';
 
 @Component({
-  selector: 'app-manage-products',
-  templateUrl: './manage-products.component.html',
-  styleUrls: ['./manage-products.component.scss']
+    selector: 'app-manage-products',
+    templateUrl: './manage-products.component.html',
+    styleUrls: ['./manage-products.component.scss'],
+    standalone: false
 })
 export class ManageProductsComponent implements OnInit{
   isFormAddProduct=false

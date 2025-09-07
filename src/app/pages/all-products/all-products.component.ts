@@ -6,9 +6,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.scss']
+    selector: 'app-all-products',
+    templateUrl: './all-products.component.html',
+    styleUrls: ['./all-products.component.scss'],
+    standalone: false
 })
 export class AllProductsComponent extends Page implements OnInit  {
 

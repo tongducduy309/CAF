@@ -5,9 +5,10 @@ import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent{
   title = 'Coffee Store';

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-box-address',
-  templateUrl: './box-address.component.html',
-  styleUrls: ['./box-address.component.scss']
+    selector: 'app-box-address',
+    templateUrl: './box-address.component.html',
+    styleUrls: ['./box-address.component.scss'],
+    standalone: false
 })
 export class BoxAddressComponent {
   @Input() info:any = {}

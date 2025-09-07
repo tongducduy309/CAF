@@ -2,9 +2,10 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-bill',
-  templateUrl: './bill.component.html',
-  styleUrls: ['./bill.component.scss']
+    selector: 'app-bill',
+    templateUrl: './bill.component.html',
+    styleUrls: ['./bill.component.scss'],
+    standalone: false
 })
 export class BillComponent implements OnChanges{
 

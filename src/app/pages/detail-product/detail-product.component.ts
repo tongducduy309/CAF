@@ -5,9 +5,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-detail-product',
-  templateUrl: './detail-product.component.html',
-  styleUrls: ['./detail-product.component.scss']
+    selector: 'app-detail-product',
+    templateUrl: './detail-product.component.html',
+    styleUrls: ['./detail-product.component.scss'],
+    standalone: false
 })
 export class DetailProductComponent extends Page implements OnInit {
 

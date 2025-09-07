@@ -5,9 +5,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-newpassword',
-  templateUrl: './newpassword.component.html',
-  styleUrls: ['./newpassword.component.scss']
+    selector: 'app-newpassword',
+    templateUrl: './newpassword.component.html',
+    styleUrls: ['./newpassword.component.scss'],
+    standalone: false
 })
 export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
 

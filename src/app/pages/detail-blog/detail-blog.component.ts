@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Page } from 'src/app/classes/page';
 
 @Component({
-  selector: 'app-detail-blog',
-  templateUrl: './detail-blog.component.html',
-  styleUrls: ['./detail-blog.component.scss']
+    selector: 'app-detail-blog',
+    templateUrl: './detail-blog.component.html',
+    styleUrls: ['./detail-blog.component.scss'],
+    standalone: false
 })
 export class DetailBlogComponent extends Page implements OnInit {
 

@@ -7,9 +7,10 @@ import { Page } from 'src/app/classes/page';
 import { UserService } from 'src/services/user.service';
 import { MainService } from 'src/services/main.service';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent extends Page implements OnInit,AfterViewInit {
   user_email = ''

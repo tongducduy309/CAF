@@ -5,9 +5,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-item-shopping-cart',
-  templateUrl: './item-shopping-cart.component.html',
-  styleUrls: ['./item-shopping-cart.component.scss']
+    selector: 'app-item-shopping-cart',
+    templateUrl: './item-shopping-cart.component.html',
+    styleUrls: ['./item-shopping-cart.component.scss'],
+    standalone: false
 })
 export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
 

@@ -3,9 +3,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-manage-address',
-  templateUrl: './manage-address.component.html',
-  styleUrls: ['./manage-address.component.scss']
+    selector: 'app-manage-address',
+    templateUrl: './manage-address.component.html',
+    styleUrls: ['./manage-address.component.scss'],
+    standalone: false
 })
 export class ManageAddressComponent implements OnInit,AfterViewInit{
   @Input() visible = false

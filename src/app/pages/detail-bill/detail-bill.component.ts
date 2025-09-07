@@ -6,9 +6,10 @@ import { MainService } from 'src/services/main.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-detail-bill',
-  templateUrl: './detail-bill.component.html',
-  styleUrls: ['./detail-bill.component.scss']
+    selector: 'app-detail-bill',
+    templateUrl: './detail-bill.component.html',
+    styleUrls: ['./detail-bill.component.scss'],
+    standalone: false
 })
 export class DetailBillComponent extends Page{
   bill:any = null

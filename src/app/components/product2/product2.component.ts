@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-product2',
-  templateUrl: './product2.component.html',
-  styleUrls: ['./product2.component.scss']
+    selector: 'app-product2',
+    templateUrl: './product2.component.html',
+    styleUrls: ['./product2.component.scss'],
+    standalone: false
 })
 export class Product2Component implements OnInit{
   ngOnInit(): void {

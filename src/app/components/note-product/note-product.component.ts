@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-note-product',
-  templateUrl: './note-product.component.html',
-  styleUrls: ['./note-product.component.scss']
+    selector: 'app-note-product',
+    templateUrl: './note-product.component.html',
+    styleUrls: ['./note-product.component.scss'],
+    standalone: false
 })
 export class NoteProductComponent implements OnInit{
 

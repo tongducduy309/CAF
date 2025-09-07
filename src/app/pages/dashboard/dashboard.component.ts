@@ -6,9 +6,10 @@ import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class DashboardComponent extends Page implements OnInit{
   isCollapsed = false;

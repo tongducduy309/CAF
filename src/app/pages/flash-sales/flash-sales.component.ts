@@ -3,9 +3,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-flash-sales',
-  templateUrl: './flash-sales.component.html',
-  styleUrls: ['./flash-sales.component.scss']
+    selector: 'app-flash-sales',
+    templateUrl: './flash-sales.component.html',
+    styleUrls: ['./flash-sales.component.scss'],
+    standalone: false
 })
 export class FlashSalesComponent implements OnInit{
   fs:any = []
