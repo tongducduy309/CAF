@@ -7,9 +7,10 @@ import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
-  selector: 'app-account',
-  templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+    selector: 'app-account',
+    templateUrl: './account.component.html',
+    styleUrls: ['./account.component.scss'],
+    standalone: false
 })
 export class AccountComponent extends Page implements OnInit {
 

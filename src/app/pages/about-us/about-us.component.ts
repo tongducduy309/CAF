@@ -2,9 +2,10 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
 @Component({
-  selector: 'app-about-us',
-  templateUrl: './about-us.component.html',
-  styleUrls: ['./about-us.component.scss']
+    selector: 'app-about-us',
+    templateUrl: './about-us.component.html',
+    styleUrls: ['./about-us.component.scss'],
+    standalone: false
 })
 export class AboutUsComponent extends Page implements AfterViewInit{
   constructor(private location:Location){

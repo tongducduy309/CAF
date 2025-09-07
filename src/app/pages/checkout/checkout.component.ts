@@ -6,9 +6,10 @@ import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrls: ['./checkout.component.scss'],
+    standalone: false
 })
 export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 

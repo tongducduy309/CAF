@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Page } from 'src/app/classes/page';
 
 @Component({
-  selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+    selector: 'app-collections',
+    templateUrl: './collections.component.html',
+    styleUrls: ['./collections.component.scss'],
+    standalone: false
 })
 export class CollectionsComponent extends Page implements OnInit {
 

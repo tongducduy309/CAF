@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-show-full-invoice',
-  templateUrl: './show-full-invoice.component.html',
-  styleUrls: ['./show-full-invoice.component.scss']
+    selector: 'app-show-full-invoice',
+    templateUrl: './show-full-invoice.component.html',
+    styleUrls: ['./show-full-invoice.component.scss'],
+    standalone: false
 })
 export class ShowFullInvoiceComponent implements OnChanges{
   @Input() bill:any = {}

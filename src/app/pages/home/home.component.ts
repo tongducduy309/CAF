@@ -4,9 +4,10 @@ import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    standalone: false
 })
 export class HomeComponent extends Page implements OnInit{
   title_button= "Login"

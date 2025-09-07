@@ -5,9 +5,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-vouchers',
-  templateUrl: './vouchers.component.html',
-  styleUrls: ['./vouchers.component.scss']
+    selector: 'app-vouchers',
+    templateUrl: './vouchers.component.html',
+    styleUrls: ['./vouchers.component.scss'],
+    standalone: false
 })
 export class VouchersComponent implements OnInit{
   vouchers_v:any = []

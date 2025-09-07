@@ -3,9 +3,10 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Page } from 'src/app/classes/page';
 
 @Component({
-  selector: 'app-terms-and-conditions',
-  templateUrl: './terms-and-conditions.component.html',
-  styleUrls: ['./terms-and-conditions.component.scss']
+    selector: 'app-terms-and-conditions',
+    templateUrl: './terms-and-conditions.component.html',
+    styleUrls: ['./terms-and-conditions.component.scss'],
+    standalone: false
 })
 export class TermsAndConditionsComponent extends Page implements AfterViewInit{
   constructor(private location:Location){

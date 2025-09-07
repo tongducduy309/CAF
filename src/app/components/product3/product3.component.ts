@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-product3',
-  templateUrl: './product3.component.html',
-  styleUrls: ['./product3.component.scss']
+    selector: 'app-product3',
+    templateUrl: './product3.component.html',
+    styleUrls: ['./product3.component.scss'],
+    standalone: false
 })
 export class Product3Component implements OnInit {
   @Input() product:any = {

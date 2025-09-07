@@ -3,9 +3,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-manage-orders',
-  templateUrl: './manage-orders.component.html',
-  styleUrls: ['./manage-orders.component.scss']
+    selector: 'app-manage-orders',
+    templateUrl: './manage-orders.component.html',
+    styleUrls: ['./manage-orders.component.scss'],
+    standalone: false
 })
 export class ManageOrdersComponent implements OnInit{
   tabs = [

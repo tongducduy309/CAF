@@ -4,9 +4,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-manage-accounts',
-  templateUrl: './manage-accounts.component.html',
-  styleUrls: ['./manage-accounts.component.scss']
+    selector: 'app-manage-accounts',
+    templateUrl: './manage-accounts.component.html',
+    styleUrls: ['./manage-accounts.component.scss'],
+    standalone: false
 })
 export class ManageAccountsComponent implements OnInit{
 

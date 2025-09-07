@@ -4,9 +4,10 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
 @Component({
-  selector: 'app-search-tool',
-  templateUrl: './search-tool.component.html',
-  styleUrls: ['./search-tool.component.scss']
+    selector: 'app-search-tool',
+    templateUrl: './search-tool.component.html',
+    styleUrls: ['./search-tool.component.scss'],
+    standalone: false
 })
 export class SearchToolComponent implements OnInit{
   @Input() theme = 'light'

@@ -6,9 +6,10 @@ import { CrudService } from 'src/services/crud.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+    selector: 'app-cart',
+    templateUrl: './cart.component.html',
+    styleUrls: ['./cart.component.scss'],
+    standalone: false
 })
 export class CartComponent extends Page{
   @Input() itemsCart:any = []
