@@ -11,7 +11,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
 import { of } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
@@ -34,15 +34,15 @@ const mockMainService = jasmine.createSpyObj('MainService', ['createNotification
 // }
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[HttpClientModule,RouterTestingModule],
-      declarations: [ LoginComponent ], // Add your component here
-      providers: [
+    declarations: [LoginComponent],
+    imports: [RouterTestingModule],
+    providers: [
         { provide: UserService, useValue: mockUserService },
         { provide: MainService, useValue: mockMainService },
-        { provide:CrudService, useValue: mockCrudService },
-        // { provide: router, useValue: mockRouter },
-      ]
-    })
+        { provide: CrudService, useValue: mockCrudService },
+        provideHttpClient(withInterceptorsFromDi()),
+    ]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
