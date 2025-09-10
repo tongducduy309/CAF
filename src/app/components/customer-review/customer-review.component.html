@@ -6,7 +6,7 @@
     <ng-template #rateIcon><span nz-icon nzType="star" nzTheme="fill"></span></ng-template>
       <span class="text">{{customer_review.point==0?'':customer_review.point}}.0 / <b>5.0</b></span>
     </div>
-    <span>{{formatDateToString(customer_review.created)}}</span>
+    <span>{{formatDateToString(customer_review.createdAt)}}</span>
   </div>
   <p class="label">{{customer_review.name}}</p>
   <blockquote>

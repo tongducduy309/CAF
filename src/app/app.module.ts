@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -59,6 +59,7 @@ import { IconDefinition } from '@ant-design/icons-angular';
 import {  NZ_ICONS } from 'ng-zorro-antd/icon';
 import { LeftOutline } from '@ant-design/icons-angular/icons';
 import { Product1Component } from './components/product1/product1.component';
+import { C } from '@angular/cdk/scrolling-module.d-ud2XrbF8';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -122,6 +123,7 @@ export let pages = [
         BrowserAnimationsModule,
         ReactiveFormsModule,
         NgZorroAntModule,
+        CommonModule,
         NzRateModule], providers: [
         { provide: NZ_I18N, useValue: vi_VN },
         { provide: NZ_ICONS, useValue: [LeftOutline] },

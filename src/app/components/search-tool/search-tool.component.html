@@ -12,7 +12,7 @@
   <nz-spin [nzSpinning]="isFinding" [nzDelay]="500">
     <div nz-row [nzGutter]="[24,12]" *ngIf="results.length>0">
       <div nz-col [nzSpan]="6" *ngFor="let product of results">
-        <app-product1 [product]="product"></app-product1>
+        <app-product1 [product]="product" (closeEmitter)="close()"></app-product1>
       </div>
     </div>
     <div class="result-empty" *ngIf="results.length==0">

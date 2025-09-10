@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
+import { ProductResponse } from 'src/app/dto/response/ProductResponse';
+import { ReviewResponse } from 'src/app/dto/response/ReviewResponse';
+import { ProductService } from 'src/app/services/product.service';
+import { ReviewService } from 'src/app/services/review.service';
+import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -54,8 +59,12 @@ export class DetailProductComponent extends Page implements OnInit {
 
   pid:any
 
+  FILE_URL = environment.variable_global.FILE_URL;
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService){
+
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private productService:ProductService,
+    private revewService:ReviewService
+  ) {
     super();
     this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
@@ -71,12 +80,12 @@ export class DetailProductComponent extends Page implements OnInit {
 
   getIdProduct(id:any){
 
-    this.crud.get("products",id).subscribe((res:any)=>{
-      const product =res.data
-      if (product[0])
-        this.product = product[0]
+    this.productService.getDetailProduct(id).then((res:ProductResponse)=>{
+     
+      if (res)
+        this.product = res
 
-      if (Object.keys(this.product).length==0) this.router.navigate(["home"])
+      else this.router.navigate(["home"])
       this.product.quantity = 1
     this.selectedSize = 0
     this.loaded()
@@ -87,10 +96,10 @@ export class DetailProductComponent extends Page implements OnInit {
 
   }
 
-  getCustomerReviews(id:any){
-    this.crud.get('customer-reviews',id).subscribe((res:any)=>{
+  getCustomerReviews(id:string){
+    this.revewService.getReviewByProductId(id).then((res:ReviewResponse[])=>{
       let sum = 0
-      const cs = res.data
+      const cs = res
       for (let c of cs){
         this.count_of_level_point[c.point-1]++
         sum+=c.point

@@ -5,12 +5,15 @@
       <a href="/home"><img src="../../../assets/images/logo.png" alt=""></a>
       <div>
         <ul nz-menu nzMode="horizontal">
-          <!-- <li nz-submenu nzPlacement="bottomCenter" nzTitle="Menu">
+          <li nz-submenu nzPlacement="bottomCenter" nzTitle="Menu">
             <ul>
-              <a [href]="'/all-products?cid='+d.id" *ngFor="let d of categories"> <li nz-menu-item >{{d.name}}</li></a>
+              <!-- @for (d of categories; track $index) {
+                <a [href]="'/all-products?cid='+d.id"> <li nz-menu-item >{{d.name}}</li></a>
+              } -->
+              
 
             </ul>
-          </li> -->
+          </li>
 
 
           <li nz-submenu nzPlacement="bottomCenter" nzTitle="Tất cả sản phẩm" routerLink="/all-products">
@@ -19,24 +22,18 @@
           <li nz-submenu nzPlacement="bottomCenter" nzTitle="Bài Viết">
             <ul>
               <li nz-menu-item><a href="/about-us">Giới thiệu</a></li>
-              <!-- <li nz-menu-item><a href="">Liên hệ</a></li> -->
-              <!-- <li nz-menu-item><a href="">Câu hỏi thường gặp</a></li> -->
+              <li nz-menu-item><a href="">Liên hệ</a></li>
+              <li nz-menu-item><a href="">Câu hỏi thường gặp</a></li>
               <li nz-menu-item><a href="/privacy-policy">Chính sách quyền riêng tư</a></li>
               <li nz-menu-item><a href="/shipping-and-delivery">Vận chuyển và giao hàng</a></li>
               <li nz-menu-item><a href="/terms-and-conditions">Điều khoản và điều kiện</a></li>
             </ul>
           </li>
-          <!-- <li nz-submenu nzTitle="Blog" (click)="remote('blogs')"></li> -->
-          <!-- <li nz-submenu nzTitle="Bộ Sưu Tập" (click)="remote('collections')"></li> -->
+          <li nz-submenu nzTitle="Blog" (click)="remote('blogs')"></li>
+          <li nz-submenu nzTitle="Bộ Sưu Tập" (click)="remote('collections')"></li>
         </ul>
 
-        <!-- <div class="border-circle">
-          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 11 11" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5013 9.16602C7.52635 9.16602 9.16797 7.52439 9.16797 5.49935C9.16797 3.4743 7.52635 1.83268 5.5013 1.83268C3.47626 1.83268 1.83464 3.4743 1.83464 5.49935C1.83464 7.52439 3.47626 9.16602 5.5013 9.16602ZM5.5013 10.0827C8.03261 10.0827 10.0846 8.03065 10.0846 5.49935C10.0846 2.96804 8.03261 0.916016 5.5013 0.916016C2.97 0.916016 0.917969 2.96804 0.917969 5.49935C0.917969 8.03065 2.97 10.0827 5.5013 10.0827Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.29926 8.33031C6.63783 7.65316 6.8737 6.65355 6.8737 5.49935C6.8737 4.34515 6.63783 3.34553 6.29926 2.66839C5.93327 1.93641 5.59727 1.83268 5.4987 1.83268C5.40013 1.83268 5.06412 1.93641 4.69814 2.66839C4.35956 3.34553 4.1237 4.34515 4.1237 5.49935C4.1237 6.65355 4.35956 7.65316 4.69814 8.33031C5.06412 9.06228 5.40013 9.16602 5.4987 9.16602C5.59727 9.16602 5.93327 9.06228 6.29926 8.33031ZM5.4987 10.0827C6.76435 10.0827 7.79036 8.03065 7.79036 5.49935C7.79036 2.96804 6.76435 0.916016 5.4987 0.916016C4.23305 0.916016 3.20703 2.96804 3.20703 5.49935C3.20703 8.03065 4.23305 10.0827 5.4987 10.0827Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.062 5.95768C10.077 5.80693 10.0846 5.65404 10.0846 5.49935C10.0846 5.34466 10.077 5.19176 10.062 5.04102H0.940599C0.925632 5.19176 0.917969 5.34466 0.917969 5.49935C0.917969 5.65404 0.925632 5.80693 0.940599 5.95768H10.062Z" fill="#FFFFFF"></path>
-        </svg>
-        </div> -->
+        
 
         <!-- <div class="border-rounded">
           USD
@@ -65,6 +62,13 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
           </svg>
+        </div>
+        <div class="border-circle">
+          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 11 11" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5013 9.16602C7.52635 9.16602 9.16797 7.52439 9.16797 5.49935C9.16797 3.4743 7.52635 1.83268 5.5013 1.83268C3.47626 1.83268 1.83464 3.4743 1.83464 5.49935C1.83464 7.52439 3.47626 9.16602 5.5013 9.16602ZM5.5013 10.0827C8.03261 10.0827 10.0846 8.03065 10.0846 5.49935C10.0846 2.96804 8.03261 0.916016 5.5013 0.916016C2.97 0.916016 0.917969 2.96804 0.917969 5.49935C0.917969 8.03065 2.97 10.0827 5.5013 10.0827Z" fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.29926 8.33031C6.63783 7.65316 6.8737 6.65355 6.8737 5.49935C6.8737 4.34515 6.63783 3.34553 6.29926 2.66839C5.93327 1.93641 5.59727 1.83268 5.4987 1.83268C5.40013 1.83268 5.06412 1.93641 4.69814 2.66839C4.35956 3.34553 4.1237 4.34515 4.1237 5.49935C4.1237 6.65355 4.35956 7.65316 4.69814 8.33031C5.06412 9.06228 5.40013 9.16602 5.4987 9.16602C5.59727 9.16602 5.93327 9.06228 6.29926 8.33031ZM5.4987 10.0827C6.76435 10.0827 7.79036 8.03065 7.79036 5.49935C7.79036 2.96804 6.76435 0.916016 5.4987 0.916016C4.23305 0.916016 3.20703 2.96804 3.20703 5.49935C3.20703 8.03065 4.23305 10.0827 5.4987 10.0827Z" fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.062 5.95768C10.077 5.80693 10.0846 5.65404 10.0846 5.49935C10.0846 5.34466 10.077 5.19176 10.062 5.04102H0.940599C0.925632 5.19176 0.917969 5.34466 0.917969 5.49935C0.917969 5.65404 0.925632 5.80693 0.940599 5.95768H10.062Z" fill="#FFFFFF"></path>
+        </svg>
         </div>
 
       </div>
@@ -112,7 +116,7 @@
               </div>
               <div class="mini-cart-footer">
                 <div class="top">
-                  <!-- <div style="display: flex;width: 100%;">
+                  <div style="display: flex;width: 100%;">
                     <div class="btn" (click)="isPromoCode=0">
                       <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
                         <path d="M14.0152 19.856L13.6543 19.4951" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
@@ -155,7 +159,7 @@
                         </g>
                     </svg>
                     </div>
-                  </div> -->
+                  </div>
                   <div style="display: flex;width: 100%;margin-top: 20px;">
                     <div class="text_group">
                       <span>Tổng</span>
@@ -246,6 +250,6 @@
   <span nz-icon nzType="close" nzTheme="outline" class="close btn" (click)="closeSearch()"></span>
 
   <div class="container">
-    <app-search-tool></app-search-tool>
+    <app-search-tool (closeEmitter)="closeSearch()"></app-search-tool>
   </div>
 </div>

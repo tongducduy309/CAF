@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Review } from 'src/app/models/Review';
 
 @Component({
     selector: 'app-customer-review',
@@ -7,7 +8,7 @@ import { Component, Input } from '@angular/core';
     standalone: false
 })
 export class CustomerReviewComponent {
-  @Input() customer_review:any={}
+  @Input() customer_review:Partial<Review>={}
 
   formatDateToString(s:any){
     if (s){

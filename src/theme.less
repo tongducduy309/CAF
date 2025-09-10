@@ -7,3 +7,39 @@
 // View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
 
 // @primary-color: #1890ff;
+
+/* src/theme.less */
+
+/* Light */
+:root {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #475569;
+  --primary: #1677ff;        /* xanh ant design */
+  --border: #e2e8f0;
+}
+
+/* Dark */
+:root[data-theme='dark'] {
+  --bg: #0b0f19;
+  --fg: #e5e7eb;
+  --muted: #94a3b8;
+  --primary: #4096ff;
+  --border: #22304a;
+}
+
+/* Áp dụng biến cho trang */
+// html, body {
+//   background: var(--bg);
+//   color: var(--fg);
+// }
+
+/* Ví dụ một số lớp tái dùng */
+.text-muted { color: var(--muted); }
+.border     { border-color: var(--border); }
+
+/* Nếu muốn “nhuộm” ng-zorro cơ bản bằng CSS var (mức nhẹ) */
+:root {
+ 
+  --ant-primary-color: var(--primary);
+}

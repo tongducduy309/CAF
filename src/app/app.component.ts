@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { inject } from '@angular/core';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-root',
@@ -11,7 +15,6 @@ import { UserService } from 'src/services/user.service';
     standalone: false
 })
 export class AppComponent{
-  title = 'Coffee Store';
   passwordVisible = false;
   user_password?: string;
   loading:any = true
@@ -19,9 +22,29 @@ export class AppComponent{
   user:any=null;
   total = 0
 
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private title = inject(Title);
+
   constructor (private crud:CrudService, private main:MainService, private userS:UserService){
     // this.getItemsCart()
+    this.router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      map(() => this.activatedRoute),
+      map(route => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      }),
+      mergeMap(route => route.data)
+    )
+    .subscribe(data => {
+      const t = data['title'] as string;
+      if (t) this.title.setTitle(`${t}`);
+    });
   }
+
+  
+
 
 
 
