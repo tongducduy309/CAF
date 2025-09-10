@@ -1,5 +1,7 @@
+import { e } from '@angular/cdk/portal-directives.d-BoG39gYN';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class Product3Component implements OnInit {
 
   selectedSize = 0;
 
-  isFormAddToCart = false
+  isFormAddToCart = false;
+
+  FILE_URL = environment.variable_global.FILE_URL;
 
   constructor(public main:MainService) { }
 

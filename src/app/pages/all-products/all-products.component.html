@@ -5,7 +5,8 @@
     </ng-template>
   </nz-back-top>
   <div nz-row class="all-product-list" nzGutter="16px">
-    <div nz-col class="filters" nzSpan="8">
+    @if (isDesktop) {
+      <div nz-col class="filters" nzSpan="8">
       <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Bộ lọc</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">Bỏ lọc</span></div>
       <div class="filter-form">
 
@@ -32,7 +33,7 @@
 
 
         <div class="filter">
-          <nz-collapse nzExpandIconPosition="right">
+          <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
               nzHeader="Xu hướng"
               nzActive="true"
@@ -50,7 +51,7 @@
         </div>
 
         <div class="filter">
-          <nz-collapse nzExpandIconPosition="right">
+          <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
               nzHeader="Giá"
               nzActive="true"
@@ -72,7 +73,7 @@
         </div>
 
         <div class="filter">
-          <nz-collapse nzExpandIconPosition="right">
+          <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
               nzHeader="Danh mục"
               nzActive="true"
@@ -96,7 +97,8 @@
 
       </div>
     </div>
-    <div nz-col class="list-product" nzSpan="16">
+    }
+    <div nz-col class="list-product" [nzSpan]="isDesktop?16:24">
       <div class="heading">
         <!-- <div class="select">
           <div>
@@ -117,7 +119,7 @@
           <div class="name-category"><p>{{n.name}}</p></div>
           <div nz-row [nzGutter]="[12,24]" >
 
-            <app-product3 nz-col [nzSpan]="6" *ngFor="let product of products_v[n.id]" [product]="product"  (addToCartEmitter)="AddToCart($event)"></app-product3>
+            <app-product3 nz-col [nzXs]="12" [nzSm]="12" [nzMd]="8" [nzLg]="8" [nzXl]="6" [nzXXl]="6" *ngFor="let product of products_v[n.id]" [product]="product"  (addToCartEmitter)="AddToCart($event)"></app-product3>
           </div>
         </div>
 

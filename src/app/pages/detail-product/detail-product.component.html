@@ -15,13 +15,14 @@
             </div>
           </div> -->
           <div nz-col nzSpan="24" class="main-img">
-            <img [src]="product.img" alt="">
+            <img [src]="FILE_URL+product.img" alt="">
           </div>
         </div>
       </div>
 
       <div nz-col nzSpan="11">
-        <div class="tag-sale" *ngIf="product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
+        @if (product.sale&&product.sale[selectedSize]) {<div class="tag-sale" *ngIf=""><span>- {{product?.sale[selectedSize]}}%</span></div>}
+        
         <!-- <div class="favorite">
           <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span>
         </div> -->
@@ -34,16 +35,19 @@
             {{product.name}}
           </div>
         </div>
-        <!-- <div class="group">
+        <div class="group">
           <div style="cursor: pointer;font-size: 20px;">
             <span nz-icon nzType="question-circle" nzTheme="outline" style="margin-right: 5px;font-size: 20px;"></span>
             <span style="font-weight: 700;">Xem Kích Cỡ</span>
           </div>
-        </div> -->
+        </div>
         <div class="group">
           <span style="font-size: 16px;font-weight: 700;">Chọn kích cỡ:</span>
           <nz-select [nzBorderless]="true" class="material" [(ngModel)]="selectedSize">
-            <nz-option *ngFor="let size of product.size;index as i" [nzValue]="i" [nzLabel]="size"></nz-option>
+            @for (size of product.sizes; track $index; let i = $index) {
+              <nz-option [nzValue]="i" [nzLabel]="size"></nz-option>
+            }
+            
           </nz-select>
         </div>
         <div class="group description" style="font-size: 16px;font-weight: 700;" *ngIf="product.description">
@@ -60,8 +64,14 @@
             </div>
           </div>
           <div nz-col nzSpan="12" style="display: flex; align-items: center;">
-            <span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
-          <span class="cost" *ngIf="product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
+            @if(product.sale){<span class="price">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>}
+            @else {<span class="price">{{main.formatPrice(product.costs[selectedSize])}}</span>}
+            @if (
+              product.sale&&product.sale[selectedSize]
+            ) {
+              <span class="cost">{{main.formatPrice(product.cost[selectedSize])}}</span>
+            }
+            
             <span style="font-size: 22px;
             color: #a7897b;
             font-weight: 900;
@@ -179,13 +189,13 @@
       </div>
 
       <div class="group">
-        <span class="label">Họ và tên</span>
-        <input nz-input placeholder="Nhập họ và tên của bạn (Hiển thị công khai)" [(ngModel)]="form_review.name" type="text" />
+        <span class="label">Họ và tên (Hiển thị công khai)</span>
+        <input nz-input placeholder="Nhập họ và tên của bạn (Hiển thị công khai)" [(ngModel)]="form_review.name" type="text" disabled/>
       </div>
 
       <div class="group">
-        <span class="label">Email</span>
-        <input nz-input placeholder="Nhập email của bạn (Không hiển thị công khai)" [(ngModel)]="form_review.email" type="email" />
+        <span class="label">Email (Không hiển thị công khai)</span>
+        <input nz-input placeholder="Nhập email của bạn (Không hiển thị công khai)" [(ngModel)]="form_review.email" type="email" disabled/>
       </div>
 
       <p>Về dữ liệu của, chúng tôi sẽ chỉ liên hệ với bạn về đánh giá bạn để lại và chỉ khi cần thiết. Bằng cách gửi đánh giá của mình, bạn đồng ý với các điều khoản và điều kiện về <a href="/privacy-policy">chính sách quyền riêng tư</a> của chúng tôi.</p>
@@ -204,7 +214,10 @@
 
   <div class="container w-600">
     <div class="list-customer-reviews" style="overflow: hidden;">
-      <app-customer-review *ngFor="let cs of customer_reviews.slice(0,number_showing)" [customer_review]="cs"></app-customer-review>
+      @for (cs of customer_reviews.slice(0,number_showing); track $index) {
+        <app-customer-review [customer_review]="cs"></app-customer-review>
+      }
+      
     </div>
     <div style="display:flex;width: 100%;justify-content: center;" *ngIf="number_showing<customer_reviews.length">
       <div class="btnShowMore" (click)="showMore()">

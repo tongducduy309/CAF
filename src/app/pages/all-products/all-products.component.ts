@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
+import { ProductResponse } from 'src/app/dto/response/ProductResponse';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
+import { ProductService } from 'src/app/services/product.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -33,12 +36,15 @@ export class AllProductsComponent extends Page implements OnInit  {
   filter_name_cate_products:any = []
   categories:any = []
 
+  isDesktop = true
+
   myForm = new FormGroup({
     trend: new FormControl('')
   });
 
 
-  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService) {
+  constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService, 
+      private productService:ProductService, private breakpointService: BreakpointService) {
     super();
     this.must_load=2
     // this.route.queryParamMap.subscribe(async params => {
@@ -54,25 +60,48 @@ export class AllProductsComponent extends Page implements OnInit  {
 
   ngOnInit(): void {
 
+    this.breakpointService.isDesktop$.subscribe(isDesktop => {
+      this.isDesktop = isDesktop;
+    });
+
     this.getAllProducts();
     this.getCategories();
   }
 
   getAllProducts(){
-    this.crud.get("products","all").subscribe((res:any)=>{
-      for (let p of res.data){
-        if (!(p.cid in this.products)){
-          this.products[p.cid] = [p]
-          this.name_cate_products.push({name:p.c_name,id:p.cid})
+    // this.crud.get("products","all").subscribe((res:any)=>{
+    //   for (let p of res.data){
+    //     if (!(p.cid in this.products)){
+    //       this.products[p.cid] = [p]
+    //       this.name_cate_products.push({name:p.c_name,id:p.cid})
+    //     }
+    //     else {
+    //       this.products[p.cid].push(p)
+    //     }
+    //   }
+    //   // this.products=products
+    //   this.products_v={...this.products}
+    //   this.loaded()
+    //   console.log(this.products);
+    // })
+
+    this.productService.getAllProducts().then((res:ProductResponse[])=>{
+   
+      for (let p of res){
+        if (!(p.category.id in this.products)){
+          this.products[p.category.id] = [p]
+          this.name_cate_products.push({name:p.category.name,id:p.category.id})
         }
         else {
-          this.products[p.cid].push(p)
+          this.products[p.category.id].push(p)
         }
       }
       // this.products=products
       this.products_v={...this.products}
+      console.log(res);
       this.loaded()
-      // console.log(this.products);
+    }).catch(err=>{
+      this.main.createNotification("error",err.message)
     })
   }
 

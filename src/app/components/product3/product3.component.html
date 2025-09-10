@@ -1,35 +1,53 @@
-
 <div class="product-item" [ngStyle]="{'background-color':bg, 'color':color_text}">
 
-    <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span></div>
-    <div style="display: flex;justify-content: center;align-items: center;"><a [href]="'products/'+this.product.name_id"><img [src]="product.img" alt=""></a></div>
-    <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
-        <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
-        <!-- <span nz-icon nzType="swap" nzTheme="outline"></span>
-        <span nz-icon nzType="eye" nzTheme="outline"></span> -->
-    </div>
-    <div class="product-content">
-        <div class="subtitle" [ngStyle]="{'color':color_text}">
-            {{product.c_name}}
-        </div>
-        <a class="name" [href]="'products/'+this.product.name_id" [ngStyle]="{'color':color_text}">{{product.name}}</a>
-    </div>
-    <div class="select">
-        <div>
-            <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize" [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
-              <nz-option *ngFor="let size of product.size;index as i" [nzValue]="i" [nzLabel]="size"></nz-option>
-            </nz-select>
-        </div>
-    </div>
-    <div nz-row class="group" style="display: flex; justify-content: space-between;margin-top: 10px; align-items: center;">
-        <div style="font-weight: 800;" [ngStyle]="{'color':color_text}">
-          <span class="price" *ngIf="product.sale">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
-          <span class="cost" *ngIf="product.sale&&product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
-        </div>
-        <div class="btnAddToCart" style="font-weight: 700;" (click)="openFormAddToCart()">
-          <span [ngStyle]="{'color':color_text}">+Thêm vào giỏ</span>
-        </div>
-    </div>
+  <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
+  </div>
+  <div style="display: flex;justify-content: center;align-items: center;"><a
+      [href]="'products/'+this.product.nameId"><img [src]="FILE_URL+product.img" alt=""></a></div>
+  <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
+    <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
+    <!-- <button nz-button nzType="text" nzShape="circle">
+      <nz-icon nzType="swap" nzTheme="outline"></nz-icon>
+    </button> -->
+    <button nz-button nzType="text" nzShape="circle">
+      <nz-icon nzType="eye" nzTheme="outline"></nz-icon>
+    </button>
+    <button nz-button nzType="text" nzShape="circle" (click)="openFormAddToCart()">
+      <nz-icon nzType="plus-circle" nzTheme="outline" />
+    </button>
 
-    <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product" (submitEmitter)="AddToCart($event)"></app-note-product>
+    
+    
+  </div>
+  <div class="product-content">
+    <div class="subtitle" [ngStyle]="{'color':color_text}">
+      {{product.c_name}}
+    </div>
+    <a class="name" [href]="'products/'+this.product.nameId" [ngStyle]="{'color':color_text}">{{product.name}}</a>
+  </div>
+  <div class="select">
+    <div>
+      <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize"
+        [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
+        @for (size of product.sizes; track $index;let i = $index) {
+        <nz-option [nzValue]="i" [nzLabel]="size"></nz-option>
+        }
+      </nz-select>
+    </div>
+  </div>
+  <div nz-row class="group"
+    style="display: flex; justify-content: space-between;margin-top: 10px; align-items: center;">
+    <div style="font-weight: 800;" [ngStyle]="{'color':color_text}">
+      <span class="price"
+        *ngIf="product.sale">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
+      <span class="cost"
+        *ngIf="product.sale&&product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
+    </div>
+    <!-- <div class="btnAddToCart" style="font-weight: 700;" (click)="openFormAddToCart()">
+          <span [ngStyle]="{'color':color_text}">+Thêm vào giỏ</span>
+        </div> -->
+  </div>
+
+  <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product"
+    (submitEmitter)="AddToCart($event)"></app-note-product>
 </div>

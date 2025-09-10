@@ -74,7 +74,8 @@ export const routes: Routes = [
   // },
   {
     path:'all-products',
-    component:AllProductsComponent
+    component:AllProductsComponent,
+    data:{title:'Tất cả sản phẩm'}
   },
   // {
   //   path:'all-products/:key',

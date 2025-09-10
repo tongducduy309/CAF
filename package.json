@@ -1,6 +1,7 @@
 {
   "name": "coffee-and-tea",
   "version": "0.0.0",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,10 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^19.2.14",
-    "@angular/cdk": "^18.2.14",
+    "@angular/cdk": "^19.2.19",
     "@angular/common": "^19.2.14",
     "@angular/compiler": "^19.2.14",
     "@angular/core": "^19.2.14",
@@ -19,17 +19,17 @@
     "@angular/platform-browser": "^19.2.14",
     "@angular/platform-browser-dynamic": "^19.2.14",
     "@angular/router": "^19.2.14",
-    "@ant-design/icons-angular": "^18.0.0",
+    "@ant-design/icons-angular": "^19.0.0",
     "@emailjs/browser": "^4.4.1",
-    "ng-zorro-antd": "^18.2.1",
+    "axios": "^1.11.0",
+    "ng-zorro-antd": "^19.0.0",
     "rxjs": "~7.8.0",
-    "stream": "^0.0.3",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.1"
+    "tslib": "^2.6.2",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.2.15",
-    "@angular/cli": "~19.2.15",
+    "@angular-devkit/build-angular": "^19.2.0",
+    "@angular/cli": "^19.2.0",
     "@angular/compiler-cli": "^19.2.14",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
