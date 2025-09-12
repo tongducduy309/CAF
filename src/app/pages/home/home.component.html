@@ -44,8 +44,8 @@
   <div class="container">
     <div class="bean">
       <video src="../../../assets/video/video_home_2.mp4" muted="muted" loop autoplay="true" playsinline controlslist="nodownload" style="border-radius: 10px;"></video>
-      <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-        <div nz-col nzSpan="8">
+      <div nz-row [nzGutter]="[16,16]">
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
           <div class="subtitle">CoffeeStore</div>
           <h3 class="content">{{ 'HOME.THE_BEST_COFFEE.TITLE' | translate }}</h3>
           <p>{{ 'HOME.THE_BEST_COFFEE.SUBTITLE' | translate }}</p>
@@ -85,14 +85,14 @@
 </section>
 <section *ngIf="must_load<=0" class="fiveth-section">
   <div class="container">
-    <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
-      <div>
+    <div nz-row [nzGutter]="[16,16]" nzJustify="space-between" nzAlign="middle">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="18" [nzLg]="18" [nzXl]="18" [nzXXl]="18">
         <div class="subtitle">CoffeeStore</div>
         <!-- <h3 class="content">Khuyến mãi cực khủng</h3> -->
         <h3 class="content">{{ 'HOME.BEST_DISCOUNT.TITLE' | translate }}</h3>
       </div>
-      <div>
-        <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXXl]="6">
+        <a style="float: right; margin-bottom: 15px;" href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
       </div>
     </div>
     <div nz-row [nzGutter]="[16,16]">
@@ -104,19 +104,21 @@
 </section>
 <section *ngIf="must_load<=0" class="sixth-section">
   <div class="container">
-    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-      <div nz-col nzSpan="8">
-        <div class="subtitle">CoffeeStore</div>
+    <div nz-row [nzGutter]="[16,16]" nzJustify="center">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8" style="z-index: 1;">
+        <div>
+          <div class="subtitle">CoffeeStore</div>
         <!-- <h3 class="content">Sản phẩm <br> thịnh hành</h3> -->
-         <h3 class="content">{{ 'HOME.POPULAR_PRODUCTS.LINE_1' | translate }} <br> {{ 'HOME.POPULAR_PRODUCTS.LINE_2' | translate }}</h3>
+         <h3 class="content" style="z-index: 1;">{{ 'HOME.POPULAR_PRODUCTS.LINE_1' | translate }} <br> {{ 'HOME.POPULAR_PRODUCTS.LINE_2' | translate }}</h3>
         <!-- <p>Cà phê sữa đá từ lâu đã trở thành thức uống quốc dân của người Việt. Với hương vị đậm đà của cà phê hòa quyện cùng vị béo ngậy của sữa tươi, cà phê sữa đá chinh phục mọi khẩu vị, từ người lớn đến trẻ nhỏ.</p> -->
         <p>{{ 'HOME.POPULAR_PRODUCTS.SUBTITLE' | translate }}</p>
         <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
+        </div>
       </div>
-      <div nz-col nzSpan="8" style="display: flex;justify-content: center;align-items: center;">
+      <div nz-col [nzXs]="10" [nzSm]="10" [nzMd]="6" [nzLg]="8" [nzXl]="8" [nzXXl]="8" style="display: flex;justify-content: center;align-items: center;z-index: 0;">
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
       </div>
-      <div nz-col [nzSpan]="8">
+      <div nz-col [nzXs]="14" [nzSm]="12" [nzMd]="10" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
         <app-product2 [product]="this.products_best_discount[0]" (addToCartEmitter)="addToCart($event)"></app-product2>
       </div>
     </div>

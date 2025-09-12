@@ -1,10 +1,20 @@
-<div class="header" [ngStyle]="{'background-color':bg_header,'position':(bg_header=='transparent')?'absolute':'relative'}" *ngIf="visible">
+<div class="header"
+  [ngStyle]="{'background-color':bg_header,'position':(bg_header=='transparent')?'absolute':'relative'}"
+  *ngIf="visible">
 
   <ng-template #template>
     <div class="container" style="display: flex; justify-content: space-between;">
-      <a href="/home"><img src="../../../assets/images/logo.png" alt=""></a>
+      @if(isDesktop){
+        <a class="logo" href="/"><img src="../../../assets/images/logo.png" alt="CoffeeStore"></a>
+      } @else {
+        <button nz-button nzType="text" nzShape="circle">
+      <nz-icon nzType="menu" nzTheme="outline" style="color: #fff;"/>
+    </button>
+      }
       <div>
-        <ul nz-menu nzMode="horizontal">
+        @if(isDesktop){
+          
+          <ul nz-menu nzMode="horizontal" >
           <!-- <li nz-submenu nzPlacement="bottomCenter" nzTitle="Menu">
             <ul>
               @for (d of categories; track $index) {
@@ -16,7 +26,8 @@
           </li> -->
 
 
-          <li nz-submenu nzPlacement="bottomCenter" [nzTitle]="'HEADER.ALL_PRODUCTS' | translate" routerLink="/all-products">
+          <li nz-submenu nzPlacement="bottomCenter" [nzTitle]="'HEADER.ALL_PRODUCTS' | translate"
+            routerLink="/all-products">
 
           </li>
           <li nz-submenu nzPlacement="bottomCenter" [nzTitle]="'HEADER.PAGES.TITLE' | translate">
@@ -25,50 +36,81 @@
               <li nz-menu-item><a href="/contact-with-us">{{ 'HEADER.PAGES.CONTACT' | translate }}</a></li>
               <li nz-menu-item><a href="/faq">{{ 'HEADER.PAGES.FAQ' | translate }}</a></li>
               <li nz-menu-item><a href="/privacy-policy">{{ 'HEADER.PAGES.PRIVACY_POLICY' | translate }}</a></li>
-              <li nz-menu-item><a href="/shipping-and-delivery">{{ 'HEADER.PAGES.SHIPPING_AND_DELIVERY' | translate }}</a></li>
-              <li nz-menu-item><a href="/terms-and-conditions">{{ 'HEADER.PAGES.TERMS_AND_CONDITIONS' | translate }}</a></li>
+              <li nz-menu-item><a href="/shipping-and-delivery">{{ 'HEADER.PAGES.SHIPPING_AND_DELIVERY' | translate
+                  }}</a></li>
+              <li nz-menu-item><a href="/terms-and-conditions">{{ 'HEADER.PAGES.TERMS_AND_CONDITIONS' | translate }}</a>
+              </li>
             </ul>
           </li>
           <li nz-submenu [nzTitle]="'HEADER.BLOG' | translate" (click)="remote('blogs')"></li>
           <li nz-submenu [nzTitle]="'HEADER.COLLECTIONS' | translate" (click)="remote('collections')"></li>
         </ul>
+        }
 
-        
+
 
         <!-- <div class="border-rounded">
           USD
         </div> -->
         <div class="border-rounded" (click)="open()" *ngIf="btnShowCart">
-          <svg style="margin-right: 5px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.57747 17.321C8.57747 18.7419 7.42554 19.8939 6.00456 19.8939C4.58357 19.8939 3.43164 18.7419 3.43164 17.321C3.43164 15.9 4.58357 14.748 6.00456 14.748C7.42554 14.748 8.57747 15.9 8.57747 17.321ZM6.8622 17.321C6.8622 17.7946 6.47822 18.1786 6.00456 18.1786C5.5309 18.1786 5.14692 17.7946 5.14692 17.321C5.14692 16.8473 5.5309 16.4633 6.00456 16.4633C6.47822 16.4633 6.8622 16.8473 6.8622 17.321Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.1539 17.321C17.1539 18.7419 16.0019 19.8939 14.5809 19.8939C13.16 19.8939 12.008 18.7419 12.008 17.321C12.008 15.9 13.16 14.748 14.5809 14.748C16.0019 14.748 17.1539 15.9 17.1539 17.321ZM15.4386 17.321C15.4386 17.7946 15.0546 18.1786 14.5809 18.1786C14.1073 18.1786 13.7233 17.7946 13.7233 17.321C13.7233 16.8473 14.1073 16.4633 14.5809 16.4633C15.0546 16.4633 15.4386 16.8473 15.4386 17.321Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.80557 2.35709C2.0174 1.93344 2.53256 1.76172 2.95622 1.97354L3.81687 2.40387C4.61384 2.80235 5.1479 3.58483 5.22857 4.47221L5.2696 4.92356C5.28968 5.14444 5.47487 5.31356 5.69666 5.31356H17.0114C18.5085 5.31356 19.5447 6.80879 19.019 8.2105L17.5153 12.2204C17.1387 13.2247 16.1787 13.8899 15.1062 13.8899H6.712C5.38128 13.8899 4.27013 12.8752 4.14965 11.55L3.52034 4.62751C3.49345 4.33171 3.31543 4.07089 3.04977 3.93806L2.18912 3.50774C1.76547 3.29591 1.59375 2.78075 1.80557 2.35709ZM5.93056 7.02883C5.6784 7.02883 5.48068 7.24535 5.5035 7.49648L5.85789 11.3947C5.89805 11.8364 6.26843 12.1747 6.712 12.1747H15.1062C15.4637 12.1747 15.7837 11.9529 15.9092 11.6182L17.413 7.60822C17.5181 7.32788 17.3109 7.02883 17.0114 7.02883H5.93056Z" fill="#FFFFFF"></path>
+          <svg style="margin-right: 5px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+            width="21" height="21" viewBox="0 0 21 21" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M8.57747 17.321C8.57747 18.7419 7.42554 19.8939 6.00456 19.8939C4.58357 19.8939 3.43164 18.7419 3.43164 17.321C3.43164 15.9 4.58357 14.748 6.00456 14.748C7.42554 14.748 8.57747 15.9 8.57747 17.321ZM6.8622 17.321C6.8622 17.7946 6.47822 18.1786 6.00456 18.1786C5.5309 18.1786 5.14692 17.7946 5.14692 17.321C5.14692 16.8473 5.5309 16.4633 6.00456 16.4633C6.47822 16.4633 6.8622 16.8473 6.8622 17.321Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M17.1539 17.321C17.1539 18.7419 16.0019 19.8939 14.5809 19.8939C13.16 19.8939 12.008 18.7419 12.008 17.321C12.008 15.9 13.16 14.748 14.5809 14.748C16.0019 14.748 17.1539 15.9 17.1539 17.321ZM15.4386 17.321C15.4386 17.7946 15.0546 18.1786 14.5809 18.1786C14.1073 18.1786 13.7233 17.7946 13.7233 17.321C13.7233 16.8473 14.1073 16.4633 14.5809 16.4633C15.0546 16.4633 15.4386 16.8473 15.4386 17.321Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M1.80557 2.35709C2.0174 1.93344 2.53256 1.76172 2.95622 1.97354L3.81687 2.40387C4.61384 2.80235 5.1479 3.58483 5.22857 4.47221L5.2696 4.92356C5.28968 5.14444 5.47487 5.31356 5.69666 5.31356H17.0114C18.5085 5.31356 19.5447 6.80879 19.019 8.2105L17.5153 12.2204C17.1387 13.2247 16.1787 13.8899 15.1062 13.8899H6.712C5.38128 13.8899 4.27013 12.8752 4.14965 11.55L3.52034 4.62751C3.49345 4.33171 3.31543 4.07089 3.04977 3.93806L2.18912 3.50774C1.76547 3.29591 1.59375 2.78075 1.80557 2.35709ZM5.93056 7.02883C5.6784 7.02883 5.48068 7.24535 5.5035 7.49648L5.85789 11.3947C5.89805 11.8364 6.26843 12.1747 6.712 12.1747H15.1062C15.4637 12.1747 15.7837 11.9529 15.9092 11.6182L17.413 7.60822C17.5181 7.32788 17.3109 7.02883 17.0114 7.02883H5.93056Z"
+              fill="#FFFFFF"></path>
           </svg>
-        {{total}} {{ 'HEADER.ITEMS' | translate }}
+          {{total}} {{ 'HEADER.ITEMS' | translate }}
         </div>
         <div class="border-circle" (click)="openSearch()">
-          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.47487 10.5131C8.48031 11.2863 7.23058 11.7466 5.87332 11.7466C2.62957 11.7466 0 9.11706 0 5.87332C0 2.62957 2.62957 0 5.87332 0C9.11706 0 11.7466 2.62957 11.7466 5.87332C11.7466 7.23058 11.2863 8.48031 10.5131 9.47487L12.785 11.7465C13.0717 12.0332 13.0717 12.4981 12.785 12.7848C12.4983 13.0715 12.0334 13.0715 11.7467 12.7848L9.47487 10.5131ZM10.2783 5.87332C10.2783 8.30612 8.30612 10.2783 5.87332 10.2783C3.44051 10.2783 1.46833 8.30612 1.46833 5.87332C1.46833 3.44051 3.44051 1.46833 5.87332 1.46833C8.30612 1.46833 10.2783 3.44051 10.2783 5.87332Z" fill="#FFFFFF"></path>
+          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="13" height="13"
+            viewBox="0 0 13 13" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M9.47487 10.5131C8.48031 11.2863 7.23058 11.7466 5.87332 11.7466C2.62957 11.7466 0 9.11706 0 5.87332C0 2.62957 2.62957 0 5.87332 0C9.11706 0 11.7466 2.62957 11.7466 5.87332C11.7466 7.23058 11.2863 8.48031 10.5131 9.47487L12.785 11.7465C13.0717 12.0332 13.0717 12.4981 12.785 12.7848C12.4983 13.0715 12.0334 13.0715 11.7467 12.7848L9.47487 10.5131ZM10.2783 5.87332C10.2783 8.30612 8.30612 10.2783 5.87332 10.2783C3.44051 10.2783 1.46833 8.30612 1.46833 5.87332C1.46833 3.44051 3.44051 1.46833 5.87332 1.46833C8.30612 1.46833 10.2783 3.44051 10.2783 5.87332Z"
+              fill="#FFFFFF"></path>
           </svg>
         </div>
         <div class="border-circle" (click)="account()" *ngIf="user==null">
-          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="15" height="18" viewBox="0 0 15 18" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
+          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="15" height="18"
+            viewBox="0 0 15 18" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z"
+              fill="#FFFFFF"></path>
           </svg>
         </div>
-        <div class="border-circle" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight" *ngIf="user!=null">
-          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="15" height="18" viewBox="0 0 15 18" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z" fill="#FFFFFF"></path>
+        <div class="border-circle" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight"
+          *ngIf="user!=null">
+          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="15" height="18"
+            viewBox="0 0 15 18" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.5 9.81818C4.27834 9.81818 1.66667 12.3824 1.66667 15.5455V17.1818C1.66667 17.6337 1.29357 18 0.833333 18C0.373096 18 0 17.6337 0 17.1818V15.5455C0 11.4786 3.35786 8.18182 7.5 8.18182C11.6421 8.18182 15 11.4786 15 15.5455V17.1818C15 17.6337 14.6269 18 14.1667 18C13.7064 18 13.3333 17.6337 13.3333 17.1818V15.5455C13.3333 12.3824 10.7217 9.81818 7.5 9.81818Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M7.5 8.18182C9.34095 8.18182 10.8333 6.71657 10.8333 4.90909C10.8333 3.10161 9.34095 1.63636 7.5 1.63636C5.65905 1.63636 4.16667 3.10161 4.16667 4.90909C4.16667 6.71657 5.65905 8.18182 7.5 8.18182ZM7.5 9.81818C10.2614 9.81818 12.5 7.62031 12.5 4.90909C12.5 2.19787 10.2614 0 7.5 0C4.73858 0 2.5 2.19787 2.5 4.90909C2.5 7.62031 4.73858 9.81818 7.5 9.81818Z"
+              fill="#FFFFFF"></path>
           </svg>
         </div>
         <div class="border-circle" nz-dropdown [nzDropdownMenu]="langMenu" nzPlacement="bottomRight">
-          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 11 11" fill="none">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.5013 9.16602C7.52635 9.16602 9.16797 7.52439 9.16797 5.49935C9.16797 3.4743 7.52635 1.83268 5.5013 1.83268C3.47626 1.83268 1.83464 3.4743 1.83464 5.49935C1.83464 7.52439 3.47626 9.16602 5.5013 9.16602ZM5.5013 10.0827C8.03261 10.0827 10.0846 8.03065 10.0846 5.49935C10.0846 2.96804 8.03261 0.916016 5.5013 0.916016C2.97 0.916016 0.917969 2.96804 0.917969 5.49935C0.917969 8.03065 2.97 10.0827 5.5013 10.0827Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.29926 8.33031C6.63783 7.65316 6.8737 6.65355 6.8737 5.49935C6.8737 4.34515 6.63783 3.34553 6.29926 2.66839C5.93327 1.93641 5.59727 1.83268 5.4987 1.83268C5.40013 1.83268 5.06412 1.93641 4.69814 2.66839C4.35956 3.34553 4.1237 4.34515 4.1237 5.49935C4.1237 6.65355 4.35956 7.65316 4.69814 8.33031C5.06412 9.06228 5.40013 9.16602 5.4987 9.16602C5.59727 9.16602 5.93327 9.06228 6.29926 8.33031ZM5.4987 10.0827C6.76435 10.0827 7.79036 8.03065 7.79036 5.49935C7.79036 2.96804 6.76435 0.916016 5.4987 0.916016C4.23305 0.916016 3.20703 2.96804 3.20703 5.49935C3.20703 8.03065 4.23305 10.0827 5.4987 10.0827Z" fill="#FFFFFF"></path>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.062 5.95768C10.077 5.80693 10.0846 5.65404 10.0846 5.49935C10.0846 5.34466 10.077 5.19176 10.062 5.04102H0.940599C0.925632 5.19176 0.917969 5.34466 0.917969 5.49935C0.917969 5.65404 0.925632 5.80693 0.940599 5.95768H10.062Z" fill="#FFFFFF"></path>
-        </svg>
+          <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+            viewBox="0 0 11 11" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M5.5013 9.16602C7.52635 9.16602 9.16797 7.52439 9.16797 5.49935C9.16797 3.4743 7.52635 1.83268 5.5013 1.83268C3.47626 1.83268 1.83464 3.4743 1.83464 5.49935C1.83464 7.52439 3.47626 9.16602 5.5013 9.16602ZM5.5013 10.0827C8.03261 10.0827 10.0846 8.03065 10.0846 5.49935C10.0846 2.96804 8.03261 0.916016 5.5013 0.916016C2.97 0.916016 0.917969 2.96804 0.917969 5.49935C0.917969 8.03065 2.97 10.0827 5.5013 10.0827Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M6.29926 8.33031C6.63783 7.65316 6.8737 6.65355 6.8737 5.49935C6.8737 4.34515 6.63783 3.34553 6.29926 2.66839C5.93327 1.93641 5.59727 1.83268 5.4987 1.83268C5.40013 1.83268 5.06412 1.93641 4.69814 2.66839C4.35956 3.34553 4.1237 4.34515 4.1237 5.49935C4.1237 6.65355 4.35956 7.65316 4.69814 8.33031C5.06412 9.06228 5.40013 9.16602 5.4987 9.16602C5.59727 9.16602 5.93327 9.06228 6.29926 8.33031ZM5.4987 10.0827C6.76435 10.0827 7.79036 8.03065 7.79036 5.49935C7.79036 2.96804 6.76435 0.916016 5.4987 0.916016C4.23305 0.916016 3.20703 2.96804 3.20703 5.49935C3.20703 8.03065 4.23305 10.0827 5.4987 10.0827Z"
+              fill="#FFFFFF"></path>
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M10.062 5.95768C10.077 5.80693 10.0846 5.65404 10.0846 5.49935C10.0846 5.34466 10.077 5.19176 10.062 5.04102H0.940599C0.925632 5.19176 0.917969 5.34466 0.917969 5.49935C0.917969 5.65404 0.925632 5.80693 0.940599 5.95768H10.062Z"
+              fill="#FFFFFF"></path>
+          </svg>
         </div>
 
       </div>
@@ -76,167 +118,252 @@
         <ul class="panel" style="margin: 0;">
           <li style="margin-bottom: 10px;" (click)="remote('account')">Tài khoản</li>
           <li style="margin-bottom: 10px;" (click)="remote('orders')">Đơn hàng</li>
-          <li style="margin-bottom: 10px;" (click)="remote('cart')" >Giỏ hàng</li>
+          <li style="margin-bottom: 10px;" (click)="remote('cart')">Giỏ hàng</li>
 
           <li (click)="logout()">Đăng xuất</li>
         </ul>
       </ng-template>
     </div>
   </ng-template>
-  <nz-drawer
-        [nzVisible]="visibleCart"
-        nzPlacement="right"
-        nzTitle="Giỏ Hàng"
-        (nzOnClose)="close()"
-      >
+  <nz-drawer [nzVisible]="visibleCart" nzPlacement="right" nzTitle="Giỏ Hàng" (nzOnClose)="close()">
 
-        <ng-container *nzDrawerContent >
-          <nz-spin style="height: 100%;" [nzSpinning]="loading" nzSize="large" nzTip="Đợi Giây Lát..." *ngIf="total>0">
-            <div class="shopping-cart">
-              <div class="mini-cart-body">
-                <div class="text" *ngIf="freeShip>subtotal">
-                  Mua thêm <b>{{main.formatPrice(freeShip-subtotal)}}</b> VND để được <br><b>MIỄN PHÍ GIAO HÀNG</b>.
+    <ng-container *nzDrawerContent>
+      <nz-spin style="height: 100%;" [nzSpinning]="loading" nzSize="large" nzTip="Đợi Giây Lát..." *ngIf="total>0">
+        <div class="shopping-cart">
+          <div class="mini-cart-body">
+            <div class="text" *ngIf="freeShip>subtotal">
+              Mua thêm <b>{{main.formatPrice(freeShip-subtotal)}}</b> VND để được <br><b>MIỄN PHÍ GIAO HÀNG</b>.
+            </div>
+            <div class="text" *ngIf="freeShip<=subtotal">
+              Đơn hàng của sẽ được giao <b>miễn phí</b>.
+            </div>
+            <div class="process" [ngStyle]="{'--value': (((subtotal/freeShip)>1)?100:(subtotal/freeShip)*100)+'%'}">
+              <div class="process-bar"></div>
+              <div style="width: 50px;position: relative;">
+                <div class="process-icon">
+                  <img src="../../../assets/shipping-logo.svg" alt="">
                 </div>
-                <div class="text" *ngIf="freeShip<=subtotal">
-                  Đơn hàng của sẽ được giao <b>miễn phí</b>.
-                </div>
-                <div class="process" [ngStyle]="{'--value': (((subtotal/freeShip)>1)?100:(subtotal/freeShip)*100)+'%'}">
-                  <div class="process-bar"></div>
-                  <div style="width: 50px;position: relative;">
-                    <div class="process-icon">
-                      <img src="../../../assets/shipping-logo.svg" alt="">
-                    </div>
-                  </div>
-                </div>
-
-                <div class="list-item">
-                  <!-- Để sản phẩm xuất hiện ở đây -->
-                  <app-item-shopping-cart (RemoveEmitter)="removeItemInCart($event)" (QuantityEmitter)="changeQuantityItemInCart($event)" *ngFor="let item of itemsCart" [item]="item"></app-item-shopping-cart>
-                </div>
-              </div>
-              <div class="mini-cart-footer">
-                <div class="top">
-                  <div style="display: flex;width: 100%;">
-                    <div class="btn" (click)="isPromoCode=0">
-                      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
-                        <path d="M14.0152 19.856L13.6543 19.4951" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M16.9392 22.7805L16.4883 22.3296" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M19.3408 25.1818L19.8461 25.687" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <mask id="mask0_696_41257" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40" fill="none">
-                            <path d="M0 -5.34058e-05H39.2466V39.2466H0V-5.34058e-05Z" fill="#FFFFFF" stroke="#FFFFFF"></path>
-                        </mask>
-                        <g mask="url(#mask0_696_41257)" fill="none">
-                            <path d="M34.2102 18.3714L37.668 14.9136C38.7497 13.832 38.7496 12.0784 37.668 10.9967L35.1338 8.4625C33.9362 9.66014 31.9945 9.66014 30.7969 8.4625C29.5993 7.26494 29.5993 5.32323 30.7969 4.12559L28.2488 1.57763C27.1672 0.496047 25.4136 0.496047 24.332 1.57763L11.3628 14.5468L11.3627 17.2046H8.70506L1.57681 24.3328C0.495229 25.4144 0.495229 27.168 1.57681 28.2496L4.12486 30.7976C5.32249 29.6 7.2642 29.6 8.46176 30.7976C9.6594 31.9952 9.6594 33.9369 8.46176 35.1345L10.996 37.6688C12.0777 38.7503 13.8313 38.7504 14.9129 37.6688L22.041 30.5406V27.8828H24.6988L29.3338 23.2478" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M25.7572 19.7556L23.2705 10.8216" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M30.0697 13.4818C29.4709 12.883 28.5 12.883 27.9013 13.4818C27.3024 14.0806 27.3024 15.0514 27.9013 15.6503C28.5 16.2491 29.4709 16.2491 30.0697 15.6503C30.6685 15.0514 30.6685 14.0806 30.0697 13.4818Z" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M21.1898 13.7513C20.591 13.1525 19.6201 13.1525 19.0214 13.7513C18.4226 14.3501 18.4226 15.321 19.0214 15.9198C19.6201 16.5186 20.591 16.5186 21.1898 15.9198C21.7887 15.321 21.7887 14.3501 21.1898 13.7513Z" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M8.88379 25.592L11.4859 22.9899" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M11.2705 27.9775L13.8727 25.3754" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M13.6543 30.3628L16.2564 27.7606" stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        </g>
-                    </svg>
-                    </div>
-                    <div class="btn" (click)="isGift=0">
-                      <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 40 40" fill="none">
-                        <mask id="mask0_696_41223" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40" fill="none">
-                            <path d="M0 0.753365H39.2466V40H0V0.753365Z" fill="#FFFFFF" stroke="#FFFFFF"></path>
-                        </mask>
-                        <g mask="url(#mask0_696_41223)" fill="none">
-                            <path d="M16.9814 30.1733V24.5072M16.9814 39.0803V32.8971M22.4712 24.5072V39.0803" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M4.03693 29.8412L23.3671 19.0684C23.909 18.7654 24.1052 18.0765 23.8041 17.535L22.638 15.4441C22.3348 14.9025 21.6457 14.7063 21.1039 15.0095L1.77144 25.7822C1.23179 26.0832 1.03556 26.7719 1.33658 27.3135L2.50279 29.4066C2.80388 29.946 3.49507 30.1421 4.03693 29.8412Z" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M14.533 18.6695L16.7962 22.7285M10.6041 26.179L8.34082 22.12" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M7.11298 22.8065C-3.59453 24.077 0.100246 10.7944 9.22907 17.945" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M13.5699 24.5072H29.9857C30.4361 24.5072 30.8063 24.8772 30.8063 25.3274V28.0691V37.6136C30.8063 38.4206 30.1463 39.0803 29.339 39.0803H10.1136C9.30647 39.0803 8.64648 38.4206 8.64648 37.6136V27.2711" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M8.34045 22.1201L14.5326 18.6696L13.75 17.2676C13.3196 16.4941 12.334 16.2155 11.5625 16.6457L8.17994 18.5314C7.4062 18.9616 7.12741 19.9446 7.55782 20.7158L8.34045 22.1201Z" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M7.3631 19.8064C6.43774 19.4698 5.72639 19.2937 4.48438 19.1578" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M11.3442 11.9178C10.6708 13.0814 10.3162 14.8088 10.5815 17.1916M15.8305 17.9473C20.1943 12.4617 16.1181 8.91763 13.0879 10.2795" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M13.1465 16.6567C13.2111 15.8409 13.608 14.6127 14.1076 13.7924" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M28.4492 10.9905C28.4492 10.9905 29.243 18.3195 26.5762 21.2104" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M32.4033 13.1995C32.4033 13.1995 33.5539 8.13074 38.6713 6.90927" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M23.7332 2.72106L22.848 4.19886C22.7521 4.35937 22.7387 4.41288 22.5403 4.46186L20.7877 4.89656C20.4487 4.98126 20.4309 5.05922 20.6628 5.32229L21.7933 6.68198C21.9137 6.82685 21.9316 6.99626 21.9159 7.2013L21.78 8.88201C21.742 9.22971 21.8156 9.27202 22.1411 9.14056L23.682 8.49859C23.8425 8.43175 24.0945 8.43175 24.2528 8.49859L25.7958 9.14056C26.1214 9.27202 26.1927 9.22971 26.1548 8.88201L26.021 7.2013C26.0055 6.99626 26.021 6.82685 26.1437 6.68198L27.272 5.32229C27.5038 5.05922 27.4883 4.98126 27.1471 4.89656L25.3945 4.46186C25.196 4.41288 25.1848 4.35937 25.0868 4.19886L24.2015 2.72106C24.0231 2.42011 23.9138 2.42011 23.7332 2.72106Z" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M34.979 15.9367L34.0915 17.4145C33.9956 17.575 33.9823 17.6285 33.7861 17.6775L32.0335 18.1122C31.6923 18.1969 31.6745 18.2749 31.9086 18.538L33.0368 19.8976C33.1595 20.0425 33.1751 20.2119 33.1595 20.417L33.0235 22.0954C32.9878 22.4454 33.0592 22.4877 33.3847 22.3562L34.9255 21.7142C35.086 21.6474 35.338 21.6474 35.4986 21.7142L37.0393 22.3562C37.3649 22.4877 37.4363 22.4454 37.4006 22.0954L37.2645 20.417C37.249 20.2119 37.2645 20.0425 37.3872 19.8976L38.5155 18.538C38.7496 18.2749 38.7318 18.1969 38.3906 18.1122L36.638 17.6775C36.4418 17.6285 36.4284 17.575 36.3325 17.4145L35.4473 15.9367C35.2666 15.6358 35.1574 15.6358 34.979 15.9367Z" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                            <path d="M33.1136 6.27173C34.3824 6.27173 35.4149 5.23966 35.4149 3.97365C35.4149 2.70534 34.3824 1.67328 33.1136 1.67328C31.8471 1.67328 30.8125 2.70534 30.8125 3.97365C30.8125 5.23966 31.8471 6.27173 33.1136 6.27173Z" stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        </g>
-                    </svg>
-                    </div>
-                  </div>
-                  <div style="display: flex;width: 100%;margin-top: 20px;">
-                    <div class="text_group">
-                      <span>Tổng</span>
-                      <p>{{total}}</p>
-                    </div>
-                    <div class="text_group" style="text-align: right;">
-                      <span>Tạm tính</span>
-                      <p>{{main.formatPrice(subtotal)}} VND</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="bottom">
-                  <div class="btn" style="background-color: #262626;" (click)="remote('cart')">
-                    Xem giỏ hàng
-                  </div>
-                  <div class="btn" style="background-color: #000;" (click)="remote('checkout')">
-                    Tính tiền
-                  </div>
-                </div>
-              </div>
-              <div class="drawer" [ngClass]="{'hidden_Drawer':(isPromoCode==1),'appear_Drawer':isPromoCode==0}">
-                <span nz-icon nzType="close" style="cursor: pointer;" nzTheme="outline" class="close" (click)="isPromoCode=1"></span>
-                <div style="display: flex;align-items: center;margin-bottom: 20px;">
-                  <svg style="margin-right: 10px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <path d="M14.0152 19.856L13.6543 19.4951" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                    <path d="M16.9392 22.7805L16.4883 22.3296" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                    <path d="M19.3408 25.1818L19.8461 25.687" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                    <mask id="mask0_696_41257" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40" height="40" fill="none">
-                        <path d="M0 -5.34058e-05H39.2466V39.2466H0V-5.34058e-05Z" fill="#FFFFFF"></path>
-                    </mask>
-                    <g mask="url(#mask0_696_41257)" fill="none">
-                        <path d="M34.2102 18.3714L37.668 14.9136C38.7497 13.832 38.7496 12.0784 37.668 10.9967L35.1338 8.4625C33.9362 9.66014 31.9945 9.66014 30.7969 8.4625C29.5993 7.26494 29.5993 5.32323 30.7969 4.12559L28.2488 1.57763C27.1672 0.496047 25.4136 0.496047 24.332 1.57763L11.3628 14.5468L11.3627 17.2046H8.70506L1.57681 24.3328C0.495229 25.4144 0.495229 27.168 1.57681 28.2496L4.12486 30.7976C5.32249 29.6 7.2642 29.6 8.46176 30.7976C9.6594 31.9952 9.6594 33.9369 8.46176 35.1345L10.996 37.6688C12.0777 38.7503 13.8313 38.7504 14.9129 37.6688L22.041 30.5406V27.8828H24.6988L29.3338 23.2478" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M25.7572 19.7556L23.2705 10.8216" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M30.0697 13.4818C29.4709 12.883 28.5 12.883 27.9013 13.4818C27.3024 14.0806 27.3024 15.0514 27.9013 15.6503C28.5 16.2491 29.4709 16.2491 30.0697 15.6503C30.6685 15.0514 30.6685 14.0806 30.0697 13.4818Z" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M21.1898 13.7513C20.591 13.1525 19.6201 13.1525 19.0214 13.7513C18.4226 14.3501 18.4226 15.321 19.0214 15.9198C19.6201 16.5186 20.591 16.5186 21.1898 15.9198C21.7887 15.321 21.7887 14.3501 21.1898 13.7513Z" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M8.88379 25.592L11.4859 22.9899" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M11.2705 27.9775L13.8727 25.3754" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                        <path d="M13.6543 30.3628L16.2564 27.7606" stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
-                    </g>
-                </svg>
-                  <span>Mã giảm giá</span>
-                </div>
-                <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-                  <input type="text" nz-input placeholder="Nhập mã..."/>
-                </nz-input-group>
-                <ng-template #suffixButton>
-                  <button nz-button nzType="primary" nzSize="large" nzSearch style="background-color: #262626;border: none;">Apply</button>
-                </ng-template>
-              </div>
-
-              <div class="drawer" [ngClass]="{'hidden_Drawer':(isGift==1),'appear_Drawer':isGift==0}">
-                <span nz-icon nzType="close" style="cursor: pointer;" nzTheme="outline" class="close" (click)="isGift=1"></span>
-                <label nz-checkbox [(ngModel)]="checkedGift">For <b>5.00 USD</b> please wrap the products in this order.</label>
               </div>
             </div>
-          </nz-spin>
 
-          <div class="cart-empty" *ngIf="total==0">
-            <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50.0652 35.729C54.4502 35.729 58.7682 37.642 62.4562 41.167C63.4292 42.018 63.4972 43.515 62.6062 44.447C61.7102 45.385 60.2152 45.385 59.3252 44.452C56.3152 41.569 53.1532 40.264 50.0652 40.264C46.9812 40.264 43.8252 41.568 40.8152 44.452C40.3812 44.879 39.7882 45.114 39.1782 45.098C37.1472 45.046 36.1992 42.553 37.6902 41.166C41.3722 37.642 45.6852 35.729 50.0652 35.729ZM59.5132 26.78C61.3262 26.78 62.8002 28.257 62.8002 30.071C62.8002 31.886 61.3252 33.356 59.5132 33.356C57.7012 33.356 56.2322 31.886 56.2322 30.071C56.2312 28.256 57.7002 26.78 59.5132 26.78ZM40.6282 26.78C42.4412 26.78 43.9092 28.257 43.9092 30.071C43.9092 31.886 42.4402 33.356 40.6282 33.356C38.8102 33.356 37.3412 31.886 37.3412 30.071C37.3412 28.256 38.8102 26.78 40.6282 26.78ZM10.2372 5.26904C5.81517 5.39404 5.11217 12.064 9.39317 13.227L14.9752 15.198L21.5432 49.443C22.3302 53.541 23.6312 57.25 25.4492 60.441C28.1212 65.14 32.7622 68.608 38.4862 68.608H66.9122C72.0432 68.701 72.0432 60.492 66.9122 60.587H38.4872C34.4402 60.071 32.7622 58.032 31.2782 55.043H68.8002C72.2412 55.043 74.1632 51.987 75.0132 48.452L83.2202 20.532C83.6582 15.942 81.2262 15.036 76.9702 15.036L23.0662 15.077L21.6172 10.649C21.2262 9.33104 20.2262 8.31304 18.9722 7.95904L10.2372 5.26904Z" fill="#A7897B"></path>
-              <path d="M40.4248 72.697C37.0658 72.697 34.3408 75.424 34.3408 78.783C34.3408 82.146 37.0658 84.873 40.4248 84.873C43.7838 84.873 46.5028 82.146 46.5028 78.783C46.5028 75.424 43.7838 72.697 40.4248 72.697Z" fill="#A7897B"></path>
-              <path d="M64.663 72.697C61.309 72.697 58.585 75.424 58.585 78.783C58.585 82.146 61.31 84.873 64.663 84.873C68.022 84.873 70.747 82.146 70.747 78.783C70.747 75.424 68.022 72.697 64.663 72.697Z" fill="#A7897B"></path>
-              </svg>
-            <h5>
-              Giỏ hàng rỗng
-            </h5>
-            <div class="btn" (click)="remote('all-products')">
-              <svg style="margin: 0 10px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 11 9" fill="none">
-                <path d="M0.669553 4.64377C0.688588 4.68986 0.716073 4.73139 0.750639 4.76595L4.25728 8.27259C4.33041 8.34573 4.42661 8.38278 4.52279 8.38278C4.61898 8.38278 4.71517 8.34623 4.78831 8.27259C4.93509 8.12581 4.93509 7.88784 4.78831 7.74107L1.9229 4.87566H10.0332C10.2406 4.87566 10.4089 4.70734 10.4089 4.49995C10.4089 4.29255 10.2406 4.12423 10.0332 4.12423H1.92339L4.7888 1.25883C4.93558 1.11205 4.93558 0.874079 4.7888 0.727301C4.64202 0.580524 4.40405 0.580524 4.25728 0.727301L0.750639 4.23394C0.716073 4.2685 0.688588 4.31003 0.669553 4.35612C0.63148 4.44829 0.63148 4.5516 0.669553 4.64377Z" fill="#FFFFFF"></path>
-              </svg>
-              <span>Tiếp tục mua sắm</span>
+            <div class="list-item">
+              <!-- Để sản phẩm xuất hiện ở đây -->
+              <app-item-shopping-cart (RemoveEmitter)="removeItemInCart($event)"
+                (QuantityEmitter)="changeQuantityItemInCart($event)" *ngFor="let item of itemsCart"
+                [item]="item"></app-item-shopping-cart>
             </div>
           </div>
+          <div class="mini-cart-footer">
+            <div class="top">
+              <div style="display: flex;width: 100%;">
+                <div class="btn" (click)="isPromoCode=0">
+                  <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30"
+                    height="30" viewBox="0 0 40 40" fill="none">
+                    <path d="M14.0152 19.856L13.6543 19.4951" stroke="#FFFFFF" stroke-width="1.53307px"
+                      stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                    <path d="M16.9392 22.7805L16.4883 22.3296" stroke="#FFFFFF" stroke-width="1.53307px"
+                      stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                    <path d="M19.3408 25.1818L19.8461 25.687" stroke="#FFFFFF" stroke-width="1.53307px"
+                      stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                    <mask id="mask0_696_41257" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
+                      width="40" height="40" fill="none">
+                      <path d="M0 -5.34058e-05H39.2466V39.2466H0V-5.34058e-05Z" fill="#FFFFFF" stroke="#FFFFFF"></path>
+                    </mask>
+                    <g mask="url(#mask0_696_41257)" fill="none">
+                      <path
+                        d="M34.2102 18.3714L37.668 14.9136C38.7497 13.832 38.7496 12.0784 37.668 10.9967L35.1338 8.4625C33.9362 9.66014 31.9945 9.66014 30.7969 8.4625C29.5993 7.26494 29.5993 5.32323 30.7969 4.12559L28.2488 1.57763C27.1672 0.496047 25.4136 0.496047 24.332 1.57763L11.3628 14.5468L11.3627 17.2046H8.70506L1.57681 24.3328C0.495229 25.4144 0.495229 27.168 1.57681 28.2496L4.12486 30.7976C5.32249 29.6 7.2642 29.6 8.46176 30.7976C9.6594 31.9952 9.6594 33.9369 8.46176 35.1345L10.996 37.6688C12.0777 38.7503 13.8313 38.7504 14.9129 37.6688L22.041 30.5406V27.8828H24.6988L29.3338 23.2478"
+                        stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path d="M25.7572 19.7556L23.2705 10.8216" stroke="#FFFFFF" stroke-width="1.53307px"
+                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M30.0697 13.4818C29.4709 12.883 28.5 12.883 27.9013 13.4818C27.3024 14.0806 27.3024 15.0514 27.9013 15.6503C28.5 16.2491 29.4709 16.2491 30.0697 15.6503C30.6685 15.0514 30.6685 14.0806 30.0697 13.4818Z"
+                        stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M21.1898 13.7513C20.591 13.1525 19.6201 13.1525 19.0214 13.7513C18.4226 14.3501 18.4226 15.321 19.0214 15.9198C19.6201 16.5186 20.591 16.5186 21.1898 15.9198C21.7887 15.321 21.7887 14.3501 21.1898 13.7513Z"
+                        stroke="#FFFFFF" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path d="M8.88379 25.592L11.4859 22.9899" stroke="#FFFFFF" stroke-width="1.53307px"
+                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                      <path d="M11.2705 27.9775L13.8727 25.3754" stroke="#FFFFFF" stroke-width="1.53307px"
+                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                      <path d="M13.6543 30.3628L16.2564 27.7606" stroke="#FFFFFF" stroke-width="1.53307px"
+                        stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="btn" (click)="isGift=0">
+                  <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="30"
+                    height="30" viewBox="0 0 40 40" fill="none">
+                    <mask id="mask0_696_41223" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0"
+                      width="40" height="40" fill="none">
+                      <path d="M0 0.753365H39.2466V40H0V0.753365Z" fill="#FFFFFF" stroke="#FFFFFF"></path>
+                    </mask>
+                    <g mask="url(#mask0_696_41223)" fill="none">
+                      <path d="M16.9814 30.1733V24.5072M16.9814 39.0803V32.8971M22.4712 24.5072V39.0803"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M4.03693 29.8412L23.3671 19.0684C23.909 18.7654 24.1052 18.0765 23.8041 17.535L22.638 15.4441C22.3348 14.9025 21.6457 14.7063 21.1039 15.0095L1.77144 25.7822C1.23179 26.0832 1.03556 26.7719 1.33658 27.3135L2.50279 29.4066C2.80388 29.946 3.49507 30.1421 4.03693 29.8412Z"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path d="M14.533 18.6695L16.7962 22.7285M10.6041 26.179L8.34082 22.12" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path d="M7.11298 22.8065C-3.59453 24.077 0.100246 10.7944 9.22907 17.945" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path
+                        d="M13.5699 24.5072H29.9857C30.4361 24.5072 30.8063 24.8772 30.8063 25.3274V28.0691V37.6136C30.8063 38.4206 30.1463 39.0803 29.339 39.0803H10.1136C9.30647 39.0803 8.64648 38.4206 8.64648 37.6136V27.2711"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M8.34045 22.1201L14.5326 18.6696L13.75 17.2676C13.3196 16.4941 12.334 16.2155 11.5625 16.6457L8.17994 18.5314C7.4062 18.9616 7.12741 19.9446 7.55782 20.7158L8.34045 22.1201Z"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path d="M7.3631 19.8064C6.43774 19.4698 5.72639 19.2937 4.48438 19.1578" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path
+                        d="M11.3442 11.9178C10.6708 13.0814 10.3162 14.8088 10.5815 17.1916M15.8305 17.9473C20.1943 12.4617 16.1181 8.91763 13.0879 10.2795"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path d="M13.1465 16.6567C13.2111 15.8409 13.608 14.6127 14.1076 13.7924" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path d="M28.4492 10.9905C28.4492 10.9905 29.243 18.3195 26.5762 21.2104" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path d="M32.4033 13.1995C32.4033 13.1995 33.5539 8.13074 38.6713 6.90927" stroke="#FFFFFF"
+                        stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none"></path>
+                      <path
+                        d="M23.7332 2.72106L22.848 4.19886C22.7521 4.35937 22.7387 4.41288 22.5403 4.46186L20.7877 4.89656C20.4487 4.98126 20.4309 5.05922 20.6628 5.32229L21.7933 6.68198C21.9137 6.82685 21.9316 6.99626 21.9159 7.2013L21.78 8.88201C21.742 9.22971 21.8156 9.27202 22.1411 9.14056L23.682 8.49859C23.8425 8.43175 24.0945 8.43175 24.2528 8.49859L25.7958 9.14056C26.1214 9.27202 26.1927 9.22971 26.1548 8.88201L26.021 7.2013C26.0055 6.99626 26.021 6.82685 26.1437 6.68198L27.272 5.32229C27.5038 5.05922 27.4883 4.98126 27.1471 4.89656L25.3945 4.46186C25.196 4.41288 25.1848 4.35937 25.0868 4.19886L24.2015 2.72106C24.0231 2.42011 23.9138 2.42011 23.7332 2.72106Z"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M34.979 15.9367L34.0915 17.4145C33.9956 17.575 33.9823 17.6285 33.7861 17.6775L32.0335 18.1122C31.6923 18.1969 31.6745 18.2749 31.9086 18.538L33.0368 19.8976C33.1595 20.0425 33.1751 20.2119 33.1595 20.417L33.0235 22.0954C32.9878 22.4454 33.0592 22.4877 33.3847 22.3562L34.9255 21.7142C35.086 21.6474 35.338 21.6474 35.4986 21.7142L37.0393 22.3562C37.3649 22.4877 37.4363 22.4454 37.4006 22.0954L37.2645 20.417C37.249 20.2119 37.2645 20.0425 37.3872 19.8976L38.5155 18.538C38.7496 18.2749 38.7318 18.1969 38.3906 18.1122L36.638 17.6775C36.4418 17.6285 36.4284 17.575 36.3325 17.4145L35.4473 15.9367C35.2666 15.6358 35.1574 15.6358 34.979 15.9367Z"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                      <path
+                        d="M33.1136 6.27173C34.3824 6.27173 35.4149 5.23966 35.4149 3.97365C35.4149 2.70534 34.3824 1.67328 33.1136 1.67328C31.8471 1.67328 30.8125 2.70534 30.8125 3.97365C30.8125 5.23966 31.8471 6.27173 33.1136 6.27173Z"
+                        stroke="#FFFFFF" stroke-width="1.1498px" stroke-miterlimit="10" stroke-linecap="round"
+                        stroke-linejoin="round" fill="none"></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div style="display: flex;width: 100%;margin-top: 20px;">
+                <div class="text_group">
+                  <span>Tổng</span>
+                  <p>{{total}}</p>
+                </div>
+                <div class="text_group" style="text-align: right;">
+                  <span>Tạm tính</span>
+                  <p>{{main.formatPrice(subtotal)}} VND</p>
+                </div>
+              </div>
+            </div>
+            <div class="bottom">
+              <div class="btn" style="background-color: #262626;" (click)="remote('cart')">
+                Xem giỏ hàng
+              </div>
+              <div class="btn" style="background-color: #000;" (click)="remote('checkout')">
+                Tính tiền
+              </div>
+            </div>
+          </div>
+          <div class="drawer" [ngClass]="{'hidden_Drawer':(isPromoCode==1),'appear_Drawer':isPromoCode==0}">
+            <span nz-icon nzType="close" style="cursor: pointer;" nzTheme="outline" class="close"
+              (click)="isPromoCode=1"></span>
+            <div style="display: flex;align-items: center;margin-bottom: 20px;">
+              <svg style="margin-right: 10px;" xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <path d="M14.0152 19.856L13.6543 19.4951" stroke="#000000" stroke-width="1.53307px"
+                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                <path d="M16.9392 22.7805L16.4883 22.3296" stroke="#000000" stroke-width="1.53307px"
+                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                <path d="M19.3408 25.1818L19.8461 25.687" stroke="#000000" stroke-width="1.53307px"
+                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                <mask id="mask0_696_41257" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="40"
+                  height="40" fill="none">
+                  <path d="M0 -5.34058e-05H39.2466V39.2466H0V-5.34058e-05Z" fill="#FFFFFF"></path>
+                </mask>
+                <g mask="url(#mask0_696_41257)" fill="none">
+                  <path
+                    d="M34.2102 18.3714L37.668 14.9136C38.7497 13.832 38.7496 12.0784 37.668 10.9967L35.1338 8.4625C33.9362 9.66014 31.9945 9.66014 30.7969 8.4625C29.5993 7.26494 29.5993 5.32323 30.7969 4.12559L28.2488 1.57763C27.1672 0.496047 25.4136 0.496047 24.332 1.57763L11.3628 14.5468L11.3627 17.2046H8.70506L1.57681 24.3328C0.495229 25.4144 0.495229 27.168 1.57681 28.2496L4.12486 30.7976C5.32249 29.6 7.2642 29.6 8.46176 30.7976C9.6594 31.9952 9.6594 33.9369 8.46176 35.1345L10.996 37.6688C12.0777 38.7503 13.8313 38.7504 14.9129 37.6688L22.041 30.5406V27.8828H24.6988L29.3338 23.2478"
+                    stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none"></path>
+                  <path d="M25.7572 19.7556L23.2705 10.8216" stroke="#000000" stroke-width="1.53307px"
+                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                  <path
+                    d="M30.0697 13.4818C29.4709 12.883 28.5 12.883 27.9013 13.4818C27.3024 14.0806 27.3024 15.0514 27.9013 15.6503C28.5 16.2491 29.4709 16.2491 30.0697 15.6503C30.6685 15.0514 30.6685 14.0806 30.0697 13.4818Z"
+                    stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none"></path>
+                  <path
+                    d="M21.1898 13.7513C20.591 13.1525 19.6201 13.1525 19.0214 13.7513C18.4226 14.3501 18.4226 15.321 19.0214 15.9198C19.6201 16.5186 20.591 16.5186 21.1898 15.9198C21.7887 15.321 21.7887 14.3501 21.1898 13.7513Z"
+                    stroke="#000000" stroke-width="1.53307px" stroke-miterlimit="10" stroke-linecap="round"
+                    stroke-linejoin="round" fill="none"></path>
+                  <path d="M8.88379 25.592L11.4859 22.9899" stroke="#000000" stroke-width="1.53307px"
+                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                  <path d="M11.2705 27.9775L13.8727 25.3754" stroke="#000000" stroke-width="1.53307px"
+                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                  <path d="M13.6543 30.3628L16.2564 27.7606" stroke="#000000" stroke-width="1.53307px"
+                    stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                </g>
+              </svg>
+              <span>Mã giảm giá</span>
+            </div>
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+              <input type="text" nz-input placeholder="Nhập mã..." />
+            </nz-input-group>
+            <ng-template #suffixButton>
+              <button nz-button nzType="primary" nzSize="large" nzSearch
+                style="background-color: #262626;border: none;">Apply</button>
+            </ng-template>
+          </div>
 
-        </ng-container>
+          <div class="drawer" [ngClass]="{'hidden_Drawer':(isGift==1),'appear_Drawer':isGift==0}">
+            <span nz-icon nzType="close" style="cursor: pointer;" nzTheme="outline" class="close"
+              (click)="isGift=1"></span>
+            <label nz-checkbox [(ngModel)]="checkedGift">For <b>5.00 USD</b> please wrap the products in this
+              order.</label>
+          </div>
+        </div>
+      </nz-spin>
+
+      <div class="cart-empty" *ngIf="total==0">
+        <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 90 90" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M50.0652 35.729C54.4502 35.729 58.7682 37.642 62.4562 41.167C63.4292 42.018 63.4972 43.515 62.6062 44.447C61.7102 45.385 60.2152 45.385 59.3252 44.452C56.3152 41.569 53.1532 40.264 50.0652 40.264C46.9812 40.264 43.8252 41.568 40.8152 44.452C40.3812 44.879 39.7882 45.114 39.1782 45.098C37.1472 45.046 36.1992 42.553 37.6902 41.166C41.3722 37.642 45.6852 35.729 50.0652 35.729ZM59.5132 26.78C61.3262 26.78 62.8002 28.257 62.8002 30.071C62.8002 31.886 61.3252 33.356 59.5132 33.356C57.7012 33.356 56.2322 31.886 56.2322 30.071C56.2312 28.256 57.7002 26.78 59.5132 26.78ZM40.6282 26.78C42.4412 26.78 43.9092 28.257 43.9092 30.071C43.9092 31.886 42.4402 33.356 40.6282 33.356C38.8102 33.356 37.3412 31.886 37.3412 30.071C37.3412 28.256 38.8102 26.78 40.6282 26.78ZM10.2372 5.26904C5.81517 5.39404 5.11217 12.064 9.39317 13.227L14.9752 15.198L21.5432 49.443C22.3302 53.541 23.6312 57.25 25.4492 60.441C28.1212 65.14 32.7622 68.608 38.4862 68.608H66.9122C72.0432 68.701 72.0432 60.492 66.9122 60.587H38.4872C34.4402 60.071 32.7622 58.032 31.2782 55.043H68.8002C72.2412 55.043 74.1632 51.987 75.0132 48.452L83.2202 20.532C83.6582 15.942 81.2262 15.036 76.9702 15.036L23.0662 15.077L21.6172 10.649C21.2262 9.33104 20.2262 8.31304 18.9722 7.95904L10.2372 5.26904Z"
+            fill="#A7897B"></path>
+          <path
+            d="M40.4248 72.697C37.0658 72.697 34.3408 75.424 34.3408 78.783C34.3408 82.146 37.0658 84.873 40.4248 84.873C43.7838 84.873 46.5028 82.146 46.5028 78.783C46.5028 75.424 43.7838 72.697 40.4248 72.697Z"
+            fill="#A7897B"></path>
+          <path
+            d="M64.663 72.697C61.309 72.697 58.585 75.424 58.585 78.783C58.585 82.146 61.31 84.873 64.663 84.873C68.022 84.873 70.747 82.146 70.747 78.783C70.747 75.424 68.022 72.697 64.663 72.697Z"
+            fill="#A7897B"></path>
+        </svg>
+        <h5>
+          Giỏ hàng rỗng
+        </h5>
+        <div class="btn" (click)="remote('all-products')">
+          <svg style="margin: 0 10px;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+            width="20" height="18" viewBox="0 0 11 9" fill="none">
+            <path
+              d="M0.669553 4.64377C0.688588 4.68986 0.716073 4.73139 0.750639 4.76595L4.25728 8.27259C4.33041 8.34573 4.42661 8.38278 4.52279 8.38278C4.61898 8.38278 4.71517 8.34623 4.78831 8.27259C4.93509 8.12581 4.93509 7.88784 4.78831 7.74107L1.9229 4.87566H10.0332C10.2406 4.87566 10.4089 4.70734 10.4089 4.49995C10.4089 4.29255 10.2406 4.12423 10.0332 4.12423H1.92339L4.7888 1.25883C4.93558 1.11205 4.93558 0.874079 4.7888 0.727301C4.64202 0.580524 4.40405 0.580524 4.25728 0.727301L0.750639 4.23394C0.716073 4.2685 0.688588 4.31003 0.669553 4.35612C0.63148 4.44829 0.63148 4.5516 0.669553 4.64377Z"
+              fill="#FFFFFF"></path>
+          </svg>
+          <span>Tiếp tục mua sắm</span>
+        </div>
+      </div>
+
+    </ng-container>
   </nz-drawer>
-  <div class="container" style="display: flex; justify-content: space-between;" *ngIf="user&&user.role>0; else template">
+  <div class="container" style="display: flex; justify-content: space-between;"
+    *ngIf="user&&user.role>0; else template">
     <a href="/home"><img src="../../../assets/images/logo.png" alt=""></a>
     <div>
       <div class="btnDashboard" routerLink="dashboard/orders">
@@ -255,8 +382,12 @@
 </div>
 
 <nz-dropdown-menu #langMenu="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item (click)="switch('vi')"><p style="margin: 0;"><span class="fi fi-vn"></span> VI</p></li>
-            <li nz-menu-item (click)="switch('en')"><p style="margin: 0;"><span class="fi fi-gb"></span> EN</p></li>
-          </ul>
-        </nz-dropdown-menu>
+  <ul nz-menu>
+    <li nz-menu-item (click)="switch('vi')">
+      <p style="margin: 0;"><span class="fi fi-vn"></span> VI</p>
+    </li>
+    <li nz-menu-item (click)="switch('en')">
+      <p style="margin: 0;"><span class="fi fi-gb"></span> EN</p>
+    </li>
+  </ul>
+</nz-dropdown-menu>
