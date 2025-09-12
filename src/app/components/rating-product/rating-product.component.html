@@ -1,6 +1,6 @@
 <div nz-row class="rating-product" [nzGutter]="[20]">
   <div nz-col [nzSpan]="8" style="display: flex;align-items: center;justify-content: center;">
-    <a [href]="'products/'+review.name_id"><img [src]="review.img" alt=""></a>
+    <a [href]="'products/'+review.name_id"><img [src]="FILE_URL + review.img" (error)="onImgError($event)"></a>
   </div>
   <div nz-col [nzSpan]="16">
     <a [href]="'products/'+review.name_id" class="name">{{review.p_name}}</a>

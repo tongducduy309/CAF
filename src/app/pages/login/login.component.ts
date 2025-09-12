@@ -6,6 +6,8 @@ import emailjs from '@emailjs/browser';
 import { Page } from 'src/app/classes/page';
 import { UserService } from 'src/services/user.service';
 import { MainService } from 'src/services/main.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { Location } from '@angular/common';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -24,7 +26,8 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
 
   processing = false
 
-  constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService){
+  constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService, 
+    private AuthenticationService:AuthenticationService, private location:Location) {
     super()
     // this.must_load=1
   }
@@ -59,18 +62,31 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
       return;
     }
     this.processing=true
-    this.user = await this.userS.login_method_2(this.user_email,this.user_password)
-    if (this.user){
-      this.UserEmitter.emit(this.user)
-      this.router.navigate([''])
+    this.AuthenticationService.login({email:this.user_email,password:this.user_password}).then((res:string)=>{
+      console.log("TOKEN",res);
+      if (res){
+        localStorage.setItem('access_token', res);
+        this.router.navigate([''])
     }
-    this.processing=false
+    })
+    .catch(e=>{
+      this.main.createNotification("error",e.message)
+    })
+    .finally(()=>{
+      this.processing=false
+    })
 
   }
 
   onEnter() {
     this.submit()
   }
+
+  back(){
+    this.location.back();
+  }
+
+  resend(){}
 
 
 
@@ -96,6 +112,10 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
     {
       this.main.createNotification('info', 'Email không hợp lệ, email phải chưa "@" (Ví dụ: vidu@example.com)');
     }
+  }
+
+  goToLogin(){
+    this.router.navigate(['account/login'])
   }
 
   isValidEmail(email:string){

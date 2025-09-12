@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { P } from '@angular/cdk/portal-directives.d-BoG39gYN';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
+import { ReviewRequest } from 'src/app/dto/request/ReviewRequest';
 import { ProductResponse } from 'src/app/dto/response/ProductResponse';
 import { ReviewResponse } from 'src/app/dto/response/ReviewResponse';
+import { PageTitleService } from 'src/app/services/page-title.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ReviewService } from 'src/app/services/review.service';
 import { environment } from 'src/environments/environment';
@@ -34,19 +37,17 @@ export class DetailProductComponent extends Page implements OnInit {
     cost:[]
   };
 
-  form_review:any = {
-    point:0
-  }
+  form_review:Partial<ReviewRequest> = {}
 
   rating_of_product:any = {
     point:0
   }
 
-  customer_reviews: any = []
+  customer_reviews: ReviewResponse[] = []
 
   writing_review:any
 
-  // products_for_best:any = []
+  products_for_best:any = []
 
   isFormAddToCart = false
   isFormBuyNow = false
@@ -61,21 +62,27 @@ export class DetailProductComponent extends Page implements OnInit {
 
   FILE_URL = environment.variable_global.FILE_URL;
 
+  quantity = 1
+
+  private pageTitle = inject(PageTitleService);
+
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private productService:ProductService,
-    private revewService:ReviewService
+    private reviewService:ReviewService
   ) {
     super();
     this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
       this.pid = params.get('id')
       this.getIdProduct(this.pid)
+      
       this.getCustomerReviews(this.pid)
-      // this.getBestProducts()
+      this.getBestProducts()
     });
   }
 
   ngOnInit(): void {
+    this.pageTitle.setTitle('DETAIL_PRODUCT.TITLE');
   }
 
   getIdProduct(id:any){
@@ -97,7 +104,7 @@ export class DetailProductComponent extends Page implements OnInit {
   }
 
   getCustomerReviews(id:string){
-    this.revewService.getReviewByProductId(id).then((res:ReviewResponse[])=>{
+    this.reviewService.getReviewByProductId(id).then((res:ReviewResponse[])=>{
       let sum = 0
       const cs = res
       for (let c of cs){
@@ -110,19 +117,21 @@ export class DetailProductComponent extends Page implements OnInit {
       console.log(cs);
       this.rating_of_product.customer = cs.length
       if (cs.length>0){
-        this.rating_of_product.point = Math.floor(sum/cs.length)
+        this.rating_of_product.point = (sum/cs.length).toFixed(1)
       }
       this.loaded()
     })
   }
 
-  // getBestProducts(){
-  //   this.crud.get("products-by-customer-reviews","2").subscribe((res:any)=>{
-  //     this.products_for_best=res.data
+  getBestProducts(){
+    this.productService.getAllProducts().then((res:ProductResponse[])=>{
+      this.products_for_best=res.slice(0,2)
 
-  //   })
-  // }
-  quantity = 1
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+  
 
   
 
@@ -135,6 +144,10 @@ export class DetailProductComponent extends Page implements OnInit {
     this.form_review.point = event
     console.log(event);
   }
+
+  onImgError(event: Event) {
+  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
+}
 
   hoverRating_Review(event:any){
     if (this.form_review.point==0){
@@ -151,23 +164,22 @@ export class DetailProductComponent extends Page implements OnInit {
       this.main.createNotification("info","Vui lòng viết nhận xét")
       return;
     }
-    if (!this.form_review.name||this.form_review.name.trim().length==0){
-      this.main.createNotification("info","Vui lòng điền họ và tên")
-      return;
-    }
-    this.crud.addData("customer-reviews",{...this.form_review,name_id:this.product.name_id})
-    .then(response => response.json())
+
+    // if (!this.form_review.name||this.form_review.name.trim().length==0){
+    //   this.main.createNotification("info","Vui lòng điền họ và tên")
+    //   return;
+    // }
+    this.form_review.productNameId = this.product.nameId
+    this.reviewService.createReview(this.form_review as ReviewRequest)
+
     .then(data => {
-        if (data.result='success') {
-          this.main.createNotification("success","Viết bài đánh giá thành công")
+        this.main.createNotification("success","Viết bài đánh giá thành công")
           this.getCustomerReviews(this.pid)
-        }
-        else{
-          this.main.createNotification("info","Viết bài đánh giá không thành công")
-        }
+        
     })
     .catch(error => {
         console.error('Error:', error);
+        this.main.createNotification("info","Viết bài đánh giá không thành công")
 
     });
   this.writing_review=false;

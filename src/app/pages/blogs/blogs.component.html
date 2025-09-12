@@ -4,11 +4,13 @@
       <div nz-col [nzSpan]="12">
         <div class="btn" (click)="back()">
           <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-          Trở Về
+          {{ 'BUTTONS.BACK' | translate }}
         </div>
 
-        <h2 class="title">Blog</h2>
-        <p>Blog cà phê của chúng tôi là thiên đường thú vị cho tất cả những người đam mê cà phê, từ những người uống cà phê bình thường đến những người sành sỏi. Đi sâu vào thế giới nơi chúng tôi tôn vinh nghệ thuật, khoa học và văn hóa cà phê.</p>
+        <!-- <h2 class="title">Blog</h2>
+        <p>Blog cà phê của chúng tôi là thiên đường thú vị cho tất cả những người đam mê cà phê, từ những người uống cà phê bình thường đến những người sành sỏi. Đi sâu vào thế giới nơi chúng tôi tôn vinh nghệ thuật, khoa học và văn hóa cà phê.</p> -->
+        <h2 class="title">{{ 'BLOG.TITLE' | translate }}</h2>
+        <p>{{ 'BLOG.SUBTITLE' | translate }}</p>
       </div>
     </div>
   </div>

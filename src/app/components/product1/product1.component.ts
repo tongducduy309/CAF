@@ -20,4 +20,8 @@ export class Product1Component {
     this.router.navigate(['products/'+this.product.nameId]);
     
   }
+
+  onImgError(event: Event) {
+  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
+}
 }

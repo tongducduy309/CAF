@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { LangService } from 'src/app/services/lang.service';
 
 @Component({
     selector: 'app-footer',
@@ -25,4 +26,7 @@ export class FooterComponent {
       }
     });
   }
+
+  private lang = inject(LangService);
+  
 }

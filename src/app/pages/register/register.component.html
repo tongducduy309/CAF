@@ -1,40 +1,38 @@
 <section [ngStyle]="{'padding':(submited)?'100px 0':'80px 0'}">
   <div class="container" *ngIf="!submited">
-    <div class="group border-top border-right border-left" style="padding: 15px 20px;">
-      <h2>Đăng Ký Tài Khoản</h2>
-    </div>
+    <h4 class="subtitle" style="text-align: center;">{{ 'REGISTER.TITLE' | translate }}</h4>
 
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <div class ="form_group field">
-          <p>Họ và tên<sup aria-hidden="true"> *</sup> :</p>
-          <input nz-input placeholder="Họ và tên" [(ngModel)]="user.fullname" type="text" />
+          <p>{{ 'REGISTER.FULLNAME' | translate }}<sup aria-hidden="true"> *</sup> :</p>
+          <input nz-input [placeholder]="'REGISTER.FULLNAME' | translate" [(ngModel)]="user.fullname" type="text" />
         </div>
         <div class="form_group field">
-            <p>E-mail<sup aria-hidden="true"> *</sup> :</p>
-            <input nz-input placeholder="Email" [(ngModel)]="user.email" type="text" />
+            <p>{{'REGISTER.EMAIL' | translate}}<sup aria-hidden="true"> *</sup> :</p>
+            <input nz-input [placeholder]="'REGISTER.EMAIL' | translate" [(ngModel)]="user.email" type="text" />
         </div>
     </div>
 
     <div class="group border-top border-right border-left" style="padding: 15px 20px;">
         <div class ="field">
-            <p>Mật khẩu<sup aria-hidden="true"> *</sup> :</p>
+            <p>{{'REGISTER.PASSWORD' | translate}}<sup aria-hidden="true"> *</sup> :</p>
             <nz-input-group [nzSuffix]="suffixTemplate">
               <input
                 [type]="passwordVisible ? 'text' : 'password'"
                 nz-input
-                placeholder="Mật khẩu"
+                [placeholder]="'REGISTER.PASSWORD' | translate"
                 [(ngModel)]="user.password"
               />
             </nz-input-group>
         </div>
 
         <div class ="field">
-          <p>Xác nhận mật khẩu<sup aria-hidden="true"> *</sup> :</p>
+          <p>{{'REGISTER.CONFIRM_PASSWORD' | translate}}<sup aria-hidden="true"> *</sup> :</p>
           <nz-input-group [nzSuffix]="suffixTemplate">
             <input
               [type]="passwordVisible ? 'text' : 'password'"
               nz-input
-              placeholder="Xác nhận mật khẩu"
+              [placeholder]="'REGISTER.CONFIRM_PASSWORD' | translate"
               [(ngModel)]="user.confirm_password"
             />
           </nz-input-group>
@@ -50,7 +48,7 @@
 
     <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;">
         <button nz-button nzType="primary" class="btnSendMess" (click)="SendMess_Register()" [disabled]="processing">
-            Đăng Ký
+            {{'REGISTER.REGISTER_BUTTON' | translate}}
             <nz-icon nzType="arrow-right"></nz-icon>
         </button>
     </div>

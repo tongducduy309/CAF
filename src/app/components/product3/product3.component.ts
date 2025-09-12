@@ -28,6 +28,7 @@ export class Product3Component implements OnInit {
   constructor(public main:MainService) { }
 
   ngOnInit(): void {
+    console.log(this.product);
   }
 
   AddToCart(product:any){
@@ -51,5 +52,9 @@ export class Product3Component implements OnInit {
     this.product["sizeSelected"] = this.product.size[this.selectedSize]
     this.isFormAddToCart = true
   }
+
+  onImgError(event: Event) {
+  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
+}
 
 }

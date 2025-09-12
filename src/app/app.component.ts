@@ -1,12 +1,11 @@
-import { TmplAstRecursiveVisitor } from '@angular/compiler';
+
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { inject } from '@angular/core';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-root',
@@ -22,24 +21,31 @@ export class AppComponent{
   user:any=null;
   total = 0
 
-  private router = inject(Router);
-  private activatedRoute = inject(ActivatedRoute);
+  // private router = inject(Router);
+  // private activatedRoute = inject(ActivatedRoute);
   private title = inject(Title);
+  private translate = inject(TranslateService);
 
   constructor (private crud:CrudService, private main:MainService, private userS:UserService){
     // this.getItemsCart()
-    this.router.events.pipe(
-      filter(e => e instanceof NavigationEnd),
-      map(() => this.activatedRoute),
-      map(route => {
-        while (route.firstChild) route = route.firstChild;
-        return route;
-      }),
-      mergeMap(route => route.data)
-    )
-    .subscribe(data => {
-      const t = data['title'] as string;
-      if (t) this.title.setTitle(`${t}`);
+    // this.router.events.pipe(
+    //   filter(e => e instanceof NavigationEnd),
+    //   map(() => this.activatedRoute),
+    //   map(route => {
+    //     while (route.firstChild) route = route.firstChild;
+    //     return route;
+    //   }),
+    //   mergeMap(route => route.data)
+    // )
+    // .subscribe(data => {
+    //   const t = data['title'] as string;
+    //   if (t) this.title.setTitle(`${t}`);
+    // });
+  }
+
+  setTitle(key: string, params?: Record<string, any>) {
+    this.translate.get(key, params).subscribe(translated => {
+      this.title.setTitle(translated);
     });
   }
 

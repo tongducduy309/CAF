@@ -2,9 +2,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Page } from 'src/app/classes/page';
+import { UserRequest } from 'src/app/dto/request/UserRequest';
+import { UserService } from 'src/app/services/user.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
-import { UserService } from 'src/services/user.service';
 
 @Component({
     selector: 'app-register',
@@ -27,43 +28,45 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
   processing=false
 
-  constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService) {
+  constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, 
+    private main:MainService,
+  private userService:UserService) {
 
     super()
     // this.must_load = 1
-    this.routed.queryParamMap.subscribe(params => {
-      const token = params.get('token')
-      this.must_load++
-      console.log(token);
-      if (token!=null){
-        this.crud.verifyUser(token).then(response => response.json())
-        .then(async data=> {
-          if(data.result=='Success'){
-            console.log("Xác thực thành công");
-            this.user =  await this.userS.login_method_1(token)
-            this.UserEmitter.emit(this.user)
-            this.router.navigate([''])
-            this.loaded()
-          }
-          else{
-            if(data.result=='Verified'){
-              this.user=await this.userS.login_method_1(token)
+    // this.routed.queryParamMap.subscribe(params => {
+    //   const token = params.get('token')
+    //   this.must_load++
+    //   console.log(token);
+    //   if (token!=null){
+    //     this.crud.verifyUser(token).then(response => response.json())
+    //     .then(async data=> {
+    //       if(data.result=='Success'){
+    //         console.log("Xác thực thành công");
+    //         this.user =  await this.userS.login_method_1(token)
+    //         this.UserEmitter.emit(this.user)
+    //         this.router.navigate([''])
+    //         this.loaded()
+    //       }
+    //       else{
+    //         if(data.result=='Verified'){
+    //           this.user=await this.userS.login_method_1(token)
 
-              this.UserEmitter.emit(this.user)
-              this.router.navigate([''])
-            }
-          }
-          // console.log(data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      }
-      else{
-        this.loaded()
-      }
+    //           this.UserEmitter.emit(this.user)
+    //           this.router.navigate([''])
+    //         }
+    //       }
+    //       // console.log(data);
+    //     })
+    //     .catch(error => {
+    //       console.error('Error:', error);
+    //     });
+    //   }
+    //   else{
+    //     this.loaded()
+    //   }
 
-    });
+    // });
 
   }
   ngAfterViewInit(): void {
@@ -127,23 +130,19 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       return;
     }
     this.processing=true
-    this.crud.addData("register",{
+    this.userService.register({
       email:this.user.email,
       fullname:this.user.fullname,
       password:this.user.password,
-      role:'0'
-    }).then(res=>res.json()).then(data=>{
-      if (data.result=='success'){
-        this.submited = true
-      }
-      else{
-        if(data.result=='existed'){
-          this.main.createNotification("info","Email đã tồn tại")
-        }
-        else{
-          this.main.createNotification("error","Xảy ra lỗi")
-        }
-      }
+    } as UserRequest).then(data=>{
+      this.main.createNotification("success","Đăng ký thành công, vui lòng kiểm tra email để xác thực tài khoản")
+      this.router.navigate(['account/login'])
+    })
+    .catch(e=>{
+      console.log("error",e.message);
+      this.main.createNotification("error",e.message)
+    })
+    .finally(()=>{
       this.processing=false
     })
 

@@ -1,0 +1,240 @@
+{
+    
+    "LOADING": "Loading...",
+    "NOTIFICATION": {
+        "SUCCESS": "Success",
+        "ERROR": "Error",
+        "WARNING": "Warning",
+        "INFO": "Info"
+    },
+    "HEADER": {
+        "TITLE": "Coffee Store",
+        "SWITCH_LANG": "Chuyển ngôn ngữ",
+        "PAGES": {
+            "TITLE": "Pages",
+            "ABOUT_US": "About Us",
+            "CONTACT": "Contact",
+            "FAQ": "Faq's",
+            "PRIVACY_POLICY": "Privacy Policy",
+            "TERMS_AND_CONDITIONS": "Terms And Conditions",
+            "SHIPPING_AND_DELIVERY": "Shipping and Delivery"
+        },
+        "ALL_PRODUCTS": "All Products",
+        "BLOG": "Blog",
+        "COLLECTIONS": "Collections",
+        "ITEMS": "items"
+    },
+    
+    "FOOTER": {
+        "TITLE_COLUMN_1": "Shop",
+        "TITLE_COLUMN_2": "Account",
+        "TITLE_COLUMN_3": "Share",
+        "ALL_PRODUCTS": "All Products",
+        "MY_CART": "My Cart",
+        "ABOUT_US": "About Us",
+        "CONTACT": "Contact",
+        "FAQ": "Faq's",
+        "PRIVACY_POLICY": "Privacy Policy",
+        "TERMS_AND_CONDITIONS": "Terms And Conditions",
+        "SHIPPING_AND_DELIVERY": "Shipping and Delivery",
+        "SLOGAN": {
+            "LINE_1": "A cup of coffee, a",
+            "LINE_2": "moment of your time",
+            "SUBLINE": "At Coffee Store, you'll explore a diverse world of flavors with a rich menu ranging from pure coffee, milk tea, fruit juices to special drinks. Each drink is meticulously crafted, delivering an unforgettable taste."
+        }
+    },
+    "BUTTONS": {
+        "LOAD_MORE": "Load More",
+        "VIEW_ALL": "View All",
+        "ADD_TO_CART": "Add to Cart",
+        "BUY_NOW": "Buy Now",
+        "CHECKOUT": "Checkout",
+        "PLACE_ORDER": "Place Order",
+        "SHOW_PRODUCTS": "Show Products",
+        "SHOW_BLOGS": "Show Blogs",
+        "BACK": "Back",
+        "CANCEL": "Cancel",
+        "SUBMIT": "Submit",
+        "GO_TO_HOME": "Go to Home",
+        "RELOAD": "Reload",
+        "RESEND": "Resend"
+    },
+    "SEARCH": {
+        "RESULTS_FOR": "Search results for",
+        "NO_RESULTS": "No results found for",
+        "SEARCH_PLACEHOLDER": "Search products..."
+    },
+    "HOME": {
+        "TITLE": "HOME - Coffee Store",
+        "THE_BEST_COFFEE": {
+            "TITLE": "The Best Coffee",
+            "SUBTITLE": "The perfect harmony of coffee and milk. Premium instant coffee blended with rich fresh milk creates a delicious, easy-to-enjoy flavor. Convenient and ready to serve, this product lets you savor a delightful cup of coffee anytime, anywhere-even on your busiest days."
+        },
+        "COFFEE_EXPERIENCE": {
+            "MAIN": {
+                "LINE_1": "Fresh roasted coffee",
+                "LINE_2": "with 24h delivery blogs",
+                "SUBTITLE": "Denver Biscuit cafe knows how to entice future customers. A video takes viewers all the way from the preparation of one of their desserts to the service.",
+  
+                "CHOOSE_ORIGIN": "Choose the origin of the coffee:",
+                "COUNTRY":"Vietnam"
+            }
+        },
+        "POPULAR_PRODUCTS": {
+            "LINE_1": "Shop Best Seller",
+            "LINE_2": "Product",
+            "SUBTITLE": "Vietnamese iced milk coffee has long been a beloved national drink. With the bold richness of coffee blended with the creamy smoothness of fresh milk, this iconic beverage delights every palate—from adults to the young."
+        },
+        "BLOG": {
+            "LINE_1": "Fresh roasted coffee",
+            "LINE_2": "Blogs",
+            "SUBTITLE": "Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant."
+        },
+        "SUBSCRIBE": {
+            "LINE_1": "Subscribe newsletter",
+            "LINE_2": "and get -20% off",
+            "SUBTITLE": "It is the most popular hot drink in the world. Seeds of the Coffea plant's fruits are separated to produce unroasted green coffee beans."
+        },
+        "BEST_DISCOUNT": {
+            "TITLE": "Coffee Shop Best Discount ‘s Product"
+        }
+
+    },
+    "DETAIL_PRODUCT": {
+        "TITLE": "Product Details",
+        "SEE_SIZING_GUIDE": "See Sizing Guide",
+        "CHOOSE_SIZE": "Choose size:",
+        "DESCRIPTION": "Description:",
+        "QUANTITY": "Quantity",
+        "REVIEWS": {
+            "TITLE":"Customer Reviews",
+            "WRITE_REVIEW": "Write a Review",
+            "CANCEL_REVIEW": "Cancel Review",
+            "SUBMIT_REVIEW": "Submit Review",
+            "NO_REVIEW": "No reviews yet. Be the first to write a review!",
+            "YOUR_REVIEW": "Your Review",
+            "COMMENT_PLACEHOLDER": "Write your review here..."
+        },
+        "ADD_TO_CART":"Add to Cart",
+        "BUY_IT_NOW":"Buy it Now"
+
+    },
+    "ALL_PRODUCTS": {
+        "TITLE": "All Products",
+        "FILTER": {
+            "TITLE": "Filter",
+            "CATEGORIES": "Categories",
+            "PRICE_RANGE": "Price Range",
+            "RATING": "Rating",
+            "BRAND": "Brand",
+            "APPLY_FILTER": "Apply Filter",
+            "TRENDING_NOW": "Trending Now",
+            "REMOVE_FILTER": "Remove Filter"
+        },
+        "SORT_BY": "Sort by",
+        "PRICE_LOW_TO_HIGH": "Price: Low to High",
+        "PRICE_HIGH_TO_LOW": "Price: High to Low",
+        "NEWEST_ARRIVALS": "Newest Arrivals",
+        "POPULARITY": "Popularity",
+        "CLEAR_ALL": "Clear All",
+        "NO_PRODUCTS": "No products found."
+
+        
+        
+    },
+    "ABOUT_US": {
+        "TITLE": "About Us",
+        "SUBTITLE":"At our coffee establishment, we are passionate about providing you with an exceptional coffee experience. We source the finest beans, uphold rigorous quality standards, and prioritize sustainability throughout our supply chain.",
+        "OUR_STORY_1": {
+            "TITLE": "Exploring the World of Exquisite Coffee",
+            "CONTENT_1": "Prepare to embark on a sensory journey as you delve into the captivating world of coffee. From the moment the beans are harvested to the final extraction, every step of the process is meticulously curated to deliver a truly exceptional cup of coffee. Experience the tantalizing aroma that fills the air as coffee beans are skillfully roasted to perfection. Our expert roasters carefully select the finest beans from around the world, each one bursting with its own unique flavors and characteristics. Whether you prefer a smooth and balanced blend or a bold and robust single-origin coffee, we have the perfect brew to tantalize your taste buds.",
+            "CONTENT_2": "Discover the joy of brewing your own cup of coffee at home. From traditional brewing methods like pour-over and French press to cutting-edge techniques like espresso machines and capsule systems, we offer a range of brewing options to suit every preference. Unleash your inner barista as you experiment with different brewing ratios, temperatures, and extraction times to create your perfect cup of coffee. Indulge in the rich, velvety texture of a perfectly steamed latte or revel in the decadence of a creamy cappuccino. Our talented baristas are masters of their craft, meticulously crafting each cup with precision and artistry. They understand the nuances of coffee extraction, milk frothing, and latte art, ensuring that every sip is a moment of pure delight."
+        },
+        "OUR_STORY_2": {
+            "TITLE": "Coffee Connoisseur's Haven: Indulge in the Finest Brews",
+            "SUBTITLE_1": "the Art of Exceptional Coffee",
+            "CONTENT_1": "Explore the diverse flavors and profiles of coffee from various regions across the globe. From the earthy notes of Indonesian beans to the fruity undertones of African coffees, each origin tells a unique story that is waiting to be savored. Embark on a flavor adventure and expand your palate as you discover the nuances and complexities of coffee from different terroirs. Coffee is more than just a beverage; it's a catalyst for connection and conversation. Whether you're enjoying a quiet moment of solitude or engaging in lively discussions with friends, coffee has a way of bringing people together. Create cherished memories as you share a cup of coffee, exchanging stories, laughter, and warmth.",
+            "CONTENT_2": "At our coffee establishment, we are passionate about providing you with an exceptional coffee experience. We source the finest beans, uphold rigorous quality standards, and prioritize sustainability throughout our supply chain. Every cup of coffee is a testament to our commitment to excellence and our love for this remarkable beverage.",
+            "SUBTITLE_2": "A Journey into the Richness of Coffee",
+            "CONTENT_3": "Immerse yourself in the art of brewing perfection as we guide you through a range of brewing methods that unlock the full potential of each coffee bean. Whether you prefer the classic richness of a pour-over, the convenience of a capsule system, or the intense flavors of espresso, we have the tools and knowledge to help you create a cup that suits your preferences. Indulge your palate in a symphony of flavors as you explore our diverse coffee offerings. From velvety dark roasts with notes of chocolate and caramel to vibrant single-origin beans with fruity undertones, there is a blend to cater to every discerning taste.",
+            "CONTENT_4": "Each sip is a journey that unravels layers of complexity, inviting you to savor the nuances that make each coffee unique.our coffee offerings cater to every occasion. Elevate your coffee experience and embrace the rituals that transform a simple cup into a moment of blissful indulgence."
+        },
+        "OUR_SERVICE": {
+            "TITLE": "About our services",
+            "SUBTITLE": "The style of an \"About Us\" page can vary depending on the company and its target audience. However, there are some general tips that can help you create a well-written and engaging \"About Us\" page.",
+            "CONTENT": "Our team is a group of passionate coffee enthusiasts dedicated to bringing you the best coffee experience. From sourcing the finest beans to crafting the perfect cup, we are committed to excellence in every aspect of our business.",
+            "SERVICE_1": {
+                "TITLE": "Fast delivery",
+                "DESCRIPTION": "We are committed to bringing your favorite products right to your door with care and speed, so you can enjoy a smooth shopping experience without the wait."
+            },
+            "SERVICE_2": {
+                "TITLE": "Many offers",
+                "DESCRIPTION": "Explore a wide range of tailored solutions designed to bring you value and convenience."
+            },
+            "SERVICE_3": {
+                "TITLE": "24/7 support",
+                "DESCRIPTION": "We deliver dedicated services with round-the-clock support, anytime you need."
+            }
+        }
+    },
+    "FAQ": {
+        "TITLE": "Featured asked questions",
+        "SUBTITLE": "We will address some of the basic issues you may be facing. If your needs are not fully met, please contact our hotline or visit us directly at the store."
+        
+    },
+    "PRIVACY_POLICY": {
+        "TITLE": "Privacy Policy",
+        "SUBTITLE": "Protecting your privacy is our top priority; this policy explains how we collect, use, and safeguard your personal information."
+    },
+    "TERMS_AND_CONDITIONS": {
+        "TITLE": "Terms & Conditions",
+        "SUBTITLE": "These Terms and Conditions set forth the binding rules governing your use of our services."
+    },
+    "SHIPPING_AND_DELIVERY": {
+        "TITLE": "Shipping & Delivery",
+        "SUBTITLE": "Shipping and delivery policies to ensure your orders arrive safely and on time."
+    },
+    "CONTACT": {
+        "TITLE": "Contact Us",
+        "SUBTITLE": "We'd love to hear from you! Whether you have questions, feedback, or just want to say hello, feel free to reach out to us through any of the following methods.",
+        "ADDRESS": "123 Coffee St, Coffee City, CO 12345",
+        "PHONE": "+1 (123) 456-7890",
+        "EMAIL": " "
+    },
+    "LOGIN": {
+        "TITLE": "Login",
+        "EMAIL": "Email",
+        "PASSWORD": "Password",
+        "FORGOT_PASSWORD": "Forgot Password?",
+        "NO_ACCOUNT": "Don't have an account?",
+        "SIGN_UP": "Sign Up",
+        "LOGIN_BUTTON": "Login",
+        "RESET_PASSWORD": "Reset your password",
+        "SUBTITLE_RESET_PASSWORD": "We will send you an email to reset your password",
+        "PLACEHOLDER_EMAIL": "Enter your email",
+        "SUCCESS_RESET_PASSWORD": "If the email you entered is associated with an account {{email}}, you will receive a password reset link shortly.",
+        "RESEND_EMAIL": "Resend Email"
+    },
+    "REGISTER": {
+        "TITLE": "Register",
+        "EMAIL": "Email",
+        "FULLNAME": "Full Name",
+        "PASSWORD": "Password",
+        "CONFIRM_PASSWORD": "Confirm Password",
+        "HAVE_ACCOUNT": "Already have an account?",
+        "LOGIN": "Login",
+        "REGISTER_BUTTON": "Register",
+        "SUCCESS_REGISTER": "Registration successful! Please check your email to verify your account.",
+        "PLACEHOLDER_EMAIL": "Enter your email",
+        "PLACEHOLDER_PASSWORD": "Enter your password",
+        "PLACEHOLDER_CONFIRM_PASSWORD": "Re-enter your password"
+    },
+    "BLOG": {
+        "TITLE": "Blog",
+        "SUBTITLE": "Our coffee blog is a delightful haven for all coffee lovers—from casual drinkers to true connoisseurs. Step into a world where we celebrate the art, science, and culture of coffee.",
+        "READ_MORE": "Read More",
+        "NO_BLOGS": "No blogs found."  
+    }
+    
+
+}

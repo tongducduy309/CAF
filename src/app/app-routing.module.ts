@@ -27,6 +27,7 @@ import { VouchersComponent } from './pages/vouchers/vouchers.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
+import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
 
 export const routes: Routes = [
 
@@ -68,14 +69,13 @@ export const routes: Routes = [
     path:'products/:id',
     component:DetailProductComponent
   },
-  // {
-  //   path:'collections',
-  //   component:CollectionsComponent
-  // },
+  {
+    path:'collections',
+    component:CollectionsComponent
+  },
   {
     path:'all-products',
-    component:AllProductsComponent,
-    data:{title:'Tất cả sản phẩm'}
+    component:AllProductsComponent
   },
   // {
   //   path:'all-products/:key',
@@ -89,14 +89,14 @@ export const routes: Routes = [
     path:'about-us',
     component:AboutUsComponent
   },
-  // {
-  //   path:'contact-with-us',
-  //   component:ContactWithUsComponent
-  // },
-  // {
-  //   path:'faq',
-  //   component:FaqComponent
-  // },
+  {
+    path:'contact-with-us',
+    component:ContactWithUsComponent
+  },
+  {
+    path:'faq',
+    component:FaqComponent
+  },
   {
     path:'privacy-policy',
     component:PrivacyPolicyComponent
@@ -115,20 +115,20 @@ export const routes: Routes = [
   // },
   {
     path:'shipping-and-delivery',
-    component:TermsAndConditionsComponent
+    component:ShippingAndDeliveryComponent
   },
   {
     path:'checkout',
     component:CheckoutComponent
   },
-  // {
-  //   path:'blogs',
-  //   component:BlogsComponent
-  // },
-  // {
-  //   path:'blogs/:name',
-  //   component:DetailBlogComponent
-  // },
+  {
+    path:'blogs',
+    component:BlogsComponent
+  },
+  {
+    path:'blogs/:name',
+    component:DetailBlogComponent
+  },
   {
     path:'dashboard',
     component:DashboardComponent,

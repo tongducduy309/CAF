@@ -47,9 +47,9 @@
       <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
         <div nz-col nzSpan="8">
           <div class="subtitle">CoffeeStore</div>
-          <h3 class="content">The best coffee</h3>
-          <p>Sự kết hợp hoàn hảo giữa cà phê và sữa. Cà phê hòa tan thượng hạng hòa quyện cùng sữa tươi béo ngậy, tạo nên hương vị thơm ngon, dễ uống. Sản phẩm tiện lợi, giúp bạn thưởng thức ly cà phê thơm ngon mọi lúc mọi nơi, ngay cả khi bận rộn.</p>
-          <a href="/all-products" class="link-btn">Xem thêm</a>
+          <h3 class="content">{{ 'HOME.THE_BEST_COFFEE.TITLE' | translate }}</h3>
+          <p>{{ 'HOME.THE_BEST_COFFEE.SUBTITLE' | translate }}</p>
+          <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
         </div>
         <div nz-col nzSpan="8">
           <!-- <app-product2></app-product2> -->
@@ -63,19 +63,21 @@
 </section>
 <section *ngIf="must_load<=0" class="fourth-section">
   <div class="container">
-    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-      <div nz-col nzSpan="8">
+    <div nz-row [nzGutter]="[16,16]" nzJustify="center">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Thưởng thức vị ngon <br> được giao nhanh trong vòng 15 phút</h3>
-        <p>Coffee Store sẽ luôn cố gắng mang đến trải nghiệm tốt nhất cho bạn.</p>
-        <a href="/all-products" class="link-btn">Xem thêm</a>
+        <h3 class="content">{{ 'HOME.COFFEE_EXPERIENCE.MAIN.LINE_1' | translate }} <br> {{ 'HOME.COFFEE_EXPERIENCE.MAIN.LINE_2' | translate }}</h3>
+        <!-- <p>Coffee Store sẽ luôn cố gắng mang đến trải nghiệm tốt nhất cho bạn.</p> -->
+        <p>{{ 'HOME.COFFEE_EXPERIENCE.MAIN.SUBTITLE' | translate }}</p>
+        <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
       </div>
-      <div nz-col nzSpan="8">
-        <div class="subtitle fw-500">Nguyên liệu được nhập trực tiếp từ</div>
-        <h3 class="content">Việt Nam</h3>
+      <div nz-col [nzXs]="0" [nzSm]="12" [nzMd]="12" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
+        <!-- <div class="subtitle fw-500">Nguyên liệu được nhập trực tiếp từ</div> -->
+         <div class="subtitle fw-500">{{ 'HOME.COFFEE_EXPERIENCE.MAIN.CHOOSE_ORIGIN' | translate }}</div>
+        <h3 class="content">{{ 'HOME.COFFEE_EXPERIENCE.MAIN.COUNTRY' | translate }}</h3>
         <img style="opacity: .4;" src="../../../assets/images/flying-coffee.webp" alt="">
       </div>
-      <div nz-col nzSpan="8">
+      <div nz-col [nzXs]="24" [nzSm]="12" [nzMd]="12" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
         <app-rating-product *ngFor="let cs of best_customer_reviews" [review]="cs"></app-rating-product>
       </div>
     </div>
@@ -86,14 +88,15 @@
     <div style="display: flex;justify-content: space-between;margin-bottom: 20px;">
       <div>
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Khuyến mãi <br> cực khủng</h3>
+        <!-- <h3 class="content">Khuyến mãi cực khủng</h3> -->
+        <h3 class="content">{{ 'HOME.BEST_DISCOUNT.TITLE' | translate }}</h3>
       </div>
       <div>
-        <a href="/all-products" class="link-btn">XEM THÊM</a>
+        <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
       </div>
     </div>
-    <div nz-row [nzGutter]="[24,12]">
-      <div nz-col [nzSpan]="6" *ngFor="let product of products_best_discount">
+    <div nz-row [nzGutter]="[16,16]">
+      <div nz-col [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="6" [nzXl]="6" [nzXXl]="6"*ngFor="let product of products_best_discount">
         <app-product3 bg="#a7897b" color_text="#fff" [product]="product" (addToCartEmitter)="addToCart($event)"></app-product3>
       </div>
     </div>
@@ -104,9 +107,11 @@
     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
       <div nz-col nzSpan="8">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Sản phẩm <br> thịnh hành</h3>
-        <p>Cà phê sữa đá từ lâu đã trở thành thức uống quốc dân của người Việt. Với hương vị đậm đà của cà phê hòa quyện cùng vị béo ngậy của sữa tươi, cà phê sữa đá chinh phục mọi khẩu vị, từ người lớn đến trẻ nhỏ.</p>
-        <a href="/all-products" class="link-btn">Xem thêm</a>
+        <!-- <h3 class="content">Sản phẩm <br> thịnh hành</h3> -->
+         <h3 class="content">{{ 'HOME.POPULAR_PRODUCTS.LINE_1' | translate }} <br> {{ 'HOME.POPULAR_PRODUCTS.LINE_2' | translate }}</h3>
+        <!-- <p>Cà phê sữa đá từ lâu đã trở thành thức uống quốc dân của người Việt. Với hương vị đậm đà của cà phê hòa quyện cùng vị béo ngậy của sữa tươi, cà phê sữa đá chinh phục mọi khẩu vị, từ người lớn đến trẻ nhỏ.</p> -->
+        <p>{{ 'HOME.POPULAR_PRODUCTS.SUBTITLE' | translate }}</p>
+        <a href="/all-products" class="link-btn">{{ 'BUTTONS.SHOW_PRODUCTS' | translate }}</a>
       </div>
       <div nz-col nzSpan="8" style="display: flex;justify-content: center;align-items: center;">
         <img src="../../../assets/images/Cup_of_Coffee.H03_1.avif" alt="">
@@ -123,31 +128,35 @@
       <img src="../../../assets/images/Subscribe-banner.webp" alt="">
       <div class="subcribe-column">
         <div class="subtitle">CoffeeStore</div>
-        <h3 class="content">Đăng ký thành viên mới <br> -20% tổng hóa đơn</h3>
-        <p>Đăng ký ngay để nhận mã giảm giá 20% và nhiều quà tặng hấp dẫn khác. Cơ hội sở hữu sản phẩm chất lượng với giá hời đang chờ bạn!</p>
+        <!-- <h3 class="content">Đăng ký thành viên mới <br> -20% tổng hóa đơn</h3> -->
+        <h3 class="content">{{ 'HOME.SUBSCRIBE.LINE_1' | translate }} <br> {{ 'HOME.SUBSCRIBE.LINE_2' | translate }}</h3>
+        <!-- <p>Đăng ký ngay để nhận mã giảm giá 20% và nhiều quà tặng hấp dẫn khác. Cơ hội sở hữu sản phẩm chất lượng với giá hời đang chờ bạn!</p> -->
+        <p>{{ 'HOME.SUBSCRIBE.SUBTITLE' | translate }}</p>
 
       </div>
     </div>
 
   </div>
 </section>
-<!-- <section *ngIf="must_load<=0" class="eightth-section">
+<section *ngIf="must_load<=0" class="eightth-section">
   <div class="container">
     <div class="bean">
-      <div nz-row [nzGutter]="[16,16]">
-        <div nz-col [nzSpan]="10">
+      <div nz-row [nzGutter]="[16,16]" nzJustify="center">
+        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8" >
           <div class="subtitle">CoffeeStore</div>
-          <h3 class="content">Fresh roasted coffee <br> Blogs</h3>
-          <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant.</p>
-          <a href="/blogs" class="link-btn">Show Blogs</a>
+          <!-- <h3 class="content">Fresh roasted coffee <br> Blogs</h3> -->
+          <h3 class="content">{{ 'HOME.BLOG.LINE_1' | translate }} <br> {{ 'HOME.BLOG.LINE_2' | translate }}</h3>
+          <!-- <p>Coffee is a beverage brewed from the roasted and ground seeds of the tropical evergreen coffee plant.</p> -->
+          <p>{{ 'HOME.BLOG.SUBTITLE' | translate }}</p>
+          <a href="/blogs" class="link-btn">{{ 'BUTTONS.SHOW_BLOGS' | translate }}</a>
         </div>
-        <div nz-col [nzSpan]="7">
+        <div nz-col [nzXs]="12" [nzSm]="10" [nzMd]="8" [nzLg]="7" [nzXl]="7" [nzXXl]="7">
           <app-blog></app-blog>
         </div>
-        <div nz-col [nzSpan]="7">
+        <div nz-col [nzXs]="12" [nzSm]="10" [nzMd]="8" [nzLg]="7" [nzXl]="7" [nzXXl]="7">
           <app-blog></app-blog>
         </div>
       </div>
       </div>
   </div>
-</section> -->
+</section>

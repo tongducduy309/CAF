@@ -1,0 +1,204 @@
+{
+  "LOADING": "Đang tải...",
+  "NOTIFICATION": {
+    "SUCCESS": "Thành công",
+    "ERROR": "Lỗi",
+    "WARNING": "Cảnh báo",
+    "INFO": "Thông báo"
+  },
+  "HEADER": {
+    "TITLE": "Coffee Store",
+    "SWITCH_LANG": "Chuyển ngôn ngữ",
+    "PAGES": {
+      "TITLE": "Trang",
+      "ABOUT_US": "Về Chúng Tôi",
+      "CONTACT": "Liên Hệ",
+      "FAQ": "Câu Hỏi Thường Gặp",
+      "PRIVACY_POLICY": "Chính Sách Bảo Mật",
+      "TERMS_AND_CONDITIONS": "Điều Khoản & Điều Kiện",
+      "SHIPPING_AND_DELIVERY": "Vận Chuyển & Giao Hàng"
+    },
+    "ALL_PRODUCTS": "Tất Cả Sản Phẩm",
+    "BLOG": "Bài Viết",
+    "COLLECTIONS": "Bộ Sưu Tập",
+    "ITEMS": "sản phẩm"
+  },
+  "FOOTER": {
+    "TITLE_COLUMN_1": "Mua Sắm",
+    "TITLE_COLUMN_2": "Tài Khoản",
+    "TITLE_COLUMN_3": "Chia Sẻ",
+    "ALL_PRODUCTS": "Tất Cả Sản Phẩm",
+    "MY_CART": "Giỏ Hàng Của Tôi",
+    "ABOUT_US": "Về Chúng Tôi",
+    "CONTACT": "Liên Hệ",
+    "FAQ": "Câu Hỏi Thường Gặp",
+    "PRIVACY_POLICY": "Chính Sách Bảo Mật",
+    "TERMS_AND_CONDITIONS": "Điều Khoản & Điều Kiện",
+    "SHIPPING_AND_DELIVERY": "Vận Chuyển & Giao Hàng",
+    "SLOGAN": {
+      "LINE_1": "Một tách cà phê,",
+      "LINE_2": "một khoảnh khắc của bạn",
+      "SUBLINE": "Tại Coffee Store, bạn sẽ khám phá thế giới hương vị đa dạng với menu phong phú từ cà phê nguyên chất, trà sữa, nước trái cây đến các loại đồ uống đặc biệt. Mỗi ly đều được pha chế tỉ mỉ, mang đến hương vị khó quên."
+    }
+  },
+  "BUTTONS": {
+    "LOAD_MORE": "Xem Thêm",
+    "VIEW_ALL": "Xem Tất Cả",
+    "ADD_TO_CART": "Thêm Vào Giỏ",
+    "BUY_NOW": "Mua Ngay",
+    "CHECKOUT": "Thanh Toán",
+    "PLACE_ORDER": "Đặt Hàng",
+    "SHOW_PRODUCTS": "Xem Sản Phẩm",
+    "SHOW_BLOGS": "Xem Bài Viết",
+    "BACK": "Quay Lại",
+    "CANCEL": "Hủy",
+    "SUBMIT": "Gửi"
+  },
+  "SEARCH": {
+    "RESULTS_FOR": "Kết quả tìm kiếm cho",
+    "NO_RESULTS": "Không tìm thấy kết quả cho",
+    "SEARCH_PLACEHOLDER": "Tìm kiếm sản phẩm..."
+  },
+  "HOME": {
+    "TITLE": "TRANG CHỦ - Coffee Store",
+    "THE_BEST_COFFEE": {
+      "TITLE": "Cà Phê Tuyệt Hảo",
+      "SUBTITLE": "Sự kết hợp hoàn hảo giữa cà phê và sữa. Cà phê hòa tan thượng hạng cùng sữa tươi béo ngậy mang đến hương vị thơm ngon, dễ uống. Tiện lợi, sẵn sàng phục vụ mọi lúc, ngay cả khi bận rộn."
+    },
+    "COFFEE_EXPERIENCE": {
+      "MAIN": {
+        "LINE_1": "Cà phê rang mới",
+        "LINE_2": "giao hàng trong 24h",
+        "SUBTITLE": "Denver Biscuit cafe biết cách thu hút khách hàng tiềm năng. Một video đưa bạn từ khâu chuẩn bị món tráng miệng cho đến phục vụ.",
+        "CHOOSE_ORIGIN": "Chọn nguồn gốc cà phê:",
+        "COUNTRY": "Việt Nam"
+      }
+    },
+    "POPULAR_PRODUCTS": {
+      "LINE_1": "Mua Sản Phẩm Bán Chạy",
+      "LINE_2": "Sản Phẩm",
+      "SUBTITLE": "Cà phê sữa đá từ lâu đã là thức uống quốc dân. Với vị đậm đà hòa quyện cùng sữa tươi béo ngậy, thức uống này chinh phục mọi khẩu vị – từ người lớn đến trẻ nhỏ."
+    },
+    "BLOG": {
+      "LINE_1": "Cà phê rang mới",
+      "LINE_2": "Bài Viết",
+      "SUBTITLE": "Cà phê là thức uống được pha từ hạt của cây cà phê nhiệt đới đã được rang và xay."
+    },
+    "SUBSCRIBE": {
+      "LINE_1": "Đăng ký nhận tin",
+      "LINE_2": "và giảm 20%",
+      "SUBTITLE": "Đây là loại đồ uống nóng phổ biến nhất thế giới. Hạt từ quả cà phê được tách ra để tạo thành hạt cà phê xanh chưa rang."
+    },
+    "BEST_DISCOUNT": {
+      "TITLE": "Sản Phẩm Khuyến Mãi Tốt Nhất"
+    }
+  },
+  "DETAIL_PRODUCT": {
+    "TITLE": "Chi Tiết Sản Phẩm",
+    "SEE_SIZING_GUIDE": "Xem Hướng Dẫn Kích Cỡ",
+    "CHOOSE_SIZE": "Chọn kích cỡ:",
+    "DESCRIPTION": "Mô tả:",
+    "QUANTITY": "Số lượng",
+    "REVIEWS": {
+      "TITLE": "Đánh Giá Khách Hàng",
+      "WRITE_REVIEW": "Viết Đánh Giá",
+      "CANCEL_REVIEW": "Hủy",
+      "SUBMIT_REVIEW": "Gửi Đánh Giá",
+      "NO_REVIEW": "Chưa có đánh giá. Hãy là người đầu tiên!",
+      "YOUR_REVIEW": "Đánh Giá Của Bạn",
+      "COMMENT_PLACEHOLDER": "Viết đánh giá tại đây..."
+    },
+    "ADD_TO_CART": "Thêm Vào Giỏ",
+    "BUY_IT_NOW": "Mua Ngay"
+  },
+  "ALL_PRODUCTS": {
+    "TITLE": "Tất Cả Sản Phẩm",
+    "FILTER": {
+      "TITLE": "Bộ Lọc",
+      "CATEGORIES": "Danh Mục",
+      "PRICE_RANGE": "Khoảng Giá",
+      "RATING": "Đánh Giá",
+      "BRAND": "Thương Hiệu",
+      "APPLY_FILTER": "Áp Dụng",
+      "TRENDING_NOW": "Xu Hướng Hiện Nay",
+      "REMOVE_FILTER": "Xóa Bộ Lọc"
+    },
+    "SORT_BY": "Sắp xếp theo",
+    "PRICE_LOW_TO_HIGH": "Giá: Thấp đến Cao",
+    "PRICE_HIGH_TO_LOW": "Giá: Cao đến Thấp",
+    "NEWEST_ARRIVALS": "Hàng Mới Nhất",
+    "POPULARITY": "Phổ Biến",
+    "CLEAR_ALL": "Xóa Tất Cả",
+    "NO_PRODUCTS": "Không tìm thấy sản phẩm."
+  },
+  "ABOUT_US": {
+    "TITLE": "Về Chúng Tôi",
+    "SUBTITLE": "Tại Coffee Store, chúng tôi đam mê mang đến cho bạn trải nghiệm cà phê tuyệt vời nhất. Chúng tôi chọn lựa hạt cà phê chất lượng, tuân thủ tiêu chuẩn khắt khe và luôn ưu tiên tính bền vững trong chuỗi cung ứng.",
+    "OUR_STORY_1": {
+      "TITLE": "Khám Phá Thế Giới Cà Phê Tinh Tế",
+      "CONTENT_1": "Hãy bắt đầu hành trình giác quan khi bạn bước vào thế giới cà phê đầy mê hoặc. Từ lúc thu hoạch hạt đến khi chiết xuất, mọi quy trình đều được thực hiện cẩn thận để mang đến ly cà phê hoàn hảo. Hãy cảm nhận hương thơm lan tỏa khi hạt được rang chín kỹ lưỡng. Đội ngũ rang cà phê của chúng tôi chọn lọc những hạt tốt nhất từ khắp nơi, mỗi loại đều mang hương vị và đặc trưng riêng. Dù bạn thích sự cân bằng mượt mà hay vị đậm đà mạnh mẽ, chúng tôi đều có lựa chọn phù hợp.",
+      "CONTENT_2": "Khám phá niềm vui tự pha cà phê tại nhà. Từ phương pháp truyền thống như pour-over, French press đến công nghệ hiện đại như máy espresso và viên nén, chúng tôi mang đến nhiều cách pha chế. Hãy trở thành barista của riêng bạn khi thử nghiệm tỷ lệ, nhiệt độ và thời gian chiết xuất để tìm ra hương vị hoàn hảo."
+    },
+    "OUR_STORY_2": {
+      "TITLE": "Thiên Đường Cho Người Yêu Cà Phê",
+      "SUBTITLE_1": "Nghệ Thuật Của Cà Phê Tuyệt Hảo",
+      "CONTENT_1": "Khám phá hương vị cà phê đa dạng từ khắp thế giới. Từ vị đất của hạt Indonesia đến nốt trái cây của cà phê châu Phi, mỗi nguồn gốc đều mang một câu chuyện riêng. Cà phê không chỉ là thức uống, mà còn kết nối con người. Dù là phút tĩnh lặng một mình hay cuộc trò chuyện sôi nổi, cà phê luôn mang mọi người lại gần nhau.",
+      "CONTENT_2": "Tại Coffee Store, chúng tôi đam mê mang đến cho bạn trải nghiệm cà phê tuyệt hảo. Mỗi tách cà phê là minh chứng cho cam kết về chất lượng và tình yêu với thức uống đặc biệt này.",
+      "SUBTITLE_2": "Hành Trình Khám Phá Hương Vị",
+      "CONTENT_3": "Đắm chìm trong nghệ thuật pha chế, chúng tôi hướng dẫn bạn nhiều phương pháp để khai thác trọn hương vị từ hạt cà phê. Dù bạn thích pour-over truyền thống, sự tiện lợi của viên nén, hay hương vị đậm đà của espresso, chúng tôi đều có giải pháp.",
+      "CONTENT_4": "Mỗi ngụm là một chuyến hành trình khám phá lớp hương vị tinh tế, mang đến khoảnh khắc thưởng thức trọn vẹn."
+    },
+    "OUR_SERVICE": {
+      "TITLE": "Dịch Vụ Của Chúng Tôi",
+      "SUBTITLE": "Phong cách giới thiệu có thể khác nhau tùy doanh nghiệp, nhưng mục tiêu chung là tạo trải nghiệm đáng tin cậy và hấp dẫn.",
+      "CONTENT": "Đội ngũ chúng tôi là những người yêu cà phê, tận tâm mang đến cho bạn trải nghiệm tốt nhất. Từ việc chọn hạt cà phê đến pha chế, chúng tôi cam kết sự hoàn hảo trong từng chi tiết.",
+      "SERVICE_1": {
+        "TITLE": "Giao Hàng Nhanh",
+        "DESCRIPTION": "Chúng tôi cam kết giao sản phẩm đến tận tay bạn nhanh chóng, an toàn, giúp bạn tận hưởng mua sắm tiện lợi, không chờ đợi."
+      },
+      "SERVICE_2": {
+        "TITLE": "Nhiều Ưu Đãi",
+        "DESCRIPTION": "Khám phá nhiều lựa chọn linh hoạt, mang lại giá trị và sự tiện lợi cho bạn."
+      },
+      "SERVICE_3": {
+        "TITLE": "Hỗ Trợ 24/7",
+        "DESCRIPTION": "Chúng tôi luôn đồng hành cùng bạn với dịch vụ hỗ trợ 24/7, bất cứ khi nào bạn cần."
+      }
+    }
+  },
+  "FAQ": {
+    "TITLE": "Câu Hỏi Thường Gặp",
+    "SUBTITLE": "Chúng tôi sẽ giải đáp những thắc mắc cơ bản mà bạn có thể gặp phải. Nếu nhu cầu chưa được đáp ứng, vui lòng liên hệ hotline hoặc đến trực tiếp cửa hàng."
+  },
+  "PRIVACY_POLICY": {
+    "TITLE": "Chính Sách Bảo Mật",
+    "SUBTITLE": "Bảo mật thông tin của bạn là ưu tiên hàng đầu; chính sách này giải thích cách chúng tôi thu thập, sử dụng và bảo vệ dữ liệu cá nhân."
+  },
+  "TERMS_AND_CONDITIONS": {
+    "TITLE": "Điều Khoản & Điều Kiện",
+    "SUBTITLE": "Điều khoản này quy định các quy tắc ràng buộc khi bạn sử dụng dịch vụ của chúng tôi."
+  },
+  "SHIPPING_AND_DELIVERY": {
+    "TITLE": "Vận Chuyển & Giao Hàng",
+    "SUBTITLE": "Chính sách vận chuyển và giao hàng nhằm đảm bảo đơn hàng của bạn đến nơi an toàn và đúng hẹn."
+  },
+  "CONTACT": {
+    "TITLE": "Liên Hệ",
+    "SUBTITLE": "Chúng tôi rất mong nhận được phản hồi từ bạn! Nếu có bất kỳ thắc mắc, góp ý hoặc đơn giản là muốn kết nối, vui lòng liên hệ với chúng tôi qua các kênh dưới đây.",
+    "ADDRESS": "123 Coffee St, Coffee City, CO 12345",
+    "PHONE": "+1 (123) 456-7890",
+    "EMAIL": " "
+  },
+  "LOGIN": {
+    "TITLE": "Đăng Nhập",
+    "EMAIL": "Email",
+    "PASSWORD": "Mật Khẩu",
+    "FORGOT_PASSWORD": "Quên Mật Khẩu?",
+    "NO_ACCOUNT": "Chưa có tài khoản?",
+    "SIGN_UP": "Đăng Ký",
+    "LOGIN_BUTTON": "Đăng Nhập",
+    "RESET_PASSWORD": "Đặt Lại Mật Khẩu",
+    "RESET_PASSWORD_SUBTITLE": "Nhập email để nhận liên kết đặt lại mật khẩu.",
+    "PLACEHOLDER_EMAIL": "Nhập email để nhận thư"
+  }
+}

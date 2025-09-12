@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Page } from 'src/app/classes/page';
+import { PageTitleService } from 'src/app/services/page-title.service';
 @Component({
     selector: 'app-faq',
     templateUrl: './faq.component.html',
     styleUrls: ['./faq.component.scss'],
     standalone: false
 })
-export class FaqComponent {
+export class FaqComponent extends Page implements AfterViewInit,OnInit{
   panels = {
     "col_1":[
       {
@@ -111,10 +113,22 @@ Hiện tại Coffee Store đã ngưng phát hành thẻ cứng, bạn vui lòng 
       }
     ]
   };
+  private pageTitle = inject(PageTitleService);
   constructor(private location:Location){
+    super();
+  }
 
+  ngOnInit(): void {
+    this.pageTitle.setTitle('FAQ.TITLE');
   }
   back(){
     this.location.back();
+  }
+  ngAfterViewInit(): void {
+    Promise.resolve().then(()=> {
+      // this.getUser()
+      this.loaded()
+    })
+
   }
 }
