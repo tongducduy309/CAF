@@ -7,7 +7,7 @@
       @if(isDesktop){
         <a class="logo" href="/"><img src="../../../assets/images/logo.png" alt="CoffeeStore"></a>
       } @else {
-        <button nz-button nzType="text" nzShape="circle">
+        <button nz-button nzType="text" nzShape="circle" (click)="isMenu=true">
       <nz-icon nzType="menu" nzTheme="outline" style="color: #fff;"/>
     </button>
       }
@@ -391,3 +391,40 @@
     </li>
   </ul>
 </nz-dropdown-menu>
+
+<nz-drawer
+      [nzVisible]="!isDesktop&&isMenu"
+      nzPlacement="left"
+      nzTitle="Coffee Store"
+      (nzOnClose)="isMenu=false"
+    >
+      <ng-container *nzDrawerContent>
+        <ul nz-menu nzMode="inline" >
+
+
+          <li nz-menu-item nzPlacement="bottomCenter"
+            (click)="remote('all-products')">
+            <span>{{ 'HEADER.ALL_PRODUCTS' | translate }} </span>
+          </li>
+          <li nz-submenu nzPlacement="bottomCenter" [nzTitle]="'HEADER.PAGES.TITLE' | translate" nzOpen>
+            <ul >
+              <li nz-menu-item><a href="/about-us">{{ 'HEADER.PAGES.ABOUT_US' | translate }}</a></li>
+              <li nz-menu-item><a href="/contact-with-us">{{ 'HEADER.PAGES.CONTACT' | translate }}</a></li>
+              <li nz-menu-item><a href="/faq">{{ 'HEADER.PAGES.FAQ' | translate }}</a></li>
+              <li nz-menu-item><a href="/privacy-policy">{{ 'HEADER.PAGES.PRIVACY_POLICY' | translate }}</a></li>
+              <li nz-menu-item><a href="/shipping-and-delivery">{{ 'HEADER.PAGES.SHIPPING_AND_DELIVERY' | translate
+                  }}</a></li>
+              <li nz-menu-item><a href="/terms-and-conditions">{{ 'HEADER.PAGES.TERMS_AND_CONDITIONS' | translate }}</a>
+              </li>
+            </ul>
+          </li>
+          <li nz-menu-item nzPlacement="bottomCenter"
+            (click)="remote('blogs')">
+            <span>{{ 'HEADER.BLOG' | translate }} </span>  
+          </li>
+          <li nz-menu-item nzPlacement="bottomCenter"
+            (click)="remote('collections')">
+            <span>{{ 'HEADER.COLLECTIONS' | translate }} </span>
+        </ul>
+      </ng-container>
+    </nz-drawer>

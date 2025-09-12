@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit{
 
   private lang = inject(LangService);
 
+  isMenu=true;
+
 
   constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService,private breakpointService: BreakpointService){
 
@@ -173,6 +175,7 @@ export class HeaderComponent implements OnInit{
   remote(page:any){
     this.router.navigate([page])
     this.visibleCart = false;
+    this.isMenu=false;
   }
 
   openSearch(){
