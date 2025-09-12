@@ -5,6 +5,9 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
   providedIn: 'root'
 })
 export class MainService {
+  translate(arg0: never): string {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private notification: NzNotificationService) { }
 

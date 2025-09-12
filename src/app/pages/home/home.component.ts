@@ -1,6 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
+import { LangService } from 'src/app/services/lang.service';
+import { PageTitleService } from 'src/app/services/page-title.service';
 import { CrudService } from 'src/services/crud.service';
 
 @Component({
@@ -30,11 +32,15 @@ export class HomeComponent extends Page implements OnInit{
 
   best_customer_reviews:any = []
 
+  private lang = inject(LangService);
+
+  private pageTitle = inject(PageTitleService);
+
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
     super()
   }
   ngOnInit(): void {
-
+    this.pageTitle.setTitle('HOME.TITLE');
     this.animationFirstSectionContent();
     this.getAllProducts();
     // this.getCategories();

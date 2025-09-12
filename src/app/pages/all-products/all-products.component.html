@@ -7,7 +7,7 @@
   <div nz-row class="all-product-list" nzGutter="16px">
     @if (isDesktop) {
       <div nz-col class="filters" nzSpan="8">
-      <div style="padding: 20px;display: flex;justify-content: space-between;"><span>Bộ lọc</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">Bỏ lọc</span></div>
+      <div style="padding: 20px;display: flex;justify-content: space-between;"><span>{{ 'ALL_PRODUCTS.FILTER.TITLE' | translate }}</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">{{ 'ALL_PRODUCTS.FILTER.REMOVE_FILTER' | translate }}</span></div>
       <div class="filter-form">
 
         <!-- <div class="filter" *ngFor="let cate of categories">
@@ -35,7 +35,7 @@
         <div class="filter">
           <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
-              nzHeader="Xu hướng"
+              [nzHeader]="'ALL_PRODUCTS.FILTER.TRENDING_NOW' | translate"
               nzActive="true"
               [nzExtra]="extraTpl0"
               (nzActiveChange) = "panels[0] = !panels[0]"
@@ -53,7 +53,7 @@
         <div class="filter">
           <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
-              nzHeader="Giá"
+              [nzHeader]="'ALL_PRODUCTS.FILTER.PRICE_RANGE' | translate"
               nzActive="true"
               [nzExtra]="extraTpl1"
               (nzActiveChange) = "panels[1] = !panels[1]"
@@ -75,7 +75,7 @@
         <div class="filter">
           <nz-collapse nzExpandIconPosition="end">
             <nz-collapse-panel
-              nzHeader="Danh mục"
+              [nzHeader]="'ALL_PRODUCTS.FILTER.CATEGORIES' | translate"
               nzActive="true"
               [nzExtra]="extraTpl2"
               (nzActiveChange) = "panels[2] = !panels[2]"
@@ -125,7 +125,7 @@
 
       </div>
 
-      <h3 class="title" *ngIf="name_cate_products.length==0">KHÔNG TÌM THẤY SẢN PHẨM</h3>
+      <h3 class="title" *ngIf="name_cate_products.length==0">{{ 'ALL_PRODUCTS.NO_PRODUCTS' | translate }}</h3>
     </div>
   </div>
 </section>

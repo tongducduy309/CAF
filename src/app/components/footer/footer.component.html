@@ -1,37 +1,39 @@
 <div class="footer" *ngIf="visible">
   <div class="container">
-    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
-      <div nz-col nzSpan="12">
+    <div nz-row [nzGutter]="[16,16]">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12" [nzXl]="12" [nzXXl]="12">
         <h3 style="color: #fff;font-size: 32px;line-height: 38px;font-weight: 700;">
-          Một tách cà phê, một <b style="color: #a7897b;font-weight: 600;">khoảng khắc của thời gian</b>
+          <!-- Một tách cà phê, một /n khoảng khắc của thời gian -->
+          {{ 'FOOTER.SLOGAN.LINE_1' | translate }} <b style="color: #a7897b;font-weight: 600;">{{ 'FOOTER.SLOGAN.LINE_2' | translate }}</b>
         </h3>
-        <p style="font-size: 1;">Đến với CoffeeStore bạn sẽ được khám phá thế giới hương vị đa dạng với menu phong phú từ cà phê nguyên chất, trà sữa, nước trái cây đến các loại thức uống đặc biệt. Mỗi ly đồ uống đều được pha chế tỉ mỉ, mang đến hương vị thơm ngon khó quên.</p>
+        <!-- Đến với CoffeeStore bạn sẽ được khám phá thế giới hương vị đa dạng với menu phong phú từ cà phê nguyên chất, trà sữa, nước trái cây đến các loại thức uống đặc biệt. Mỗi ly đồ uống đều được pha chế tỉ mỉ, mang đến hương vị thơm ngon khó quên. -->
+        <p style="font-size: 1;">{{ 'FOOTER.SLOGAN.SUBLINE' | translate }}</p>
       </div>
-      <div nz-col nzSpan="12">
+      <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="12" [nzXl]="12" [nzXXl]="12">
         <nz-row>
-          <nz-col nzSpan="8">
+          <nz-col [nzXs]="12" [nzSm]="12" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
             <h4 class="title">
-              Cửa Hàng:
+              {{ 'FOOTER.TITLE_COLUMN_1' | translate }}
             </h4>
             <ul>
               <!-- <li><a href="/search">Tìm kiếm</a></li> -->
               <!-- <li><a href="/collections">Bộ sưu tập</a></li> -->
-              <li><a href="/all-products">Tất cả sản phẩm</a></li>
-              <li><a href="/cart">Giỏ hàng</a></li>
+              <li><a href="/all-products">{{ 'FOOTER.ALL_PRODUCTS' | translate }}</a></li>
+              <li><a href="/cart">{{ 'FOOTER.MY_CART' | translate }}</a></li>
               <!-- <li><a href="/wishlist">Wishlist</a></li> -->
             </ul>
           </nz-col>
-          <nz-col nzSpan="8">
+          <nz-col [nzXs]="12" [nzSm]="12" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
             <h4 class="title">
-              Khách Hàng:
+              {{ 'FOOTER.TITLE_COLUMN_2' | translate }}
             </h4>
             <ul>
-              <li><a href="/about-us">Giới thiệu</a></li>
-              <!-- <li><a href="/contact-with-us">Liên hệ</a></li> -->
-              <!-- <li><a href="/faq">Câu hỏi thường gặp</a></li> -->
-              <li><a href="/privacy-policy">Chính sách quyền riêng tư</a></li>
-              <li><a href="/shipping-and-delivery">Vận chuyển và giao hàng</a></li>
-              <li><a href="/terms-and-conditions">Điều khoản và điều kiện</a></li>
+              <li><a href="/about-us">{{ 'FOOTER.ABOUT_US' | translate }}</a></li>
+              <li><a href="/contact-with-us">{{ 'FOOTER.CONTACT' | translate }}</a></li>
+              <li><a href="/faq">{{ 'FOOTER.FAQ' | translate }}</a></li>
+              <li><a href="/privacy-policy">{{ 'FOOTER.PRIVACY_POLICY' | translate }}</a></li>
+              <li><a href="/shipping-and-delivery">{{ 'FOOTER.SHIPPING_AND_DELIVERY' | translate }}</a></li>
+              <li><a href="/terms-and-conditions">{{ 'FOOTER.TERMS_AND_CONDITIONS' | translate }}</a></li>
             </ul>
 
 
@@ -40,9 +42,9 @@
 
 
           </nz-col>
-          <nz-col nzSpan="8">
+          <nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" [nzXXl]="8">
             <h4 class="title">
-              Mạng xã hội:
+              {{ 'FOOTER.TITLE_COLUMN_3' | translate }}
 
             </h4>
             <div style="display: flex;">

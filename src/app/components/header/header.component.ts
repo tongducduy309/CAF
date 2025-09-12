@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/services/user.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
+import { LangService } from 'src/app/services/lang.service';
+import { BreakpointService } from 'src/app/services/breakpoint.service';
 
 @Component({
     selector: 'app-header',
@@ -33,11 +35,18 @@ export class HeaderComponent implements OnInit{
 
   @Input() visible = true
 
+  isDesktop = true
 
-  constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService){
+  private lang = inject(LangService);
+
+
+  constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService,private breakpointService: BreakpointService){
 
   }
   ngOnInit(): void {
+    this.breakpointService.isDesktop$.subscribe(isDesktop => {
+      this.isDesktop = isDesktop;
+    });
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
     {
@@ -252,5 +261,10 @@ export class HeaderComponent implements OnInit{
     this.user = null
     this.total = 0
   }
+
+
+  switch(l: 'vi'|'en') { this.lang.use(l); }
+
+  get cur() { return this.lang.current(); }
 
 }

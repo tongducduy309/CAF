@@ -9,7 +9,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
@@ -60,6 +60,11 @@ import {  NZ_ICONS } from 'ng-zorro-antd/icon';
 import { LeftOutline } from '@ant-design/icons-angular/icons';
 import { Product1Component } from './components/product1/product1.component';
 import { C } from '@angular/cdk/scrolling-module.d-ud2XrbF8';
+import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader, TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownPageComponent } from './components/markdown-page/markdown-page.component';
+import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -81,7 +86,8 @@ export let components:any = [
   CustomerReviewComponent,
   DetailBillComponent,
   ShowFullInvoiceComponent,
-  Product1Component
+  Product1Component,
+  MarkdownPageComponent,
 ]
 
 export let pages = [
@@ -112,8 +118,14 @@ export let pages = [
   VouchersComponent,
   DetailBillComponent,
   ManageOrdersComponent,
-  ManageAccountsComponent
+  ManageAccountsComponent,
+  
+  ShippingAndDeliveryComponent
 ]
+
+export function httpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader();
+}
 
 @NgModule({ declarations: [...components, ...pages],
     bootstrap: [AppComponent],
@@ -123,10 +135,29 @@ export let pages = [
         BrowserAnimationsModule,
         ReactiveFormsModule,
         NgZorroAntModule,
+        MarkdownModule,
         CommonModule,
+        HttpClientModule,
+        TranslateModule.forRoot(),
+        MarkdownModule.forRoot(),
+        
         NzRateModule], providers: [
         { provide: NZ_I18N, useValue: vi_VN },
         { provide: NZ_ICONS, useValue: [LeftOutline] },
+        ...provideTranslateHttpLoader({
+      prefix: '/assets/i18n/',
+      suffix: '.json',
+      // tùy chọn:
+      // enforceLoading: false,
+      // useHttpBackend: false,
+    }),
         provideHttpClient(withInterceptorsFromDi())
     ] })
-export class AppModule { }
+export class AppModule {
+  constructor(ts: TranslateService) {
+    ts.setDefaultLang('vi'); // ngôn ngữ mặc định
+    const saved = localStorage.getItem('lang');
+    const browser = ts.getBrowserLang();
+    ts.use((saved as any) || (browser?.match(/en|vi/) ? browser : 'vi'));
+  }
+ }

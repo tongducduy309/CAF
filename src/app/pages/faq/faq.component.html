@@ -4,11 +4,13 @@
       <div nz-col [nzSpan]="12">
         <div class="btn" (click)="back()">
           <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-          Trở Về
+          {{ 'BUTTONS.BACK' | translate }}
         </div>
 
-        <h2 class="title">Câu Hỏi Thường Gặp</h2>
-        <p>Chúng tôi sẽ giải quyết một số vấn đề cơ bản  mà bạn đang mắc phải. Nếu phải chưa đáp ứng được nhu cầu của quý khách, vui lòng liên hệ trực tiếp đường dây nóng, hoặc trực tiếp tại cửa hàng.</p>
+        <!-- <h2 class="title">Câu Hỏi Thường Gặp</h2>
+        <p>Chúng tôi sẽ giải quyết một số vấn đề cơ bản  mà bạn đang mắc phải. Nếu phải chưa đáp ứng được nhu cầu của quý khách, vui lòng liên hệ trực tiếp đường dây nóng, hoặc trực tiếp tại cửa hàng.</p> -->
+        <h2 class="title">{{ 'FAQ.TITLE' | translate }}</h2>
+        <p>{{ 'FAQ.SUBTITLE' | translate }}</p>
       </div>
     </div>
   </div>

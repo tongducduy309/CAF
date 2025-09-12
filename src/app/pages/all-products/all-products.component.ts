@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { ProductResponse } from 'src/app/dto/response/ProductResponse';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
+import { PageTitleService } from 'src/app/services/page-title.service';
 import { ProductService } from 'src/app/services/product.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
@@ -42,6 +43,8 @@ export class AllProductsComponent extends Page implements OnInit  {
     trend: new FormControl('')
   });
 
+  private pageTitle = inject(PageTitleService);
+
 
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService, 
       private productService:ProductService, private breakpointService: BreakpointService) {
@@ -59,7 +62,7 @@ export class AllProductsComponent extends Page implements OnInit  {
   }
 
   ngOnInit(): void {
-
+    this.pageTitle.setTitle('ALL_PRODUCTS.TITLE');
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });

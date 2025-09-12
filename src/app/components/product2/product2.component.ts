@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class Product2Component implements OnInit{
   isFavorite = false;
   selectedSize = 0
   isFormAddToCart = false
+  FILE_URL = environment.variable_global.FILE_URL;
 
   constructor (public main:MainService){
 
@@ -46,6 +48,10 @@ export class Product2Component implements OnInit{
     this.product["sizeSelected"] = this.product.size[this.selectedSize]
     this.isFormAddToCart = true
   }
+
+  onImgError(event: Event) {
+  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
+}
 
 
 }

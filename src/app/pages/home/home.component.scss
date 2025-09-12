@@ -110,7 +110,7 @@ p{
 }
 
 .second-section{
-  background-color: var(--bg);
+  background-color: #000;
   [nz-carousel-content] {
     // text-align: center;
     height: 400px;
@@ -206,7 +206,7 @@ p{
 .third-section{
   position: relative;
   padding: 80px 0;
-  background-color: var(--bg);
+  background-color: #000;
 
   .bean{
     padding: 55px 20px;
@@ -240,21 +240,21 @@ p{
 }
 
 .fourth-section{
-  background-color: var(--bg);
+  background-color: #000;
 }
 
 .fiveth-section{
-  background-color: var(--bg);
+  background-color: #000;
   [app-product3]{
     background-color: #a7897b;
   }
 }
 
 .sixth-section{
-  background-color: var(--bg);
+  background-color: #000;
 }
 .subcribe-section{
-  background-color: var(--bg);
+  background-color: #000;
   .banner{
     position: relative;
     z-index: 1;
@@ -293,7 +293,7 @@ p{
 }
 
 .eightth-section{
-  background-color: var(--bg);
+  background-color: #000;
 }
 
 @keyframes show_ {

@@ -1,0 +1,71 @@
+import { Injectable } from '@angular/core';
+import axios from 'axios';
+import { environment } from 'src/environments/environment';
+import { AuthenticationRequest } from '../dto/request/Authentication';
+import { UserRequest } from '../dto/request/UserRequest';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthenticationService {
+
+  private apiClient: any;
+
+  constructor() {
+
+    const BASE_URL = environment.variable_global.BASE_URL;
+    const API_URL = environment.variable_global.API_URL;
+    if (!BASE_URL && !API_URL) {
+      throw new Error("KHÔNG CẤU HÌNH ĐƯỜNG DẪN API");
+    }
+
+
+    this.apiClient = axios.create({
+      baseURL: API_URL&&API_URL.length>0 ? API_URL: BASE_URL+"auth/",
+      timeout: 5000,
+      headers: { "Content-Type": "application/json" },
+    });
+
+    this.apiClient.interceptors.request.use((config: any) => {
+      const token = this.getAccessToken()
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
+      return config;
+    }, (error: any) => {
+      return Promise.reject(error);
+    });
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  async login(authentication:AuthenticationRequest): Promise<string> {
+    try {
+      const { data } = await this.apiClient.post(`token`, authentication, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+
+  async register(userRequest:UserRequest): Promise<string> {
+    try {
+      const { data } = await this.apiClient.post(``, userRequest, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+}

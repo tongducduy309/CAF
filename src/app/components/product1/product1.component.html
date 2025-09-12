@@ -2,7 +2,7 @@
 <div class="product" nzGutter="10" (click)="onClick()">
   <div class="group" style="display: flex;align-items: center;height: 100%; justify-content: center;">
       <div style="display: flex;justify-content: center;align-items: center;">
-        <a><img [src]="FILE_URL+product.img" alt=""></a></div>
+        <a><img [src]="FILE_URL + product.img" (error)="onImgError($event)" alt=""></a></div>
         <a class="name" style="font-weight: 900;color: #000;">{{product.name}}</a>
     </div>
 

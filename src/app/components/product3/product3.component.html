@@ -3,7 +3,7 @@
   <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
   </div>
   <div style="display: flex;justify-content: center;align-items: center;"><a
-      [href]="'products/'+this.product.nameId"><img [src]="FILE_URL+product.img" alt=""></a></div>
+      [href]="'products/'+this.product.nameId"><img [src]="FILE_URL + product.img" (error)="onImgError($event)" alt=""></a></div>
   <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
     <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
     <!-- <button nz-button nzType="text" nzShape="circle">

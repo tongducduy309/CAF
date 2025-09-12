@@ -1,23 +1,23 @@
 
 <section *ngIf="isFormLogin===true">
   <div class="container">
-    <h4 class="subtitle" style="text-align: center;">Đăng Nhập</h4>
+    <h4 class="subtitle" style="text-align: center;">{{ 'LOGIN.TITLE' | translate }}</h4>
 
 
   <div nz-col style="padding: 10px;">
     <div class="group border-top border-right border-left">
       <div  nz-row [nzGutter]="[15]">
         <div class="field form_group" nz-col nzSpan="12">
-          <span>E-mail <sup aria-hidden="true">*</sup> :</span>
-            <input nz-input placeholder="Email" [(ngModel)]="user_email" type="text" (keyup.enter)="onEnter()"/>
+          <span>{{ 'LOGIN.EMAIL' | translate }} <sup aria-hidden="true">*</sup> :</span>
+            <input nz-input [placeholder]=" 'LOGIN.EMAIL' | translate " [(ngModel)]="user_email" type="text" (keyup.enter)="onEnter()"/>
         </div>
         <div nz-col nzSpan="12">
-          <span>Mật khẩu <sup aria-hidden="true">*</sup> :</span>
+          <span>{{ 'LOGIN.PASSWORD' | translate }} <sup aria-hidden="true">*</sup> :</span>
           <nz-input-group [nzSuffix]="suffixTemplate">
             <input
               [type]="passwordVisible ? 'text' : 'password'"
               nz-input
-              placeholder="Mật khẩu"
+              [placeholder]=" 'LOGIN.PASSWORD' | translate "
               (keyup.enter)="onEnter()"
               [(ngModel)]="user_password"
             />
@@ -32,18 +32,18 @@
       </div>
     </div>
     <div class="group border-top border-right border-left" style="display: flex; justify-content: end;align-items: center;">
-      <span class="span_forgotPassword" (click)="this.router.navigate(['account/login/reset-your-password'])">Quên mật khẩu?</span>
+      <span class="span_forgotPassword" (click)="this.router.navigate(['account/login/reset-your-password'])">{{ 'LOGIN.FORGOT_PASSWORD' | translate }}</span>
       <button nz-button nzType="primary" (click)="submit()" class="btnLogin" [disabled]="processing">
-        Đăng Nhập
+        {{ 'LOGIN.LOGIN_BUTTON' | translate }}
         <nz-icon [nzType]="'arrow-right'"></nz-icon>
       </button>
     </div>
     <div class="group border-top border-right border-left border-bottom group-container-btnRegister">
       <span style="margin-right: 15px;">
-        Chưa có tài khoản ?
+        {{ 'LOGIN.NO_ACCOUNT' | translate }}
       </span>
       <button nz-button nzType="primary" (click)="register()" class="btnRegister" >
-        Đăng Ký
+        {{ 'LOGIN.SIGN_UP' | translate }}
         <nz-icon nzType="arrow-right"></nz-icon>
       </button>
     </div>
@@ -53,22 +53,27 @@
 <section *ngIf="isFormLogin===false">
   <div class="container">
     <div *ngIf="!this.isSendEmailSuccess">
-      <h2>Đặt lại mật khẩu</h2>
+      <!-- <h2>Đặt lại mật khẩu</h2> -->
+      <h4 class="subtitle" style="text-align: center;">{{ 'LOGIN.RESET_PASSWORD' | translate }}</h4>
     <!-- <span style="color: #ff0000;" *ngIf="!isMessage"><span nz-icon nzType="exclamation-circle" nzTheme="outline"></span> No account found with that email.</span> -->
-      <input nz-input placeholder="Nhập email để nhận thư" [(ngModel)]="resetYP_email" type="text" style="margin-bottom: 10px;">
+      <input nz-input [placeholder]="'LOGIN.PLACEHOLDER_EMAIL' | translate" [(ngModel)]="resetYP_email" type="text" style="margin-bottom: 10px;">
       <button nz-button nzType="primary" class="btnSubmit_ResetPW" (click)="submit_resetPW()">
-        Gửi
+        {{ 'BUTTONS.SUBMIT' | translate }}
+      </button>
+      <button nz-button nzType="primary" class="btn-primary" (click)="back()">
+        {{ 'BUTTONS.CANCEL' | translate }}
       </button>
     </div>
 
     <nz-result *ngIf="this.isSendEmailSuccess"
 
       nzStatus="success"
-      [nzTitle]="'Thiết lập lại mật khẩu'"
-      [nzSubTitle]="'Vui lòng xác nhận tài khoản trong hộp thư để thiết lập lại mật khẩu ['+resetYP_email+']'"
+      [nzTitle]="'LOGIN.RESET_PASSWORD' | translate"
+      [nzSubTitle]="'LOGIN.SUCCESS_RESET_PASSWORD' | translate:{email: resetYP_email}"
     >
     <div nz-result-extra>
-      <button nz-button (click)="reload()">Tải lại trang</button>
+      <button nzType="primary" nz-button (click)="goToLogin()" class="btn-primary">{{ 'LOGIN.TITLE' | translate }}</button>
+      <button nz-button (click)="resend()" class="btn-default">{{ 'BUTTONS.RESEND' | translate }}</button>
     </div>
     </nz-result>
   </div>

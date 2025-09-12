@@ -3,6 +3,7 @@ import axios from "axios";
 import { environment } from 'src/environments/environment';
 import { ProductResponse } from '../dto/response/ProductResponse';
 import { Product } from '../models/Product';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ProductService {
 
   private apiClient: any;
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
 
     const BASE_URL = environment.variable_global.BASE_URL;
     const API_URL = environment.variable_global.API_URL;
@@ -27,10 +28,10 @@ export class ProductService {
     });
 
     this.apiClient.interceptors.request.use((config: any) => {
-      // const token = getAccessToken()
-      // if (token) {
-      //   config.headers['Authorization'] = `Bearer ${token}`;
-      // }
+      const token = authenticationService.getAccessToken()
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
       return config;
     }, (error: any) => {
       return Promise.reject(error);

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { ReviewResponse } from '../dto/response/ReviewResponse';
+import { ReviewRequest } from '../dto/request/ReviewRequest';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class ReviewService {
 
   private apiClient: any;
 
-  constructor() {
+  constructor(private authenticationService: AuthenticationService) {
 
     const BASE_URL = environment.variable_global.BASE_URL;
     const API_URL = environment.variable_global.API_URL;
@@ -19,16 +21,16 @@ export class ReviewService {
     }
 
     this.apiClient = axios.create({
-      baseURL: API_URL&&API_URL.length>0 ? API_URL: BASE_URL+"reviews/",
+      baseURL: API_URL&&API_URL.length>0 ? API_URL: BASE_URL+"reviews",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });
 
     this.apiClient.interceptors.request.use((config: any) => {
-      // const token = getAccessToken()
-      // if (token) {
-      //   config.headers['Authorization'] = `Bearer ${token}`;
-      // }
+      const token = authenticationService.getAccessToken()
+      if (token) {
+        config.headers['Authorization'] = `Bearer ${token}`;
+      }
       return config;
     }, (error: any) => {
       return Promise.reject(error);
@@ -39,6 +41,20 @@ export class ReviewService {
     try {
       const { data } = await this.apiClient.get(`product-id/${name_id}`);
       return data.data as ReviewResponse[];
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+
+  async createReview(reviewRequest:ReviewRequest): Promise<ReviewResponse> {
+    try {
+      const { data } = await this.apiClient.post(``, reviewRequest, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data as ReviewResponse;
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");

@@ -424,3 +424,33 @@ from{
     opacity: .7;
   }
 }
+
+.fi-vn {
+    background-image: url(../../../assets/images/vn.svg);
+}
+
+.fi-gb {
+    background-image: url(../../../assets/images/gb.svg);
+}
+
+.fib,
+.fi {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.fi {
+    position: relative;
+    display: inline-block;
+    width: 1.333333em;
+    line-height: 1em
+}
+
+.fi:before {
+    content: " "
+}
+
+.fi.fis {
+    width: 1em
+}

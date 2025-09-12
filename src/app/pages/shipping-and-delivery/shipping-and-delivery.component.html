@@ -1,0 +1,24 @@
+<section class="header-section">
+  <div class="container">
+    <div nz-row>
+      <div nz-col [nzSpan]="12">
+        <div class="btn" (click)="back()">
+          <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
+          {{ 'BUTTONS.BACK' | translate }}
+        </div>
+        <h2 class="title">{{ 'SHIPPING_AND_DELIVERY.TITLE' | translate }}</h2>
+        <p>{{ 'SHIPPING_AND_DELIVERY.SUBTITLE' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="content-section">
+  <div class="container">
+    
+    <app-markdown-page slug="shipping-and-delivery"></app-markdown-page>
+  </div>
+</section>
+
+
+
+

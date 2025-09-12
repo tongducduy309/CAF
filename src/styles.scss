@@ -39,8 +39,30 @@ section{
 .btn{
   user-select: none;
   cursor: pointer;
+
 }
 
+.btn-primary{
+  color: #fff;
+  background-color: #262626 !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0;
+  min-width: 150px;
+  min-height: 50px;
+  transition: all ease-in-out .5s;
+
+}
+
+.btn-default{
+  min-width: 150px;
+  min-height: 50px;
+  transition: all ease-in-out .5s;
+
+}
+.btn-primary:hover{
+  background-color: #000 !important;
+}
 .link-btn{
   font-style: normal;
   font-weight: 700;

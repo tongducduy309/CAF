@@ -1,0 +1,5 @@
+<ng-container *ngIf="loading">Loading…</ng-container>
+
+    <markdown *ngIf="!loading && content" [data]="content" class="markdown-body"></markdown>
+
+    <div *ngIf="!loading && error" class="md-error">{{ error }}</div>

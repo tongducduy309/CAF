@@ -45,6 +45,12 @@
             "scripts": [],
             "browser": "src/main.ts"
           },
+          "i18n": {
+            "sourceLocale": "vi",
+            "locales": {
+              "en": "src/i18n/messages.en.xlf"
+            }
+          },
           "configurations": {
             "production": {
               "budgets": [
@@ -66,6 +72,11 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
+            },
+            "en": {
+              "localize": [
+                "en"
+              ]
             }
           },
           "defaultConfiguration": "production"

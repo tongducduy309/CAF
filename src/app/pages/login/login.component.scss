@@ -21,8 +21,13 @@ section{
   color: #ffffff !important;
   background-color: #262626 !important;
   border: none;
-  width: 150px;
-  height: 50px;
+  min-width: 150px;
+  min-height: 50px;
+}
+
+.btnSubmit_ResetPW
+{
+  margin-right: 15px;
 }
 
 .btnRegister:hover,.btnLogin:hover, .btnSubmit_ResetPW:hover

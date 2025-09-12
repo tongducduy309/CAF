@@ -4,46 +4,65 @@
       <div nz-col [nzSpan]="12">
         <div class="btn" (click)="back()">
           <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
-          Trở Về
+          {{ 'BUTTONS.BACK' | translate }}
         </div>
 
-        <h2 class="title">Giới Thiệu</h2>
-        <p>Tại cơ sở cà phê của chúng tôi, chúng tôi mong muốn mang đến cho bạn trải nghiệm cà phê đặc biệt. Chúng tôi cung cấp những hạt cà phê tốt nhất,
-          duy trì các tiêu chuẩn chất lượng nghiêm ngặt và ưu tiên tính bền vững trong toàn bộ chuỗi cung ứng của mình.</p>
+        <h2 class="title">{{ 'ABOUT_US.TITLE' | translate }}</h2>
+        <!-- <p>Tại cơ sở cà phê của chúng tôi, chúng tôi mong muốn mang đến cho bạn trải nghiệm cà phê đặc biệt. Chúng tôi cung cấp những hạt cà phê tốt nhất,
+          duy trì các tiêu chuẩn chất lượng nghiêm ngặt và ưu tiên tính bền vững trong toàn bộ chuỗi cung ứng của mình.</p> -->
+        <p>{{ 'ABOUT_US.SUBTITLE' | translate }}</p>
       </div>
     </div>
   </div>
 </section>
 <section class="content-section">
   <div class="container">
-    <h2 class="title">Khám phá thế giới cà phê hảo hạng</h2>
+    <h2 class="title">{{ 'ABOUT_US.OUR_STORY_1.TITLE' | translate }}</h2>
     <div nz-row [nzGutter]="[24,24]">
       <div nz-col [nzSpan]="12">
-        <p>
+        <!-- <p>
           Chuẩn bị bắt đầu một hành trình cảm giác khi bạn khám phá thế giới cà phê quyến rũ. Từ lúc hạt cà phê được thu hoạch cho đến khi chiết xuất cuối cùng,
           mọi bước của quy trình đều được tuyển chọn tỉ mỉ để mang đến một tách cà phê thực sự đặc biệt.
           Trải nghiệm hương thơm hấp dẫn lan tỏa trong không khí khi hạt cà phê được rang một cách khéo léo đến mức hoàn hảo.
           Những người rang cà phê chuyên nghiệp của chúng tôi cẩn thận lựa chọn những hạt cà phê hảo hạng nhất từ ​​khắp nơi trên thế giới,
           mỗi hạt đều bùng nổ với hương vị và đặc điểm riêng biệt.
           Cho dù bạn thích một hỗn hợp mịn và cân bằng hay một loại cà phê nguyên chất đậm đà và mạnh mẽ, chúng tôi đều có loại cà phê hoàn hảo để kích thích vị giác của bạn.
-        </p>
+        </p> -->
+        <p>{{ 'ABOUT_US.OUR_STORY_1.CONTENT_1' | translate }}</p>
       </div>
       <div nz-col [nzSpan]="12">
-        <p>
+        <!-- <p>
           Khám phá niềm vui khi tự pha tách cà phê tại nhà. Từ các phương pháp pha truyền thống như pour-over và French press đến các kỹ thuật tiên tiến như máy pha cà phê espresso và hệ thống viên nang, chúng tôi cung cấp nhiều lựa chọn pha chế phù hợp với mọi sở thích. Giải phóng nghệ nhân pha chế bên trong bạn khi bạn thử nghiệm các tỷ lệ pha, nhiệt độ và thời gian chiết xuất khác nhau để tạo ra tách cà phê hoàn hảo. Thưởng thức kết cấu mịn màng, béo ngậy của một tách latte được hấp hoàn hảo hoặc đắm mình trong sự xa hoa của một tách cappuccino béo ngậy. Các nhân viên pha chế tài năng của chúng tôi là bậc thầy trong nghề của họ, tỉ mỉ chế tác từng tách cà phê với độ chính xác và nghệ thuật cao. Họ hiểu được những sắc thái của việc chiết xuất cà phê, tạo bọt sữa và nghệ thuật pha cà phê latte, đảm bảo rằng mỗi ngụm cà phê đều là khoảnh khắc vui sướng tột độ.
-        </p>
+        </p> -->
+        <p>{{ 'ABOUT_US.OUR_STORY_1.CONTENT_2' | translate }}</p>
       </div>
     </div>
 
-    <h2 class="title" style="text-align: center;">Thiên đường của người sành cà phê: Thưởng thức những loại bia hảo hạng nhất</h2>
+    <!-- <h2 class="title" style="text-align: center;">Thiên đường của người sành cà phê: Thưởng thức những loại bia hảo hạng nhất</h2> -->
+    <h2 class="title" style="text-align: center;">{{ 'ABOUT_US.OUR_STORY_2.TITLE' | translate }}</h2>
     <div class="block">
       <div nz-row [nzGutter]="[24,24]">
         <div nz-col [nzSpan]="12">
-          <h3 class="subtitle">
+          <!-- <h3 class="subtitle">
             Nghệ thuật pha cà phê đặc biệt
+          </h3> -->
+          <h3 class="subtitle">
+            {{ 'ABOUT_US.OUR_STORY_2.SUBTITLE_1' | translate }}
           </h3>
-          <p>Khám phá hương vị và đặc điểm đa dạng của cà phê từ nhiều vùng khác nhau trên toàn cầu. Từ hương đất của hạt cà phê Indonesia đến hương trái cây của cà phê châu Phi, mỗi nguồn gốc đều kể một câu chuyện độc đáo đang chờ được thưởng thức. Hãy bắt đầu cuộc phiêu lưu hương vị và mở rộng khẩu vị của bạn khi khám phá những sắc thái và sự phức tạp của cà phê từ các vùng đất khác nhau. Cà phê không chỉ là một thức uống; nó là chất xúc tác cho sự kết nối và trò chuyện. Cho dù bạn đang tận hưởng khoảnh khắc yên tĩnh một mình hay tham gia vào các cuộc trò chuyện sôi nổi với bạn bè, cà phê luôn có cách để gắn kết mọi người lại với nhau. Tạo ra những kỷ niệm đáng trân trọng khi bạn chia sẻ một tách cà phê, trao đổi những câu chuyện, tiếng cười và sự ấm áp.</p>
-          <p>Tại cơ sở cà phê của chúng tôi, chúng tôi đam mê cung cấp cho bạn trải nghiệm cà phê đặc biệt. Chúng tôi tìm nguồn cung cấp hạt cà phê tốt nhất, duy trì các tiêu chuẩn chất lượng nghiêm ngặt và ưu tiên tính bền vững trong toàn bộ chuỗi cung ứng của mình. Mỗi tách cà phê là minh chứng cho cam kết của chúng tôi về sự xuất sắc và tình yêu của chúng tôi dành cho loại đồ uống tuyệt vời này.</p>
+          <!-- <p>Khám phá hương vị và đặc điểm đa dạng của cà phê từ nhiều vùng khác nhau trên toàn cầu. Từ hương đất của
+            hạt cà phê Indonesia đến hương trái cây của cà phê châu Phi, mỗi nguồn gốc đều kể một câu chuyện độc đáo
+            đang chờ được thưởng thức. Hãy bắt đầu cuộc phiêu lưu hương vị và mở rộng khẩu vị của bạn khi khám phá những
+            sắc thái và sự phức tạp của cà phê từ các vùng đất khác nhau. Cà phê không chỉ là một thức uống; nó là chất
+            xúc tác cho sự kết nối và trò chuyện. Cho dù bạn đang tận hưởng khoảnh khắc yên tĩnh một mình hay tham gia
+            vào các cuộc trò chuyện sôi nổi với bạn bè, cà phê luôn có cách để gắn kết mọi người lại với nhau. Tạo ra
+            những kỷ niệm đáng trân trọng khi bạn chia sẻ một tách cà phê, trao đổi những câu chuyện, tiếng cười và sự
+            ấm áp.</p>
+          <p>Tại cơ sở cà phê của chúng tôi, chúng tôi đam mê cung cấp cho bạn trải nghiệm cà phê đặc biệt. Chúng tôi
+            tìm nguồn cung cấp hạt cà phê tốt nhất, duy trì các tiêu chuẩn chất lượng nghiêm ngặt và ưu tiên tính bền
+            vững trong toàn bộ chuỗi cung ứng của mình. Mỗi tách cà phê là minh chứng cho cam kết của chúng tôi về sự
+            xuất sắc và tình yêu của chúng tôi dành cho loại đồ uống tuyệt vời này.</p> -->
+          <p>{{ 'ABOUT_US.OUR_STORY_2.CONTENT_1' | translate }}</p>
+          <p>{{ 'ABOUT_US.OUR_STORY_2.CONTENT_2' | translate }}</p>
         </div>
         <div nz-col [nzSpan]="12">
           <img src="https://coffee-workdo.myshopify.com/cdn/shop/files/abt-1.jpg?v=1672736568" alt="">
@@ -58,17 +77,32 @@
           <img src="https://coffee-workdo.myshopify.com/cdn/shop/files/abt-2.jpg?v=1672736581" alt="">
         </div>
         <div nz-col [nzSpan]="12">
-          <h3 class="subtitle">
+          <!-- <h3 class="subtitle">
             Hành trình khám phá sự phong phú của cà phê
+          </h3> -->
+          <h3 class="subtitle">
+            {{ 'ABOUT_US.OUR_STORY_2.SUBTITLE_2' | translate }}
           </h3>
-          <p>Đắm mình vào nghệ thuật pha chế hoàn hảo khi chúng tôi hướng dẫn bạn qua nhiều phương pháp pha chế khác nhau giúp khai thác hết tiềm năng của từng hạt cà phê. Cho dù bạn thích sự đậm đà cổ điển của phương pháp pha pour-over, sự tiện lợi của hệ thống viên nang hay hương vị đậm đà của cà phê espresso, chúng tôi đều có các công cụ và kiến ​​thức để giúp bạn tạo ra một tách cà phê phù hợp với sở thích của bạn. Hãy thỏa mãn khẩu vị của bạn bằng bản giao hưởng hương vị khi bạn khám phá các loại cà phê đa dạng của chúng tôi. Từ những loại rang sẫm màu mịn màng với hương sô cô la và caramel đến những hạt cà phê nguyên chất sống động với hương trái cây, có một sự pha trộn để đáp ứng mọi khẩu vị sành điệu.</p>
-          <p>Mỗi ngụm là một hành trình khám phá những lớp phức tạp, mời bạn thưởng thức những sắc thái làm nên sự độc đáo của từng loại cà phê. Các sản phẩm cà phê của chúng tôi phục vụ cho mọi dịp. Nâng tầm trải nghiệm cà phê của bạn và đón nhận các nghi lễ biến một tách cà phê đơn giản thành khoảnh khắc tận hưởng hạnh phúc.</p>
+          <!-- <p>Đắm mình vào nghệ thuật pha chế hoàn hảo khi chúng tôi hướng dẫn bạn qua nhiều phương pháp pha chế khác
+            nhau giúp khai thác hết tiềm năng của từng hạt cà phê. Cho dù bạn thích sự đậm đà cổ điển của phương pháp
+            pha pour-over, sự tiện lợi của hệ thống viên nang hay hương vị đậm đà của cà phê espresso, chúng tôi đều có
+            các công cụ và kiến ​​thức để giúp bạn tạo ra một tách cà phê phù hợp với sở thích của bạn. Hãy thỏa mãn
+            khẩu vị của bạn bằng bản giao hưởng hương vị khi bạn khám phá các loại cà phê đa dạng của chúng tôi. Từ
+            những loại rang sẫm màu mịn màng với hương sô cô la và caramel đến những hạt cà phê nguyên chất sống động
+            với hương trái cây, có một sự pha trộn để đáp ứng mọi khẩu vị sành điệu.</p>
+          <p>Mỗi ngụm là một hành trình khám phá những lớp phức tạp, mời bạn thưởng thức những sắc thái làm nên sự độc
+            đáo của từng loại cà phê. Các sản phẩm cà phê của chúng tôi phục vụ cho mọi dịp. Nâng tầm trải nghiệm cà phê
+            của bạn và đón nhận các nghi lễ biến một tách cà phê đơn giản thành khoảnh khắc tận hưởng hạnh phúc.</p> -->
+          <p>{{ 'ABOUT_US.OUR_STORY_2.CONTENT_3' | translate }}</p>
+          <p>{{ 'ABOUT_US.OUR_STORY_2.CONTENT_4' | translate }}</p>
         </div>
       </div>
     </div>
 
-    <h2 class="title" style="text-align: center;margin-bottom: 20px;">Về dịch vụ của chúng tôi</h2>
-    <p style="text-align: center;">Mang lại trải nghiệm tốt nhất cho khách hàng</p>
+    <!-- <h2 class="title" style="text-align: center;margin-bottom: 20px;">Về dịch vụ của chúng tôi</h2>
+    <p style="text-align: center;">Mang lại trải nghiệm tốt nhất cho khách hàng</p> -->
+    <h2 class="title" style="text-align: center;margin-bottom: 20px;">{{ 'ABOUT_US.OUR_SERVICE.TITLE' | translate }}</h2>
+    <p style="text-align: center;">{{ 'ABOUT_US.OUR_SERVICE.SUBTITLE' | translate }}</p>
 
     <div style="margin-top: 30px;">
       <div nz-row [nzGutter]="[24,24]">
@@ -76,28 +110,37 @@
         <div nz-col [nzSpan]="8">
           <div class="block-service">
             <div style="display: flex; justify-content: space-between;">
-              <h4>Giao hàng nhanh 5 phút</h4>
+              <!-- <h4>Giao hàng nhanh 5 phút</h4> -->
+              <h4>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_1.TITLE' | translate }}</h4>
               <img src="../../../assets/images/icon_1.png" alt="">
             </div>
-            <p>Thời gian giao hàng tùy thuộc vào địa chỉ giao hàng. Chúng tôi sẽ đảm bảo thức uống sẽ đến tay bạn nhanh nhất, với hương vị vẫn đảm bảo.</p>
+            <!-- <p>Thời gian giao hàng tùy thuộc vào địa chỉ giao hàng. Chúng tôi sẽ đảm bảo thức uống sẽ đến tay bạn nhanh
+              nhất, với hương vị vẫn đảm bảo.</p> -->
+            <p>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_1.DESCRIPTION' | translate }}</p>
           </div>
         </div>
         <div nz-col [nzSpan]="8">
           <div class="block-service">
             <div style="display: flex; justify-content: space-between;">
-              <h4>Nhiều ưu đãi</h4>
+              <!-- <h4>Nhiều ưu đãi</h4> -->
+              <h4>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_2.TITLE' | translate }}</h4>
               <img src="../../../assets/images/icon_2.png" alt="">
             </div>
-            <p>Có nhiều chương trình ưu đãi dành cho khách hàng. <br> Đối tượng học sinh, sinh viên với nhiều khuyến mã đặc biệt hàng tuần</p>
+            <!-- <p>Có nhiều chương trình ưu đãi dành cho khách hàng. <br> Đối tượng học sinh, sinh viên với nhiều khuyến mã
+              đặc biệt hàng tuần</p> -->
+            <p>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_2.DESCRIPTION' | translate }}
           </div>
         </div>
         <div nz-col [nzSpan]="8">
           <div class="block-service">
             <div style="display: flex; justify-content: space-between;">
-              <h4>Hỗ trợ 24/7</h4>
+              <!-- <h4>Hỗ trợ 24/7</h4> -->
+              <h4>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_3.TITLE' | translate }}</h4>
               <img src="../../../assets/images/icon_3.png" alt="">
             </div>
-            <p>Hỗ trợ dịch vụ CMS có sẵn 24 giờ một ngày, 7 ngày một tuần. Bạn có thể liên hệ với chúng tôi qua số điện thoại, email hoặc trò chuyện.</p>
+            <!-- <p>Hỗ trợ dịch vụ CMS có sẵn 24 giờ một ngày, 7 ngày một tuần. Bạn có thể liên hệ với chúng tôi qua số điện
+              thoại, email hoặc trò chuyện.</p> -->
+            <p>{{ 'ABOUT_US.OUR_SERVICE.SERVICE_3.DESCRIPTION' | translate }}
           </div>
         </div>
       </div>
