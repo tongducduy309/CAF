@@ -1,4 +1,4 @@
-# ☕ Coffee Store
+# ☕ Coffee Store (Version 1)
 
 Ứng dụng web **Coffee Store (Coffee And Tea)** được phát triển bằng **Angular 15**, triển khai qua **Docker + Nginx**, hỗ trợ chạy trực tiếp trên **Vercel**.  
 👉 Demo: [caf-bay.vercel.app](https://caf-bay.vercel.app)
@@ -39,6 +39,15 @@ npm install
 ```bash
 npm start
 ```
+
+## 📖 Hướng phát triển
+Dự án sẽ được phát triển version với các tính năng mới như sau:
+- Phát triển dự án dựa trên Angular 19
+- Hiển thị trên nhiều ngôn ngữ (Tiếng Anh, Tiếng Việt,...)
+- Thiết kế giao diện hiển thị trên nhiều thiết bị
+- Cho phép thực hiện thanh toán Online
+- Chỉnh sửa giao tiếp Backend bằng Axios
+[Phiên bản 2](https://github.com/tongducduy309/CAF/tree/update-v2)
 
 ## 👨‍💻 Tác giả
 - Tống Đức Duy
