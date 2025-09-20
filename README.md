@@ -47,7 +47,10 @@ Dự án sẽ được phát triển version với các tính năng mới như s
 - Thiết kế giao diện hiển thị trên nhiều thiết bị
 - Cho phép thực hiện thanh toán Online
 - Chỉnh sửa giao tiếp Backend bằng Axios
+
+
 [Phiên bản 2](https://github.com/tongducduy309/CAF/tree/update-v2)
+
 
 ## 👨‍💻 Tác giả
 - Tống Đức Duy
