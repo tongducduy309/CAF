@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import axios from "axios";
-import { environment } from 'src/environments/environment';
-import { ProductResponse } from '../dto/response/ProductResponse';
-import { Product } from '../models/Product';
 import { AuthenticationService } from './authentication.service';
+import { environment } from 'src/environments/environment';
+import axios from 'axios';
+import { CreateBlogRequest } from '../dto/request/Blog';
+import { ResponseObject } from '../models/ResponseObject';
+import { BlogHTMLResponse } from '../dto/response/BlogResponse';
+import { parseLocalDateTime } from '../utils/Date';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
+export class BlogService {
 
   private apiClient: any;
 
@@ -22,7 +24,7 @@ export class ProductService {
 
 
     this.apiClient = axios.create({
-      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"products",
+      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"blogs",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });
@@ -38,28 +40,29 @@ export class ProductService {
     });
   }
 
-  async getAllProducts(): Promise<ProductResponse[]> {
+  async getDetailBlogBySlug(slug:string): Promise<BlogHTMLResponse> {
     try {
-      const { data } = await this.apiClient.get("");
-      return data.data as ProductResponse[];
-    } catch (err: unknown) {
-      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
-    }
-  }
-  async getDetailProduct(id:string): Promise<ProductResponse> {
-    try {
-      const { data } = await this.apiClient.get(`grouped/${id}`);
-      return data.data as ProductResponse;
+      const { data } = await this.apiClient.get(`/html/${slug}`);
+      const res  = {
+        ...data.data,
+        createdAt:parseLocalDateTime(data.data.createdAt)
+      };
+
+      return res as BlogHTMLResponse;
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
     }
   }
 
-  async searchProduct(keyword:string): Promise<Product> {
+  async create(createBlogRequest:CreateBlogRequest): Promise<ResponseObject> {
     try {
-      const { data } = await this.apiClient.get(`search/${keyword}`);
-      return data.data as Product;
+      const { data } = await this.apiClient.post(``, createBlogRequest, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data;
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");

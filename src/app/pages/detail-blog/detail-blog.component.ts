@@ -1,20 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
+import { BlogHTMLResponse } from 'src/app/dto/response/BlogResponse';
+import { BlogService } from 'src/app/services/blog.service';
+import { numberToStringMonth } from 'src/app/utils/Date';
+import { MainService } from 'src/services/main.service';
 
 @Component({
-    selector: 'app-detail-blog',
-    templateUrl: './detail-blog.component.html',
-    styleUrls: ['./detail-blog.component.scss'],
-    standalone: false
+  selector: 'app-detail-blog',
+  templateUrl: './detail-blog.component.html',
+  styleUrls: ['./detail-blog.component.scss'],
+  standalone: false
 })
 export class DetailBlogComponent extends Page implements OnInit {
 
-  constructor() {
+  blogService = inject(BlogService)
+  route = inject(ActivatedRoute)
+  main = inject(MainService)
+  loading=true;
+  blog:Partial<BlogHTMLResponse>={}
+
+  numberToStringMonth = (month:number) =>{
+    return numberToStringMonth(month)
+  }
+
+  constructor(private location:Location) {
     super()
+    this.route.paramMap.subscribe(async (params) => {
+      const slug = params.get('slug');
+      if (slug) {
+        this.getBlogBySlug(slug);
+      }
+    });
   }
 
   ngOnInit(): void {
     this.loaded()
+
+  }
+
+  getBlogBySlug(slug: string) {
+    this.blogService.getDetailBlogBySlug(slug).then((res:BlogHTMLResponse)=>{
+      this.blog = res
+      console.log(res)
+    }).catch(e=>{
+      this.main.createNotification("error",e.message)
+    }).finally(()=>{
+      this.loading=true
+    })
   }
 
   blogs = [
@@ -31,5 +65,9 @@ export class DetailBlogComponent extends Page implements OnInit {
       content: 'Of the two main species grown, arabica coffee (from C. arabica) is generally more highly regarded than robusta coffee (from...'
     }
   ]
+
+  back(){
+    this.location.back();
+  }
 
 }

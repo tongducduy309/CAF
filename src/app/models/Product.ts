@@ -10,5 +10,13 @@ export interface Product {
     img:string;
     status:boolean;
     category:CategoryResponse;
+    variants:ProductVariant[];
+}
+
+export interface ProductVariant {
+    id: string;
+    size: string;
+    price: number;
+    status: boolean;
 }
     

@@ -17,14 +17,14 @@
           <span nz-icon nzType="container"></span>
           <span>Quản lí đơn hàng</span>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add" *ngIf="user.role>1">
+        <li nz-submenu nzOpen  nzTitle="Quản lí sản phẩm / khuyến mãi" nzIcon="appstore-add">
           <ul>
             <li nz-menu-item (click)="remote('manage-products')" [nzSelected]="titlePage=='manage-products'">Sản phẩm</li>
             <li nz-menu-item (click)="remote('flash-sales')" [nzSelected]="titlePage=='flash-sales'">Chương trình khuyến mãi</li>
             <li nz-menu-item (click)="remote('vouchers')" [nzSelected]="titlePage=='vouchers'">Phiếu giảm giá</li>
           </ul>
         </li>
-        <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user" *ngIf="user.role>1">
+        <li nz-submenu nzOpen  nzTitle="Quản lí tài khoản" nzIcon="user">
           <ul>
             <li nz-menu-item (click)="remote('accounts-customer')" [nzSelected]="titlePage=='accounts-customer'">Khách hàng</li>
             <li nz-menu-item (click)="remote('accounts-staff')" [nzSelected]="titlePage=='accounts-staff'">Nhân viên</li>

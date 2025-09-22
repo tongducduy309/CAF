@@ -1,0 +1,81 @@
+.wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+}
+
+.panel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.pane {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    background: var(--bg, #fff);
+    margin-bottom: 20px;
+}
+
+
+
+
+.preview {
+    padding: 12px;
+    overflow: auto;
+    height: 100%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+}
+
+:host ::ng-deep pre {
+    background-color: #f6f8fa;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    margin-top: 0;
+    overflow: auto;
+    overflow-wrap: normal;
+    padding: 16px;
+    white-space: pre;
+    word-break: normal;
+    border-radius: 6px;
+    box-sizing: border-box;
+    
+}
+
+.markdown-body h1 {
+    font-size: 32px;
+}
+
+.markdown-body h2 {
+    font-size: 24px;
+}
+
+.markdown-body p {
+    font-size: 16px;
+}
+
+nz-splitter {
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
+:host ::ng-deep .ant-splitter-panel,
+:host ::ng-deep .ant-splitter-panel .ant-splitter-panel-content {
+    overflow: hidden !important;
+}
+
+app-box-editor-markdown {
+    margin: 12px 0;
+}

@@ -57,7 +57,8 @@
         "SUBMIT": "Submit",
         "GO_TO_HOME": "Go to Home",
         "RELOAD": "Reload",
-        "RESEND": "Resend"
+        "RESEND": "Resend",
+        "READ_MORE":"Read More"
     },
     "SEARCH": {
         "RESULTS_FOR": "Search results for",
@@ -234,6 +235,12 @@
         "SUBTITLE": "Our coffee blog is a delightful haven for all coffee lovers—from casual drinkers to true connoisseurs. Step into a world where we celebrate the art, science, and culture of coffee.",
         "READ_MORE": "Read More",
         "NO_BLOGS": "No blogs found."  
+    },
+    "DETAIL_BLOG":{
+        "DATE":{
+            "TITLE":"Date",
+            "CONTENT":"{{month}} {{day}}, {{year}}"
+        }
     }
     
 

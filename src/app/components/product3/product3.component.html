@@ -29,8 +29,8 @@
     <div>
       <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize"
         [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
-        @for (size of product.sizes; track $index;let i = $index) {
-        <nz-option [nzValue]="i" [nzLabel]="size"></nz-option>
+        @for (variant of product.variants; track $index;let i = $index) {
+        <nz-option [nzValue]="variant.id" [nzLabel]="variant.size"></nz-option>
         }
       </nz-select>
     </div>

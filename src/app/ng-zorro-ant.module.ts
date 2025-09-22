@@ -65,12 +65,13 @@ import { NzTreeSelectModule } from 'ng-zorro-antd/tree-select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzResizableModule } from 'ng-zorro-antd/resizable';
-
-
+import { NzSplitterModule } from 'ng-zorro-antd/splitter';
+import { NzSegmentedModule } from 'ng-zorro-antd/segmented';
 
 @NgModule({
   imports:[
     NzIconModule,
+    NzSegmentedModule,
     NzAffixModule,
     NzAlertModule,
     NzAnchorModule,
@@ -92,6 +93,7 @@ import { NzResizableModule } from 'ng-zorro-antd/resizable';
     NzDividerModule,
     NzDrawerModule,
     NzDropDownModule,
+    NzSplitterModule,
     NzEmptyModule,
     NzFormModule,
     NzGridModule,
@@ -139,6 +141,7 @@ import { NzResizableModule } from 'ng-zorro-antd/resizable';
   ],
   exports: [
     NzIconModule,
+    NzSegmentedModule,
     NzAffixModule,
     NzAlertModule,
     NzAnchorModule,
@@ -171,6 +174,7 @@ import { NzResizableModule } from 'ng-zorro-antd/resizable';
     NzMentionModule,
     NzMenuModule,
     NzMessageModule,
+    NzSplitterModule,
     NzModalModule,
     NzNoAnimationModule,
     NzNotificationModule,

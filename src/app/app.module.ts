@@ -56,7 +56,7 @@ import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
-import {  NZ_ICONS } from 'ng-zorro-antd/icon';
+import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { LeftOutline } from '@ant-design/icons-angular/icons';
 import { Product1Component } from './components/product1/product1.component';
 import { C } from '@angular/cdk/scrolling-module.d-ud2XrbF8';
@@ -65,10 +65,13 @@ import { provideTranslateHttpLoader, TranslateHttpLoader } from '@ngx-translate/
 import { MarkdownModule } from 'ngx-markdown';
 import { MarkdownPageComponent } from './components/markdown-page/markdown-page.component';
 import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
+import { MarkdownEditorPreviewComponent } from './components/markdown-editor-preview/markdown-editor-preview.component';
+import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
+import { BoxEditorMarkdownComponent } from './components/markdown-editor-preview/box-editor-markdown/box-editor-markdown.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
-export let components:any = [
+export let components: any = [
   HeaderComponent,
   FooterComponent,
   Product2Component,
@@ -81,13 +84,15 @@ export let components:any = [
   BoxAddressComponent,
   ManageAddressComponent,
   NoteProductComponent,
-  ItemInBillComponent ,
+  ItemInBillComponent,
   BillComponent,
   CustomerReviewComponent,
   DetailBillComponent,
   ShowFullInvoiceComponent,
   Product1Component,
   MarkdownPageComponent,
+  MarkdownEditorPreviewComponent,
+  BoxEditorMarkdownComponent
 ]
 
 export let pages = [
@@ -119,40 +124,45 @@ export let pages = [
   DetailBillComponent,
   ManageOrdersComponent,
   ManageAccountsComponent,
-  
-  ShippingAndDeliveryComponent
+
+  ShippingAndDeliveryComponent,
+  EditorBlogComponent
 ]
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader();
 }
 
-@NgModule({ declarations: [...components, ...pages],
-    bootstrap: [AppComponent],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        ReactiveFormsModule,
-        NgZorroAntModule,
-        MarkdownModule,
-        CommonModule,
-        HttpClientModule,
-        TranslateModule.forRoot(),
-        MarkdownModule.forRoot(),
-        
-        NzRateModule], providers: [
-        { provide: NZ_I18N, useValue: vi_VN },
-        { provide: NZ_ICONS, useValue: [LeftOutline] },
-        ...provideTranslateHttpLoader({
+@NgModule({
+  declarations: [...components, ...pages],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    NgZorroAntModule,
+    MarkdownModule,
+    CommonModule,
+    HttpClientModule,
+    TranslateModule.forRoot(),
+    MarkdownModule.forRoot(),
+
+    NzRateModule],
+  providers: [
+    { provide: NZ_I18N, useValue: vi_VN },
+    { provide: NZ_ICONS, useValue: [LeftOutline] },
+    ...provideTranslateHttpLoader({
       prefix: '/assets/i18n/',
       suffix: '.json',
       // tùy chọn:
       // enforceLoading: false,
       // useHttpBackend: false,
     }),
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
+    provideHttpClient(withInterceptorsFromDi()),
+    
+  ]
+})
 export class AppModule {
   constructor(ts: TranslateService) {
     ts.setDefaultLang('vi'); // ngôn ngữ mặc định
@@ -160,4 +170,4 @@ export class AppModule {
     const browser = ts.getBrowserLang();
     ts.use((saved as any) || (browser?.match(/en|vi/) ? browser : 'vi'));
   }
- }
+}

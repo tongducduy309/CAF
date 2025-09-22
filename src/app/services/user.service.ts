@@ -21,7 +21,7 @@ export class UserService {
 
 
     this.apiClient = axios.create({
-      baseURL: API_URL&&API_URL.length>0 ? API_URL: BASE_URL+"users",
+      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"users",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });

@@ -19,7 +19,7 @@ export class Product3Component implements OnInit {
 
   @Output() addToCartEmitter = new EventEmitter();
 
-  selectedSize = 0;
+  selectedSize = '';
 
   isFormAddToCart = false;
 
@@ -28,6 +28,7 @@ export class Product3Component implements OnInit {
   constructor(public main:MainService) { }
 
   ngOnInit(): void {
+    this.selectedSize = this.product.variants[0]?.id
     console.log(this.product);
   }
 

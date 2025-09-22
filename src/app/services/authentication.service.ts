@@ -21,7 +21,7 @@ export class AuthenticationService {
 
 
     this.apiClient = axios.create({
-      baseURL: API_URL&&API_URL.length>0 ? API_URL: BASE_URL+"auth/",
+      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"auth/",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });

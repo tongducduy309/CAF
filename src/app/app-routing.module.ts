@@ -28,138 +28,142 @@ import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
+import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 
 export const routes: Routes = [
 
   {
-    path:'home',
-    component:HomeComponent
+    path: 'home',
+    component: HomeComponent
   },
   {
-    path:'',
+    path: '',
     redirectTo: '/home',
-    pathMatch: 'full' ,
+    pathMatch: 'full',
 
   },
   {
-    path:'account',
-    component:AccountComponent,
+    path: 'account',
+    component: AccountComponent,
   },
   {
-    path:'account/login',
-    component:LoginComponent
+    path: 'account/login',
+    component: LoginComponent
   },
   {
-    path:'account/login/:param',
-    component:LoginComponent
+    path: 'account/login/:param',
+    component: LoginComponent
   },
   {
-    path:'account/register',
-    component:RegisterComponent
+    path: 'account/register',
+    component: RegisterComponent
   },
   {
-    path:'account/verify',
-    component:RegisterComponent
+    path: 'account/verify',
+    component: RegisterComponent
   },
   {
-    path:'account/new-password',
-    component:NewpasswordComponent
+    path: 'account/new-password',
+    component: NewpasswordComponent
   },
   {
-    path:'products/:id',
-    component:DetailProductComponent
+    path: 'products/:id',
+    component: DetailProductComponent
   },
   {
-    path:'collections',
-    component:CollectionsComponent
+    path: 'collections',
+    component: CollectionsComponent
   },
   {
-    path:'all-products',
-    component:AllProductsComponent
+    path: 'all-products',
+    component: AllProductsComponent
   },
   // {
   //   path:'all-products/:key',
   //   component:AllProductsComponent
   // },
   {
-    path:'cart',
-    component:CartComponent
+    path: 'cart',
+    component: CartComponent
   },
   {
-    path:'about-us',
-    component:AboutUsComponent
+    path: 'about-us',
+    component: AboutUsComponent
   },
   {
-    path:'contact-with-us',
-    component:ContactWithUsComponent
+    path: 'contact-with-us',
+    component: ContactWithUsComponent
   },
   {
-    path:'faq',
-    component:FaqComponent
+    path: 'faq',
+    component: FaqComponent
   },
   {
-    path:'privacy-policy',
-    component:PrivacyPolicyComponent
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent
   },
   // {
   //   path:'search',
   //   component:SearchComponent
   // },
   {
-    path:'terms-and-conditions',
-    component:TermsAndConditionsComponent
+    path: 'terms-and-conditions',
+    component: TermsAndConditionsComponent
   },
   // {
   //   path:'wishlist',
   //   component:WishlistComponent
   // },
   {
-    path:'shipping-and-delivery',
-    component:ShippingAndDeliveryComponent
+    path: 'shipping-and-delivery',
+    component: ShippingAndDeliveryComponent
   },
   {
-    path:'checkout',
-    component:CheckoutComponent
+    path: 'checkout',
+    component: CheckoutComponent
   },
   {
-    path:'blogs',
-    component:BlogsComponent
+    path: 'blogs',
+    component: BlogsComponent
   },
   {
-    path:'blogs/:name',
-    component:DetailBlogComponent
+    path: 'blogs/:slug',
+    component: DetailBlogComponent
   },
   {
-    path:'dashboard',
-    component:DashboardComponent,
-    children:[
-      {path:"manage-products",component:ManageProductsComponent},
-      {path:"flash-sales",component:FlashSalesComponent},
-      {path:"vouchers",component:VouchersComponent},
-      {path:"orders",component:ManageOrdersComponent},
-      {path:":title",component:ManageAccountsComponent}
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+      { path: "manage-products", component: ManageProductsComponent },
+      { path: "flash-sales", component: FlashSalesComponent },
+      { path: "vouchers", component: VouchersComponent },
+      { path: "orders", component: ManageOrdersComponent },
+      {path: 'editor-blog',component: EditorBlogComponent},
+      { path: ":title", component: ManageAccountsComponent },
+      
     ]
   },
+
   {
-    path:'orders',
-    component:OrdersComponent
+    path: 'orders',
+    component: OrdersComponent
   },
   {
-    path:'bill/:bid',
-    component:DetailBillComponent
+    path: 'bill/:bid',
+    component: DetailBillComponent
   },
   {
-    path:'page-not-found',
-    component:PageNotFoundComponent
+    path: 'page-not-found',
+    component: PageNotFoundComponent
   },
   {
-    path:'**',
-    redirectTo:'/page-not-found'
+    path: '**',
+    redirectTo: '/page-not-found'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
+  imports: [RouterModule.forRoot(routes, {
     onSameUrlNavigation: 'ignore'
   })],
   exports: [RouterModule]

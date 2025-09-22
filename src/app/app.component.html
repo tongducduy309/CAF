@@ -1,6 +1,3 @@
-
-<nz-spin [nzSpinning]="loading" nzSize="large" [nzTip]="'LOADING...' | translate">
-  <app-header [(total)]="total" [(user)]="user" ></app-header>
-  <router-outlet (activate)="change($event)"></router-outlet>
-  <app-footer ></app-footer>
-</nz-spin>
+<app-header [(total)]="total" [(user)]="user"></app-header>
+<router-outlet (activate)="change($event)"></router-outlet>
+<app-footer></app-footer>

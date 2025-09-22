@@ -1,0 +1,31 @@
+<div class="box-editor-markdown" #box>
+    <div class="header">
+        <span>{{index}}.</span>
+        <div>
+            <button nz-button nzType="text" nzShape="circle" (click)="up()" [disabled]="index==1">
+                <nz-icon nzType="arrow-up" nzTheme="outline" />
+            </button>
+            <button nz-button nzType="text" nzShape="circle" (click)="down()" [disabled]="index==maxBox">
+                <nz-icon nzType="arrow-down" nzTheme="outline" />
+            </button>
+            <button nz-button nzType="text" nzShape="circle" (click)="remove()">
+                <nz-icon nzType="close" nzTheme="outline" />
+            </button>
+        </div>
+    </div>
+    <div class="toolbar">
+        <button nz-button nzType="text" nzShape="circle" nz-tooltip nzTooltipTitle="Toggle Heading" nzTooltipPlacement="bottom" (click)="applyBold(textarea)">
+            <nz-icon nzType="font-size" nzTheme="outline" />
+        </button>
+        <button nz-button nzType="text" nzShape="circle" nz-tooltip nzTooltipTitle="Bold" nzTooltipPlacement="bottom" (click)="applyBold(textarea)">
+            <nz-icon nzType="bold" nzTheme="outline" />
+        </button>
+        <button nz-button nzType="text" nzShape="circle" nz-tooltip nzTooltipTitle="Italicize" nzTooltipPlacement="bottom" (click)="applyItalicize(textarea)">
+            <nz-icon nzType="italic" nzTheme="outline" />
+        </button>
+    </div>
+    
+    <textarea [(ngModel)]="text" (ngModelChange)="textChange.emit($event)" maxlength="65535" #textarea spellcheck="false"></textarea>
+    <div style="margin-top: 10px;text-align: end;">{{text.length}}/65.535</div>
+    <div class="resizer-bottom" (mousedown)="startResize($event, box)"></div>
+</div>

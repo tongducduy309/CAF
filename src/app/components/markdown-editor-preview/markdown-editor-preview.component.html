@@ -1,0 +1,33 @@
+
+
+<div class="toolbar">
+    <div>
+        <button nz-button nzType="default" (click)="new()">
+            <nz-icon nzType="plus" nzTheme="outline" />
+            New
+        </button>
+    </div>
+    <div>
+        <button nz-button nzType="primary" (click)="save()">
+            <nz-icon nzType="save" nzTheme="outline" />
+            Save
+        </button>
+    </div>
+
+    <!-- <nz-divider></nz-divider> -->
+</div>
+
+<nz-segmented [nzOptions]="options" [(ngModel)]="selectedValue" (ngModelChange)="handleModelChange($event)" />
+
+@if (selectedValue=='Preview') {
+<div class="preview markdown-body">
+    <markdown [data]="text"></markdown>
+</div>
+}@else{
+<div>
+    @for (box of boxes; track $index;let i=$index) {
+    <app-box-editor-markdown [index]="i+1" [text]="box" [maxBox]="boxes.length" (textChange)="boxes[i]=$event" (onIndexChange)="changeIndex($event)" (onRemove)="remove($event)" 
+        class="box-editor-markdown"></app-box-editor-markdown>
+    }
+</div>
+}
