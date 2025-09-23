@@ -1,4 +1,5 @@
-<section class="all-products" style="padding-bottom: 80px;">
+<app-loading [loading]="loading">
+  <section class="all-products" style="padding-bottom: 80px;">
   <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
     <ng-template #tpl>
       <span nz-icon nzType="up-circle" nzTheme="fill" style="font-size: 30px; color: #262626;"></span>
@@ -10,26 +11,7 @@
       <div style="padding: 20px;display: flex;justify-content: space-between;"><span>{{ 'ALL_PRODUCTS.FILTER.TITLE' | translate }}</span><span style="cursor: pointer;" (click)="removeFilters()" *ngIf="n_filters>0">{{ 'ALL_PRODUCTS.FILTER.REMOVE_FILTER' | translate }}</span></div>
       <div class="filter-form">
 
-        <!-- <div class="filter" *ngFor="let cate of categories">
-          <nz-collapse nzExpandIconPosition="right">
-            <nz-collapse-panel
-              [nzHeader]="cate.name"
-              nzActive="true"
-              [nzExtra]="extraTpl1"
-              (nzActiveChange) = "panels[1].active = !panels[1].active"
-              [nzShowArrow] = "false"
-            >
-              <ul>
-                <li *ngFor="let value of cate.values" (click)="remote('all-products/'+value.name_id)">
-                  {{value.name}}
-                </li>
-              </ul>
-              <ng-template #extraTpl1>
-                <span nz-icon [nzType]="panels[1].active?'minus':'plus'"></span>
-              </ng-template>
-            </nz-collapse-panel>
-        </nz-collapse>
-        </div> -->
+        
 
 
         <div class="filter">
@@ -129,3 +111,5 @@
     </div>
   </div>
 </section>
+
+</app-loading>

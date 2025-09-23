@@ -15,7 +15,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./all-products.component.scss'],
     standalone: false
 })
-export class AllProductsComponent extends Page implements OnInit  {
+export class AllProductsComponent implements OnInit  {
 
   color_text = '#262626';
 
@@ -43,12 +43,14 @@ export class AllProductsComponent extends Page implements OnInit  {
     trend: new FormControl('')
   });
 
+  loading=true
+
   private pageTitle = inject(PageTitleService);
 
 
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService, 
       private productService:ProductService, private breakpointService: BreakpointService) {
-    super();
+
     // this.route.queryParamMap.subscribe(async params => {
     //   const cid = parseInt(params.get('cid')||'-1')
     //   if (cid!=-1){
@@ -60,36 +62,19 @@ export class AllProductsComponent extends Page implements OnInit  {
     // });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.pageTitle.setTitle('ALL_PRODUCTS.TITLE');
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });
 
-    this.getAllProducts();
-    this.getCategories();
-  }
+    try {
+      const [products, categories] = await Promise.all([
+        this.productService.getAllProducts(),
+        this.getCategories()
+      ]);
 
-  getAllProducts(){
-    // this.crud.get("products","all").subscribe((res:any)=>{
-    //   for (let p of res.data){
-    //     if (!(p.cid in this.products)){
-    //       this.products[p.cid] = [p]
-    //       this.name_cate_products.push({name:p.c_name,id:p.cid})
-    //     }
-    //     else {
-    //       this.products[p.cid].push(p)
-    //     }
-    //   }
-    //   // this.products=products
-    //   this.products_v={...this.products}
-    //   this.loaded()
-    //   console.log(this.products);
-    // })
-
-    this.productService.getAllProducts().then((res:ProductResponse[])=>{
-   
-      for (let p of res){
+      for (let p of products){
         if (!(p.category.id in this.products)){
           this.products[p.category.id] = [p]
           this.name_cate_products.push({name:p.category.name,id:p.category.id})
@@ -98,35 +83,37 @@ export class AllProductsComponent extends Page implements OnInit  {
           this.products[p.category.id].push(p)
         }
       }
-      // this.products=products
       this.products_v={...this.products}
-      console.log(res);
-      this.loaded()
-    }).catch(err=>{
-      this.main.createNotification("error",err.message)
-    })
+      this.categories = categories;
+    } catch (err) {
+      const errorMessage = (err && typeof err === 'object' && 'message' in err) ? (err as any).message : String(err);
+      this.main.createNotification("error", errorMessage);
+    } finally {
+      this.loading = false;
+    }
+
   }
 
-  getCategories(){
-
-    this.crud.get("categories","all").subscribe((res:any)=>{
-      // this.categories.drinks = categories.filter((category:any)=>category.type==0)
-      // this.categories.food = categories.filter((category:any)=>category.type==1)
-      this.categories = res.data
-      for (let c of this.categories){
-        this.filters_value.category.push(false)
-      }
-      // this.categories=categories
-      // console.log(categories);
-      this.loaded()
-    })
+  getCategories(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this.crud.get("categories", "all").subscribe({
+        next: (res: any) => {
+          const categories = res.data;
+          for (let c of categories) {
+            this.filters_value.category.push(false);
+          }
+          resolve(categories);
+        },
+        error: (err: any) => {
+          this.main.createNotification("error", err.message);
+          resolve([]);
+        }
+      });
+    });
   }
 
   panels = [true,true,true];
 
-  log(values: string[]): void {
-    console.log(values);
-  }
 
   changePrice(price:any){
 
@@ -298,7 +285,7 @@ export class AllProductsComponent extends Page implements OnInit  {
   }
 
   AddToCart(product:any){
-    this.addToCart(product)
+    // this.addToCart(product)
   }
 
 
