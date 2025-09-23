@@ -49,7 +49,6 @@ export class AllProductsComponent extends Page implements OnInit  {
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService, 
       private productService:ProductService, private breakpointService: BreakpointService) {
     super();
-    this.must_load=2
     // this.route.queryParamMap.subscribe(async params => {
     //   const cid = parseInt(params.get('cid')||'-1')
     //   if (cid!=-1){

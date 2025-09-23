@@ -22,6 +22,8 @@ export class HomeComponent extends Page implements OnInit{
   ]
   namepush = ''
 
+  loading = true
+
   products_best_discount: any = []
 
   products_by_cate: any = {}
@@ -65,8 +67,8 @@ export class HomeComponent extends Page implements OnInit{
       }
 
       console.log(this.products_by_cate);
-      this.loaded()
-    });
+      
+    },()=>{},()=>{this.loading = false});
 
   }
 

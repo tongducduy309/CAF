@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
 import { PageTitleService } from 'src/app/services/page-title.service';
@@ -8,10 +8,10 @@ import { PageTitleService } from 'src/app/services/page-title.service';
     styleUrls: ['./about-us.component.scss'],
     standalone: false
 })
-export class AboutUsComponent extends Page implements AfterViewInit,OnInit{
+export class AboutUsComponent implements OnInit{
   private pageTitle = inject(PageTitleService);
   constructor(private location:Location){
-    super()
+
   }
   ngOnInit(): void {
     this.pageTitle.setTitle('ABOUT_US.TITLE');
@@ -20,11 +20,4 @@ export class AboutUsComponent extends Page implements AfterViewInit,OnInit{
     this.location.back();
   }
 
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      // this.getUser()
-      this.loaded()
-    })
-
-  }
 }

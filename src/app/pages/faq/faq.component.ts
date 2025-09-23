@@ -8,7 +8,7 @@ import { PageTitleService } from 'src/app/services/page-title.service';
     styleUrls: ['./faq.component.scss'],
     standalone: false
 })
-export class FaqComponent extends Page implements AfterViewInit,OnInit{
+export class FaqComponent implements OnInit{
   panels = {
     "col_1":[
       {
@@ -115,7 +115,7 @@ Hiện tại Coffee Store đã ngưng phát hành thẻ cứng, bạn vui lòng 
   };
   private pageTitle = inject(PageTitleService);
   constructor(private location:Location){
-    super();
+
   }
 
   ngOnInit(): void {
@@ -123,12 +123,5 @@ Hiện tại Coffee Store đã ngưng phát hành thẻ cứng, bạn vui lòng 
   }
   back(){
     this.location.back();
-  }
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      // this.getUser()
-      this.loaded()
-    })
-
   }
 }

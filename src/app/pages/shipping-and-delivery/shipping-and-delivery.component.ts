@@ -8,23 +8,14 @@ import { Location } from '@angular/common';
   styleUrl: './shipping-and-delivery.component.scss',
   standalone: false
 })
-export class ShippingAndDeliveryComponent extends Page implements AfterViewInit,OnInit{
+export class ShippingAndDeliveryComponent implements OnInit{
   private pageTitle = inject(PageTitleService);
   constructor(private location:Location){
-    super()
   }
   ngOnInit(): void {
     this.pageTitle.setTitle('SHIPPING_AND_DELIVERY.TITLE');
   }
   back(){
     this.location.back();
-  }
-
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      // this.getUser()
-      this.loaded()
-    })
-
   }
 }

@@ -17,7 +17,6 @@ export class CartComponent extends Page{
   user:any={}
   constructor(private location:Location, public main:MainService, private crud:CrudService,private router:Router, private userS:UserService){
     super()
-    this.must_load = 1
   }
   ngOnInit(): void {
     this.checkUser()

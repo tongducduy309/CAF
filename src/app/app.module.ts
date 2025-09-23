@@ -68,6 +68,7 @@ import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/ship
 import { MarkdownEditorPreviewComponent } from './components/markdown-editor-preview/markdown-editor-preview.component';
 import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { BoxEditorMarkdownComponent } from './components/markdown-editor-preview/box-editor-markdown/box-editor-markdown.component';
+import { LoadingComponent } from './components/loading/loading.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -92,7 +93,8 @@ export let components: any = [
   Product1Component,
   MarkdownPageComponent,
   MarkdownEditorPreviewComponent,
-  BoxEditorMarkdownComponent
+  BoxEditorMarkdownComponent,
+  LoadingComponent
 ]
 
 export let pages = [

@@ -45,7 +45,6 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
     super()
-    this.must_load = 2
   }
 
   ngAfterViewInit(): void {

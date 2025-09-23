@@ -6,10 +6,9 @@ export class Page {
   @Output() LoadingEmitter= new EventEmitter()
   @Output() changeQuantityEmitter= new EventEmitter()
   @Output() UserEmitter= new EventEmitter()
-  must_load = 0
+  must_load=1
   constructor (){
     this.LoadingEmitter.emit(true)
-    document.body.style.overflow = 'hidden'
   }
 
 
@@ -21,12 +20,6 @@ export class Page {
 
 
   loaded(){
-    this.must_load--;
-    if (this.must_load<=0){
-      this.LoadingEmitter.emit(false)
-      // console.log(this.must_load);
-      document.body.style.overflow = 'auto'
-    }
 
 
   }
