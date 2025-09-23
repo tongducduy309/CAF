@@ -3,7 +3,7 @@ import { AuthenticationService } from './authentication.service';
 import { environment } from 'src/environments/environment';
 import axios from 'axios';
 import { CreateBlogRequest } from '../dto/request/Blog';
-import { ResponseObject } from '../models/ResponseObject';
+import { ResponseObject } from '../models/responseObject.model';
 import { BlogHTMLResponse } from '../dto/response/BlogResponse';
 import { parseLocalDateTime } from '../utils/Date';
 

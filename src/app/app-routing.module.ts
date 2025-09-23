@@ -29,6 +29,7 @@ import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.compo
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
 import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -45,6 +46,7 @@ export const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'account/login',

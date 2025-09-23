@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,7 +9,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
@@ -70,8 +70,15 @@ import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { BoxEditorMarkdownComponent } from './components/markdown-editor-preview/box-editor-markdown/box-editor-markdown.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ImageComponent } from './components/image/image.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthenticationService } from './services/authentication.service';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
+
+
+export function initAuth(auth: AuthenticationService) {
+  return async () => (await auth.checkAuth()).toPromise(); // or firstValueFrom(auth.checkAuth())
+}
 
 export let components: any = [
   HeaderComponent,
@@ -164,6 +171,13 @@ export function httpLoaderFactory(http: HttpClient) {
       // useHttpBackend: false,
     }),
     provideHttpClient(withInterceptorsFromDi()),
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initAuth,
+      deps: [AuthenticationService],
+      multi: true
+    }
     
   ]
 })

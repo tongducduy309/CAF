@@ -1,8 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { AuthenticationRequest } from '../dto/request/Authentication';
 import { UserRequest } from '../dto/request/UserRequest';
+import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
+import { User } from '../models/user.model';
+import { ResponseObject } from '../models/responseObject.model';
+import { Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +15,16 @@ export class AuthenticationService {
 
   private apiClient: any;
 
-  constructor() {
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+  private router = inject(Router)
 
+  constructor() {
+    const token = this.getAccessToken()
+
+    if (!token) {
+      this.userSubject.next(null);
+    }
     const BASE_URL = environment.variable_global.BASE_URL;
     const API_URL = environment.variable_global.API_URL;
     if (!BASE_URL && !API_URL) {
@@ -27,7 +39,7 @@ export class AuthenticationService {
     });
 
     this.apiClient.interceptors.request.use((config: any) => {
-      const token = this.getAccessToken()
+      
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
@@ -35,6 +47,19 @@ export class AuthenticationService {
     }, (error: any) => {
       return Promise.reject(error);
     });
+  }
+
+  async checkAuth(): Promise<Observable<User | null>> {
+    return from(this.apiClient.get('/me')).pipe(
+      map((response:any) => response.data),
+      tap(user => {
+        this.userSubject.next(user);
+      }),
+      catchError(err => {
+        this.userSubject.next(null);
+        return of(null);
+      })
+    );
   }
 
   getAccessToken(): string | null {
@@ -66,6 +91,14 @@ export class AuthenticationService {
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+
+  logout(redirectToLogin = true) {
+    localStorage.removeItem('access_token');
+    this.userSubject.next(null);
+    if (redirectToLogin) {
+      this.router.navigate(['']);
     }
   }
 }

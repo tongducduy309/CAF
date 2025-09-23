@@ -5,6 +5,7 @@ import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { LangService } from 'src/app/services/lang.service';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
     selector: 'app-header',
@@ -13,6 +14,9 @@ import { BreakpointService } from 'src/app/services/breakpoint.service';
     standalone: false
 })
 export class HeaderComponent implements OnInit{
+  auth = inject(AuthenticationService)
+  user$ = this.auth.user$;
+  
   itemsCart:any = []
   @Input() total = 0
   @Output() totalChange = new EventEmitter()
@@ -39,13 +43,14 @@ export class HeaderComponent implements OnInit{
 
   private lang = inject(LangService);
 
-  isMenu=true;
+  isMenu=false;
 
 
   constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService,private breakpointService: BreakpointService){
 
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    (await this.auth.checkAuth()).subscribe();
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });
@@ -145,10 +150,8 @@ export class HeaderComponent implements OnInit{
 
     })
   }
-  account(){
-    if (this.userS.isVerify==false){
-      this.router.navigate(["account/login"])
-    }
+  profile(){
+    this.router.navigate(["account"])
   }
 
   // visible = false;
@@ -258,8 +261,7 @@ export class HeaderComponent implements OnInit{
   }
 
   logout(){
-    this.userS.logout()
-    this.user = null
+    this.auth.logout(true)
     this.total = 0
   }
 

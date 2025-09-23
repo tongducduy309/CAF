@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { debounceTime, fromEvent, map, throttleTime } from 'rxjs';
-import { Product } from 'src/app/models/Product';
+import { Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
