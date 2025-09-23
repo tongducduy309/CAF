@@ -1,27 +1,53 @@
-# CoffeeAndTea
+# ☕ Coffee Store (Version 2)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+Ứng dụng web **Coffee Store (Coffee And Tea)** được phát triển bằng **Angular 19**, triển khai qua **Docker**, hỗ trợ chạy trực tiếp trên **Vercel**.  
 
-## Development server
+👉 Demo: [caf-bay.vercel.app](https://caf-bay.vercel.app)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+👉 Backend: [Java Spring Boot](https://github.com/tongducduy309/API_JSB_CoffeeStore)
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🚀 Tính năng
+- Giao diện web hiện đại với Angular.
+- Quản lý cấu hình qua Docker & docker-compose.
+- Deploy dễ dàng trên server hoặc nền tảng cloud (Vercel, Docker host).
+- Hiển thị trên nhiều ngôn ngữ (Tiếng Anh, Tiếng Việt,...)
+- Thiết kế giao diện hiển thị trên nhiều thiết bị
+- Cho phép thực hiện thanh toán Online
+- Giao tiếp Backend bằng Axios
+---
 
-## Build
+## 🛠 Công nghệ
+- [Angular 19](https://angular.io/)  
+- [Java Spring Boot](https://docs.spring.io/spring-boot/)
+- [TypeScript](https://www.typescriptlang.org/)  
+- [SCSS](https://sass-lang.com/)  
+- [Docker](https://www.docker.com/)  
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📦 Cài đặt & chạy
 
-## Running end-to-end tests
+### 1. Clone dự án
+```bash
+git clone https://github.com/tongducduy309/CAF.git
+cd CAF
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+### 2. Cài đặt dependencies
+```bash
+npm install
+```
 
-## Further help
+### 3. Chạy dev server
+```bash
+npm start
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## 👨‍💻 Tác giả
+- Tống Đức Duy
+- Lê Trung Kiên
+- Lê Bùi Minh Khoa
