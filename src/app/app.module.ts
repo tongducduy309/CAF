@@ -69,6 +69,7 @@ import { MarkdownEditorPreviewComponent } from './components/markdown-editor-pre
 import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { BoxEditorMarkdownComponent } from './components/markdown-editor-preview/box-editor-markdown/box-editor-markdown.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ImageComponent } from './components/image/image.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -94,7 +95,8 @@ export let components: any = [
   MarkdownPageComponent,
   MarkdownEditorPreviewComponent,
   BoxEditorMarkdownComponent,
-  LoadingComponent
+  LoadingComponent,
+  ImageComponent
 ]
 
 export let pages = [

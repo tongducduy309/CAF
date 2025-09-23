@@ -49,9 +49,6 @@ export class Product2Component implements OnInit{
     this.isFormAddToCart = true
   }
 
-  onImgError(event: Event) {
-  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
-}
 
 
 }

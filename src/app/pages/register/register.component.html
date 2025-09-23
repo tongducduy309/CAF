@@ -47,7 +47,7 @@
     </div>
 
     <div class="group border-top border-right border-left border-bottom" style="padding: 15px 20px;">
-        <button nz-button nzType="primary" class="btnSendMess" (click)="SendMess_Register()" [disabled]="processing">
+        <button nz-button nzType="primary" class="btnSendMess" (click)="SendMess_Register()" [disabled]="loading">
             {{'REGISTER.REGISTER_BUTTON' | translate}}
             <nz-icon nzType="arrow-right"></nz-icon>
         </button>

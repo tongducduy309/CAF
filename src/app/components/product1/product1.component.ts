@@ -21,7 +21,4 @@ export class Product1Component {
     
   }
 
-  onImgError(event: Event) {
-  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
-}
 }

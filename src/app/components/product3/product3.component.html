@@ -3,7 +3,10 @@
   <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
   </div>
   <div style="display: flex;justify-content: center;align-items: center;"><a
-      [href]="'products/'+this.product.nameId"><img [src]="FILE_URL + product.img" (error)="onImgError($event)" alt=""></a></div>
+      [href]="'products/'+this.product.nameId">
+ 
+      <image [src]="FILE_URL + product.img"></image>
+    </a></div>
   <div class="icon" style="display: flex;flex-direction: column;justify-content: space-between;">
     <!-- <span nz-icon nzType="heart" [nzTheme]="isFavorite?'fill':'outline'" (click)="isFavorite=!isFavorite"></span> -->
     <!-- <button nz-button nzType="text" nzShape="circle">
@@ -27,12 +30,14 @@
   </div>
   <div class="select">
     <div>
-      <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize"
+      @if(product.variants){
+        <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize"
         [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
         @for (variant of product.variants; track $index;let i = $index) {
         <nz-option [nzValue]="variant.id" [nzLabel]="variant.size"></nz-option>
         }
       </nz-select>
+      }
     </div>
   </div>
   <div nz-row class="group"

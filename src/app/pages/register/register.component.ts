@@ -13,7 +13,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./register.component.scss'],
     standalone: false
 })
-export class RegisterComponent extends Page implements OnInit,AfterViewInit {
+export class RegisterComponent implements OnInit{
 
   submited = false
 
@@ -26,53 +26,13 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
 
   passwordVisible=false
 
-  processing=false
+  loading=false
 
   constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, 
     private main:MainService,
   private userService:UserService) {
 
-    super()
-    // this.must_load = 1
-    // this.routed.queryParamMap.subscribe(params => {
-    //   const token = params.get('token')
-    //   this.must_load++
-    //   console.log(token);
-    //   if (token!=null){
-    //     this.crud.verifyUser(token).then(response => response.json())
-    //     .then(async data=> {
-    //       if(data.result=='Success'){
-    //         console.log("Xác thực thành công");
-    //         this.user =  await this.userS.login_method_1(token)
-    //         this.UserEmitter.emit(this.user)
-    //         this.router.navigate([''])
-    //         this.loaded()
-    //       }
-    //       else{
-    //         if(data.result=='Verified'){
-    //           this.user=await this.userS.login_method_1(token)
 
-    //           this.UserEmitter.emit(this.user)
-    //           this.router.navigate([''])
-    //         }
-    //       }
-    //       // console.log(data);
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //     });
-    //   }
-    //   else{
-    //     this.loaded()
-    //   }
-
-    // });
-
-  }
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      this.loaded()
-    })
   }
 
   ngOnInit(): void {
@@ -129,7 +89,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       this.createNotification('info', 'Xác nhận mật khẩu phải trùng khớp với mật khẩu đã điền');
       return;
     }
-    this.processing=true
+    this.loading=true
     this.userService.register({
       email:this.user.email,
       fullname:this.user.fullname,
@@ -143,7 +103,7 @@ export class RegisterComponent extends Page implements OnInit,AfterViewInit {
       this.main.createNotification("error",e.message)
     })
     .finally(()=>{
-      this.processing=false
+      this.loading=false
     })
 
 
