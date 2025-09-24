@@ -34,19 +34,20 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  {
-  path: '',
-  component: PublicLayoutComponent,
-  children: [
-    { path: 'home', component: HomeComponent }, 
-  ]
-},
   
+  {
+    path: '',
+    component: PublicLayoutComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+    ]
+  },
+
   {
     path: 'account',
     component: AccountComponent,
-    canActivate:[AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'account/login',
@@ -140,9 +141,9 @@ export const routes: Routes = [
       { path: "flash-sales", component: FlashSalesComponent },
       { path: "vouchers", component: VouchersComponent },
       { path: "orders", component: ManageOrdersComponent },
-      {path: 'editor-blog',component: EditorBlogComponent},
+      { path: 'editor-blog', component: EditorBlogComponent },
       { path: ":title", component: ManageAccountsComponent },
-      
+
     ]
   },
 
@@ -168,7 +169,7 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     onSameUrlNavigation: 'ignore',
     preloadingStrategy: PreloadAllModules,
-    
+
   })],
   exports: [RouterModule]
 })
