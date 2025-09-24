@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { ProductResponse } from 'src/app/dto/response/ProductResponse';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
+import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';
 import { ProductService } from 'src/app/services/product.service';
 import { CrudService } from 'src/services/crud.service';
@@ -46,6 +47,7 @@ export class AllProductsComponent implements OnInit  {
   loading=true
 
   private pageTitle = inject(PageTitleService);
+  private layoutService = inject(LayoutService)
 
 
   constructor(private crud:CrudService, private router:Router, private route: ActivatedRoute, private main:MainService, 
@@ -89,6 +91,7 @@ export class AllProductsComponent implements OnInit  {
       const errorMessage = (err && typeof err === 'object' && 'message' in err) ? (err as any).message : String(err);
       this.main.createNotification("error", errorMessage);
     } finally {
+      this.layoutService.setReady()
       this.loading = false;
     }
 

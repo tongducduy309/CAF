@@ -2,6 +2,7 @@ import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
 import { PageTitleService } from 'src/app/services/page-title.service';
+import { LayoutService } from 'src/app/services/layout.service';
 @Component({
     selector: 'app-faq',
     templateUrl: './faq.component.html',
@@ -114,12 +115,14 @@ Hiện tại Coffee Store đã ngưng phát hành thẻ cứng, bạn vui lòng 
     ]
   };
   private pageTitle = inject(PageTitleService);
+  private layoutService = inject(LayoutService)
   constructor(private location:Location){
 
   }
 
   ngOnInit(): void {
     this.pageTitle.setTitle('FAQ.TITLE');
+    this.layoutService.setReady()
   }
   back(){
     this.location.back();

@@ -18,3 +18,7 @@
 ::ng-deep .ant-spin-blur{
   opacity: 0;
 }
+
+.no-scroll {
+  overflow: hidden !important;
+}

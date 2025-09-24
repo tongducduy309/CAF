@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
@@ -9,6 +9,7 @@ import { MainService } from 'src/services/main.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Location } from '@angular/common';
 import { Auth } from 'src/app/models/user.model';
+import { LayoutService } from 'src/app/services/layout.service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -27,20 +28,20 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
 
   processing = false
 
+  private layoutService = inject(LayoutService)
+
   constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService, 
     private AuthenticationService:AuthenticationService, private location:Location) {
     super()
     // this.must_load=1
   }
+  ngAfterViewInit(): void {
+    this.layoutService.setReady()
+  }
 
   user=null
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      // this.getUser()
-      this.loaded()
-    })
 
-  }
+
 
   ngOnInit(): void {
 
@@ -50,6 +51,7 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
       this.isFormLogin=(params.get('param')==null);
       // this.loaded()
     })
+    
   }
 
   async submit(){

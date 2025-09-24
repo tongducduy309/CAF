@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Page } from 'src/app/classes/page';
 import { Location } from '@angular/common';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
     selector: 'app-account',
@@ -21,6 +22,8 @@ export class AccountComponent extends Page implements OnInit {
   address_user_choosing:any = null
 
   changing_fullname = false
+
+  private layoutService = inject(LayoutService)
 
   constructor(private location:Location, private main:MainService, private userS:UserService, private router:Router, private crud:CrudService){
     super()
@@ -63,6 +66,8 @@ export class AccountComponent extends Page implements OnInit {
       }
 
 
+    }).finally(()=>{
+      this.layoutService.setReady()
     });
 
 

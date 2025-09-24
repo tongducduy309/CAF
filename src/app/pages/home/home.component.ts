@@ -2,6 +2,7 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { Route, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { LangService } from 'src/app/services/lang.service';
+import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';
 import { CrudService } from 'src/services/crud.service';
 
@@ -41,6 +42,8 @@ export class HomeComponent extends Page implements OnInit{
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
     super()
   }
+
+  layoutService = inject(LayoutService)
   ngOnInit(): void {
     this.pageTitle.setTitle('HOME.TITLE');
     this.animationFirstSectionContent();
@@ -68,7 +71,7 @@ export class HomeComponent extends Page implements OnInit{
 
       console.log(this.products_by_cate);
       
-    },()=>{},()=>{this.loading = false});
+    },()=>{},()=>{this.layoutService.setReady();});
 
   }
 

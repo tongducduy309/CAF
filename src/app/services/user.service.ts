@@ -3,6 +3,8 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { UserRequest } from '../dto/request/UserRequest';
 import { AuthenticationService } from './authentication.service';
+import { catchError, from, map, Observable, of, tap } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,17 +39,16 @@ export class UserService {
     });
   }
 
-  async register(userRequest:UserRequest): Promise<string> {
-    try {
-      const { data } = await this.apiClient.post(``, userRequest, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      return data.data;
-    } catch (err: unknown) {
-
-      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+  async getProfile(): Promise<Observable<User | null>> {
+      return from(this.apiClient.get('/profile')).pipe(
+        map((response: any) => response.data),
+        tap(user => {
+          return user
+        }),
+        catchError(err => {
+          return of(null);
+        })
+      );
     }
-  }
+
 }

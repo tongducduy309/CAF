@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Page } from 'src/app/classes/page';
+import { Component, inject, OnInit } from '@angular/core';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
     selector: 'app-page-not-found',
@@ -7,11 +7,11 @@ import { Page } from 'src/app/classes/page';
     styleUrls: ['./page-not-found.component.scss'],
     standalone: false
 })
-export class PageNotFoundComponent extends Page implements OnInit{
+export class PageNotFoundComponent implements OnInit{
+  private layoutService = inject(LayoutService)
   constructor (){
-    super()
   }
-  ngOnInit(): void {
-    this.loaded()
+  ngOnInit(): void {  
+    this.layoutService.setReady()
   }
 }

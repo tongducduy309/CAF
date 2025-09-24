@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Page } from 'src/app/classes/page';
 import { UserRequest } from 'src/app/dto/request/UserRequest';
+import { AuthenticationService } from 'src/app/services/authentication.service';
+import { LayoutService } from 'src/app/services/layout.service';
 import { UserService } from 'src/app/services/user.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
@@ -13,7 +15,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./register.component.scss'],
     standalone: false
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit,AfterViewInit{
 
   submited = false
 
@@ -28,11 +30,16 @@ export class RegisterComponent implements OnInit{
 
   loading=false
 
+  private layoutService = inject(LayoutService)
+
   constructor(private crud:CrudService,private notification: NzNotificationService, public router:Router, private routed: ActivatedRoute, 
     private main:MainService,
-  private userService:UserService) {
+  private authService:AuthenticationService) {
 
 
+  }
+  ngAfterViewInit(): void {
+    this.layoutService.setReady()
   }
 
   ngOnInit(): void {
@@ -90,7 +97,7 @@ export class RegisterComponent implements OnInit{
       return;
     }
     this.loading=true
-    this.userService.register({
+    this.authService.register({
       email:this.user.email,
       fullname:this.user.fullname,
       password:this.user.password,

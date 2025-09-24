@@ -1,2 +1,3 @@
-
-<router-outlet (activate)="change($event)"></router-outlet>
+<app-loading [loading]="(loading$ | async) ?? false">
+    <router-outlet></router-outlet>
+</app-loading>

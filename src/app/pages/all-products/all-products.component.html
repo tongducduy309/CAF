@@ -1,5 +1,4 @@
-<app-loading [loading]="loading">
-  <section class="all-products" style="padding-bottom: 80px;">
+<section class="all-products" style="padding-bottom: 80px;">
   <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
     <ng-template #tpl>
       <span nz-icon nzType="up-circle" nzTheme="fill" style="font-size: 30px; color: #262626;"></span>
@@ -107,9 +106,7 @@
 
       </div>
 
-      <h3 class="title" *ngIf="name_cate_products.length==0">{{ 'ALL_PRODUCTS.NO_PRODUCTS' | translate }}</h3>
+      <h3 class="title" *ngIf="!loading&&name_cate_products.length==0">{{ 'ALL_PRODUCTS.NO_PRODUCTS' | translate }}</h3>
     </div>
   </div>
 </section>
-
-</app-loading>

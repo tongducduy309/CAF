@@ -6,6 +6,10 @@ import { UserService } from 'src/services/user.service';
 import { Title } from '@angular/platform-browser';
 import { inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadingService } from './services/loading.service';
+import { LayoutService } from './services/layout.service';
+import { Subscription, take, timer } from 'rxjs';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 @Component({
     selector: 'app-root',
@@ -21,27 +25,55 @@ export class AppComponent{
   user:any=null;
   total = 0
 
+  loading$ = this.loadingService.loading$;
+  private subs = new Subscription();
+
+  readonly READY_FALLBACK = 8000;
+
   // private router = inject(Router);
   // private activatedRoute = inject(ActivatedRoute);
   private title = inject(Title);
   private translate = inject(TranslateService);
 
-  constructor (private crud:CrudService, private main:MainService, private userS:UserService){
-    // this.getItemsCart()
-    // this.router.events.pipe(
-    //   filter(e => e instanceof NavigationEnd),
-    //   map(() => this.activatedRoute),
-    //   map(route => {
-    //     while (route.firstChild) route = route.firstChild;
-    //     return route;
-    //   }),
-    //   mergeMap(route => route.data)
-    // )
-    // .subscribe(data => {
-    //   const t = data['title'] as string;
-    //   if (t) this.title.setTitle(`${t}`);
-    // });
+  constructor (private crud:CrudService, private main:MainService, private userS:UserService, private loadingService: LoadingService,
+    private layoutService: LayoutService, private router: Router,){
+      this.subs.add(
+      this.router.events.subscribe(ev => {
+        if (ev instanceof NavigationStart) {
+          this.loadingService.show();
+        } else if (ev instanceof NavigationEnd || ev instanceof NavigationCancel || ev instanceof NavigationError) {
+         
+          const readySub = this.layoutService.ready$.pipe(take(1)).subscribe({
+            next: () => {
+              this.loadingService.hide();
+              readySub.unsubscribe();
+            },
+            error: () => {
+              this.loadingService.hide();
+              readySub.unsubscribe();
+            }
+          });
+
+          const t = timer(this.READY_FALLBACK).pipe(take(1)).subscribe(() => {
+            this.loadingService.hide();
+            try { readySub.unsubscribe(); } catch {}
+            t.unsubscribe();
+          });
+        }
+      })
+      
+    );
+
+    this.subs.add(
+        this.loadingService.loading$.subscribe(isLoading => {
+          if (isLoading) document.body.style.overflow = 'hidden'
+      else document.body.style.overflow = 'auto'
+        })
+      )
+    
   }
+
+  
 
   setTitle(key: string, params?: Record<string, any>) {
     this.translate.get(key, params).subscribe(translated => {
@@ -53,103 +85,5 @@ export class AppComponent{
 
 
 
-
-  change(componentRef:any){
-    componentRef.ItemsCartAddEmitter?.subscribe((res:any)=>{
-
-      if (this.user){
-        if (this.user.role>0){
-          this.main.createNotification("info","Tài khoản admin/nhân viên không thể thực hiện thao tác này")
-          return
-        }
-        this.crud.addData("cart",{pid:res.id,uid:this.user.id,quantity:res.quantity*1,note:res.note}).then(response=>response.json()).then(data=>{
-          if (data.result='success'){
-
-            this.total+=res.quantity*1
-
-
-
-
-            this.main.createNotification("success","Thêm vào giỏ hàng thành công")
-          }
-          else{
-            this.main.createNotification("error","Thêm vào giỏ hàng thất bại")
-          }
-        })
-
-      }else{
-        this.main.createNotification("info","Đăng nhập để thêm sản phẩm vào giỏ hàng")
-      }
-
-      // this.putItemCartToSession(this.itemsCart)
-      console.log(res);
-    })
-    componentRef.LoadingEmitter?.subscribe((res:any)=>{
-      // console.log(this.loading);
-      this.loading=res
-
-    })
-    componentRef.UserEmitter?.subscribe((res:any)=>{
-      // console.log(res);
-      this.user = res
-
-    })
-
-    componentRef.totalEmitter?.subscribe((res:any)=>{
-      // console.log(res);
-      this.total = res
-
-    })
-
-  }
-
-  // async getUser():Promise<any>{
-
-  //   return new Promise(async (resolve, reject) => {
-  //     const token = this.main.getCookie("u-caf")
-
-  //     if(token){
-  //       const result = await this.userS.getUser(null,null,token)
-  //       if (result){
-  //         if (result.result=='Success'){
-  //           resolve({id:result.id})
-  //         }
-  //       }
-  //       resolve(null)
-
-
-  //     }
-
-
-  //   });
-
-
-  // }
-
-
-
-
-
-  // getItemsCart(){
-  //   // this.itemsCart = this.getItemsCartFromLocalStorage()
-
-  //   this.total = 0
-  //   this.subtotal=0
-
-  //   for (let ite of this.itemsCart){
-  //     this.total+=ite.quantity*1
-  //     this.subtotal+=ite.quantity*this.main.getPrice(ite)
-  //   }
-  // }
-
-  // getItemsCartFromLocalStorage(){
-  //   return JSON.parse(window.localStorage.getItem("caf-itemsCart") || '[]')
-  // }
-
-
-  // putItemCartToSession(items:any){
-  //   // console.log(items);
-  //   window.localStorage.setItem(`caf-itemsCart`,JSON.stringify(items))
-  // }
 
 }

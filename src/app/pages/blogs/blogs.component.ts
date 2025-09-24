@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
+import { LayoutService } from 'src/app/services/layout.service';
 @Component({
     selector: 'app-blogs',
     templateUrl: './blogs.component.html',
     styleUrls: ['./blogs.component.scss'],
     standalone: false
 })
-export class BlogsComponent extends Page implements OnInit {
-
+export class BlogsComponent implements OnInit {
+  private layoutService = inject(LayoutService)
   constructor(private location:Location){
-    super()
+
   }
   back(){
     this.location.back();
   }
 
   ngOnInit(): void {
-    this.loaded()
+    this.layoutService.setReady()
   }
 
   blogs = [
