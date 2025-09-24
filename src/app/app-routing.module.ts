@@ -34,19 +34,15 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
   path: '',
   component: PublicLayoutComponent,
   children: [
-    { path: '', component: HomeComponent }, 
+    { path: 'home', component: HomeComponent }, 
   ]
 },
-  // {
-  //   path: '',
-  //   redirectTo: '/home',
-  //   pathMatch: 'full',
-
-  // },
+  
   {
     path: 'account',
     component: AccountComponent,
@@ -171,7 +167,8 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     onSameUrlNavigation: 'ignore',
-    preloadingStrategy: PreloadAllModules
+    preloadingStrategy: PreloadAllModules,
+    
   })],
   exports: [RouterModule]
 })

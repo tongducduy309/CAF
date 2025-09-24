@@ -94,6 +94,12 @@ export class HomeComponent extends Page implements OnInit{
 
   }
 
+  onError(ev: any) {
+    console.error('Video error', ev);
+    // fallback: show poster only, or retry
+    // this.retryLoad();
+  }
+
   getBestCustomerReviews(){
     this.crud.get("best-customer-reviews","2").subscribe((res:any)=>{
       this.best_customer_reviews  = res.data
