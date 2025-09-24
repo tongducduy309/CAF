@@ -4,6 +4,7 @@ import { CartResponse } from '../dto/response/cart.response';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
 import axios from 'axios';
+import { UpdateQuantityCartRequest } from '../dto/request/cart.request';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,7 @@ export class CartService {
     return from(this.apiClient.get('/mycart')).pipe(
       map((response: any) => response.data),
       tap(cart => {
+        console.log(cart.data)
         this.cartSubject.next(cart.data);
       }),
       catchError(err => {
@@ -52,5 +54,29 @@ export class CartService {
         return of([]);
       })
     );
+  }
+
+  async updateQuantityInCart(id:string,updateQuantityCartRequest:UpdateQuantityCartRequest): Promise<CartResponse> {
+    try {
+      const { data } = await this.apiClient.patch(`/${id}`,updateQuantityCartRequest,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data as CartResponse;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+
+  async removeItemById(id:string): Promise<void> {
+    try {
+      const { data } = await this.apiClient.delete(`/${id}`);
+      
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+    }
   }
 }

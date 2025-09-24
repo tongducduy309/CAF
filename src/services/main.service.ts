@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
-  translate(arg0: never): string {
-    throw new Error('Method not implemented.');
-  }
 
-  constructor(private notification: NzNotificationService) { }
+  constructor(private notification: NzNotificationService, private translate:TranslateService) { }
 
   getPrice(item:any){
     if (!item) return 0
@@ -56,11 +54,10 @@ export class MainService {
     this.setCookie(name, '', -1);
   }
 
-  createNotification(type: string, message: string): void {
-    if (type!='success'&&type!='info'&&type!='warning'&&type!='error') return;
+  createNotification(type: 'success'|'info'|'warning'|'error', message: string): void {
     this.notification.create(
       type,
-      'Thông Báo',
+      this.translate.instant('NOTIFICATION.TITLE'),
       message
     );
   }

@@ -2,10 +2,13 @@
     
     "LOADING": "Loading...",
     "NOTIFICATION": {
-        "SUCCESS": "Success",
-        "ERROR": "Error",
-        "WARNING": "Warning",
-        "INFO": "Info"
+        "TITLE":"Notification",
+        "ERROR": {
+            "CALL_API":"An unexpected error occurred. Please try again"
+        },
+        "SUCCESS":{
+            "REMOVE_ITEM_IN_CART":"Product successfully removed from cart"
+        }
     },
     "HEADER": {
         "TITLE": "Coffee Store",

@@ -7,26 +7,28 @@ import { LangService } from 'src/app/services/lang.service';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { CartService } from 'src/app/services/cart.service';
+import { filter, map } from 'rxjs';
+import { CartResponse } from 'src/app/dto/response/cart.response';
 
 @Component({
-    selector: 'app-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    standalone: false
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  standalone: false
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   auth = inject(AuthenticationService)
   user$ = this.auth.user$;
 
   cartService = inject(CartService)
   cart$ = this.cartService.cart$;
-  
+
 
   @Input() isBackgroundTransparent = false
   @Input() total = 0
   @Output() totalChange = new EventEmitter()
   subtotal = 0
-  @Input() user:any=null;
+  @Input() user: any = null;
   @Output() userChange = new EventEmitter();
 
   btnShowCart = true
@@ -35,7 +37,7 @@ export class HeaderComponent implements OnInit{
 
   freeShip = 200000
 
-  isSearing:any;
+  isSearing: any;
 
   loading = true
 
@@ -47,10 +49,10 @@ export class HeaderComponent implements OnInit{
 
   private lang = inject(LangService);
 
-  isMenu=false;
+  isMenu = false;
 
 
-  constructor (private userS:UserService, private router:Router, private crud:CrudService, public main:MainService,private breakpointService: BreakpointService){
+  constructor(private userS: UserService, private router: Router, private crud: CrudService, public main: MainService, private breakpointService: BreakpointService) {
 
   }
   async ngOnInit(): Promise<void> {
@@ -59,23 +61,23 @@ export class HeaderComponent implements OnInit{
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });
-    
+
 
     this.getCategories();
 
 
   }
 
-  async getUser():Promise<any>{
+  async getUser(): Promise<any> {
 
     return new Promise(async (resolve, reject) => {
       const user = this.main.getCookie("u-caf")
       // console.log(user);
-      if(user){
-        const result = await this.userS.getUser(null,null,user.token)
-        if (result){
-          if (result.result=='Success'){
-            resolve({id:result.id,role:result.role})
+      if (user) {
+        const result = await this.userS.getUser(null, null, user.token)
+        if (result) {
+          if (result.result == 'Success') {
+            resolve({ id: result.id, role: result.role })
           }
         }
         resolve(null)
@@ -91,29 +93,29 @@ export class HeaderComponent implements OnInit{
 
 
 
-  getCategories(){
-    this.crud.get("categories","all").subscribe((res:any)=>{
-      if (res.result='success'){
-        this.categories=res.data
+  getCategories() {
+    this.crud.get("categories", "all").subscribe((res: any) => {
+      if (res.result = 'success') {
+        this.categories = res.data
         console.log(this.categories);
       }
 
 
     })
   }
-  profile(){
+  profile() {
     this.router.navigate(["account"])
   }
 
   // visible = false;
-  isPromoCode:any = -1;
-  isGift:any = -1;
+  isPromoCode: any = -1;
+  isGift: any = -1;
   checkedGift = false;
 
 
   open(): void {
     this.visibleCart = true;
-      this.getItemsCart()
+    this.getItemsCart()
 
   }
 
@@ -121,23 +123,23 @@ export class HeaderComponent implements OnInit{
     this.visibleCart = false;
   }
 
-  remote(page:any){
+  remote(page: any) {
     this.router.navigate([page])
     this.visibleCart = false;
-    this.isMenu=false;
+    this.isMenu = false;
   }
 
-  openSearch(){
+  openSearch() {
     document.body.style.overflow = 'hidden'
-    this.isSearing=true
+    this.isSearing = true
   }
 
-  closeSearch(){
+  closeSearch() {
     document.body.style.overflow = 'auto'
-    this.isSearing=false
+    this.isSearing = false
   }
 
-  getItemsCart(){
+  getItemsCart() {
     // this.crud.get("cart",this.user.id).subscribe((response:any)=>{
     //   this.itemsCart = response.data
     //   this.cal_Info_Cart()
@@ -148,7 +150,7 @@ export class HeaderComponent implements OnInit{
 
   }
 
-  changeQuantityItemInCart(item:any){
+  changeQuantityItemInCart(item: any) {
     // for (let i of this.itemsCart){
     //   if (i.id==item.id){
     //     i.quantity = item.quantity
@@ -159,22 +161,10 @@ export class HeaderComponent implements OnInit{
 
   }
 
-  removeItemInCart(data:any){
-    // const id = data.id
-
-    // this.crud.delete("cart",id).subscribe((res:any)=>{
-    //   console.log(res);
-    //   if (res.result=='success'){
-    //     const quantity = data.quantity
-    //     this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
-    //     this.total-=quantity
-
-
-    //   }
-    //   else{
-    //     this.main.createNotification("error","Xóa sản phẩm khỏi giỏ hàng không thành công")
-    //   }
-    // })
+  removeItemInCart(id: string) {
+    this.cart$ = this.cart$.pipe(
+      map((items: CartResponse[]) => items.filter(item => item.id !== id))
+    );
   }
 
   // changeQuantityItem(item:any){
@@ -184,7 +174,7 @@ export class HeaderComponent implements OnInit{
 
   // }
 
-  cal_Info_Cart(){
+  cal_Info_Cart() {
     // this.total = 0
     // this.subtotal=0
 
@@ -206,13 +196,13 @@ export class HeaderComponent implements OnInit{
 
   }
 
-  logout(){
+  logout() {
     this.auth.logout(true)
     this.total = 0
   }
 
 
-  switch(l: 'vi'|'en') { this.lang.use(l); }
+  switch(l: 'vi' | 'en') { this.lang.use(l); }
 
   get cur() { return this.lang.current(); }
 

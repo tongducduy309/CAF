@@ -1,6 +1,10 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, fromEvent, map } from 'rxjs';
+import { UpdateQuantityCartRequest } from 'src/app/dto/request/cart.request';
+import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -13,13 +17,20 @@ import { MainService } from 'src/services/main.service';
 export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
 
   @Input() item:any = {}
-  @Output() QuantityEmitter = new EventEmitter()
-  @Output() RemoveEmitter = new EventEmitter()
+  @Output() onRemove = new EventEmitter<string>();
 
   @ViewChild('btnPlus') btnPlus!: ElementRef;
   @ViewChild('btnSub') btnSub!: ElementRef;
 
-  constructor(private router:Router, public main:MainService, private crud:CrudService){
+
+
+  FILE_URL = environment.variable_global.FILE_URL;
+
+  cartService = inject(CartService)
+
+  
+
+  constructor(private router:Router, public main:MainService, private crud:CrudService, private translate: TranslateService){
 
   }
   ngAfterViewInit(): void {
@@ -41,7 +52,16 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
   }
 
   remove(){
-    this.RemoveEmitter.emit({id:this.item.id,quantity:this.item.quantity})
+    this.cartService.removeItemById(this.item.id).then(()=>{
+     
+      this.main.createNotification("success",this.translate.instant('NOTIFICATION.SUCCESS.REMOVE_ITEM_IN_CART' ))
+      this.onRemove.emit(this.item.id)
+    
+      
+    }).catch((e)=>{
+      console.error(e.message)
+      this.main.createNotification("error",this.translate.instant('NOTIFICATION.ERROR.CALL_API' ))
+    })
   }
 
   changeQuantity(){
@@ -50,7 +70,6 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
       this.item.quantity=1
     if(this.item.quantity>99)
       this.item.quantity=99
-    this.QuantityEmitter.emit(this.item)
     this.updateQuantity()
   }
 
@@ -58,7 +77,6 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
     if (this.item.quantity>1)
     {
       this.item.quantity--;
-      this.QuantityEmitter.emit(this.item)
     }
 
   }
@@ -67,7 +85,6 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
 
     if (this.item.quantity<99){
       this.item.quantity++;
-      this.QuantityEmitter.emit(this.item)
     }
 
 
@@ -102,10 +119,12 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
   }
 
   updateQuantity(){
-    this.crud.put("cart",{id:this.item.id,quantity:this.item.quantity}).then(res=>res.json()).then(data=>{
-      // if (data.result=='failed'){
-      //   this.main.createNotification("error","[Lỗi] Thay đổi số lượng giỏ hàng")
-      // }
+    this.cartService.updateQuantityInCart(this.item.id,{
+      productVariantId:this.item.productVariant.id,
+      quantity:this.item.quantity
+    } as UpdateQuantityCartRequest).then(()=>{}).catch((e)=>{
+      console.error(e.message)
+      this.main.createNotification("error",this.translate.instant('NOTIFICATION.ERROR.CALL_API' ))
     })
   }
 }

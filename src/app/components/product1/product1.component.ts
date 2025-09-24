@@ -17,7 +17,7 @@ export class Product1Component {
 
   onClick(){
     this.closeEmitter.emit();
-    this.router.navigate(['products/'+this.product.nameId]);
+    this.router.navigate(['products/'+this.product.id]);
     
   }
 

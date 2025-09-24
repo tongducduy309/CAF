@@ -74,6 +74,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { CountSafePipe } from './pipes/count-safe.pipe';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -156,6 +157,7 @@ export function httpLoaderFactory(http: HttpClient) {
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
     AppRoutingModule,
+    CountSafePipe,
     FormsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
@@ -186,7 +188,8 @@ export function httpLoaderFactory(http: HttpClient) {
       multi: true
     }
     
-  ]
+  ],
+  
 })
 export class AppModule {
   constructor(ts: TranslateService) {

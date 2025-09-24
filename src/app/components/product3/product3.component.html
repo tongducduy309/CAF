@@ -3,7 +3,7 @@
   <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
   </div>
   <div style="display: flex;justify-content: center;align-items: center;"><a
-      [href]="'products/'+this.product.nameId">
+      [href]="'products/'+this.product.id">
  
       <image [src]="FILE_URL + product.img"></image>
     </a></div>
@@ -26,7 +26,7 @@
     <div class="subtitle" [ngStyle]="{'color':color_text}">
       {{product.c_name}}
     </div>
-    <a class="name" [href]="'products/'+this.product.nameId" [ngStyle]="{'color':color_text}">{{product.name}}</a>
+    <a class="name" [href]="'products/'+this.product.id" [ngStyle]="{'color':color_text}">{{product.name}}</a>
   </div>
   <div class="select">
     <div>
