@@ -34,33 +34,79 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 export const routes: Routes = [
-  
+
   {
     path: '',
     component: PublicLayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent },
+      { path: 'home', component: HomeComponent, data: { is_bg_header: false } },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'all-products',
+        component: AllProductsComponent
+      },
+      {
+        path: 'about-us',
+        component: AboutUsComponent
+      },
+      {
+        path: 'contact-with-us',
+        component: ContactWithUsComponent
+      },
+      {
+        path: 'faq',
+        component: FaqComponent
+      },
+      {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent
+      },
+      // {
+      //   path:'search',
+      //   component:SearchComponent
+      // },
+      {
+        path: 'terms-and-conditions',
+        component: TermsAndConditionsComponent
+      },
+      // {
+      //   path:'wishlist',
+      //   component:WishlistComponent
+      // },
+      {
+        path: 'shipping-and-delivery',
+        component: ShippingAndDeliveryComponent
+      },
+      {
+        path: 'account/login',
+        component: LoginComponent
+      },
+      {
+        path: 'account/login/:param',
+        component: LoginComponent
+      },
+      {
+        path: 'account/register',
+        component: RegisterComponent
+      },
+      {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'blogs',
+        component: BlogsComponent
+      },
+      {
+        path: 'blogs/:slug',
+        component: DetailBlogComponent
+      },
     ]
   },
 
-  {
-    path: 'account',
-    component: AccountComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'account/login',
-    component: LoginComponent
-  },
-  {
-    path: 'account/login/:param',
-    component: LoginComponent
-  },
-  {
-    path: 'account/register',
-    component: RegisterComponent
-  },
+
+
   {
     path: 'account/verify',
     component: RegisterComponent
@@ -77,10 +123,7 @@ export const routes: Routes = [
     path: 'collections',
     component: CollectionsComponent
   },
-  {
-    path: 'all-products',
-    component: AllProductsComponent
-  },
+
   // {
   //   path:'all-products/:key',
   //   component:AllProductsComponent
@@ -89,50 +132,12 @@ export const routes: Routes = [
     path: 'cart',
     component: CartComponent
   },
-  {
-    path: 'about-us',
-    component: AboutUsComponent
-  },
-  {
-    path: 'contact-with-us',
-    component: ContactWithUsComponent
-  },
-  {
-    path: 'faq',
-    component: FaqComponent
-  },
-  {
-    path: 'privacy-policy',
-    component: PrivacyPolicyComponent
-  },
-  // {
-  //   path:'search',
-  //   component:SearchComponent
-  // },
-  {
-    path: 'terms-and-conditions',
-    component: TermsAndConditionsComponent
-  },
-  // {
-  //   path:'wishlist',
-  //   component:WishlistComponent
-  // },
-  {
-    path: 'shipping-and-delivery',
-    component: ShippingAndDeliveryComponent
-  },
+
   {
     path: 'checkout',
     component: CheckoutComponent
   },
-  {
-    path: 'blogs',
-    component: BlogsComponent
-  },
-  {
-    path: 'blogs/:slug',
-    component: DetailBlogComponent
-  },
+
   {
     path: 'dashboard',
     component: DashboardComponent,

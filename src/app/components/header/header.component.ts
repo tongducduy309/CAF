@@ -18,13 +18,13 @@ export class HeaderComponent implements OnInit{
   user$ = this.auth.user$;
   
   itemsCart:any = []
+  @Input() isBackgroundTransparent = false
   @Input() total = 0
   @Output() totalChange = new EventEmitter()
   subtotal = 0
   @Input() user:any=null;
   @Output() userChange = new EventEmitter();
 
-  bg_header = '#000'
   btnShowCart = true
 
   categories: any = {}
@@ -50,41 +50,11 @@ export class HeaderComponent implements OnInit{
 
   }
   async ngOnInit(): Promise<void> {
-    (await this.auth.checkAuth()).subscribe();
+    (await this.auth.fetchProfile()).subscribe();
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd)
-    {
-        // Route change detected
-        console.log(event.url);
-        const s = event.url.split("/")[1]
-
-        switch (s){
-          case 'home':
-            this.bg_header = 'transparent'
-            this.btnShowCart = true
-            this.visible=true
-            break
-          case 'cart':
-          case 'checkout':
-            this.bg_header = '#000'
-            this.btnShowCart = false
-            this.visible=true
-            break
-          case 'dashboard':
-            this.visible = false
-            break
-
-          default:
-            this.bg_header = '#000'
-            this.btnShowCart = true
-            this.visible=true
-        }
-
-      }
-    });
+    
 
     this.getCategories();
 

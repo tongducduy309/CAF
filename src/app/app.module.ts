@@ -79,7 +79,7 @@ const icons: IconDefinition[] = [LeftOutline];
 
 
 export function initAuth(auth: AuthenticationService) {
-  return async () => (await auth.checkAuth()).toPromise(); // or firstValueFrom(auth.checkAuth())
+  return async () => (await auth.fetchProfile()).toPromise(); // or firstValueFrom(auth.checkAuth())
 }
 
 export let layouts:any=[

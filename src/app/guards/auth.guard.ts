@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
     if (user) return true;
 
     try {
-      const checked = await firstValueFrom((await this.auth.checkAuth()).pipe(
+      const checked = await firstValueFrom((await this.auth.fetchProfile()).pipe(
         map(u => !!u)
       ));
       if (checked) return true;

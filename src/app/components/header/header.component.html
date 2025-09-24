@@ -1,5 +1,5 @@
 <div class="header"
-  [ngStyle]="{'background-color':bg_header,'position':(bg_header=='transparent')?'absolute':'relative'}"
+  [ngStyle]="{'background-color':isBackgroundTransparent?'transparent':'#000','position':(isBackgroundTransparent)?'absolute':'relative'}"
   *ngIf="visible">
 
   <ng-template #template>

@@ -11,4 +11,5 @@ export interface Auth {
   id: string;
   fullname: string;
   createdAt: string; 
+  token:string;
 }

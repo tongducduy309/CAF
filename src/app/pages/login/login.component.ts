@@ -8,6 +8,7 @@ import { UserService } from 'src/services/user.service';
 import { MainService } from 'src/services/main.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Location } from '@angular/common';
+import { Auth } from 'src/app/models/user.model';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -62,10 +63,10 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
       return;
     }
     this.processing=true
-    this.AuthenticationService.login({email:this.user_email,password:this.user_password}).then((res:string)=>{
-      console.log("TOKEN",res);
+    this.AuthenticationService.login({email:this.user_email,password:this.user_password}).then((res:Auth)=>{
+      // console.log("TOKEN",res);
       if (res){
-        localStorage.setItem('access_token', res);
+        // localStorage.setItem('access_token', res);
         this.router.navigate([''])
     }
     })
