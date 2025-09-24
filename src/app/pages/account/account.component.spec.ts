@@ -1,7 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccountComponent } from './account.component';
-import { SharedTestingModule } from 'src/app/shared-testing/shared-testing.module';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 
 describe('AccountComponent', () => {

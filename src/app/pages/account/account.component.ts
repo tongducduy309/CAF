@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Page } from 'src/app/classes/page';
 import { Location } from '@angular/common';
 import { MainService } from 'src/services/main.service';
-import { UserService } from 'src/services/user.service';
 import { Router } from '@angular/router';
 import { CrudService } from 'src/services/crud.service';
 import { LayoutService } from 'src/app/services/layout.service';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
     selector: 'app-account',
@@ -13,10 +14,10 @@ import { LayoutService } from 'src/app/services/layout.service';
     styleUrls: ['./account.component.scss'],
     standalone: false
 })
-export class AccountComponent extends Page implements OnInit {
+export class AccountComponent implements OnInit {
 
   isMannageAddress = false
-  user: any = null
+  user: Partial<User> = {}
   address: any = []
 
   address_user_choosing:any = null
@@ -24,51 +25,28 @@ export class AccountComponent extends Page implements OnInit {
   changing_fullname = false
 
   private layoutService = inject(LayoutService)
+  private userService = inject(UserService)
 
-  constructor(private location:Location, private main:MainService, private userS:UserService, private router:Router, private crud:CrudService){
-    super()
+  constructor(private location:Location, private main:MainService, private router:Router, private crud:CrudService){
+
   }
 
   back(){
     this.location.back();
   }
   async ngOnInit(){
-    this.user = await this.getUser()
-    if (!this.user)
-      this.router.navigate([''])
-    this.loaded()
+    this.getUser()
   }
 
   async getUser():Promise<any>{
 
-    return new Promise(async (resolve, reject) => {
-      const user = this.main.getCookie("u-caf")
+    (await this.userService.getProfile()).subscribe((user:User|null)=>{
 
       if(user){
-        const result = await this.userS.getUser(null,null,user.token)
-        if (result){
-          if (result.result=='Success'){
-            resolve({
-              id:result.id,
-              fullname:result.fullname,
-              token:user.token,
-              point:result.point,
-              email:result.email,
-              contactNumber: result.contactNumber,
-              ranking:this.getRanking(result.point),
-              id_address_default:result.id_address_default
-            })
-          }
-        }
-        resolve(null)
-
-
+        this.user = user
       }
-
-
-    }).finally(()=>{
-      this.layoutService.setReady()
-    });
+    },()=>{},
+    ()=>{this.layoutService.setReady()})
 
 
   }
@@ -101,8 +79,8 @@ export class AccountComponent extends Page implements OnInit {
   }
 
   changePassword(){
-    console.log(this.user.token);
-    this.router.navigate(['account/new-password'],{queryParams:{'token':this.user.token}})
+    // console.log(this.user.token);
+    // this.router.navigate(['account/new-password'],{queryParams:{'token':this.user.token}})
   }
 
 }

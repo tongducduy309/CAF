@@ -41,9 +41,8 @@ export class UserService {
 
   async getProfile(): Promise<Observable<User | null>> {
       return from(this.apiClient.get('/profile')).pipe(
-        map((response: any) => response.data),
-        tap(user => {
-          return user
+        map((response: any) => {
+          return response.data.data as User
         }),
         catchError(err => {
           return of(null);
