@@ -22,7 +22,8 @@
         "ALL_PRODUCTS": "All Products",
         "BLOG": "Blog",
         "COLLECTIONS": "Collections",
-        "ITEMS": "items"
+        "ITEMS": "items",
+        "LOGIN_BUTTON":"Login"
     },
     
     "FOOTER": {

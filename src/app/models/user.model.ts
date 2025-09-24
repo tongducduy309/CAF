@@ -6,3 +6,9 @@ export interface User {
   phone: string;
   createdAt: string; 
 }
+
+export interface Auth {
+  id: string;
+  fullname: string;
+  createdAt: string; 
+}

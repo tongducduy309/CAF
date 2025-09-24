@@ -30,19 +30,23 @@ import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts
 import { ShippingAndDeliveryComponent } from './pages/shipping-and-delivery/shipping-and-delivery.component';
 import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 
 export const routes: Routes = [
-
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: '',
-    redirectTo: '/home',
-    pathMatch: 'full',
+  path: '',
+  component: PublicLayoutComponent,
+  children: [
+    { path: '', component: HomeComponent }, 
+  ]
+},
+  // {
+  //   path: '',
+  //   redirectTo: '/home',
+  //   pathMatch: 'full',
 
-  },
+  // },
   {
     path: 'account',
     component: AccountComponent,

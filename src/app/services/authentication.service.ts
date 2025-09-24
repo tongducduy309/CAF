@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationRequest } from '../dto/request/Authentication';
 import { UserRequest } from '../dto/request/UserRequest';
 import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
-import { User } from '../models/user.model';
+import { Auth, User } from '../models/user.model';
 import { ResponseObject } from '../models/responseObject.model';
 import { Router} from '@angular/router';
 
@@ -49,7 +49,7 @@ export class AuthenticationService {
     });
   }
 
-  async checkAuth(): Promise<Observable<User | null>> {
+  async checkAuth(): Promise<Observable<Auth | null>> {
     return from(this.apiClient.get('/me')).pipe(
       map((response:any) => response.data),
       tap(user => {

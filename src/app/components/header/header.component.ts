@@ -83,36 +83,12 @@ export class HeaderComponent implements OnInit{
             this.visible=true
         }
 
-        if(s!='dashboard')this.checkUser(event.urlAfterRedirects)
       }
     });
 
     this.getCategories();
 
 
-  }
-
-  async checkUser(path:string){
-    if (this.user==null){
-      if (path!='/account/login'&&path!='/account/reset-your-password'&&path!='/account/register'){
-        this.user = await this.getUser();
-
-        if (this.user!=null){
-          this.getItemsCart()
-          this.userChange.emit(this.user)
-        }
-
-      }
-      else{
-        this.user = await this.getUser();
-          if (this.user!=null){
-            this.remote('')
-            this.getItemsCart()
-            this.userChange.emit(this.user)
-          }
-
-      }
-    }
   }
 
   async getUser():Promise<any>{

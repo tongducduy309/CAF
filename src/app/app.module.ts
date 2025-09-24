@@ -72,6 +72,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ImageComponent } from './components/image/image.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthenticationService } from './services/authentication.service';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -79,6 +81,11 @@ const icons: IconDefinition[] = [LeftOutline];
 export function initAuth(auth: AuthenticationService) {
   return async () => (await auth.checkAuth()).toPromise(); // or firstValueFrom(auth.checkAuth())
 }
+
+export let layouts:any=[
+  MainLayoutComponent,
+  PublicLayoutComponent
+]
 
 export let components: any = [
   HeaderComponent,
@@ -145,7 +152,7 @@ export function httpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [...components, ...pages],
+  declarations: [...components, ...pages, ...layouts],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [BrowserModule,
     AppRoutingModule,
