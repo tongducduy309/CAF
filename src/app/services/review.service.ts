@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { ReviewResponse } from '../dto/response/ReviewResponse';
-import { ReviewRequest } from '../dto/request/ReviewRequest';
+import { ReviewResponse } from '../dto/response/review.response';
+import { ReviewRequest } from '../dto/request/review.request';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({

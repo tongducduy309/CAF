@@ -85,10 +85,23 @@ p{
       font-weight: 700;
     }
 
-    .content{
-      animation: show_ 2s 2s infinite ease-in-out alternate;
-    }
+    
   }
+
+  .banner-center-content .content {
+  display: inline-block; /* allow transform without affecting line */
+  transition: opacity 400ms ease, transform 400ms ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* trạng thái ẩn (fade-out + hơi dịch lên) */
+.banner-center-content .content.anim-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  /* optional: pointer-events none while animating */
+  pointer-events: none;
+}
   
   video{
     z-index: -1;

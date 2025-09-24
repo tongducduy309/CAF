@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CreateBlogRequest, CreateBoxBlogRequest } from 'src/app/dto/request/Blog';
+import { CreateBlogRequest, CreateBoxBlogRequest } from 'src/app/dto/request/blog.request';
 import { ResponseObject } from 'src/app/models/responseObject.model';
 import { BlogService } from 'src/app/services/blog.service';
 

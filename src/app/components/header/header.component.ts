@@ -6,6 +6,7 @@ import { MainService } from 'src/services/main.service';
 import { LangService } from 'src/app/services/lang.service';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
     selector: 'app-header',
@@ -16,8 +17,11 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 export class HeaderComponent implements OnInit{
   auth = inject(AuthenticationService)
   user$ = this.auth.user$;
+
+  cartService = inject(CartService)
+  cart$ = this.cartService.cart$;
   
-  itemsCart:any = []
+
   @Input() isBackgroundTransparent = false
   @Input() total = 0
   @Output() totalChange = new EventEmitter()
@@ -51,6 +55,7 @@ export class HeaderComponent implements OnInit{
   }
   async ngOnInit(): Promise<void> {
     (await this.auth.fetchProfile()).subscribe();
+    (await this.cartService.getMyCart()).subscribe();
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });
@@ -107,13 +112,8 @@ export class HeaderComponent implements OnInit{
 
 
   open(): void {
-    if (this.user){
-      this.visibleCart = true;
+    this.visibleCart = true;
       this.getItemsCart()
-    }
-    else{
-      this.main.createNotification("info","Đăng nhập để mở giỏ hàng")
-    }
 
   }
 
@@ -138,43 +138,43 @@ export class HeaderComponent implements OnInit{
   }
 
   getItemsCart(){
-    this.crud.get("cart",this.user.id).subscribe((response:any)=>{
-      this.itemsCart = response.data
-      this.cal_Info_Cart()
-      // this.itemsCartChange.emit(this.itemsCart)
+    // this.crud.get("cart",this.user.id).subscribe((response:any)=>{
+    //   this.itemsCart = response.data
+    //   this.cal_Info_Cart()
+    //   // this.itemsCartChange.emit(this.itemsCart)
 
 
-    })
+    // })
 
   }
 
   changeQuantityItemInCart(item:any){
-    for (let i of this.itemsCart){
-      if (i.id==item.id){
-        i.quantity = item.quantity
-        break
-      }
-    }
-    this.cal_Info_Cart()
+    // for (let i of this.itemsCart){
+    //   if (i.id==item.id){
+    //     i.quantity = item.quantity
+    //     break
+    //   }
+    // }
+    // this.cal_Info_Cart()
 
   }
 
   removeItemInCart(data:any){
-    const id = data.id
+    // const id = data.id
 
-    this.crud.delete("cart",id).subscribe((res:any)=>{
-      console.log(res);
-      if (res.result=='success'){
-        const quantity = data.quantity
-        this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
-        this.total-=quantity
+    // this.crud.delete("cart",id).subscribe((res:any)=>{
+    //   console.log(res);
+    //   if (res.result=='success'){
+    //     const quantity = data.quantity
+    //     this.itemsCart = this.itemsCart.filter((ite:any)=>ite.id!=id)
+    //     this.total-=quantity
 
 
-      }
-      else{
-        this.main.createNotification("error","Xóa sản phẩm khỏi giỏ hàng không thành công")
-      }
-    })
+    //   }
+    //   else{
+    //     this.main.createNotification("error","Xóa sản phẩm khỏi giỏ hàng không thành công")
+    //   }
+    // })
   }
 
   // changeQuantityItem(item:any){
@@ -185,15 +185,15 @@ export class HeaderComponent implements OnInit{
   // }
 
   cal_Info_Cart(){
-    this.total = 0
-    this.subtotal=0
+    // this.total = 0
+    // this.subtotal=0
 
-    for (let ite of this.itemsCart){
-      this.total+=ite.quantity*1
-      this.subtotal+=ite.quantity*this.main.getPrice(ite)
-    }
-    this.totalChange.emit(this.total)
-    this.loading=false
+    // for (let ite of this.itemsCart){
+    //   this.total+=ite.quantity*1
+    //   this.subtotal+=ite.quantity*this.main.getPrice(ite)
+    // }
+    // this.totalChange.emit(this.total)
+    // this.loading=false
     // if (item.quantity==0){
     //   this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))
     // }

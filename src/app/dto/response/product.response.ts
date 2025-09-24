@@ -1,5 +1,5 @@
 import { C } from "@angular/cdk/portal-directives.d-BoG39gYN";
-import { CategoryResponse } from "./CategoryResponse";
+import { CategoryResponse } from "./category.response";
 
 export interface ProductResponse {
     ids:string[];

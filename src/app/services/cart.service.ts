@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
+import { CartResponse } from '../dto/response/cart.response';
 import { environment } from 'src/environments/environment';
-import { UserRequest } from '../dto/request/user.request';
 import { AuthenticationService } from './authentication.service';
-import { catchError, from, map, Observable, of, tap } from 'rxjs';
-import { User } from '../models/user.model';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class CartService {
 
   private apiClient: any;
+
+  private cartSubject = new BehaviorSubject<CartResponse[]>([]);
+  cart$ = this.cartSubject.asObservable();
 
   constructor(private authenticationService: AuthenticationService) {
 
@@ -23,7 +25,7 @@ export class UserService {
 
 
     this.apiClient = axios.create({
-      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"users",
+      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "carts",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });
@@ -39,15 +41,16 @@ export class UserService {
     });
   }
 
-  async getProfile(): Promise<Observable<User | null>> {
-      return from(this.apiClient.get('/profile')).pipe(
-        map((response: any) => {
-          return response.data.data as User
-        }),
-        catchError(err => {
-          return of(null);
-        })
-      );
-    }
-
+  async getMyCart(): Promise<Observable<CartResponse[]>> {
+    return from(this.apiClient.get('/mycart')).pipe(
+      map((response: any) => response.data),
+      tap(cart => {
+        this.cartSubject.next(cart.data);
+      }),
+      catchError(err => {
+        this.cartSubject.next([]);
+        return of([]);
+      })
+    );
+  }
 }

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
-import { ProductResponse } from 'src/app/dto/response/ProductResponse';
+import { ProductResponse } from 'src/app/dto/response/product.response';
 import { BreakpointService } from 'src/app/services/breakpoint.service';
 import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';

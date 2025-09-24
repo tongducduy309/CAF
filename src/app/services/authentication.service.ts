@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { AuthenticationRequest } from '../dto/request/Authentication';
-import { UserRequest } from '../dto/request/UserRequest';
+import { AuthenticationRequest } from '../dto/request/authentication.request';
+import { UserRequest } from '../dto/request/user.request';
 import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
 import { Auth, User } from '../models/user.model';
 import { ResponseObject } from '../models/responseObject.model';

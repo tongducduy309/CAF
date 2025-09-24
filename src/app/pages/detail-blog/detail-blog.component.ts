@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Page } from 'src/app/classes/page';
-import { BlogHTMLResponse } from 'src/app/dto/response/BlogResponse';
+import { BlogHTMLResponse } from 'src/app/dto/response/blog.response';
 import { BlogService } from 'src/app/services/blog.service';
 import { numberToStringMonth } from 'src/app/utils/Date';
 import { MainService } from 'src/services/main.service';

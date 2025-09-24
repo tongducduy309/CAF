@@ -1,4 +1,5 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Route, Router } from '@angular/router';
 import { Page } from 'src/app/classes/page';
 import { LangService } from 'src/app/services/lang.service';
@@ -12,7 +13,7 @@ import { CrudService } from 'src/services/crud.service';
     styleUrls: ['./home.component.scss'],
     standalone: false
 })
-export class HomeComponent extends Page implements OnInit{
+export class HomeComponent extends Page implements OnInit, OnDestroy{
   title_button= "Login"
   list_product = [
     {
@@ -35,12 +36,30 @@ export class HomeComponent extends Page implements OnInit{
 
   best_customer_reviews:any = []
 
+  currentContent!: SafeHtml;
+  private idx = 0;
+
+  private intervalId: any = null;
+  private animating = false;
+
+  private readonly FADE_DURATION = 800; 
+  private readonly INTERVAL = 3000;
+
+  @ViewChild('contentElem', { static: true }) contentElem!: ElementRef<HTMLElement>;
+
+  private contents: string[] = [
+    'Cà phê đậm vị',
+    'Trái cây nguyên chất',
+    'Thơm mát ngọt vị.'
+  ];
+
   private lang = inject(LangService);
 
   private pageTitle = inject(PageTitleService);
 
-  constructor (private crud:CrudService, private route:Router, private elRef: ElementRef){
+  constructor (private crud:CrudService, private route:Router, private elRef: ElementRef, private sanitizer: DomSanitizer){
     super()
+    this.currentContent = this.sanitizer.bypassSecurityTrustHtml(this.contents[this.idx]);
   }
 
   layoutService = inject(LayoutService)
@@ -50,6 +69,7 @@ export class HomeComponent extends Page implements OnInit{
     this.getAllProducts();
     // this.getCategories();
     this.getBestCustomerReviews();
+    this.intervalId = setInterval(() => this.animationFirstSectionContent(), this.INTERVAL);
   }
 
 
@@ -114,23 +134,32 @@ export class HomeComponent extends Page implements OnInit{
   }
 
   animationFirstSectionContent(){
-    const contents = [
-      'Cà phê đậm vị',
-    'Trái cây nguyên chất',
-    'Thơm mát <b>ngọt vị.</b>'
-    ]
-    const content = this.elRef.nativeElement.querySelector('.banner-center-content .content')
-    let i=0
-    setInterval(()=>{
-      if(content){
-        content.innerHTML = contents[i++]
-        if (i==3) i=0
-      }
-    },2000)
+    if (this.animating) return;
+    const el = this.contentElem?.nativeElement;
+    if (!el) return;
+
+    this.animating = true;
+    el.classList.add('anim-out');
+
+    setTimeout(() => {
+      this.idx = (this.idx + 1) % this.contents.length;
+      this.currentContent = this.sanitizer.bypassSecurityTrustHtml(this.contents[this.idx]);
+      el.classList.remove('anim-out');
+      setTimeout(() => {
+        this.animating = false;
+      }, this.FADE_DURATION);
+    }, this.FADE_DURATION);
   }
 
   changeTab(page:any){
     this.selected_tab = this.categories[page].id
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
   }
 
 

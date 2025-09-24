@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AuthenticationService } from './authentication.service';
 import { environment } from 'src/environments/environment';
 import axios from 'axios';
-import { CreateBlogRequest } from '../dto/request/Blog';
+import { CreateBlogRequest } from '../dto/request/blog.request';
 import { ResponseObject } from '../models/responseObject.model';
-import { BlogHTMLResponse } from '../dto/response/BlogResponse';
+import { BlogHTMLResponse } from '../dto/response/blog.response';
 import { parseLocalDateTime } from '../utils/Date';
 
 @Injectable({

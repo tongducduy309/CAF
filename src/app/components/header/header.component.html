@@ -66,7 +66,7 @@
               d="M1.80557 2.35709C2.0174 1.93344 2.53256 1.76172 2.95622 1.97354L3.81687 2.40387C4.61384 2.80235 5.1479 3.58483 5.22857 4.47221L5.2696 4.92356C5.28968 5.14444 5.47487 5.31356 5.69666 5.31356H17.0114C18.5085 5.31356 19.5447 6.80879 19.019 8.2105L17.5153 12.2204C17.1387 13.2247 16.1787 13.8899 15.1062 13.8899H6.712C5.38128 13.8899 4.27013 12.8752 4.14965 11.55L3.52034 4.62751C3.49345 4.33171 3.31543 4.07089 3.04977 3.93806L2.18912 3.50774C1.76547 3.29591 1.59375 2.78075 1.80557 2.35709ZM5.93056 7.02883C5.6784 7.02883 5.48068 7.24535 5.5035 7.49648L5.85789 11.3947C5.89805 11.8364 6.26843 12.1747 6.712 12.1747H15.1062C15.4637 12.1747 15.7837 11.9529 15.9092 11.6182L17.413 7.60822C17.5181 7.32788 17.3109 7.02883 17.0114 7.02883H5.93056Z"
               fill="#FFFFFF"></path>
           </svg>
-          {{total}} {{ 'HEADER.ITEMS' | translate }}
+          {{ (cart$ | async)?.length ?? 0 }} {{ 'HEADER.ITEMS' | translate }}
         </div>
         }
         <div class="border-circle" (click)="openSearch()">
@@ -78,7 +78,7 @@
           </svg>
         </div>
         @if(user$ | async){
-        <div class="border-circle" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menuAccount"
+        <div class="border-circle" nz-dropdown [nzDropdownMenu]="menuAccount"
           nzPlacement="bottomRight">
           <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="15" height="18"
             viewBox="0 0 15 18" fill="none">
@@ -147,7 +147,7 @@
             <div class="list-item">
               <!-- Để sản phẩm xuất hiện ở đây -->
               <app-item-shopping-cart (RemoveEmitter)="removeItemInCart($event)"
-                (QuantityEmitter)="changeQuantityItemInCart($event)" *ngFor="let item of itemsCart"
+                (QuantityEmitter)="changeQuantityItemInCart($event)" *ngFor="let item of (cart$ | async)"
                 [item]="item"></app-item-shopping-cart>
             </div>
           </div>
