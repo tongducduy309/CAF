@@ -7,7 +7,8 @@
             "CALL_API":"An unexpected error occurred. Please try again"
         },
         "SUCCESS":{
-            "REMOVE_ITEM_IN_CART":"Product successfully removed from cart"
+            "REMOVE_ITEM_IN_CART":"Product successfully removed from cart",
+            "ADD_TO_CART":"Product successfully added to cart"
         }
     },
     "HEADER": {
@@ -245,6 +246,9 @@
             "TITLE":"Date",
             "CONTENT":"{{month}} {{day}}, {{year}}"
         }
+    },
+    "LABELS":{
+        "PRICE":"Price"
     }
     
 

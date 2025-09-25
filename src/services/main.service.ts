@@ -80,7 +80,8 @@ export class MainService {
     return id;
   }
 
-  formatPrice(num:any) {
+  formatPrice(num:number|null|undefined) {
+    if (!num) num = 0
     try {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }

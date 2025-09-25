@@ -44,15 +44,7 @@
                 <p class="note">Ghi chú: {{item.note}}</p>
             </nz-col>
             <nz-col nzSpan="12">
-                <div class="quantity">
-                    <button nz-button nzType="text" nzShape="circle">
-                        <nz-icon nzType="minus" nzTheme="outline" #btnSub (click)="subQuantity()" />
-                    </button>
-                    <input type="text" [(ngModel)]="item.quantity" (blur)="changeQuantity()">
-                    <button nz-button nzType="text" nzShape="circle">
-                        <nz-icon nzType="plus" nzTheme="outline" #btnPlus (click)="addQuantity()" />
-                    </button>
-                </div>
+                <input-quantity [quantity]="item.quantity" (onChange)="changeQuantity($event)" theme="dark"></input-quantity>
             </nz-col>
         </nz-row>
     </div>

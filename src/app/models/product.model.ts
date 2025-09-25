@@ -3,9 +3,7 @@ import { CategoryResponse } from "../dto/response/category.response";
 export interface Product {
     id:string;
     name:string;
-    nameId:string;
     size:string;
-    cost:number;
     description:string;
     img:string;
     status:boolean;
@@ -18,5 +16,17 @@ export interface ProductVariant {
     size: string;
     price: number;
     status: boolean;
+}
+
+export interface DetailProduct{
+    id:string;
+    name:string;
+    quantity:number;
+    size:string;
+    description:string;
+    img:string;
+    status:boolean;
+    category:CategoryResponse;
+    variant:ProductVariant;
 }
     

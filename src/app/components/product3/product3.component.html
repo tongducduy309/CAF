@@ -1,7 +1,7 @@
 <div class="product-item" [ngStyle]="{'background-color':bg, 'color':color_text}">
 
-  <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
-  </div>
+  <!-- <div class="tag-sale" *ngIf="product.sale&&product.sale[selectedSize]"><span>- {{product?.sale[selectedSize]}}%</span>
+  </div> -->
   <div style="display: flex;justify-content: center;align-items: center;"><a
       [href]="'products/'+this.product.id">
  
@@ -12,7 +12,7 @@
     <!-- <button nz-button nzType="text" nzShape="circle">
       <nz-icon nzType="swap" nzTheme="outline"></nz-icon>
     </button> -->
-    <button nz-button nzType="text" nzShape="circle">
+    <button nz-button nzType="text" nzShape="circle" [routerLink]="'/products/'+this.product.id">
       <nz-icon nzType="eye" nzTheme="outline"></nz-icon>
     </button>
     <button nz-button nzType="text" nzShape="circle" (click)="openFormAddToCart()">
@@ -24,7 +24,7 @@
   </div>
   <div class="product-content">
     <div class="subtitle" [ngStyle]="{'color':color_text}">
-      {{product.c_name}}
+      {{product.category?.name}}
     </div>
     <a class="name" [href]="'products/'+this.product.id" [ngStyle]="{'color':color_text}">{{product.name}}</a>
   </div>
@@ -34,7 +34,7 @@
         <nz-select [nzBorderless]="true" class="color" [(ngModel)]="selectedSize"
         [ngStyle]="{'color':color_text, 'border':'1px solid '+color_text}">
         @for (variant of product.variants; track $index;let i = $index) {
-        <nz-option [nzValue]="variant.id" [nzLabel]="variant.size"></nz-option>
+        <nz-option [nzValue]="variant" [nzLabel]="variant.size"></nz-option>
         }
       </nz-select>
       }
@@ -43,16 +43,16 @@
   <div nz-row class="group"
     style="display: flex; justify-content: space-between;margin-top: 10px; align-items: center;">
     <div style="font-weight: 800;" [ngStyle]="{'color':color_text}">
-      <span class="price"
+      <!-- <span class="price"
         *ngIf="product.sale">{{main.formatPrice((product.sale[selectedSize])?product.cost[selectedSize]-product.cost[selectedSize]*(product.sale[selectedSize]/100):product.cost[selectedSize])}}</span>
       <span class="cost"
-        *ngIf="product.sale&&product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span>
+        *ngIf="product.sale&&product.sale[selectedSize]">{{main.formatPrice(product.cost[selectedSize])}}</span> -->
+        <span class="price">{{'LABELS.PRICE' | translate}}: {{main.formatPrice(selectedSize?selectedSize.price:0)}}</span>
     </div>
     <!-- <div class="btnAddToCart" style="font-weight: 700;" (click)="openFormAddToCart()">
           <span [ngStyle]="{'color':color_text}">+Thêm vào giỏ</span>
         </div> -->
   </div>
 
-  <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product"
-    (submitEmitter)="AddToCart($event)"></app-note-product>
+  <app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="productInCart"></app-note-product>
 </div>

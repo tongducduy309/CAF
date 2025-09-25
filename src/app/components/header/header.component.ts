@@ -161,11 +161,11 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  removeItemInCart(id: string) {
-    this.cart$ = this.cart$.pipe(
-      map((items: CartResponse[]) => items.filter(item => item.id !== id))
-    );
-  }
+  // removeItemInCart(id: string) {
+  //   this.cart$ = this.cart$.pipe(
+  //     map((items: CartResponse[]) => items.filter(item => item.id !== id))
+  //   );
+  // }
 
   // changeQuantityItem(item:any){
   //   this.itemsCart = this.itemsCart.filter((ite:any)=>!(ite.pid==item.pid))

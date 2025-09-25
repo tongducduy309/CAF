@@ -10,7 +10,7 @@
       [nzStyle]="{ top: '20px' }"
     >
       <ng-container *nzModalContent>
-        <p class="subtitle">{{product.name}} ({{product.sizeSelected}})</p>
+        <p class="subtitle">{{product.name}} ({{product.size}})</p>
         <textarea
         nz-input
         placeholder="Thêm ghi chú..."
@@ -19,11 +19,7 @@
       ></textarea>
       <div class="group-qty" style="margin-top: 20px;">
         <span style="font-size: 16px;font-weight: 700;">Số lượng:</span>
-        <div class="quantity">
-          <span nz-icon nzType="minus" nzTheme="outline" (click)="removeQuantity()"></span>
-          <input type="text" [(ngModel)]="product.quantity" (blur)="changeQuantity()">
-          <span nz-icon nzType="plus" nzTheme="outline" (click)="addQuantity()"></span>
-        </div>
+        <input-quantity [quantity]="product.quantity||0" (onChange)="changeQuantity($event)" theme="dark"></input-quantity>
       </div>
       </ng-container>
     </nz-modal>

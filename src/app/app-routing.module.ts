@@ -102,6 +102,10 @@ export const routes: Routes = [
         path: 'blogs/:slug',
         component: DetailBlogComponent
       },
+      {
+        path: 'products/:id',
+        component: DetailProductComponent
+      },
     ]
   },
 
@@ -115,10 +119,7 @@ export const routes: Routes = [
     path: 'account/new-password',
     component: NewpasswordComponent
   },
-  {
-    path: 'products/:id',
-    component: DetailProductComponent
-  },
+
   {
     path: 'collections',
     component: CollectionsComponent

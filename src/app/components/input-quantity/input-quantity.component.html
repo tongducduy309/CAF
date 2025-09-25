@@ -1,0 +1,9 @@
+<div class="quantity" [ngClass]="{'dark':theme=='dark'}">
+    <button nz-button nzType="text" nzShape="circle">
+        <nz-icon nzType="minus" nzTheme="outline" #btnSub (click)="subQuantity()" />
+    </button>
+    <input type="text" [(ngModel)]="quantity" (blur)="changeQuantity()">
+    <button nz-button nzType="text" nzShape="circle">
+        <nz-icon nzType="plus" nzTheme="outline" #btnPlus (click)="addQuantity()" />
+    </button>
+</div>

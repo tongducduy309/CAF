@@ -1,46 +1,55 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { CartRequest, ProductInCartRequest } from 'src/app/dto/request/cart.request';
+import { CartService } from 'src/app/services/cart.service';
+import { MainService } from 'src/services/main.service';
+
 
 @Component({
-    selector: 'app-note-product',
-    templateUrl: './note-product.component.html',
-    styleUrls: ['./note-product.component.scss'],
-    standalone: false
+  selector: 'app-note-product',
+  templateUrl: './note-product.component.html',
+  styleUrls: ['./note-product.component.scss'],
+  standalone: false
 })
-export class NoteProductComponent implements OnInit{
+
+export class NoteProductComponent implements OnInit {
 
   @Input() visible = false
   @Output() visibleChange = new EventEmitter<boolean>();
   @Input() title = 'Thêm vào giỏ'
-  @Input() product:any
+  @Input() product: Partial<ProductInCartRequest> = {}
   @Output() submitEmitter = new EventEmitter();
+  cartService = inject(CartService)
+  mainService = inject(MainService)
+  translate = inject(TranslateService)
   ngOnInit(): void {
+    console.log(this.product)
   }
 
-  cancel(){
+  cancel() {
     this.visibleChange.emit(false)
   }
 
-  submit(){
-    this.submitEmitter.emit({note:this.product.note,quantity:this.product.quantity})
+  submit() {
+    this.addToCard()
     this.visibleChange.emit(false)
   }
 
-  changeQuantity(){
-    this.product.quantity = this.product.quantity.replace(/\D/g, '');
-    if(this.product.quantity<1) this.product.quantity=1
-    if(this.product.quantity>99) this.product.quantity=99
+  changeQuantity(quantity: number) {
+    this.product.quantity = quantity
   }
 
-  removeQuantity(){
-    if (this.product.quantity>1)
-      this.product.quantity--;
-
-  }
-
-  addQuantity(){
-    if (this.product.quantity<99)
-      this.product.quantity++;
-
-
+  addToCard() {
+    this.cartService.addToCart({
+      productId: this.product.productId,
+      productVariantId: this.product.productVariantId,
+      quantity: this.product.quantity,
+      note: this.product.note
+    } as CartRequest).then(() => {
+      this.mainService.createNotification("success", this.translate.instant("NOTIFICATION.SUCCESS.ADD_TO_CART"))
+    }).catch((e) => {
+      console.error(e.message)
+      this.mainService.createNotification("error", this.translate.instant('NOTIFICATION.ERROR.CALL_API'))
+    })
   }
 }

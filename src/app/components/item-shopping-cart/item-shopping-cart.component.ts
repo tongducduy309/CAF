@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, fromEvent, map } from 'rxjs';
 import { UpdateQuantityCartRequest } from 'src/app/dto/request/cart.request';
 import { CartService } from 'src/app/services/cart.service';
 import { environment } from 'src/environments/environment';
@@ -14,13 +13,11 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./item-shopping-cart.component.scss'],
     standalone: false
 })
-export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
+export class ItemShoppingCartComponent{
 
   @Input() item:any = {}
-  @Output() onRemove = new EventEmitter<string>();
 
-  @ViewChild('btnPlus') btnPlus!: ElementRef;
-  @ViewChild('btnSub') btnSub!: ElementRef;
+  
 
 
 
@@ -33,18 +30,6 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
   constructor(private router:Router, public main:MainService, private crud:CrudService, private translate: TranslateService){
 
   }
-  ngAfterViewInit(): void {
-
-    // Promise.resolve().then(()=> {
-
-    // })
-    this.event()
-  }
-
-  ngOnInit(): void {
-    // console.log(this.item);
-
-  }
 
   remote(s:any){
     console.log(s);
@@ -55,7 +40,6 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
     this.cartService.removeItemById(this.item.id).then(()=>{
      
       this.main.createNotification("success",this.translate.instant('NOTIFICATION.SUCCESS.REMOVE_ITEM_IN_CART' ))
-      this.onRemove.emit(this.item.id)
     
       
     }).catch((e)=>{
@@ -64,59 +48,12 @@ export class ItemShoppingCartComponent implements OnInit,AfterViewInit{
     })
   }
 
-  changeQuantity(){
-    this.item.quantity = this.item.quantity.replace(/\D/g, '');
-    if(this.item.quantity<1)
-      this.item.quantity=1
-    if(this.item.quantity>99)
-      this.item.quantity=99
+  changeQuantity(quantity:number){
+    this.item.quantity = quantity
     this.updateQuantity()
   }
 
-  subQuantity(){
-    if (this.item.quantity>1)
-    {
-      this.item.quantity--;
-    }
-
-  }
-
-  addQuantity(){
-
-    if (this.item.quantity<99){
-      this.item.quantity++;
-    }
-
-
-  }
-
-  event(){
-    const plus = this.btnPlus.nativeElement as HTMLDivElement;
-    const sub = this.btnSub.nativeElement as HTMLDivElement;
-
-    fromEvent(plus, 'click')
-  .pipe(
-    debounceTime(300),
-    map((event: any) => event.target)
-  )
-  .subscribe(value => {
-    if (this.item.quantity<=99){
-
-      this.updateQuantity()
-    }
-  });
-
-  fromEvent(sub, 'click')
-  .pipe(
-    debounceTime(300),
-    map((event: any) => event.target)
-  )
-  .subscribe(value => {
-    if (this.item.quantity>0){
-      this.updateQuantity()
-    }
-  });
-  }
+  
 
   updateQuantity(){
     this.cartService.updateQuantityInCart(this.item.id,{

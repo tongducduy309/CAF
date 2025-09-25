@@ -46,10 +46,10 @@ export class ProductService {
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
     }
   }
-  async getDetailProduct(id:string): Promise<ProductResponse> {
+  async getDetailProduct(id:string): Promise<Product> {
     try {
-      const { data } = await this.apiClient.get(`grouped/${id}`);
-      return data.data as ProductResponse;
+      const { data } = await this.apiClient.get(`/${id}`);
+      return data.data as Product;
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");

@@ -1,6 +1,7 @@
-import { e } from '@angular/cdk/portal-directives.d-BoG39gYN';
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { ProductInCartRequest } from 'src/app/dto/request/cart.request';
+import { Product, ProductVariant } from 'src/app/models/product.model';
 import { environment } from 'src/environments/environment';
 import { MainService } from 'src/services/main.service';
 
@@ -11,15 +12,14 @@ import { MainService } from 'src/services/main.service';
     standalone: false
 })
 export class Product3Component implements OnInit {
-  @Input() product:any = {
+  @Input() product:Partial<Product> = {
   }
+  productInCart:Partial<ProductInCartRequest> = {}
 
   @Input() bg = '#6a593d21';
   @Input() color_text = '#262626';
 
-  @Output() addToCartEmitter = new EventEmitter();
-
-  selectedSize = '';
+  selectedSize:Partial<ProductVariant> = {};
 
   isFormAddToCart = false;
 
@@ -28,29 +28,24 @@ export class Product3Component implements OnInit {
   constructor(public main:MainService) { }
 
   ngOnInit(): void {
-    this.selectedSize = this.product.variants?this.product.variants[0]?.id:""
+    this.selectedSize = this.product.variants?this.product.variants[0]:{
+    id: '',
+    size: '',
+    price: 0,
+    status: false
+  };
     console.log(this.product);
   }
 
-  AddToCart(product:any){
-    const product_c = {
-      id:this.product.id[this.selectedSize],
-      pid:this.product.id,
-      name:this.product.name,
-      quantity:product.quantity,
-      sale:this.product.sale[this.selectedSize],
-      cost:this.product.cost[this.selectedSize],
-      size:this.product.size[this.selectedSize],
-      name_id: this.product.name_id,
-      note:product.note
-    }
-    this.addToCartEmitter.emit(product_c);
-  }
 
   openFormAddToCart(){
-    this.product["quantity"] = 1
-    this.product["note"]=''
-    this.product["sizeSelected"] = this.product.size[this.selectedSize]
+    this.productInCart = {
+      name:this.product.name,
+      size:this.selectedSize.size,
+      productId:this.product.id,
+      productVariantId:this.selectedSize.id,
+      quantity:1
+    } as ProductInCartRequest
     this.isFormAddToCart = true
   }
 

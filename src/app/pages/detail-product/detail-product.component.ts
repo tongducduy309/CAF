@@ -1,10 +1,14 @@
-import { P } from '@angular/cdk/portal-directives.d-BoG39gYN';
-import { Component, inject, OnInit } from '@angular/core';
+
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzImageService } from 'ng-zorro-antd/image';
 import { Page } from 'src/app/classes/page';
+import { ProductInCartRequest } from 'src/app/dto/request/cart.request';
 import { ReviewRequest } from 'src/app/dto/request/review.request';
 import { ProductResponse } from 'src/app/dto/response/product.response';
 import { ReviewResponse } from 'src/app/dto/response/review.response';
+import { Product, ProductVariant } from 'src/app/models/product.model';
+import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';
 import { ProductService } from 'src/app/services/product.service';
 import { ReviewService } from 'src/app/services/review.service';
@@ -12,30 +16,21 @@ import { environment } from 'src/environments/environment';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
+
 @Component({
     selector: 'app-detail-product',
     templateUrl: './detail-product.component.html',
     styleUrls: ['./detail-product.component.scss'],
     standalone: false
 })
-export class DetailProductComponent extends Page implements OnInit {
+export class DetailProductComponent extends Page implements OnInit,AfterViewInit {
 
-  // imgs = [
-  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
-  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
-  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/3_23b7a8b2-85c6-4826-bbb5-0274ec262ef1_600x600.png?v=1672659207",
-  //   "https://coffee-workdo.myshopify.com/cdn/shop/products/1_f05ae8de-129a-4d3f-afba-d062e1ffb1d8_600x600.png?v=1672659207",
-
-  // ]
   products_best_sell:any=[
   ]
-  selectedSize = 0;
+  selectedSize:Partial<ProductVariant> = {};
   isFavorite = false;
   selected_img_product = 0;
-  product:any = {
-    sale:[],
-    cost:[]
-  };
+  product:Partial<Product>={}
 
   form_review:Partial<ReviewRequest> = {}
 
@@ -52,7 +47,7 @@ export class DetailProductComponent extends Page implements OnInit {
   isFormAddToCart = false
   isFormBuyNow = false
 
-  product_form:any = {}
+  product_form:Partial<ProductInCartRequest> = {}
 
   number_showing = 2
 
@@ -63,6 +58,18 @@ export class DetailProductComponent extends Page implements OnInit {
   FILE_URL = environment.variable_global.FILE_URL;
 
   quantity = 1
+
+  layoutService = inject(LayoutService)
+  nzImageService = inject(NzImageService)
+
+  readonly images = [
+    {
+      src: 'https://img.alicdn.com/tfs/TB1g.mWZAL0gK0jSZFtXXXQCXXa-200-200.svg',
+      width: '200px',
+      height: '200px',
+      alt: 'ng-zorro'
+    }
+  ];
 
   private pageTitle = inject(PageTitleService);
 
@@ -78,25 +85,29 @@ export class DetailProductComponent extends Page implements OnInit {
       
       this.getCustomerReviews(this.pid)
       this.getBestProducts()
+      
     });
+  }
+  ngAfterViewInit(): void {
+    this.layoutService.setReady()
   }
 
   ngOnInit(): void {
     this.pageTitle.setTitle('DETAIL_PRODUCT.TITLE');
+    
   }
 
   getIdProduct(id:any){
 
-    this.productService.getDetailProduct(id).then((res:ProductResponse)=>{
+    this.productService.getDetailProduct(id).then((res:Product)=>{
      
       if (res)
         this.product = res
 
       else this.router.navigate(["home"])
-      this.product.quantity = 1
-    this.selectedSize = 0
+      this.quantity = 1
+      this.selectedSize = this.product.variants?this.product.variants[0]:{}
     this.loaded()
-    console.log(this.product);
 
       if (!this.product) this.router.navigate(['page-not-found'])
     })
@@ -126,7 +137,6 @@ export class DetailProductComponent extends Page implements OnInit {
   getBestProducts(){
     this.productService.getAllProducts().then((res:ProductResponse[])=>{
       this.products_for_best=res.slice(0,2)
-
     }).catch((err)=>{
       console.log(err);
     })
@@ -169,7 +179,7 @@ export class DetailProductComponent extends Page implements OnInit {
     //   this.main.createNotification("info","Vui lòng điền họ và tên")
     //   return;
     // }
-    this.form_review.productNameId = this.product.nameId
+    // this.form_review.productNameId = this.product.nameId
     this.reviewService.createReview(this.form_review as ReviewRequest)
 
     .then(data => {
@@ -185,63 +195,36 @@ export class DetailProductComponent extends Page implements OnInit {
   this.writing_review=false;
   }
 
-  changeQuantity(){
-    this.product.quantity = this.product.quantity.replace(/\D/g, '');
-    if(this.product.quantity<1) this.product.quantity=1
-    if(this.product.quantity>99) this.product.quantity=99
+  changeQuantity(quantity:number){
+    this.quantity = quantity
   }
 
-  removeQuantity(){
-    if (this.product.quantity>1)
-      this.product.quantity--;
-
-  }
-
-  addQuantity(){
-    if (this.product.quantity<99)
-      this.product.quantity++;
-
-
-  }
-
-  AddToCart(product:any){
-    console.log("Add To Cart");
-    console.log(this.product);
-    const product_c = {
-      id:this.product.id[this.selectedSize],
-      pid:this.product.id,
-      name:this.product.name,
-      quantity:product.quantity,
-      sale:this.product.sale[this.selectedSize],
-      cost:this.product.cost[this.selectedSize],
-      size:this.product.size[this.selectedSize],
-      name_id: this.product.name_id,
-      note:product.note
-    }
-    this.addToCart(product_c)
-  }
 
   openFormAddToCart(){
-    this.product_form = {...this.product}
-    this.product_form["note"]=''
-    this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
+    this.product_form = {
+      name:this.product.name,
+      size:this.selectedSize.size,
+      productId:this.product.id,
+      productVariantId:this.selectedSize.id,
+      quantity:this.quantity
+    }
     this.isFormAddToCart = true
   }
 
   openFormBuyNow(){
     this.product_form = {...this.product}
     this.product_form["note"]=''
-    this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
+    // this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
     this.isFormBuyNow = true
   }
 
   BuyNow(product:any){
     const product_c = {
-      id:this.product.id[this.selectedSize],
+      // id:this.product.id[this.selectedSize],
       quantity:product.quantity,
       note:product.note
     }
-    console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
+    // console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
     this.router.navigate([`checkout`],{ queryParams: {...product_c} })
   }
 
@@ -250,6 +233,10 @@ export class DetailProductComponent extends Page implements OnInit {
     if (this.number_showing>this.customer_reviews.length){
       this.number_showing=this.customer_reviews.length
     }
+  }
+
+  seeSizingGuide(){
+    this.nzImageService.preview(this.images);
   }
 
 

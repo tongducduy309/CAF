@@ -4,7 +4,7 @@ import { CartResponse } from '../dto/response/cart.response';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
 import axios from 'axios';
-import { UpdateQuantityCartRequest } from '../dto/request/cart.request';
+import { CartRequest, UpdateQuantityCartRequest } from '../dto/request/cart.request';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,8 @@ export class CartService {
 
   private cartSubject = new BehaviorSubject<CartResponse[]>([]);
   cart$ = this.cartSubject.asObservable();
+
+  get cartValue(): CartResponse[] { return this.cartSubject.value; }
 
   constructor(private authenticationService: AuthenticationService) {
 
@@ -56,9 +58,9 @@ export class CartService {
     );
   }
 
-  async updateQuantityInCart(id:string,updateQuantityCartRequest:UpdateQuantityCartRequest): Promise<CartResponse> {
+  async updateQuantityInCart(id: string, updateQuantityCartRequest: UpdateQuantityCartRequest): Promise<CartResponse> {
     try {
-      const { data } = await this.apiClient.patch(`/${id}`,updateQuantityCartRequest,{
+      const { data } = await this.apiClient.patch(`/${id}`, updateQuantityCartRequest, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -66,17 +68,39 @@ export class CartService {
       return data.data as CartResponse;
     } catch (err: unknown) {
 
-      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
     }
   }
 
-  async removeItemById(id:string): Promise<void> {
+  async removeItemById(id: string): Promise<void> {
     try {
       const { data } = await this.apiClient.delete(`/${id}`);
-      
+      const next = this.cartValue.filter(it => it.id !== id);
+      this.cartSubject.next(next);
+
     } catch (err: unknown) {
 
-      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:"Đã xảy ra lỗi. Vui lòng thử lại");
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+
+  }
+
+  async addToCart(req: CartRequest): Promise<CartResponse> {
+
+    try {
+      const res = await this.apiClient.post('', req, { headers: { 'Content-Type': 'application/json' } });
+      const added = res.data?.data as CartResponse;
+
+      const existedIdx = this.cartValue.findIndex(it => it.id === added.id);
+      let next = [...this.cartValue];
+      if (existedIdx >= 0) next[existedIdx] = { ...next[existedIdx], ...added };
+      else next.push(added);
+      this.cartSubject.next(next);
+
+      return added;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
     }
   }
 }

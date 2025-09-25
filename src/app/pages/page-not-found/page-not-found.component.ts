@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
@@ -7,11 +7,11 @@ import { LayoutService } from 'src/app/services/layout.service';
     styleUrls: ['./page-not-found.component.scss'],
     standalone: false
 })
-export class PageNotFoundComponent implements OnInit{
+export class PageNotFoundComponent implements AfterViewInit{
   private layoutService = inject(LayoutService)
   constructor (){
   }
-  ngOnInit(): void {  
+  ngAfterViewInit(): void {
     this.layoutService.setReady()
   }
 }

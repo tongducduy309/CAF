@@ -151,8 +151,7 @@
           </div>
 
           <div class="list-item">
-            <!-- Để sản phẩm xuất hiện ở đây -->
-            <app-item-shopping-cart (onRemove)="removeItemInCart($event)"
+            <app-item-shopping-cart
               (QuantityEmitter)="changeQuantityItemInCart($event)" *ngFor="let item of (cart$ | async)"
               [item]="item"></app-item-shopping-cart>
           </div>
