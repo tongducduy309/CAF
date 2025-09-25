@@ -1,6 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { Location } from '@angular/common';
@@ -11,11 +10,11 @@ import { Location } from '@angular/common';
     styleUrls: ['./detail-bill.component.scss'],
     standalone: false
 })
-export class DetailBillComponent extends Page{
+export class DetailBillComponent{
   bill:any = null
 
   constructor(private route: ActivatedRoute, private crud:CrudService, private main:MainService, private location:Location){
-    super()
+
     this.route.paramMap.subscribe(async (params) => {
       const bid = params.get('bid')
       this.getBill(bid)
@@ -35,7 +34,6 @@ export class DetailBillComponent extends Page{
           console.log(res);
           if (res.data){
             this.bill = res.data
-            this.loaded()
             return;
           }
         }

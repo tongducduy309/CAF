@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Page } from 'src/app/classes/page';
 import { LayoutService } from 'src/app/services/layout.service';
 @Component({
     selector: 'app-blogs',

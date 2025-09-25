@@ -1,11 +1,9 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { Page } from 'src/app/classes/page';
 import { UserRequest } from 'src/app/dto/request/user.request';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LayoutService } from 'src/app/services/layout.service';
-import { UserService } from 'src/app/services/user.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 

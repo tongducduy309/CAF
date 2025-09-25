@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
@@ -11,7 +10,7 @@ import { UserService } from 'src/services/user.service';
     styleUrls: ['./checkout.component.scss'],
     standalone: false
 })
-export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
+export class CheckoutComponent implements OnInit {
 
   user:any = {
     card:{
@@ -44,12 +43,7 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
   @Output() totalEmitter = new EventEmitter()
 
   constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
-    super()
-  }
-
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-    })
+    
   }
 
 
@@ -68,7 +62,6 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
           const product = res.data
           this.products.push({...product,quantity:quantity,note:note})
           this.cal_Info_list()
-          this.loaded()
         })
       }
       else{
@@ -85,7 +78,6 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
     this.crud.get("cart",this.user.id).subscribe((response:any)=>{
       this.products = response.data
       this.cal_Info_list()
-      this.loaded()
 
     })
 
@@ -124,7 +116,6 @@ export class CheckoutComponent extends Page implements OnInit, AfterViewInit {
           code:'',
           date:''
         }}
-        this.loaded()
       }
       // this.getAddressOfUser()
     }

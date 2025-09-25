@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -10,7 +9,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./newpassword.component.scss'],
     standalone: false
 })
-export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
+export class NewpasswordComponent implements OnInit{
 
   user:any = {}
   passwordVisible = false;
@@ -25,12 +24,7 @@ export class NewpasswordComponent extends Page implements OnInit,AfterViewInit{
   processing=false
 
   constructor(private router:Router, private routed:ActivatedRoute, private main:MainService, private crud:CrudService){
-    super()
-  }
-  ngAfterViewInit(): void {
-    Promise.resolve().then(()=> {
-      this.loaded()
-    })
+
   }
 
   ngOnInit(): void {

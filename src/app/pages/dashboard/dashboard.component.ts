@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
@@ -11,13 +10,12 @@ import { UserService } from 'src/services/user.service';
     styleUrls: ['./dashboard.component.scss'],
     standalone: false
 })
-export class DashboardComponent extends Page implements OnInit{
+export class DashboardComponent implements OnInit{
   isCollapsed = false;
   titlePage = 'orders'
   user:any = {}
 
   constructor (private router:Router, private crud:CrudService, private main:MainService, public userS:UserService){
-    super();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd)
     {
@@ -46,7 +44,6 @@ export class DashboardComponent extends Page implements OnInit{
           if (this.user.role<2){
             this.router.navigate(['dashboard/orders'])
           }
-          this.loaded()
         }
         else this.router.navigate(['page-not-found'])
       })

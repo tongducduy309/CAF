@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Page } from 'src/app/classes/page';
 
 @Component({
     selector: 'app-collections',
@@ -7,7 +6,7 @@ import { Page } from 'src/app/classes/page';
     styleUrls: ['./collections.component.scss'],
     standalone: false
 })
-export class CollectionsComponent extends Page implements OnInit {
+export class CollectionsComponent implements OnInit {
 
   collections = [
     {
@@ -61,6 +60,5 @@ export class CollectionsComponent extends Page implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.loaded()
   }
 }

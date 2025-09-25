@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
-import { Page } from 'src/app/classes/page';
+
 import { Location } from '@angular/common';
 import { PageTitleService } from 'src/app/services/page-title.service';
 import { LayoutService } from 'src/app/services/layout.service';

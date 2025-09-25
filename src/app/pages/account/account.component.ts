@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Page } from 'src/app/classes/page';
 import { Location } from '@angular/common';
 import { MainService } from 'src/services/main.service';
 import { Router } from '@angular/router';

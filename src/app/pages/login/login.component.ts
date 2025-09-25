@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
 import emailjs from '@emailjs/browser';
-import { Page } from 'src/app/classes/page';
 import { UserService } from 'src/services/user.service';
 import { MainService } from 'src/services/main.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
@@ -16,7 +15,7 @@ import { LayoutService } from 'src/app/services/layout.service';
     styleUrls: ['./login.component.scss'],
     standalone: false
 })
-export class LoginComponent extends Page implements OnInit,AfterViewInit {
+export class LoginComponent implements OnInit,AfterViewInit {
   user_email = ''
   user_password = ''
   passwordVisible = false;
@@ -32,8 +31,7 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
 
   constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService, 
     private AuthenticationService:AuthenticationService, private location:Location) {
-    super()
-    // this.must_load=1
+
   }
   ngAfterViewInit(): void {
     this.layoutService.setReady()
@@ -49,7 +47,6 @@ export class LoginComponent extends Page implements OnInit,AfterViewInit {
 
     this.routed.paramMap.subscribe(params=>{
       this.isFormLogin=(params.get('param')==null);
-      // this.loaded()
     })
     
   }

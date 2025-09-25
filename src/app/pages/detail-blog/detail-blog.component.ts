@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { Page } from 'src/app/classes/page';
 import { BlogHTMLResponse } from 'src/app/dto/response/blog.response';
 import { BlogService } from 'src/app/services/blog.service';
 import { numberToStringMonth } from 'src/app/utils/Date';
@@ -13,7 +12,7 @@ import { MainService } from 'src/services/main.service';
   styleUrls: ['./detail-blog.component.scss'],
   standalone: false
 })
-export class DetailBlogComponent extends Page implements OnInit {
+export class DetailBlogComponent implements OnInit {
 
   blogService = inject(BlogService)
   route = inject(ActivatedRoute)
@@ -26,7 +25,6 @@ export class DetailBlogComponent extends Page implements OnInit {
   }
 
   constructor(private location:Location) {
-    super()
     this.route.paramMap.subscribe(async (params) => {
       const slug = params.get('slug');
       if (slug) {
@@ -36,7 +34,6 @@ export class DetailBlogComponent extends Page implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loaded()
 
   }
 

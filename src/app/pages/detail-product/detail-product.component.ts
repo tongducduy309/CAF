@@ -1,8 +1,7 @@
 
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzImageService } from 'ng-zorro-antd/image';
-import { Page } from 'src/app/classes/page';
 import { ProductInCartRequest } from 'src/app/dto/request/cart.request';
 import { ReviewRequest } from 'src/app/dto/request/review.request';
 import { ProductResponse } from 'src/app/dto/response/product.response';
@@ -18,42 +17,42 @@ import { MainService } from 'src/services/main.service';
 
 
 @Component({
-    selector: 'app-detail-product',
-    templateUrl: './detail-product.component.html',
-    styleUrls: ['./detail-product.component.scss'],
-    standalone: false
+  selector: 'app-detail-product',
+  templateUrl: './detail-product.component.html',
+  styleUrls: ['./detail-product.component.scss'],
+  standalone: false
 })
-export class DetailProductComponent extends Page implements OnInit,AfterViewInit {
+export class DetailProductComponent implements OnInit {
 
-  products_best_sell:any=[
+  products_best_sell: any = [
   ]
-  selectedSize:Partial<ProductVariant> = {};
+  selectedSize: Partial<ProductVariant> = {};
   isFavorite = false;
   selected_img_product = 0;
-  product:Partial<Product>={}
+  product: Partial<Product> = {}
 
-  form_review:Partial<ReviewRequest> = {}
+  form_review: Partial<ReviewRequest> = {}
 
-  rating_of_product:any = {
-    point:0
+  rating_of_product: any = {
+    point: 0
   }
 
   customer_reviews: ReviewResponse[] = []
 
-  writing_review:any
+  writing_review: any
 
-  products_for_best:any = []
+  products_for_best: any = []
 
   isFormAddToCart = false
   isFormBuyNow = false
 
-  product_form:Partial<ProductInCartRequest> = {}
+  product_form: Partial<ProductInCartRequest> = {}
 
   number_showing = 2
 
-  count_of_level_point = [0,0,0,0,0]
+  count_of_level_point = [0, 0, 0, 0, 0]
 
-  pid:any
+  pid: any
 
   FILE_URL = environment.variable_global.FILE_URL;
 
@@ -74,104 +73,94 @@ export class DetailProductComponent extends Page implements OnInit,AfterViewInit
   private pageTitle = inject(PageTitleService);
 
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private productService:ProductService,
-    private reviewService:ReviewService
+  constructor(private crud: CrudService, private route: ActivatedRoute, private router: Router, public main: MainService, private productService: ProductService,
+    private reviewService: ReviewService
   ) {
-    super();
-    this.must_load=2
     this.route.paramMap.subscribe(async (params) => {
       this.pid = params.get('id')
-      this.getIdProduct(this.pid)
-      
-      this.getCustomerReviews(this.pid)
-      this.getBestProducts()
-      
+
+
+
+
+      try {
+        const [product, reviews, bestProducts] = await Promise.all([
+          this.getIdProduct(this.pid),
+          this.getCustomerReviews(this.pid),
+          this.getBestProducts(),
+        ]);
+
+        // set state 1 lần
+        this.product = product;
+        this.quantity = 1;
+        this.selectedSize = product.variants?.[0] ?? {};
+
+        this.customer_reviews = reviews;
+        const sum = reviews.reduce((s, r) => s + (r.point ?? 0), 0);
+        this.count_of_level_point = [0, 0, 0, 0, 0];
+        reviews.forEach(r => { if (r.point) this.count_of_level_point[r.point - 1]++; });
+        this.rating_of_product.customer = reviews.length;
+        this.rating_of_product.point = reviews.length ? parseFloat((sum / reviews.length).toFixed(1)) : 0;
+
+        this.products_for_best = bestProducts.slice(0, 2);
+      } catch (err: any) {
+        this.main.createNotification('error', err?.message ?? 'Có lỗi xảy ra');
+      } finally {
+        this.layoutService.setReady();
+      }
+
     });
-  }
-  ngAfterViewInit(): void {
-    this.layoutService.setReady()
   }
 
   ngOnInit(): void {
     this.pageTitle.setTitle('DETAIL_PRODUCT.TITLE');
-    
-  }
-
-  getIdProduct(id:any){
-
-    this.productService.getDetailProduct(id).then((res:Product)=>{
-     
-      if (res)
-        this.product = res
-
-      else this.router.navigate(["home"])
-      this.quantity = 1
-      this.selectedSize = this.product.variants?this.product.variants[0]:{}
-    this.loaded()
-
-      if (!this.product) this.router.navigate(['page-not-found'])
-    })
 
   }
 
-  getCustomerReviews(id:string){
-    this.reviewService.getReviewByProductId(id).then((res:ReviewResponse[])=>{
-      let sum = 0
-      const cs = res
-      for (let c of cs){
-        this.count_of_level_point[c.point-1]++
-        sum+=c.point
-        console.log(sum);
-      }
-
-      this.customer_reviews = cs
-      console.log(cs);
-      this.rating_of_product.customer = cs.length
-      if (cs.length>0){
-        this.rating_of_product.point = (sum/cs.length).toFixed(1)
-      }
-      this.loaded()
-    })
+  getIdProduct(id: string): Promise<Product> {
+    return this.productService.getDetailProduct(id).then((res: Product) => {
+      if (!res) this.router.navigate(['page-not-found'])
+      return res;
+    });
   }
 
-  getBestProducts(){
-    this.productService.getAllProducts().then((res:ProductResponse[])=>{
-      this.products_for_best=res.slice(0,2)
-    }).catch((err)=>{
-      console.log(err);
-    })
+  getCustomerReviews(id: string): Promise<ReviewResponse[]> {
+    return this.reviewService.getReviewByProductId(id).then((res: ReviewResponse[]) => res);
   }
-  
 
-  
+  getBestProducts(): Promise<ProductResponse[]> {
+    return this.productService.getAllProducts().then((res: ProductResponse[]) => res);
+  }
 
-  writeReview(){
+
+
+
+  writeReview() {
     this.form_review = {}
     this.writing_review = !this.writing_review
   }
 
-  changeRating_Review(event:any){
+  changeRating_Review(event: any) {
     this.form_review.point = event
     console.log(event);
   }
 
   onImgError(event: Event) {
-  (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
-}
+    (event.target as HTMLImageElement).src = '../../assets/images/example_product.png';
+  }
 
-  hoverRating_Review(event:any){
-    if (this.form_review.point==0){
+  hoverRating_Review(event: any) {
+    if (this.form_review.point == 0) {
       this.form_review.point = event
     }
   }
 
-  async submitReview(){
-    if (!this.form_review.point||this.form_review.point==0){
-      this.main.createNotification("info","Vui lòng chọn điểm đánh giá")
+  async submitReview() {
+    if (!this.form_review.point || this.form_review.point == 0) {
+      this.main.createNotification("info", "Vui lòng chọn điểm đánh giá")
       return;
     }
-    if (!this.form_review.comment||this.form_review.comment.trim().length==0){
-      this.main.createNotification("info","Vui lòng viết nhận xét")
+    if (!this.form_review.comment || this.form_review.comment.trim().length == 0) {
+      this.main.createNotification("info", "Vui lòng viết nhận xét")
       return;
     }
 
@@ -182,60 +171,60 @@ export class DetailProductComponent extends Page implements OnInit,AfterViewInit
     // this.form_review.productNameId = this.product.nameId
     this.reviewService.createReview(this.form_review as ReviewRequest)
 
-    .then(data => {
-        this.main.createNotification("success","Viết bài đánh giá thành công")
-          this.getCustomerReviews(this.pid)
-        
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        this.main.createNotification("info","Viết bài đánh giá không thành công")
+      .then(data => {
+        this.main.createNotification("success", "Viết bài đánh giá thành công")
+        this.getCustomerReviews(this.pid)
 
-    });
-  this.writing_review=false;
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        this.main.createNotification("info", "Viết bài đánh giá không thành công")
+
+      });
+    this.writing_review = false;
   }
 
-  changeQuantity(quantity:number){
+  changeQuantity(quantity: number) {
     this.quantity = quantity
   }
 
 
-  openFormAddToCart(){
+  openFormAddToCart() {
     this.product_form = {
-      name:this.product.name,
-      size:this.selectedSize.size,
-      productId:this.product.id,
-      productVariantId:this.selectedSize.id,
-      quantity:this.quantity
+      name: this.product.name,
+      size: this.selectedSize.size,
+      productId: this.product.id,
+      productVariantId: this.selectedSize.id,
+      quantity: this.quantity
     }
     this.isFormAddToCart = true
   }
 
-  openFormBuyNow(){
-    this.product_form = {...this.product}
-    this.product_form["note"]=''
+  openFormBuyNow() {
+    this.product_form = { ...this.product }
+    this.product_form["note"] = ''
     // this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
     this.isFormBuyNow = true
   }
 
-  BuyNow(product:any){
+  BuyNow(product: any) {
     const product_c = {
       // id:this.product.id[this.selectedSize],
-      quantity:product.quantity,
-      note:product.note
+      quantity: product.quantity,
+      note: product.note
     }
     // console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
-    this.router.navigate([`checkout`],{ queryParams: {...product_c} })
+    this.router.navigate([`checkout`], { queryParams: { ...product_c } })
   }
 
-  showMore(){
-    this.number_showing+=2
-    if (this.number_showing>this.customer_reviews.length){
-      this.number_showing=this.customer_reviews.length
+  showMore() {
+    this.number_showing += 2
+    if (this.number_showing > this.customer_reviews.length) {
+      this.number_showing = this.customer_reviews.length
     }
   }
 
-  seeSizingGuide(){
+  seeSizingGuide() {
     this.nzImageService.preview(this.images);
   }
 

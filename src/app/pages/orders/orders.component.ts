@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Page } from 'src/app/classes/page';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 @Component({
@@ -9,7 +8,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./orders.component.scss'],
     standalone: false
 })
-export class OrdersComponent extends Page implements OnInit{
+export class OrdersComponent implements OnInit{
   tabs = [
     {
       name: 'Tất cả',
@@ -45,8 +44,6 @@ export class OrdersComponent extends Page implements OnInit{
   bills:any=[]
   bills_v:any=[]
   constructor(private location:Location, private crud:CrudService, private main:MainService){
-    super();
-    this.must_load=1
   }
   ngOnInit(): void {
     this.getBills()
@@ -61,7 +58,6 @@ export class OrdersComponent extends Page implements OnInit{
       this.crud.get("bills",user.uid).subscribe((res:any)=>{
         this.bills=res.data
         this.bills_v = [...this.bills]
-        this.loaded()
       })
     }
   }

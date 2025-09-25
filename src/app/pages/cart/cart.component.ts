@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { Page } from 'src/app/classes/page';
 import { MainService } from 'src/services/main.service';
 import { CrudService } from 'src/services/crud.service';
 import { Router } from '@angular/router';
@@ -11,12 +10,12 @@ import { UserService } from 'src/services/user.service';
     styleUrls: ['./cart.component.scss'],
     standalone: false
 })
-export class CartComponent extends Page{
+export class CartComponent{
   @Input() itemsCart:any = []
   subtotal = 0
   user:any={}
   constructor(private location:Location, public main:MainService, private crud:CrudService,private router:Router, private userS:UserService){
-    super()
+
   }
   ngOnInit(): void {
     this.checkUser()
@@ -30,7 +29,6 @@ export class CartComponent extends Page{
       this.itemsCart = response.data
       this.cal_Info_Cart()
       // console.log(this.itemsCart);
-      this.loaded()
     })
 
   }
@@ -93,7 +91,6 @@ export class CartComponent extends Page{
 
       //
 
-    this.changeQuantityEmitter.emit(item)
 
 
   }

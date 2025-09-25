@@ -1,7 +1,6 @@
 import { Component, ElementRef, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Route, Router } from '@angular/router';
-import { Page } from 'src/app/classes/page';
 import { LangService } from 'src/app/services/lang.service';
 import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';
@@ -13,7 +12,7 @@ import { CrudService } from 'src/services/crud.service';
     styleUrls: ['./home.component.scss'],
     standalone: false
 })
-export class HomeComponent extends Page implements OnInit, OnDestroy{
+export class HomeComponent implements OnInit, OnDestroy{
   title_button= "Login"
   list_product = [
     {
@@ -58,7 +57,6 @@ export class HomeComponent extends Page implements OnInit, OnDestroy{
   private pageTitle = inject(PageTitleService);
 
   constructor (private crud:CrudService, private route:Router, private elRef: ElementRef, private sanitizer: DomSanitizer){
-    super()
     this.currentContent = this.sanitizer.bypassSecurityTrustHtml(this.contents[this.idx]);
   }
 
