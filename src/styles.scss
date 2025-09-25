@@ -22,9 +22,20 @@ background-color: #242424;
 
 }
 
+
 .cdk-global-scrollblock{
   overflow-y:visible;
 }
+
+body.ant-scrolling-effect,
+body.cdk-global-scrollblock { overflow: hidden !important; width: 100% !important; }
+html { overflow-y: auto !important; }
+
+
+/* 5) Đảm bảo khung ngoài đủ cao */
+html, body { min-height: 100vh; }
+
+
 
 body{
   font-family: 'Josefin';
