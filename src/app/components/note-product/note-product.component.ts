@@ -1,4 +1,5 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { CartRequest, ProductInCartRequest } from 'src/app/dto/request/cart.request';
 import { CartService } from 'src/app/services/cart.service';
@@ -16,14 +17,21 @@ export class NoteProductComponent implements OnInit {
 
   @Input() visible = false
   @Output() visibleChange = new EventEmitter<boolean>();
-  @Input() title = 'Thêm vào giỏ'
+  @Input() form:"cart"|"buy" = "cart"
   @Input() product: Partial<ProductInCartRequest> = {}
-  @Output() submitEmitter = new EventEmitter();
+  isCart:boolean = true
+  
+
   cartService = inject(CartService)
   mainService = inject(MainService)
   translate = inject(TranslateService)
+  router = inject(Router)
   ngOnInit(): void {
-    console.log(this.product)
+    
+  }
+
+  open(){
+    this.isCart = this.form==='cart'
   }
 
   cancel() {
@@ -31,7 +39,10 @@ export class NoteProductComponent implements OnInit {
   }
 
   submit() {
-    this.addToCard()
+    if (this.isCart)
+      this.addToCard()
+    else
+      this.buyNow()
     this.visibleChange.emit(false)
   }
 
@@ -51,5 +62,10 @@ export class NoteProductComponent implements OnInit {
       console.error(e.message)
       this.mainService.createNotification("error", this.translate.instant('NOTIFICATION.ERROR.CALL_API'))
     })
+  }
+
+  buyNow(){
+    // console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
+    this.router.navigate([`checkout`], { queryParams: { ...this.product } })
   }
 }

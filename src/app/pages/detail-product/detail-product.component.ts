@@ -201,20 +201,18 @@ export class DetailProductComponent implements OnInit {
   }
 
   openFormBuyNow() {
-    this.product_form = { ...this.product }
-    this.product_form["note"] = ''
-    // this.product_form["sizeSelected"] = this.product.size[this.selectedSize]
+    this.product_form = {
+      name: this.product.name,
+      size: this.selectedSize.size,
+      productId: this.product.id,
+      productVariantId: this.selectedSize.id,
+      quantity: this.quantity
+    }
     this.isFormBuyNow = true
   }
 
   BuyNow(product: any) {
-    const product_c = {
-      // id:this.product.id[this.selectedSize],
-      quantity: product.quantity,
-      note: product.note
-    }
-    // console.log(`checkout?id=${product_c.id}&quantity=${product_c.quantity}&note=${product_c.note}`);
-    this.router.navigate([`checkout`], { queryParams: { ...product_c } })
+    
   }
 
   showMore() {

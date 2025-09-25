@@ -262,5 +262,5 @@
     </div>
   </div>
 </section>
-<app-note-product [title]="'Thêm vào giỏ'" [(visible)]="isFormAddToCart" [product]="product_form"></app-note-product>
-<app-note-product [title]="'Đặt món'" [(visible)]="isFormBuyNow" [product]="product_form"></app-note-product>
+<app-note-product form="cart" [(visible)]="isFormAddToCart" [product]="product_form"></app-note-product>
+<app-note-product form="buy" [(visible)]="isFormBuyNow" [product]="product_form"></app-note-product>
