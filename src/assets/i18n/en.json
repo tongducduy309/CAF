@@ -247,6 +247,9 @@
             "CONTENT":"{{month}} {{day}}, {{year}}"
         }
     },
+    "CHECKOUT":{
+        "TITLE":"Checkout"
+    },
     "LABELS":{
         "PRICE":"Price"
     }

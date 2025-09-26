@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PageTitleService } from 'src/app/services/page-title.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 import { UserService } from 'src/services/user.service';
+import { Location } from '@angular/common';
+import { LayoutService } from 'src/app/services/layout.service';
 
 @Component({
     selector: 'app-checkout',
@@ -42,22 +45,31 @@ export class CheckoutComponent implements OnInit {
 
   @Output() totalEmitter = new EventEmitter()
 
-  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService){
+  private pageTitle = inject(PageTitleService);
+  layoutService = inject(LayoutService)
+
+  constructor (private crud:CrudService, private route: ActivatedRoute, private router:Router, public main:MainService, private userS:UserService,
+    private location:Location
+  ){
     
+  }
+
+  back(){
+    this.location.back();
   }
 
 
 
 
   async ngOnInit(): Promise<void> {
-    await this.checkUser()
+    this.pageTitle.setTitle('CHECKOUT.TITLE');
     this.route.queryParamMap.subscribe(params => {
       const quantity = parseInt(params.get('quantity')||'0')
-      const id = params.get('id')
+      const productId = params.get('productId')
       const note = params.get('note')
-      if (quantity&&id){
+      if (quantity&&productId){
         this.inCart=false
-        this.crud.get('product',id!).subscribe((res:any)=>{
+        this.crud.get('product',productId!).subscribe((res:any)=>{
           // console.log(products);
           const product = res.data
           this.products.push({...product,quantity:quantity,note:note})
@@ -95,32 +107,6 @@ export class CheckoutComponent implements OnInit {
     this.bill.paymentmethod = '1'
   }
 
-
-
-  async checkUser(){
-    this.user = await this.getUser();
-    // console.log(this.user);
-    if (!this.user)
-    {
-      this.router.navigate(['home'])
-    }
-    else{
-      if (this.user.role>0){
-        this.main.createNotification("info","Tài khoản admin/nhân viên không thể thực hiện thao tác này")
-
-
-      }
-      else{
-        this.user = {...this.user,card:{
-          serial:'',
-          code:'',
-          date:''
-        }}
-      }
-      // this.getAddressOfUser()
-    }
-
-  }
 
   async getUser():Promise<any>{
 
