@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 
 declare const google: any;
 
-const API = 'http://localhost:8080'; // đổi sang API của bạn
 const GOOGLE_CLIENT_ID = environment.GOOGLE_CLIENT_ID;
 
 @Injectable({
@@ -144,8 +143,8 @@ export class AuthenticationService {
 
   initGoogle() {
     google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: (response: any) => this.handleCredentialResponse(response)
+      client_id: environment.GOOGLE_CLIENT_ID,
+      callback: (response: any) => this.handleCredentialResponse(response),
     });
   }
 

@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
   }
   ngAfterViewInit(): void {
+    this.authenticationService.initGoogle();
+    this.authenticationService.promptOneTap();
     this.authenticationService.renderGoogleButton('googleBtn');
     this.layoutService.setReady()
   }
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
 
   ngOnInit(): void {
-    this.authenticationService.initGoogle();
+    
 
 
     this.routed.paramMap.subscribe(params=>{

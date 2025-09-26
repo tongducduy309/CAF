@@ -25,6 +25,7 @@
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "axios": "^1.11.0",
+    "gapi-script": "^1.2.0",
     "marked": "^15.0.12",
     "ng-zorro-antd": "^19.0.0",
     "ngx-markdown": "^19.1.1",
