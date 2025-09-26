@@ -76,6 +76,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { CountSafePipe } from './pipes/count-safe.pipe';
 import { InputQuantityComponent } from './components/input-quantity/input-quantity.component';
+import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
 registerLocaleData(vi);
 const icons: IconDefinition[] = [LeftOutline];
 
@@ -113,7 +114,8 @@ export let components: any = [
   BoxEditorMarkdownComponent,
   LoadingComponent,
   ImageComponent,
-  InputQuantityComponent
+  InputQuantityComponent,
+  OAuth2CallbackComponent
 ]
 
 export let pages = [

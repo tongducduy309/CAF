@@ -8,12 +8,19 @@ import { Auth, User } from '../models/user.model';
 import { ResponseObject } from '../models/responseObject.model';
 import { Router } from '@angular/router';
 
+declare const google: any;
+
+const API = 'http://localhost:8080'; // đổi sang API của bạn
+const GOOGLE_CLIENT_ID = environment.GOOGLE_CLIENT_ID;
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
 
   private apiClient: any;
+
+  private APP_URL:string = "";
 
   private userSubject = new BehaviorSubject<Auth | null>(null);
   user$ = this.userSubject.asObservable();
@@ -31,9 +38,9 @@ export class AuthenticationService {
       throw new Error("KHÔNG CẤU HÌNH ĐƯỜNG DẪN API");
     }
 
-
+    this.APP_URL = API_URL && API_URL.length > 0 ? API_URL : BASE_URL
     this.apiClient = axios.create({
-      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "auth/",
+      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "api/v1/auth/",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });
@@ -50,7 +57,7 @@ export class AuthenticationService {
   }
 
   async fetchProfile(): Promise<Observable<Auth | null>> {
-    return from(this.apiClient.get('/me')).pipe(
+    return from(this.apiClient.get('me')).pipe(
       map((response: any) => response.data),
       tap(user => {
         this.userSubject.next(user);
@@ -108,6 +115,10 @@ export class AuthenticationService {
     }
   }
 
+  // loginWithGoogle() {
+  //   window.location.href = `${this.APP_URL}oauth2/authorization/google`;
+  // }
+
 
   async register(userRequest: UserRequest): Promise<string> {
     try {
@@ -130,4 +141,55 @@ export class AuthenticationService {
       this.router.navigate(['']);
     }
   }
+
+  initGoogle() {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: (response: any) => this.handleCredentialResponse(response)
+    });
+  }
+
+  renderGoogleButton(elementId: string) {
+    google.accounts.id.renderButton(
+      document.getElementById(elementId),
+      { theme: 'filled_blue', size: 'large', type: 'standard', shape: 'rectangular' }
+    );
+  }
+
+  /** Bật One Tap (tuỳ chọn) */
+  promptOneTap() {
+    google.accounts.id.prompt(); // hiện khung one-tap nếu đủ điều kiện
+  }
+
+  private async handleCredentialResponse(response: any) {
+    const idToken = response?.credential; 
+    if (!idToken) return;
+     try {
+    const auth = await this.loginWithGoogleToken(idToken);
+    // Lưu ý: nếu BE trả 'accessToken' thì lưu đúng key
+    localStorage.setItem('access_token', auth.token);
+
+    this.userSubject.next(auth as Auth); 
+    this.router.navigate([''])
+  } catch (e: any) {
+    console.error('Google login failed:', e?.message || e);
+    // this.main.createNotification('error', e.message);
+  }
+  }
+
+  async loginWithGoogleToken(idToken: string): Promise<Auth> {
+    try {
+      const { data } = await this.apiClient.post(`google`, { token:idToken }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return data.data;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
+    }
+  }
+
+
 }

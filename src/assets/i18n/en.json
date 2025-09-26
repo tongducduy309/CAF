@@ -208,7 +208,7 @@
         "EMAIL": " "
     },
     "LOGIN": {
-        "TITLE": "Login",
+        "TITLE": "Sign In",
         "EMAIL": "Email",
         "PASSWORD": "Password",
         "FORGOT_PASSWORD": "Forgot Password?",
@@ -219,7 +219,8 @@
         "SUBTITLE_RESET_PASSWORD": "We will send you an email to reset your password",
         "PLACEHOLDER_EMAIL": "Enter your email",
         "SUCCESS_RESET_PASSWORD": "If the email you entered is associated with an account {{email}}, you will receive a password reset link shortly.",
-        "RESEND_EMAIL": "Resend Email"
+        "RESEND_EMAIL": "Resend Email",
+        "LOGIN_WITH_GOOGLE":"Sign in with Google"
     },
     "REGISTER": {
         "TITLE": "Register",

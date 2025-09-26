@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Location } from '@angular/common';
 import { Auth } from 'src/app/models/user.model';
 import { LayoutService } from 'src/app/services/layout.service';
+import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -30,19 +31,23 @@ export class LoginComponent implements OnInit,AfterViewInit {
   private layoutService = inject(LayoutService)
 
   constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService, 
-    private AuthenticationService:AuthenticationService, private location:Location) {
+    private authenticationService:AuthenticationService, private location:Location, private http: HttpClient) {
 
   }
   ngAfterViewInit(): void {
+    this.authenticationService.renderGoogleButton('googleBtn');
     this.layoutService.setReady()
   }
 
   user=null
 
+  
+
+
 
 
   ngOnInit(): void {
-
+    this.authenticationService.initGoogle();
 
 
     this.routed.paramMap.subscribe(params=>{
@@ -62,7 +67,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
       return;
     }
     this.processing=true
-    this.AuthenticationService.login({email:this.user_email,password:this.user_password}).then((res:Auth)=>{
+    this.authenticationService.login({email:this.user_email,password:this.user_password}).then((res:Auth)=>{
       // console.log("TOKEN",res);
       if (res){
         // localStorage.setItem('access_token', res);
@@ -87,6 +92,10 @@ export class LoginComponent implements OnInit,AfterViewInit {
   }
 
   resend(){}
+
+  loginWithGoogle() {
+  // this.authenticationService.loginWithGoogle();
+}
 
 
 

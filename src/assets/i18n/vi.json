@@ -53,6 +53,7 @@
     "BACK": "Quay Lại",
     "CANCEL": "Hủy",
     "SUBMIT": "Gửi"
+    
   },
   "SEARCH": {
     "RESULTS_FOR": "Kết quả tìm kiếm cho",
@@ -199,6 +200,7 @@
     "LOGIN_BUTTON": "Đăng Nhập",
     "RESET_PASSWORD": "Đặt Lại Mật Khẩu",
     "RESET_PASSWORD_SUBTITLE": "Nhập email để nhận liên kết đặt lại mật khẩu.",
-    "PLACEHOLDER_EMAIL": "Nhập email để nhận thư"
+    "PLACEHOLDER_EMAIL": "Nhập email để nhận thư",
+    "LOGIN_WITH_GOOGLE":"Đăng nhập với Google"
   }
 }

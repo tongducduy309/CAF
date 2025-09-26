@@ -56,8 +56,10 @@ export class HeaderComponent implements OnInit {
 
   }
   async ngOnInit(): Promise<void> {
-    (await this.auth.fetchProfile()).subscribe();
-    (await this.cartService.getMyCart()).subscribe();
+    (await this.auth.fetchProfile()).subscribe(async (data)=>{
+      if (data) (await this.cartService.getMyCart()).subscribe();
+    });
+    
     this.breakpointService.isDesktop$.subscribe(isDesktop => {
       this.isDesktop = isDesktop;
     });

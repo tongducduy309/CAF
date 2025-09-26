@@ -32,6 +32,7 @@ import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
+import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
 
 export const routes: Routes = [
 
@@ -107,6 +108,10 @@ export const routes: Routes = [
         component: DetailProductComponent
       },
     ]
+  },
+  {
+    path:'oauth2/callback',
+    component:OAuth2CallbackComponent
   },
 
 

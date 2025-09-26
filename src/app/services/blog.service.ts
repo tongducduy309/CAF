@@ -24,7 +24,7 @@ export class BlogService {
 
 
     this.apiClient = axios.create({
-      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"blogs",
+      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"api/v1/blogs",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });

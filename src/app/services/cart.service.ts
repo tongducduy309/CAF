@@ -28,7 +28,7 @@ export class CartService {
 
 
     this.apiClient = axios.create({
-      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "carts",
+      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "api/v1/carts",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });

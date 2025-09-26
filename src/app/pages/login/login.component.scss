@@ -15,6 +15,26 @@ section{
   padding: 80px 0 ;
 }
 
+.google-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  background: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  height: 40px;
+
+  img {
+    margin-left: 4px;
+  }
+
+  &:hover {
+    background: #f7f8f8;
+    border-color: #c6c6c6;
+  }
+}
+
 
 .btnRegister,.btnLogin, .btnSubmit_ResetPW
 {
