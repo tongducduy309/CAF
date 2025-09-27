@@ -1,12 +1,15 @@
 
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { NzImageService } from 'ng-zorro-antd/image';
+import { async, firstValueFrom } from 'rxjs';
 import { ProductInCartRequest } from 'src/app/dto/request/cart.request';
 import { ReviewRequest } from 'src/app/dto/request/review.request';
 import { ProductResponse } from 'src/app/dto/response/product.response';
 import { ReviewResponse } from 'src/app/dto/response/review.response';
 import { Product, ProductVariant } from 'src/app/models/product.model';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 import { LayoutService } from 'src/app/services/layout.service';
 import { PageTitleService } from 'src/app/services/page-title.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -71,7 +74,9 @@ export class DetailProductComponent implements OnInit {
   ];
 
   private pageTitle = inject(PageTitleService);
-
+  authService = inject(AuthenticationService)
+  translate = inject(TranslateService)
+  user$ = this.authService.user$
 
   constructor(private crud: CrudService, private route: ActivatedRoute, private router: Router, public main: MainService, private productService: ProductService,
     private reviewService: ReviewService
@@ -111,7 +116,8 @@ export class DetailProductComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    (await this.authService.fetchProfile()).subscribe()
     this.pageTitle.setTitle('DETAIL_PRODUCT.TITLE');
 
   }
@@ -189,8 +195,11 @@ export class DetailProductComponent implements OnInit {
   }
 
 
-  openFormAddToCart() {
-    this.product_form = {
+  async openFormAddToCart() {
+    
+    const user = await firstValueFrom(this.user$);
+    if (user) {
+      this.product_form = {
       name: this.product.name,
       size: this.selectedSize.size,
       productId: this.product.id,
@@ -198,21 +207,27 @@ export class DetailProductComponent implements OnInit {
       quantity: this.quantity
     }
     this.isFormAddToCart = true
-  }
-
-  openFormBuyNow() {
-    this.product_form = {
-      name: this.product.name,
-      size: this.selectedSize.size,
-      productId: this.product.id,
-      productVariantId: this.selectedSize.id,
-      quantity: this.quantity
     }
-    this.isFormBuyNow = true
+    else {
+      this.main.createNotification("info", this.translate.instant("NOTIFICATION.INFO.LOGIN_REQUIRED"))
+    }
   }
 
-  BuyNow(product: any) {
-    
+  async openFormBuyNow() {
+    const user = await firstValueFrom(this.user$);
+    if (user) {
+      this.product_form = {
+        name: this.product.name,
+        size: this.selectedSize.size,
+        productId: this.product.id,
+        productVariantId: this.selectedSize.id,
+        quantity: this.quantity
+      }
+      this.isFormBuyNow = true
+    }
+    else {
+      this.main.createNotification("info", this.translate.instant("NOTIFICATION.INFO.LOGIN_REQUIRED"))
+    }
   }
 
   showMore() {

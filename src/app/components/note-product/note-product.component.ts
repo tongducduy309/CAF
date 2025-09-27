@@ -31,7 +31,8 @@ export class NoteProductComponent implements OnInit {
   }
 
   open(){
-    this.isCart = this.form==='cart'
+    console.log(this.form)
+    this.isCart = (this.form=='cart')
   }
 
   cancel() {
@@ -39,7 +40,8 @@ export class NoteProductComponent implements OnInit {
   }
 
   submit() {
-    if (this.isCart)
+    console.log(this.isCart)
+    if (this.isCart==true)
       this.addToCard()
     else
       this.buyNow()

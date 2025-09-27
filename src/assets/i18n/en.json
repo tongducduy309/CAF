@@ -9,6 +9,9 @@
         "SUCCESS":{
             "REMOVE_ITEM_IN_CART":"Product successfully removed from cart",
             "ADD_TO_CART":"Product successfully added to cart"
+        },
+        "INFO":{
+            "LOGIN_REQUIRED":"Please log in to continue"
         }
     },
     "HEADER": {
