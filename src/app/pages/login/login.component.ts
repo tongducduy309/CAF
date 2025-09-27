@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { CrudService } from 'src/services/crud.service';
@@ -9,7 +9,6 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Location } from '@angular/common';
 import { Auth } from 'src/app/models/user.model';
 import { LayoutService } from 'src/app/services/layout.service';
-import { HttpClient } from '@angular/common/http';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -31,14 +30,16 @@ export class LoginComponent implements OnInit,AfterViewInit {
   private layoutService = inject(LayoutService)
 
   constructor (private crud:CrudService, public router:Router, private routed: ActivatedRoute, private userS:UserService, private main:MainService, 
-    private authenticationService:AuthenticationService, private location:Location, private http: HttpClient) {
+    private authenticationService:AuthenticationService, private location:Location) {
 
   }
   ngAfterViewInit(): void {
     this.authenticationService.initGoogle();
     this.authenticationService.promptOneTap();
     this.authenticationService.renderGoogleButton('googleBtn');
+    
     this.layoutService.setReady()
+    
   }
 
   user=null
@@ -54,6 +55,7 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
     this.routed.paramMap.subscribe(params=>{
       this.isFormLogin=(params.get('param')==null);
+      
     })
     
   }
@@ -95,9 +97,6 @@ export class LoginComponent implements OnInit,AfterViewInit {
 
   resend(){}
 
-  loginWithGoogle() {
-  // this.authenticationService.loginWithGoogle();
-}
 
 
 

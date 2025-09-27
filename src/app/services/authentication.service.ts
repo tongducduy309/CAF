@@ -19,7 +19,7 @@ export class AuthenticationService {
 
   private apiClient: any;
 
-  private APP_URL:string = "";
+  private APP_URL: string = "";
 
   private userSubject = new BehaviorSubject<Auth | null>(null);
   user$ = this.userSubject.asObservable();
@@ -56,6 +56,10 @@ export class AuthenticationService {
   }
 
   async fetchProfile(): Promise<Observable<Auth | null>> {
+    if (!this.getAccessToken()) {
+      this.userSubject.next(null);
+      return of(null);
+    }
     return from(this.apiClient.get('me')).pipe(
       map((response: any) => response.data),
       tap(user => {
@@ -88,7 +92,7 @@ export class AuthenticationService {
 
   async login(authentication: AuthenticationRequest): Promise<Auth> {
     try {
-      const {data} = await this.apiClient.post('authenticate', authentication,{
+      const { data } = await this.apiClient.post('authenticate', authentication, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -142,9 +146,13 @@ export class AuthenticationService {
   }
 
   initGoogle() {
+
     google.accounts.id.initialize({
       client_id: environment.GOOGLE_CLIENT_ID,
       callback: (response: any) => this.handleCredentialResponse(response),
+      auto_select: false,
+    use_fedcm_for_prompt: false,            
+    itp_support: true
     });
   }
 
@@ -155,30 +163,35 @@ export class AuthenticationService {
     );
   }
 
-  /** Bật One Tap (tuỳ chọn) */
+
+
   promptOneTap() {
-    google.accounts.id.prompt(); // hiện khung one-tap nếu đủ điều kiện
+    // google.accounts.id.prompt()
+    google.accounts.id.prompt((notification: any) => {
+    if (notification.isDisplayed()) {
+      return;
+    }
+
+  });
   }
 
   private async handleCredentialResponse(response: any) {
-    const idToken = response?.credential; 
+    const idToken = response?.credential;
     if (!idToken) return;
-     try {
-    const auth = await this.loginWithGoogleToken(idToken);
-    // Lưu ý: nếu BE trả 'accessToken' thì lưu đúng key
-    localStorage.setItem('access_token', auth.token);
+    try {
+      const auth = await this.loginWithGoogleToken(idToken);
+      localStorage.setItem('access_token', auth.token);
 
-    this.userSubject.next(auth as Auth); 
-    this.router.navigate([''])
-  } catch (e: any) {
-    console.error('Google login failed:', e?.message || e);
-    // this.main.createNotification('error', e.message);
-  }
+      this.userSubject.next(auth as Auth);
+      this.router.navigate([''])
+    } catch (e: any) {
+      console.error('Google login failed:', e?.message || e);
+    }
   }
 
   async loginWithGoogleToken(idToken: string): Promise<Auth> {
     try {
-      const { data } = await this.apiClient.post(`google`, { token:idToken }, {
+      const { data } = await this.apiClient.post(`google`, { token: idToken }, {
         headers: {
           'Content-Type': 'application/json'
         }
