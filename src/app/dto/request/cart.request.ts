@@ -4,7 +4,7 @@ export interface UpdateQuantityCartRequest{
 }
 
 export interface CartRequest {
-    productId:string;
+    // productId:string;
     productVariantId:string;
     quantity:number;
     note:string;

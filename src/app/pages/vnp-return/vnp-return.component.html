@@ -1,0 +1,28 @@
+<nz-result [nzStatus]="status==PaymentStatus.PAID ? 'success' : 'error'"
+  [nzTitle]="status==PaymentStatus.PAID? 'Successfully Purchased Cloud Server ECS!' : 'Purchase Failed'" [nzSubTitle]="status==PaymentStatus.PAID?
+       'Order number: ' + orderId + '. Cloud server configuration takes 1-5 minutes, please wait.' 
+      : 'Order number: ' + orderId + '. Something went wrong, please try again.'">
+  <ng-container *nzResultIcon>
+    <i nz-icon nzType="sync" nzSpin style="font-size: 48px; color: #1890ff;"></i>
+  </ng-container>
+  <div nz-result-extra>
+    @if(status==PaymentStatus.PAID){
+    <button nz-button nzType="primary">Go Console</button>
+    <button nz-button>Buy Again</button>
+    }
+    @else{
+    <button nz-button nzType="primary">Try Again</button>
+    <button nz-button>Contact Support</button>
+    }
+
+
+
+  </div>
+</nz-result>
+
+<nz-result nzTitle="Great, we have done all the operators!">
+  <nz-icon nzType="sync" nzTheme="outline" nz-result-icon/>
+      <div nz-result-extra>
+        <button nz-button nzType="primary">Next</button>
+      </div>
+    </nz-result>

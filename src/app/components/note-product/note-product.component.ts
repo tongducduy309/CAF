@@ -54,7 +54,6 @@ export class NoteProductComponent implements OnInit {
 
   addToCard() {
     this.cartService.addToCart({
-      productId: this.product.productId,
       productVariantId: this.product.productVariantId,
       quantity: this.product.quantity,
       note: this.product.note

@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
 import { CartResponse } from '../dto/response/cart.response';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './authentication.service';
 import axios from 'axios';
 import { CartRequest, UpdateQuantityCartRequest } from '../dto/request/cart.request';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class CartService {
 
   private cartSubject = new BehaviorSubject<CartResponse[]>([]);
   cart$ = this.cartSubject.asObservable();
+  translate  = inject(TranslateService);
 
   get cartValue(): CartResponse[] { return this.cartSubject.value; }
 
@@ -58,6 +60,16 @@ export class CartService {
     );
   }
 
+  async getDetailProduct(productVariantId:string,quantity:number,note:string):Promise<CartResponse>{
+    try{
+      const {data} = await this.apiClient.get(`/product?productVariantId=${productVariantId}&quantity=${quantity}&note=${note}`);
+      return data.data as CartResponse
+    }catch (err: unknown) {
+      console.log(err)
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
+    }
+  }
+
   async updateQuantityInCart(id: string, updateQuantityCartRequest: UpdateQuantityCartRequest): Promise<CartResponse> {
     try {
       const { data } = await this.apiClient.patch(`/${id}`, updateQuantityCartRequest, {
@@ -68,7 +80,7 @@ export class CartService {
       return data.data as CartResponse;
     } catch (err: unknown) {
 
-      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
     }
   }
 
@@ -80,7 +92,7 @@ export class CartService {
 
     } catch (err: unknown) {
 
-      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
     }
 
   }
@@ -100,7 +112,7 @@ export class CartService {
       return added;
     } catch (err: unknown) {
 
-      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : "Đã xảy ra lỗi. Vui lòng thử lại");
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
     }
   }
 }

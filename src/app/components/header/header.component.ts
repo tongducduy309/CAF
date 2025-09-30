@@ -70,29 +70,6 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  async getUser(): Promise<any> {
-
-    return new Promise(async (resolve, reject) => {
-      const user = this.main.getCookie("u-caf")
-      // console.log(user);
-      if (user) {
-        const result = await this.userS.getUser(null, null, user.token)
-        if (result) {
-          if (result.result == 'Success') {
-            resolve({ id: result.id, role: result.role })
-          }
-        }
-        resolve(null)
-
-
-      }
-
-
-    });
-
-
-  }
-
 
 
   getCategories() {
@@ -117,7 +94,6 @@ export class HeaderComponent implements OnInit {
 
   open(): void {
     this.visibleCart = true;
-    this.getItemsCart()
 
   }
 
@@ -139,17 +115,6 @@ export class HeaderComponent implements OnInit {
   closeSearch() {
     document.body.style.overflow = 'auto'
     this.isSearing = false
-  }
-
-  getItemsCart() {
-    // this.crud.get("cart",this.user.id).subscribe((response:any)=>{
-    //   this.itemsCart = response.data
-    //   this.cal_Info_Cart()
-    //   // this.itemsCartChange.emit(this.itemsCart)
-
-
-    // })
-
   }
 
   changeQuantityItemInCart(item: any) {

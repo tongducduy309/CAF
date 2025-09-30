@@ -1,20 +1,24 @@
 
 <div class="product">
   <div class="left">
-    <img [src]="product.img" alt="">
+    <image [src]="FILE_URL + item.product?.img" [custom]="{
+    width: '100px',
+    height: '100px',
+    objectFit: 'contain'}"></image>
 
   </div>
   <div class="center">
-    <p class="name">{{product.name}}</p>
+    <p class="name">{{item.product?.name}}</p>
     <div>
-      <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
-      <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
+      <p class="size"><b>Kích cỡ: </b> {{item.productVariant?.size}}</p>
+      <p class="quantity"><b>Số lượng: </b> {{item.quantity}}</p>
     </div>
-    <p class="note">Ghi chú: {{product.note}}</p>
+    <p class="note">Ghi chú: {{item.note}}</p>
   </div>
   <div class="right">
-    <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
-    <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
+    <div class="cost"><span>{{main.formatPrice(item.productVariant?.price)}}</span></div>
+    <!-- <div class="cost" *ngIf="item.sale>0"><span>{{main.formatPrice(item.cost)}}</span></div>
+    <div class="price"><span>{{main.formatPrice((item.sale>0)?(item.cost-item.cost*(item.sale/100)):item.cost)}}</span> VND</div> -->
 
 
 

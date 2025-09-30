@@ -1,15 +1,11 @@
 .product{
   display: flex;
   margin-bottom: 20px;
+  align-items: center;
   .left{
     flex: 1;
     margin-right: 10px;
     position: relative;
-  }
-  img{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
   }
 
   .note{

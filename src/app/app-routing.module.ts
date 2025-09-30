@@ -33,6 +33,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
+import { VnpReturnComponent } from './pages/vnp-return/vnp-return.component';
 
 export const routes: Routes = [
 
@@ -107,6 +108,10 @@ export const routes: Routes = [
         path: 'products/:id',
         component: DetailProductComponent
       },
+      {
+    path: 'payments/vnpay/return',
+    component: VnpReturnComponent
+  },
     ]
   },
   {
@@ -166,14 +171,15 @@ export const routes: Routes = [
     path: 'bill/:bid',
     component: DetailBillComponent
   },
-  {
-    path: 'page-not-found',
-    component: PageNotFoundComponent
-  },
-  {
-    path: '**',
-    redirectTo: '/page-not-found'
-  }
+  
+  // {
+  //   path: 'page-not-found',
+  //   component: PageNotFoundComponent
+  // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/page-not-found'
+  // }
 ];
 
 @NgModule({

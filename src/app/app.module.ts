@@ -57,7 +57,7 @@ import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { LeftOutline } from '@ant-design/icons-angular/icons';
+import { LeftOutline, LoadingOutline, SyncOutline } from '@ant-design/icons-angular/icons';
 import { Product1Component } from './components/product1/product1.component';
 import { C } from '@angular/cdk/scrolling-module.d-ud2XrbF8';
 import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -77,9 +77,8 @@ import { PublicLayoutComponent } from './layouts/public-layout/public-layout.com
 import { CountSafePipe } from './pipes/count-safe.pipe';
 import { InputQuantityComponent } from './components/input-quantity/input-quantity.component';
 import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
+import { VnpReturnComponent } from './pages/vnp-return/vnp-return.component';
 registerLocaleData(vi);
-const icons: IconDefinition[] = [LeftOutline];
-
 
 export function initAuth(auth: AuthenticationService) {
   return async () => (await auth.fetchProfile()).toPromise(); // or firstValueFrom(auth.checkAuth())
@@ -149,8 +148,11 @@ export let pages = [
   ManageAccountsComponent,
 
   ShippingAndDeliveryComponent,
-  EditorBlogComponent
+  EditorBlogComponent,
+  VnpReturnComponent
 ]
+
+const icons = [SyncOutline, LoadingOutline,LeftOutline];
 
 export function httpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader();
@@ -175,7 +177,7 @@ export function httpLoaderFactory(http: HttpClient) {
     NzRateModule],
   providers: [
     { provide: NZ_I18N, useValue: vi_VN },
-    { provide: NZ_ICONS, useValue: [LeftOutline] },
+    { provide: NZ_ICONS, useValue: icons },
     ...provideTranslateHttpLoader({
       prefix: '/assets/i18n/',
       suffix: '.json',

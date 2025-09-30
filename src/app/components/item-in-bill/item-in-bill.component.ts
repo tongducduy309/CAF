@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CartResponse } from 'src/app/dto/response/cart.response';
+import { environment } from 'src/environments/environment';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -8,7 +10,8 @@ import { MainService } from 'src/services/main.service';
     standalone: false
 })
 export class ItemInBillComponent {
-  @Input() product:any = {}
+  @Input() item:Partial<CartResponse> = {}
+  FILE_URL = environment.variable_global.FILE_URL;
   constructor(public main:MainService){
 
   }
