@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VnpReturnComponent } from './vnp-return.component';
+import { PaymentSummaryComponent } from './payment-summary.component';
 
-describe('VnpReturnComponent', () => {
-  let component: VnpReturnComponent;
-  let fixture: ComponentFixture<VnpReturnComponent>;
+describe('PaymentSummaryComponent', () => {
+  let component: PaymentSummaryComponent;
+  let fixture: ComponentFixture<PaymentSummaryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [VnpReturnComponent]
+      imports: [PaymentSummaryComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VnpReturnComponent);
+    fixture = TestBed.createComponent(PaymentSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -33,7 +33,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
-import { VnpReturnComponent } from './pages/vnp-return/vnp-return.component';
+import { PaymentSummaryComponent } from './pages/payment-summary/payment-summary.component';
 
 export const routes: Routes = [
 
@@ -109,14 +109,14 @@ export const routes: Routes = [
         component: DetailProductComponent
       },
       {
-    path: 'payments/vnpay/return',
-    component: VnpReturnComponent
-  },
+        path: 'payments/vnpay/return',
+        component: PaymentSummaryComponent
+      },
     ]
   },
   {
-    path:'oauth2/callback',
-    component:OAuth2CallbackComponent
+    path: 'oauth2/callback',
+    component: OAuth2CallbackComponent
   },
 
 
@@ -171,7 +171,7 @@ export const routes: Routes = [
     path: 'bill/:bid',
     component: DetailBillComponent
   },
-  
+
   // {
   //   path: 'page-not-found',
   //   component: PageNotFoundComponent

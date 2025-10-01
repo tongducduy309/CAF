@@ -77,7 +77,7 @@ import { PublicLayoutComponent } from './layouts/public-layout/public-layout.com
 import { CountSafePipe } from './pipes/count-safe.pipe';
 import { InputQuantityComponent } from './components/input-quantity/input-quantity.component';
 import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
-import { VnpReturnComponent } from './pages/vnp-return/vnp-return.component';
+import { PaymentSummaryComponent } from './pages/payment-summary/payment-summary.component';
 registerLocaleData(vi);
 
 export function initAuth(auth: AuthenticationService) {
@@ -149,7 +149,7 @@ export let pages = [
 
   ShippingAndDeliveryComponent,
   EditorBlogComponent,
-  VnpReturnComponent
+  PaymentSummaryComponent
 ]
 
 const icons = [SyncOutline, LoadingOutline,LeftOutline];

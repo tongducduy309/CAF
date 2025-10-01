@@ -254,6 +254,29 @@
     "CHECKOUT":{
         "TITLE":"Checkout"
     },
+    "PAYMENT_SUMMARY":{
+        "TITLE":"Payment Summary",
+        "ORDER_STATUS":{
+            "PAID":"Paid",
+            "UNPAID":"Unpaid",
+            "PENDING":"Pending",
+            "CANCELED":"Canceled",
+            "FAILED":"Failed"
+        },
+        "DATE_TIME":"{{month}} {{day}}, {{year}}, {{hour}}:{{minute}}:{{second}}",
+        "ORDER_DETAILS":"Order Details",
+        "ORDER_ID":"Order ID",
+        "ORDER_AMOUNT":"Order Amount",
+        "ORDER_DATE":"Order Date",
+        "TRANSACTION_NO":"Transaction No",
+        "TRANSACTION_STATUS":"Transaction Status",
+        "SECURE_HASH":"Secure Hash",
+        "AMOUNT_PAID_LABEL":"Amount Paid:",
+        "DATE_LABEL":"Date & Time:",
+        "REF_LABEL":"Reference Number:",
+        "BACK_TO_HOME":"Back to Home",
+        "RELOAD_STATUS":"Reload Status"
+    },
     "LABELS":{
         "PRICE":"Price"
     }

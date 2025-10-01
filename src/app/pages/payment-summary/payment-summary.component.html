@@ -1,0 +1,45 @@
+
+<section class="content-section">
+  <div class="container">
+    
+    <nz-result
+      nzStatus="success"
+      nzTitle="Payment Successful"
+      nzSubTitle="Thank you for your purchase!"
+    >
+      <div nz-result-extra>
+
+        <div style="display: flex;justify-content: center;flex-direction: column; align-items: center;gap: 10px;">
+          <div class="payment-card">
+            <nz-row nzGutter="5" nzJustify="space-between" style="width: 100%;">
+              
+              <p nz-col nzSpan="12" style="text-align: left;">Date & Time:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{'PAYMENT_SUMMARY.DATE_TIME' | translate:{month: payment.payDateTime?.month, day: payment.payDateTime?.day, year: payment.payDateTime?.year, hour: payment.payDateTime?.hour, minute: payment.payDateTime?.minute, second: payment.payDateTime?.second} }}</h4>
+              <p nz-col nzSpan="12" style="text-align: left;">Transaction No.:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{payment.transactionNo}}</h4>
+              <p nz-col nzSpan="12" style="text-align: left;">Bank:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{payment.bankCode}}</h4>
+            </nz-row>
+          </div>
+          <div class="payment-card">
+            <nz-row nzGutter="5" nzJustify="space-between" style="width: 100%;">
+              
+              <p nz-col nzSpan="12" style="text-align: left;">Amount Paid:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{payment.amountFormatted}}</h4>
+              <p nz-col nzSpan="12" style="text-align: left;">Reference Number:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{payment.txnRef}}</h4>
+              <p nz-col nzSpan="12" style="text-align: left;">Order Info:</p>
+              <h4 nz-col nzSpan="12" style="text-align: right;">{{payment.orderInfo}}</h4>
+            </nz-row>
+          </div>
+        <button nz-button nzType="primary" (click)="goHome()">{{ 'BUTTONS.GO_TO_HOME' | translate }}</button>
+        </div>
+        <!-- <button nz-button>Buy Again</button> -->
+      </div>
+    </nz-result>
+  </div>
+</section>
+
+
+
+
