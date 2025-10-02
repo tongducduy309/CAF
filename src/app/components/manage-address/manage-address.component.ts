@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User } from 'src/app/models/user.model';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -18,7 +19,7 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
     {id:1,name:'Tống Đức Duy', contactnumber:'0586152003', address:'123', default_:true, index:0},
     {id:1,name:'Tống Đức Duy', contactnumber:'0586152003', address:'123', index:1, choosing:true}
   ]
-  @Input() user:any
+  @Input() user_id:string = ''
 
   addModifying = -1
 
@@ -59,7 +60,7 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
 
     }
     else{
-      this.crud.put("address-of-user",{...this.addressForm,uid:this.user.id}).then(response => response.json())
+      this.crud.put("address-of-user",{...this.addressForm,uid:this.user_id}).then(response => response.json())
     .then((data:any) => {
       console.log(data);
         if (data.result=='success') {
@@ -83,7 +84,7 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
     }
 
     if (this.addressForm.default_&&!this.list_address[this.addModifying].default_){
-      this.crud.put("address-of-user/default",{uid:this.user.id,id:this.addressForm.id}).then(response => response.json())
+      this.crud.put("address-of-user/default",{uid:this.user_id,id:this.addressForm.id}).then(response => response.json())
     .then((data:any) => {
       console.log(data);
         if (data.result=='success') {
@@ -123,7 +124,7 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
       this.addressForm.default_ = true
     }
 
-    await this.crud.addData("address-of-user",{...this.addressForm,uid:this.user.id}).then(response => response.json())
+    await this.crud.addData("address-of-user",{...this.addressForm,uid:this.user_id}).then(response => response.json())
     .then((data:any) => {
       console.log(data.status);
         if (data.result=='success') {
@@ -197,9 +198,9 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
  }
 
   getAddressOfUser(){
-    if (this.user)
+    if (this.user_id)
     {
-      this.crud.get("address-of-user",`${this.user.id}`).subscribe((address:any)=>{
+      this.crud.get("address-of-user",`${this.user_id}`).subscribe((address:any)=>{
         console.log(address);
         if (address.result=='success'){
           this.list_address = address.data

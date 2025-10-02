@@ -1,4 +1,4 @@
-<section>
+<section class="second-section">
   <div class="container">
     <div class="btn" (click)="back()">
       <span nz-icon nzType="arrow-left" nzTheme="outline"></span>
@@ -72,7 +72,7 @@
             <h4 class="subtitle">Sản phẩm</h4>
           </div>
           <div class="list-products">
-            <app-item-in-bill *ngFor="let product of products" [item]="product"></app-item-in-bill>
+            <app-order-item *ngFor="let product of products" [item]="product"></app-order-item>
             <nz-divider></nz-divider>
           </div>
         </div>
@@ -109,6 +109,6 @@
     </div>
   </div>
 
-  <!-- <app-manage-address *ngIf="user.id" [user]="{id:user.id,id_address_default:user.id_address_default}"
-    (chooseEmitter)="chooseAddress($event)" [(visible)]="isMannageAddress"></app-manage-address> -->
+  <app-manage-address [user]="user.info"
+    (chooseEmitter)="chooseAddress($event)" [(visible)]="isMannageAddress"></app-manage-address>
 </section>

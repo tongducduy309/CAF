@@ -1,0 +1,19 @@
+<div class="order">
+  <div class="top">
+    <div class="list-products">
+      <div class="product" *ngFor="let product of order.orderItems">
+        <app-order-item [item]="product"></app-order-item>
+      </div>
+    </div>
+    <div class="btnDetail" [routerLink]="'/order/'+order.id">
+      <span >Chi tiết</span>
+    </div>
+
+  </div>
+  <div class="bottom">
+    <span class="date-created">
+      Ngày tạo: {{formatDateToString(order.createdAt)}}
+    </span>
+    <span><b>TỔNG</b>({{order.orderItems.length}})<b>:</b> {{main.formatPrice(order.total)}} VND</span>
+  </div>
+</div>

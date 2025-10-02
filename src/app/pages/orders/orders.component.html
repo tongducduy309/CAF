@@ -24,9 +24,9 @@
       <nz-tab [nzTitle]="titleTemplate" *ngFor="let tab of tabs" (nzClick)="changeStatus(tab.status)">
         <ng-template #titleTemplate>
           <span nz-icon *ngIf="tab.icon.length>0" [nzType]="tab.icon"></span>
-          {{ tab.name }}
+          <span style="font-family: 'Josefin';">{{ tab.name }}</span>
         </ng-template>
-        <app-bill *ngFor="let bill of bills_v" [bill]="bill"></app-bill>
+        <app-order *ngFor="let order of orders_v" [order]="order"></app-order>
       </nz-tab>
   </nz-tabset>
   </div>

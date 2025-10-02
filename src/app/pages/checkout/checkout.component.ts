@@ -110,7 +110,7 @@ export class CheckoutComponent implements OnInit {
     // });
     this.checkoutService.createOrder({
       userId:this.user.info?.id,
-      orderType:OrderType.GRABFOOD,
+      orderType:OrderType.PICKUP,
       paymentMethod:PaymentMethod.EWALLET,
       note:"",
       items: this.toOrderItem()
@@ -129,6 +129,7 @@ export class CheckoutComponent implements OnInit {
     (await this.userService.getProfile()).subscribe((res:User|null)=>{
       if (this.user){
         this.user.info = res
+        console.log(this.user);
       }
     })
  
@@ -140,7 +141,6 @@ export class CheckoutComponent implements OnInit {
         this.inCart = false
 
         this.cartService.getDetailProduct(productVariantId, quantity, note).then((res: CartResponse) => {
-      
           this.products.push(res)
           this.cal_Info_list()
         })

@@ -1,4 +1,8 @@
+import { P } from '@angular/cdk/portal-directives.d-BoG39gYN';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { OrderStatus, OrderType } from 'src/app/enums/Order.enum';
+import { PaymentStatus, PaymentMethod } from 'src/app/enums/Payment.enum';
+import { Order } from 'src/app/models/order.model';
 import { MainService } from 'src/services/main.service';
 
 @Component({
@@ -8,40 +12,39 @@ import { MainService } from 'src/services/main.service';
     standalone: false
 })
 export class ShowFullInvoiceComponent implements OnChanges{
-  @Input() bill:any = {}
-  total = 0
+  @Input() order:Partial<Order> = {
+  }
+  status = {
+    text: 'Chờ xác nhận',
+    color: 'blue'
+  }
+  OrderType = OrderType;
   constructor (public main:MainService){
-
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['bill']){
-      switch (this.bill.status){
-        case 1:
-          this.bill.status_text = 'Đang pha chế'
-          this.bill.status_color = 'orange'
+    if (changes['order']){
+      switch (this.order?.orderStatus){
+        case OrderStatus.PREPARING:
+          this.status.text = 'Đang pha chế'
+          this.status.color = 'orange'
           break;
-        case 2:
-          this.bill.status_text = 'Đang giao hàng'
-          this.bill.status_color = 'purple'
+        case OrderStatus.SHIPPING:
+          this.status.text = 'Đang giao hàng'
+          this.status.color = 'purple'
           break;
-        case 3:
-          this.bill.status_text = 'Đã nhận'
-          this.bill.status_color = 'green'
+        case OrderStatus.DELIVERED:
+          this.status.text = 'Đã nhận'
+          this.status.color = 'green'
           break;
-        case 4:
-          this.bill.status_text = 'Hủy'
-          this.bill.status_color = 'red'
+        case OrderStatus.CANCELLED:
+          this.status.text = 'Hủy'
+          this.status.color = 'red'
           break;
         default:
-          this.bill.status_text = 'Chờ xác nhận'
-          this.bill.status_color = 'blue'
+          this.status.text = 'Chờ xác nhận'
+          this.status.color = 'blue'
       }
 
-      this.total=0
-
-      for (let p of this.bill.products){
-        this.total+=p.quantity*1
-      }
     }
 
   }

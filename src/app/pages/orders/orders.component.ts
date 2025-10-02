@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
+import { OrderService } from 'src/app/services/order.service';
+import { LayoutService } from 'src/app/services/layout.service';
+import { OrderStatus } from 'src/app/enums/Order.enum';
+import { Order } from 'src/app/models/order.model';
 @Component({
     selector: 'app-orders',
     templateUrl: './orders.component.html',
@@ -13,62 +17,64 @@ export class OrdersComponent implements OnInit{
     {
       name: 'Tất cả',
       icon: '',
-      status:-1
+      status:"ALL"
     },{
       name: 'Chờ xác nhận',
-      icon: 'double-right',
-      status:0
+      icon: 'swap-right',
+      status:OrderStatus.PENDING
     },
     {
       name: 'Đang pha chế',
-      icon: 'double-right',
-      status:1
+      icon: 'swap-right',
+      status:OrderStatus.PREPARING
     },
+    
     {
       name: 'Đang giao hàng',
-      icon: 'double-right',
-      status:2
+      icon: 'swap-right',
+      status:OrderStatus.DELIVERING
     },
     {
-      name: 'Đã nhận',
-      icon: 'double-right',
-      status:3
+      name: 'Hoàn thành',
+      icon: 'swap-right',
+      status:OrderStatus.RECEIVED
     },
     {
       name: 'Hủy',
-      icon: 'double-right',
-      status:4
+      icon: 'swap-right',
+      status:OrderStatus.CANCELLED
     }
   ];
 
-  bills:any=[]
-  bills_v:any=[]
+  orders:any=[]
+  orders_v:any=[]
+  orderService = inject(OrderService)
+  layoutService = inject(LayoutService)
   constructor(private location:Location, private crud:CrudService, private main:MainService){
   }
   ngOnInit(): void {
-    this.getBills()
+    this.getOrders();
   }
   back(){
     this.location.back();
   }
 
-  getBills(){
-    const user = this.main.getCookie("u-caf")
-    if (user){
-      this.crud.get("bills",user.uid).subscribe((res:any)=>{
-        this.bills=res.data
-        this.bills_v = [...this.bills]
-      })
-    }
+  getOrders(){
+    this.orderService.getAllMyOrders().then(res=>{
+      this.orders=res
+      this.orders_v = [...this.orders]
+      console.log(this.orders);
+      this.layoutService.setReady();
+    });
   }
 
-  changeStatus(status:any){
+  changeStatus(status:OrderStatus|string){
   
-    if (status==-1)
+    if (status=="ALL")
     {
-      this.bills_v=[...this.bills]
+      this.orders_v=[...this.orders]
     }else{
-      this.bills_v=this.bills.filter((bill:any)=>bill.status==status)
+      this.orders_v=this.orders.filter((order:Order)=>order.orderStatus==status)
     }
   }
 }

@@ -6,6 +6,7 @@ import { CreateOrderRequest } from '../dto/request/order.request';
 import { AuthenticationService } from './authentication.service';
 import { PaymentStatus } from '../enums/Payment.enum';
 import { P } from '@angular/cdk/portal-directives.d-BoG39gYN';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +60,27 @@ private apiClient: any;
   async getStatus(id:number): Promise<PaymentStatus> {
     try {
       const { data } = await this.apiClient.get(`${id}/payment-status`);
-      console.log(data);
       return data.data??PaymentStatus.UNPAID as PaymentStatus;
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
+    }
+  }
+
+  async getAllMyOrders(): Promise<Order[]> {
+    try {
+      const { data } = await this.apiClient.get(`myorders`);
+      return data.data??[] as Order[];
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err)?err.response?.data?.message:this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
+    }
+  }
+
+  async getDetailOrder(id: number): Promise<Order> {
+    try {
+      const { data } = await this.apiClient.get(`${id}`);
+      return data.data as Order;
     } catch (err: unknown) {
 
       throw new Error(axios.isAxiosError(err)?err.response?.data?.message:this.translate.instant('NOTIFICATION.ERROR.CALL_API'));

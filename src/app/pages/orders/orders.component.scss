@@ -47,6 +47,7 @@ p{
 
 .content-section{
   background-color: #f5f5f5;
+  min-height: 300px;
 
   ::ng-deep .ant-tabs-nav-wrap{
     justify-content: center;

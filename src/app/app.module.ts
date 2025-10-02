@@ -9,7 +9,7 @@ import { NZ_I18N, vi_VN } from 'ng-zorro-antd/i18n';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import vi from '@angular/common/locales/vi';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { NgZorroAntModule } from './ng-zorro-ant.module';
@@ -46,21 +46,16 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { ManageProductsComponent } from './pages/manage-products/manage-products.component';
 import { FlashSalesComponent } from './pages/flash-sales/flash-sales.component';
 import { VouchersComponent } from './pages/vouchers/vouchers.component';
-import { ItemInBillComponent } from './components/item-in-bill/item-in-bill.component';
-import { BillComponent } from './components/bill/bill.component';
 import { DetailBillComponent } from './pages/detail-bill/detail-bill.component';
 import { CustomerReviewComponent } from './components/customer-review/customer-review.component';
 import { ManageOrdersComponent } from './pages/manage-orders/manage-orders.component';
 import { ShowFullInvoiceComponent } from './components/show-full-invoice/show-full-invoice.component';
 import { ManageAccountsComponent } from './pages/manage-accounts/manage-accounts.component';
 import { NzRateModule } from 'ng-zorro-antd/rate';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { IconDefinition } from '@ant-design/icons-angular';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
 import { LeftOutline, LoadingOutline, SyncOutline } from '@ant-design/icons-angular/icons';
 import { Product1Component } from './components/product1/product1.component';
-import { C } from '@angular/cdk/scrolling-module.d-ud2XrbF8';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader, TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { MarkdownPageComponent } from './components/markdown-page/markdown-page.component';
@@ -70,7 +65,6 @@ import { EditorBlogComponent } from './pages/editor-blog/editor-blog.component';
 import { BoxEditorMarkdownComponent } from './components/markdown-editor-preview/box-editor-markdown/box-editor-markdown.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ImageComponent } from './components/image/image.component';
-import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { AuthenticationService } from './services/authentication.service';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
@@ -78,6 +72,8 @@ import { CountSafePipe } from './pipes/count-safe.pipe';
 import { InputQuantityComponent } from './components/input-quantity/input-quantity.component';
 import { OAuth2CallbackComponent } from './components/oauth2-callback/oauth2-callback.component';
 import { PaymentSummaryComponent } from './pages/payment-summary/payment-summary.component';
+import { OrderComponent } from './components/order/order.component';
+import { OrderItemComponent } from './components/order/order-item/order-item.component';
 registerLocaleData(vi);
 
 export function initAuth(auth: AuthenticationService) {
@@ -102,8 +98,6 @@ export let components: any = [
   BoxAddressComponent,
   ManageAddressComponent,
   NoteProductComponent,
-  ItemInBillComponent,
-  BillComponent,
   CustomerReviewComponent,
   DetailBillComponent,
   ShowFullInvoiceComponent,
@@ -114,7 +108,9 @@ export let components: any = [
   LoadingComponent,
   ImageComponent,
   InputQuantityComponent,
-  OAuth2CallbackComponent
+  OAuth2CallbackComponent,
+  OrderComponent,
+  OrderItemComponent
 ]
 
 export let pages = [

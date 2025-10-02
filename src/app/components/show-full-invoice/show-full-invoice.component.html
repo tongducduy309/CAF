@@ -1,76 +1,62 @@
-<nz-ribbon [nzText]="bill.status_text" [nzColor]="bill.status_color" >
-  <div class="bill">
+<nz-ribbon [nzText]="status.text" [nzColor]="status.color" >
+  @if(order != null) {
+    <div class="order">
     <div class="header border-bottom">
       <!-- <span nz-icon nzType="arrow-left" nzTheme="outline" (click)="back.emit()" style="margin-right: 20px;cursor: pointer;"></span> -->
-      <p class="subtitle"><b>Mã hóa đơn: </b>{{bill.id}}</p>
+      <p class="subtitle"><b>Mã hóa đơn: </b>{{order.id}}</p>
       <span class="date-created">
-        Ngày tạo: {{formatDateToString(bill.created)}}
+        Ngày tạo: {{formatDateToString(order.createdAt)}}
       </span>
     </div>
-    <div class="info_receiver border-bottom">
+    @if (
+      order.orderType === OrderType.DELIVERY
+    ) {
+      <div class="info_receiver border-bottom">
       <h2 class="subtitle" style="margin-bottom: 20px;">Địa chỉ giao hàng:</h2>
-      <div class="group">
-        <p><b>Người nhận: </b>{{bill.receiver}}</p>
+      <!-- <div class="group">
+        <p><b>Người nhận: </b>{{order.receiver}}</p>
       </div>
       <div class="group">
-        <p><b>Số điện thoại: </b>{{bill.contactnumber}}</p>
+        <p><b>Số điện thoại: </b>{{order.contactnumber}}</p>
       </div>
       <div class="group">
-        <p><b>Địa chỉ: </b>{{bill.address}}</p>
-      </div>
+        <p><b>Địa chỉ: </b>{{order.address}}</p>
+      </div> -->
     </div>
+    }
     <div class="list-products">
-      <h2 class="subtitle" style="margin-bottom: 20px;">Danh sách sản phẩm: ({{total}} sản phẩm)</h2>
-      <div class="product" *ngFor="let product of bill.products">
-        <div class="left">
-          <img [src]="product.img" alt="">
-
-        </div>
-        <div class="center">
-          <p class="name">{{product.name}}</p>
-          <div>
-            <p class="size"><b>Kích cỡ: </b> {{product.size}}</p>
-            <p class="quantity"><b>Số lượng: </b> {{product.quantity}}</p>
-          </div>
-          <p class="note">Ghi chú: {{product.note}}</p>
-        </div>
-        <div class="right">
-          <div class="cost" *ngIf="product.sale>0"><span>{{main.formatPrice(product.cost)}}</span></div>
-          <div class="price"><span>{{main.formatPrice((product.sale>0)?(product.cost-product.cost*(product.sale/100)):product.cost)}}</span> VND</div>
-
-
-
-        </div>
-      </div>
+      <h2 class="subtitle" style="margin-bottom: 20px;">Danh sách sản phẩm: ({{order.orderItems?.length}} sản phẩm)</h2>
+      @for (product of order.orderItems; track $index) { <app-order-item [item]="product"></app-order-item>}
     </div>
     <div class="footer">
       <div class="group">
         <div class="inline">
           <b>Tạm tính:</b>
-          <div>{{main.formatPrice(bill.subtotal)}} <span>VND</span></div>
+          <div>{{main.formatPrice(order.subtotal)}} <span>VND</span></div>
         </div>
         <div class="inline">
           <b>Phí vận chuyển:</b>
-          <div>{{main.formatPrice(bill.delivery_fee)}} <span>VND</span></div>
+          <div>{{main.formatPrice(order.shippingFee)}} <span>VND</span></div>
         </div>
-        <div class="inline" *ngIf="bill.discount>0">
+        <div class="inline" *ngIf="order.discount||0 > 0">
           <b>Giảm giá:</b>
-          <div>-{{bill.discount}}<span>%</span></div>
+          <div>-{{order.discount}}<span>%</span></div>
         </div>
-        <div class="inline" *ngIf="bill.discount>0">
+        <div class="inline" *ngIf="order.discount||0>0">
           <b></b>
-          <div class="cost-not-discount">{{main.formatPrice(bill.cost/(1-bill.discount/100))}} <span>VND</span></div>
+          <div class="cost-not-discount">{{main.formatPrice(order.total||0/(1-(order.discount||1)/100))}} <span>VND</span></div>
         </div>
         <div class="inline">
           <b>Tổng:</b>
-          <div class="cost" style="font-weight: 600;">{{main.formatPrice(bill.cost)}} <span>VND</span></div>
+          <div class="cost" style="font-weight: 600;">{{main.formatPrice(order.total||0+(order.shippingFee||0))}} <span>VND</span></div>
         </div>
       </div>
       <div class="group">
-        <p *ngIf="bill.comment&&bill.comment.length>0"><b>Lý do: </b>{{bill.comment}}</p>
+        <p *ngIf="order.note"><b>Lý do: </b>{{order.note}}</p>
       </div>
 
 
     </div>
   </div>
+  }
 </nz-ribbon>

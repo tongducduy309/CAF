@@ -112,6 +112,14 @@ export const routes: Routes = [
         path: 'payments/vnpay/return',
         component: PaymentSummaryComponent
       },
+      {
+        path: 'orders',
+        component: OrdersComponent
+      },
+      {
+    path: 'order/:bid',
+    component: DetailBillComponent
+  },
     ]
   },
   {
@@ -163,14 +171,8 @@ export const routes: Routes = [
     ]
   },
 
-  {
-    path: 'orders',
-    component: OrdersComponent
-  },
-  {
-    path: 'bill/:bid',
-    component: DetailBillComponent
-  },
+
+  
 
   // {
   //   path: 'page-not-found',
