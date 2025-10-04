@@ -10,5 +10,5 @@ export interface Address {
     city: string;
     latitude?: number;
     longitude?: number;
-    isDefault: boolean;
+    default: boolean;
 }

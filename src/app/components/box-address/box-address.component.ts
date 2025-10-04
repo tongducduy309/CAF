@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Address } from 'src/app/models/address.model';
 
 @Component({
     selector: 'app-box-address',
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     standalone: false
 })
 export class BoxAddressComponent {
-  @Input() info:any = {}
+  @Input() info:Partial<Address> = {}
   @Output()  removeEmitter = new EventEmitter()
   @Output()  modifyEmitter = new EventEmitter()
   @Output()  chooseEmitter = new EventEmitter()

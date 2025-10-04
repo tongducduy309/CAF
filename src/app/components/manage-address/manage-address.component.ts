@@ -1,5 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { CrudService } from 'src/services/crud.service';
 import { MainService } from 'src/services/main.service';
 
@@ -9,7 +11,7 @@ import { MainService } from 'src/services/main.service';
     styleUrls: ['./manage-address.component.scss'],
     standalone: false
 })
-export class ManageAddressComponent implements OnInit,AfterViewInit{
+export class ManageAddressComponent implements OnInit{
   @Input() visible = false
   @Input() choosing = 0
   @Output() visibleChange = new EventEmitter<boolean>();
@@ -29,14 +31,15 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
 
   isaddressForm_default = false
 
+  userService = inject(UserService)
+
+  translate =  inject(TranslateService)
+
   constructor (private crud:CrudService,private main:MainService){
 
   }
-  ngAfterViewInit(): void {
-    this.getAddressOfUser()
-  }
   ngOnInit(): void {
-
+    this.getAddressOfUser()
   }
 
 
@@ -169,15 +172,12 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
  }
 
  removeAddress(id:any){
-  // console.log(this.list_address,id);
-  this.crud.delete("address-of-user",id).subscribe((res:any)=>{
-    if (res.result=='success'){
-      this.main.createNotification("success","Đã xóa một địa chỉ")
+  this.userService.deleteAddressById(id).then((res:any)=>{
+    this.main.createNotification("success","Đã xóa một địa chỉ")
       this.list_address = this.list_address.filter((a:any)=>a.id!=id)
-    }
-    else{
-      this.main.createNotification("info","Xóa địa chỉ thất bại")
-    }
+  }).catch((err:any)=>{
+    console.error(err.message)
+      this.main.createNotification("error", this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
   })
 
  }
@@ -200,20 +200,13 @@ export class ManageAddressComponent implements OnInit,AfterViewInit{
   getAddressOfUser(){
     if (this.user_id)
     {
-      this.crud.get("address-of-user",`${this.user_id}`).subscribe((address:any)=>{
-        console.log(address);
-        if (address.result=='success'){
-          this.list_address = address.data
-          for (let a of this.list_address){
-            if (a.default_){
-              this.chooseEmitter.emit(a)
-              break
-            }
-          }
-
-        }
-
-      })
+      this.userService.getMyAddresses().then(addresses=>{
+        this.list_address = addresses
+        console.log(this.list_address);
+      }).catch(err=>{
+        console.error(err.message)
+      this.main.createNotification("error", this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
+      });
     }
   }
 

@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { UserRequest } from '../dto/request/user.request';
 import { AuthenticationService } from './authentication.service';
 import { catchError, from, map, Observable, of, tap } from 'rxjs';
 import { User } from '../models/user.model';
+import { TranslateService } from '@ngx-translate/core';
+import { Address } from '../models/address.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +14,8 @@ import { User } from '../models/user.model';
 export class UserService {
 
   private apiClient: any;
+
+  private translate = inject(TranslateService);
 
   constructor(private authenticationService: AuthenticationService) {
 
@@ -23,7 +27,7 @@ export class UserService {
 
 
     this.apiClient = axios.create({
-      baseURL: (API_URL&&API_URL.length>0 ? API_URL: BASE_URL)+"api/v1/users",
+      baseURL: (API_URL && API_URL.length > 0 ? API_URL : BASE_URL) + "api/v1/users",
       timeout: 5000,
       headers: { "Content-Type": "application/json" },
     });
@@ -40,14 +44,35 @@ export class UserService {
   }
 
   async getProfile(): Promise<Observable<User | null>> {
-      return from(this.apiClient.get('/profile')).pipe(
-        map((response: any) => {
-          return response.data.data as User
-        }),
-        catchError(err => {
-          return of(null);
-        })
-      );
+    return from(this.apiClient.get('/profile')).pipe(
+      map((response: any) => {
+        return response.data.data as User
+      }),
+      catchError(err => {
+        return of(null);
+      })
+    );
+  }
+
+  async getMyAddresses():Promise<Address[]>{
+    try{
+      const {data} = await this.apiClient.get(`addresses`);
+      return data.data as Address[]
+    }catch (err: unknown) {
+      console.log(err)
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
     }
+  }
+
+  async deleteAddressById(id: string): Promise<void> {
+    try {
+      const { data } = await this.apiClient.delete(`addresses/${id}`);
+
+    } catch (err: unknown) {
+
+      throw new Error(axios.isAxiosError(err) ? err.response?.data?.message : this.translate.instant('NOTIFICATION.ERROR.CALL_API'));
+    }
+
+  }
 
 }
