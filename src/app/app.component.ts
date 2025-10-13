@@ -28,7 +28,7 @@ export class AppComponent{
   loading$ = this.loadingService.loading$;
   private subs = new Subscription();
 
-  readonly READY_FALLBACK = 8000;
+  readonly READY_FALLBACK = 3500;
 
   // private router = inject(Router);
   // private activatedRoute = inject(ActivatedRoute);
